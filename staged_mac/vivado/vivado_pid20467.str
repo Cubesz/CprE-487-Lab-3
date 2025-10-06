@@ -313,3 +313,416 @@ selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project
 // RouteApi::initDelayMediator elapsed time: 6.8s
 // RouteApi: Init Delay Mediator Swing Worker Finished
 // [Engine Memory]: 2,159 MB (+262027kb) [00:07:47]
+// Elapsed time: 159 seconds
+selectButton(PAResourceCommand.PACommandNames_RUN_IMPLEMENTATION, "Run Implementation"); // d (c, cs)
+// Run Command: PAResourceCommand.PACommandNames_RUN_IMPLEMENTATION
+// f (cs): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (f)
+// bz (cs):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f (cs)
+// Tcl Message: launch_runs impl_1 -jobs 4 
+// Tcl Message: INFO: [Timing 38-480] Writing timing data to binary archive. 
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: [Mon Oct  6 15:32:58 2025] Launched impl_1... Run output will be captured here: /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.runs/impl_1/runme.log 
+// 'c' command handler elapsed time: 4 seconds
+dismissDialog("Starting Design Runs"); // bz (cs)
+// TclEventType: RUN_STATUS_CHANGE
+// [GUI Memory]: 170 MB (+122kb) [00:10:10]
+// TclEventType: RUN_STEP_COMPLETED
+// Elapsed time: 35 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "new_staged_mac.sv", 3); // m (l, cs)
+// [GUI Memory]: 182 MB (+2952kb) [00:10:45]
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "new_staged_mac.sv", 3); // m (l, cs)
+// TclEventType: RUN_STEP_COMPLETED
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "new_staged_mac.sv", 3); // m (l, cs)
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// ag (cs): Implementation Completed: addNotify
+// Elapsed time: 17 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (ag)
+// Run Command: PAResourceCommand.PACommandNames_GOTO_IMPLEMENTED_DESIGN
+// g (cs): Close Design: addNotify
+selectButton(PAResourceAtoD.ClosePlanner_YES, "Yes"); // a (g)
+// bz (cs):  Close : addNotify
+dismissDialog("Close Design"); // g (cs)
+// TclEventType: DESIGN_CLOSE
+// HMemoryUtils.trashcanNow. Engine heap size: 2,163 MB. GUI used memory: 115 MB. Current time: 10/6/25, 3:34:03 PM CDT
+// Engine heap size: 2,163 MB. GUI used memory: 116 MB. Current time: 10/6/25, 3:34:03 PM CDT
+// TclEventType: CURR_DESIGN_SET
+// Tcl Message: close_design 
+// TclEventType: DESIGN_CLOSE
+// bz (cs):  Open Implemented Design : addNotify
+dismissDialog("Close"); // bz (cs)
+// Tcl Message: open_run impl_1 
+// TclEventType: SDC_CONSTRAINT_ADD
+// TclEventType: POWER_CNS_STALE
+// TclEventType: FLOORPLAN_MODIFY
+// TclEventType: DESIGN_NEW
+// HMemoryUtils.trashcanNow. Engine heap size: 2,247 MB. GUI used memory: 92 MB. Current time: 10/6/25, 3:34:04 PM CDT
+// TclEventType: DESIGN_NEW
+// TclEventType: HFED_INIT_ROUTE_STORAGE_COMPLETED
+// [Engine Memory]: 2,335 MB (+70880kb) [00:11:15]
+// Device: addNotify
+// DeviceView Instantiated
+// TclEventType: CURR_DESIGN_SET
+// Tcl Message: Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 7922.816 ; gain = 0.000 ; free physical = 6233 ; free virtual = 17015 
+// Tcl Message: INFO: [Netlist 29-17] Analyzing 18 Unisim elements for replacement INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds INFO: [Project 1-479] Netlist was created with Vivado 2020.1 INFO: [Project 1-570] Preparing netlist for logic optimization INFO: [Timing 38-478] Restoring timing data from binary archive. INFO: [Timing 38-479] Binary timing data restore complete. INFO: [Project 1-856] Restoring constraints from binary archive. INFO: [Constraints 18-5170] The checkpoint was created with non-default parameter values which do not match the current Vivado settings.  Mismatching parameters are: 
+// Tcl Message:   general.maxThreads 
+// Tcl Message: INFO: [Project 1-853] Binary constraint restore complete. 
+// Tcl Message: Reading XDEF placement. Reading placer database... Reading XDEF routing. 
+// Tcl Message: Read XDEF File: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.03 . Memory (MB): peak = 7983.559 ; gain = 0.000 ; free physical = 6099 ; free virtual = 16882 
+// Tcl Message: Restored from archive | CPU: 0.030000 secs | Memory: 0.240417 MB | 
+// Tcl Message: Finished XDEF File Restore: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.03 . Memory (MB): peak = 7983.559 ; gain = 0.000 ; free physical = 6099 ; free virtual = 16882 Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 7983.559 ; gain = 0.000 ; free physical = 6099 ; free virtual = 16882 
+// Tcl Message: INFO: [Project 1-111] Unisim Transformation Summary: No Unisim elements were transformed.  
+// Device view-level: 0.0
+// RouteApi: Init Delay Mediator Swing Worker Finished
+// TclEventType: DRC_ADDED
+// TclEventType: METHODOLOGY_ADDED
+// TclEventType: POWER_UPDATED
+// TclEventType: TIMING_SUMMARY_UPDATED
+// 'dZ' command handler elapsed time: 6 seconds
+// V (cs): Critical Messages: addNotify
+dismissDialog("Open Implemented Design"); // bz (cs)
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (V)
+dismissDialog("Critical Messages"); // V (cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+// Elapsed time: 19 seconds
+selectTab(PAResourceOtoP.ProjectSummaryTimingPanel_PROJECT_SUMMARY_TIMING_PANEL_TABBED, PAResourceOtoP.ProjectSummaryTimingPanel_HOLD, "Hold", 1); // d (E, cs)
+selectTab(PAResourceOtoP.ProjectSummaryTimingPanel_PROJECT_SUMMARY_TIMING_PANEL_TABBED, PAResourceOtoP.ProjectSummaryTimingPanel_SETUP, "Setup", 0); // d (E, cs)
+selectTab(PAResourceOtoP.ProjectSummaryTimingPanel_PROJECT_SUMMARY_TIMING_PANEL_TABBED, PAResourceOtoP.ProjectSummaryTimingPanel_HOLD, "Hold", 1); // d (E, cs)
+selectTab(PAResourceOtoP.ProjectSummaryTimingPanel_PROJECT_SUMMARY_TIMING_PANEL_TABBED, PAResourceOtoP.ProjectSummaryTimingPanel_SETUP, "Setup", 0); // d (E, cs)
+selectTab(PAResourceOtoP.ProjectSummaryTimingPanel_PROJECT_SUMMARY_TIMING_PANEL_TABBED, PAResourceOtoP.ProjectSummaryTimingPanel_HOLD, "Hold", 1); // d (E, cs)
+selectTab(PAResourceOtoP.ProjectSummaryTimingPanel_PROJECT_SUMMARY_TIMING_PANEL_TABBED, PAResourceOtoP.ProjectSummaryTimingPanel_PULSE_WIDTH, "Pulse Width", 2); // d (E, cs)
+// Elapsed time: 37 seconds
+selectTab(PAResourceOtoP.ProjectSummaryPowerPanel_TABBED_PANE, PAResourceOtoP.ProjectSummaryPowerPanel_ON_CHIP, "On-Chip", 1); // d (E, cs)
+selectTab(PAResourceOtoP.ProjectSummaryPowerPanel_TABBED_PANE, PAResourceOtoP.ProjectSummaryPowerPanel_SUMMARY, "Summary", 0); // d (E, cs)
+selectTab(PAResourceQtoS.RunGadget_RUN_GADGET_TABBED_PANE, PAResourceQtoS.RunGadget_ROUTE_STATUS, "Route Status", 1); // i (E, cs)
+selectTab(PAResourceQtoS.RunGadget_RUN_GADGET_TABBED_PANE, PAResourceQtoS.RunGadget_SUMMARY, "Summary", 0); // i (E, cs)
+selectTab(PAResourceQtoS.RunGadget_RUN_GADGET_TABBED_PANE, PAResourceQtoS.RunGadget_ROUTE_STATUS, "Route Status", 1); // i (E, cs)
+selectTab(PAResourceQtoS.RunGadget_RUN_GADGET_TABBED_PANE, PAResourceQtoS.RunGadget_SUMMARY, "Summary", 0); // i (E, cs)
+selectTab(PAResourceQtoS.RunGadget_RUN_GADGET_TABBED_PANE, PAResourceQtoS.RunGadget_SUMMARY, "Summary", 0); // i (E, cs)
+selectTab(PAResourceQtoS.RunGadget_RUN_GADGET_TABBED_PANE, PAResourceQtoS.RunGadget_SUMMARY, "Summary", 0); // i (E, cs)
+selectTab(PAResourceOtoP.ProjectSummaryTimingPanel_PROJECT_SUMMARY_TIMING_PANEL_TABBED, PAResourceOtoP.ProjectSummaryTimingPanel_SETUP, "Setup", 0); // d (E, cs)
+selectButton(PAResourceOtoP.ProjectSummaryTimingPanel_OPEN_TIMING_SUMMARY_REPORT, "Implemented Timing Report"); // h (Q, cs)
+// Run Command: PAResourceCommand.PACommandNames_OPEN_TIMING_SUMMARY
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Timer Settings]", 1, false); // a (J, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Design Timing Summary]", 2, false); // a (J, cs)
+// [GUI Memory]: 194 MB (+3680kb) [00:13:06]
+// Elapsed time: 19 seconds
+selectMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // aa (q, cs)
+dismissMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // aa (q, cs)
+selectMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // aa (q, cs)
+selectMenu(PAResourceItoN.MainMenuMgr_FLOORPLANNING, "Floorplanning"); // af (cs)
+dismissMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // aa (q, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Device", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Device", 1); // m (l, cs)
+selectGraphicalView(PAResourceOtoP.PAViews_DEVICE, 477395, 307664); // E (F, cs)
+// Device select: 'Tile - CLBLM_R_X69Y63'
+selectView(PAResourceOtoP.PAViews_DEVICE, "Device", 1281, 517, 1873, 939); // U (m, cs)
+// PAPropertyPanels.initPanels (Tile: CLBLM_R_X69Y63) elapsed time: 0.2s
+selectGraphicalView(PAResourceOtoP.PAViews_DEVICE, 482156, 315995); // E (F, cs)
+// Device select: 'Tile - CLBLL_L_X70Y60'
+selectView(PAResourceOtoP.PAViews_DEVICE, "Device", 1289, 531, 1873, 939); // U (m, cs)
+// HMemoryUtils.trashcanNow. Engine heap size: 2,397 MB. GUI used memory: 135 MB. Current time: 10/6/25, 3:36:09 PM CDT
+selectGraphicalView(PAResourceOtoP.PAViews_DEVICE, 476800, 321351); // E (F, cs)
+// Device select: 'Tile - CLBLM_R_X69Y59'
+selectView(PAResourceOtoP.PAViews_DEVICE, "Device", 1280, 540, 1873, 939); // U (m, cs)
+selectGraphicalView(PAResourceOtoP.PAViews_DEVICE, 460733, 313019); // E (F, cs)
+// Device select: 'Tile - CLBLM_L_X66Y61'
+selectView(PAResourceOtoP.PAViews_DEVICE, "Device", 1253, 526, 1873, 939); // U (m, cs)
+selectGraphicalView(PAResourceOtoP.PAViews_DEVICE, 436334, 284455); // E (F, cs)
+// Device select: 'Tile - CLBLM_L_X62Y70'
+selectView(PAResourceOtoP.PAViews_DEVICE, "Device", 1212, 478, 1873, 939); // U (m, cs)
+selectGraphicalView(PAResourceOtoP.PAViews_DEVICE, 404199, 280289); // E (F, cs)
+// Device select: 'Tile - CLBLM_R_X57Y72'
+selectView(PAResourceOtoP.PAViews_DEVICE, "Device", 1158, 471, 1873, 939); // U (m, cs)
+selectGraphicalView(PAResourceOtoP.PAViews_DEVICE, 391107, 286240); // E (F, cs)
+// Device select: 'Tile - CLBLL_R_X55Y70'
+selectView(PAResourceOtoP.PAViews_DEVICE, "Device", 1135, 482, 1873, 939); // U (m, cs)
+// HMemoryUtils.trashcanNow. Engine heap size: 2,398 MB. GUI used memory: 173 MB. Current time: 10/6/25, 3:36:14 PM CDT
+selectTab((HResource) null, (HResource) null, "Sources", 0); // aL (aI, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+selectTab((HResource) null, (HResource) null, "Messages", 1); // aL (aI, cs)
+selectTab((HResource) null, (HResource) null, "Log", 2); // aL (aI, cs)
+selectTab((HResource) null, (HResource) null, "Reports", 3); // aL (aI, cs)
+// Elapsed time: 12 seconds
+selectTab((HResource) null, (HResource) null, "Design Runs", 4); // aL (aI, cs)
+selectTab((HResource) null, (HResource) null, "DRC", 6); // aL (aI, cs)
+selectTab((HResource) null, (HResource) null, "Methodology", 7); // aL (aI, cs)
+selectTab((HResource) null, (HResource) null, "Timing", 8); // aL (aI, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Clock Summary]", 3, false); // a (J, cs)
+// Elapsed time: 29 seconds
+expandTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Check Timing]", 4); // a (J, cs)
+collapseTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Check Timing]", 4); // a (J, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Design Timing Summary]", 2, false); // a (J, cs)
+expandTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Intra-Clock Paths]", 5); // a (J, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Intra-Clock Paths]", 5, true); // a (J, cs) - Node
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Intra-Clock Paths, main]", 6, true); // a (J, cs) - Node
+collapseTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Intra-Clock Paths]", 5); // a (J, cs)
+expandTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Check Timing]", 4); // a (J, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Check Timing, no_input_delay]", 9, false); // a (J, cs)
+// Elapsed time: 12 seconds
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Check Timing, no_output_delay]", 10, false); // a (J, cs)
+collapseTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Check Timing]", 4); // a (J, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Clock Summary]", 3, false); // a (J, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, General Information]", 0, false); // a (J, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Other Path Groups]", 7, false); // a (J, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Unconstrained Paths]", 9, false); // a (J, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Other Path Groups]", 7, false); // a (J, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Inter-Clock Paths]", 6, false); // a (J, cs)
+expandTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Intra-Clock Paths]", 5); // a (J, cs)
+expandTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Intra-Clock Paths, main]", 6); // a (J, cs)
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Intra-Clock Paths, main, Pulse Width -0.450 ns]", 9, false); // a (J, cs)
+selectTable(PAResourceOtoP.PulseWidthClockChecksTablePanel_PULSE_WIDTH_CLOCK_CHECKS_TABLE, "High Pulse Width ; Slow ; FDRE/C ; n/a ; 0.5 ; 0.050000004 ; -0.45 ; SLICE_X113Y60 ; FSM_onehot_state_reg[1]/C", 2, "FSM_onehot_state_reg[1]/C", 8); // f (J, cs)
+// Elapsed time: 214 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "new_staged_mac.sv", 3); // m (l, cs)
+// Elapsed time: 45 seconds
+selectCodeEditor("new_staged_mac.sv", 258, 467); // bP (w, cs)
+// Elapsed time: 153 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false); // B (F, cs)
+// Elapsed time: 14 seconds
+selectCodeEditor("new_staged_mac.sv", 403, 457); // bP (w, cs)
+// Elapsed time: 20 seconds
+selectCodeEditor("new_staged_mac.sv", 240, 503); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 28 seconds
+selectCodeEditor("new_staged_mac.sv", 217, 651); // bP (w, cs)
+// Elapsed time: 18 seconds
+selectCodeEditor("new_staged_mac.sv", 106, 279); // bP (w, cs)
+selectCodeEditor("new_staged_mac.sv", 98, 264); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 2,432 MB. GUI used memory: 136 MB. Current time: 10/6/25, 3:46:45 PM CDT
+// Elapsed time: 32 seconds
+selectCodeEditor("new_staged_mac.sv", 393, 348); // bP (w, cs)
+selectCodeEditor("new_staged_mac.sv", 100, 245); // bP (w, cs)
+selectCodeEditor("new_staged_mac.sv", 122, 355); // bP (w, cs)
+selectCodeEditor("new_staged_mac.sv", 146, 705); // bP (w, cs)
+// Elapsed time: 70 seconds
+selectCodeEditor("new_staged_mac.sv", 293, 696); // bP (w, cs)
+selectCodeEditor("new_staged_mac.sv", 208, 713); // bP (w, cs)
+selectCodeEditor("new_staged_mac.sv", 212, 694); // bP (w, cs)
+selectCodeEditor("new_staged_mac.sv", 305, 698); // bP (w, cs)
+// Elapsed time: 47 seconds
+selectCodeEditor("new_staged_mac.sv", 343, 762); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 88 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 15, false); // u (J, cs)
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// A (cs): Run Synthesis: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (A)
+// bz (cs):  Resetting Runs : addNotify
+dismissDialog("Run Synthesis"); // A (cs)
+// TclEventType: RUN_MODIFY
+// TclEventType: DESIGN_STALE
+// TclEventType: RUN_RESET
+// Tcl Message: reset_run synth_1 
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// f (cs): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (f)
+// bz (cs):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f (cs)
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: launch_runs synth_1 -jobs 4 
+// Tcl Message: [Mon Oct  6 15:50:59 2025] Launched synth_1... Run output will be captured here: /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.runs/synth_1/runme.log 
+// 'k' command handler elapsed time: 6 seconds
+dismissDialog("Starting Design Runs"); // bz (cs)
+// TclEventType: RUN_STATUS_CHANGE
+selectButton(PAResourceOtoP.ProjectTab_CLOSE_DESIGN, "Close Design"); // h (ds, cs)
+// TclEventType: DESIGN_CLOSE
+// TclEventType: TIMING_RESULTS_UNLOAD
+// Engine heap size: 2,440 MB. GUI used memory: 98 MB. Current time: 10/6/25, 3:51:03 PM CDT
+// WARNING: HEventQueue.dispatchEvent() is taking  1427 ms.
+// HMemoryUtils.trashcanNow. Engine heap size: 2,440 MB. GUI used memory: 98 MB. Current time: 10/6/25, 3:51:03 PM CDT
+// TclEventType: CURR_DESIGN_SET
+// Tcl Message: close_design 
+// bz (cs):  Closing : addNotify
+// TclEventType: DESIGN_CLOSE
+// [Engine Memory]: 2,547 MB (+100316kb) [00:28:13]
+dismissDialog("Closing"); // bz (cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "new_staged_mac.sv", 2); // m (l, cs)
+// Elapsed time: 10 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// ag (cs): Synthesis Completed: addNotify
+// Elapsed time: 47 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (ag)
+// Run Command: PAResourceCommand.PACommandNames_RUN_IMPLEMENTATION
+// f (cs): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (f)
+// bz (cs):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f (cs)
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: launch_runs impl_1 -jobs 4 
+// Tcl Message: [Mon Oct  6 15:52:05 2025] Launched impl_1... Run output will be captured here: /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.runs/impl_1/runme.log 
+dismissDialog("Starting Design Runs"); // bz (cs)
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// Elapsed time: 40 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac(behavioral) (staged_mac.vhd)]", 2, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac(behavioral) (staged_mac.vhd)]", 2, false, false, false, false, false, true); // B (F, cs) - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false); // B (F, cs)
+selectButton((HResource) null, "Properties_settings"); // x (g, cs): TRUE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac(behavioral) (staged_mac.vhd)]", 2, false); // B (F, cs)
+// ag (cs): Implementation Completed: addNotify
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (ag)
+dismissDialog("Implementation Completed"); // ag (cs)
+selectButton((HResource) null, "Properties_settings"); // x (g, cs): TRUE
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false, false, false, false, false, true); // B (F, cs) - Double Click
+selectTab(RDIResource.PropertiesView_TABBED_PANE, (HResource) null, "Properties", 1); // i (c, cs)
+selectTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 1, false); // l (C, cs)
+selectTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 1, false); // l (C, cs)
+expandTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9); // l (C, cs)
+selectTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 1, false, false, false, false, false, true); // l (C, cs) - Double Click
+selectTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 1, false); // l (C, cs)
+selectTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 1, false, false, false, false, false, true); // l (C, cs) - Double Click
+selectView(PAResourceOtoP.PAViews_TCL_OBJECT_VIEW, "Tcl Object View", 75, 75, 503, 373, false, false, false, true, false); // u (E, cs) - Popup Trigger
+selectTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 1, false); // l (C, cs)
+selectTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 1, false); // l (C, cs)
+selectTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 1, false, false, false, false, false, true); // l (C, cs) - Double Click
+selectTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 1, false); // l (C, cs)
+selectView(PAResourceOtoP.PAViews_TCL_OBJECT_VIEW, "Tcl Object View", 75, 75, 503, 373, false, false, false, true, false); // u (E, cs) - Popup Trigger
+selectTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 1, false); // l (C, cs)
+selectButton(PAResourceTtoZ.TclObjectView_ADD_PROPERTIES, "Tcl Object View_new"); // E (g, cs)
+selectTreeTable(PAResourceTtoZ.TclObjectTreeTable_TREETABLE, "NAME ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 9, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv", 1, false); // l (C, cs)
+selectTab(RDIResource.PropertiesView_TABBED_PANE, (HResource) null, "General", 0); // i (c, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac(behavioral) (staged_mac.vhd)]", 2, false); // B (F, cs)
+selectButton(PAResourceQtoS.SrcFilePropPanels_TYPE, (String) null); // t (ci, cs)
+// ab (cs): Set Type: addNotify
+// Elapsed time: 10 seconds
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (ab)
+dismissDialog("Set Type"); // ab (cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false); // B (F, cs)
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // aa (q, cs)
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // af (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_CHECKPOINT, "Checkpoint"); // af (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_IP, "IP"); // af (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_TEXT_EDITOR, "Text Editor"); // af (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_EXPORT, "Export"); // af (cs)
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // aa (q, cs)
+selectButton((HResource) null, "Properties_settings"); // x (g, cs): TRUE
+selectButton(PAResourceQtoS.SrcFilePropPanels_TYPE, (String) null); // t (ci, cs)
+// ab (cs): Set Type: addNotify
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (ab)
+dismissDialog("Set Type"); // ab (cs)
+// Elapsed time: 27 seconds
+selectCodeEditor("new_staged_mac.sv", 171, 521); // bP (w, cs)
+// Elapsed time: 10 seconds
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // E (g, cs)
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c (cs): Add Sources: addNotify
+selectButton("NEXT", "Next >"); // JButton (j, c)
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_DIRECTORIES, "Add Directories"); // a (E, c)
+setFolderChooser("/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/hdl");
+selectButton("FINISH", "Finish"); // JButton (j, c)
+// 'h' command handler elapsed time: 13 seconds
+dismissDialog("Add Sources"); // c (cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files {/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/hdl/staged_mac.vhd /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/hdl/new_staged_mac.sv} 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed time: 15 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 2, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 2, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 2, false, false, false, false, true, false); // B (F, cs) - Popup Trigger
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false, false, false, false, true, false); // B (F, cs) - Popup Trigger
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectCodeEditor("new_staged_mac.sv", 250, 92); // bP (w, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 2, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 2, false, false, false, false, true, false); // B (F, cs) - Popup Trigger
+selectCodeEditor("new_staged_mac.sv", 189, 119); // bP (w, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false, false, false, false, false, true); // B (F, cs) - Double Click
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "new_staged_mac.sv", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "new_staged_mac.sv (2)", 3); // m (l, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 2, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 2, false, false, false, false, true, false); // B (F, cs) - Popup Trigger
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenuItem(RDIResourceCommand.RDICommands_DELETE, "Remove File from Project..."); // ai (ao, cs)
+// Run Command: RDIResourceCommand.RDICommands_DELETE
+// aE (cs): Remove Sources: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (aE)
+dismissDialog("Remove Sources"); // aE (cs)
+// Tcl Message: export_ip_user_files -of_objects  [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv] -no_script -reset -force -quiet 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: remove_files  /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/new/new_staged_mac.sv 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+// HMemoryUtils.trashcanNow. Engine heap size: 2,521 MB. GUI used memory: 100 MB. Current time: 10/6/25, 3:56:05 PM CDT
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false, false, false, false, true, false); // B (F, cs) - Popup Trigger
+selectButton(RDIResourceCommand.RDICommands_SETTINGS, "new_staged_mac"); // h (Q, cs)
+// Run Command: RDIResourceCommand.RDICommands_SETTINGS
+// d (cs): Settings: addNotify
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (d)
+dismissDialog("Settings"); // d (cs)
+selectButton(RDIResourceCommand.RDICommands_SETTINGS, "new_staged_mac"); // h (Q, cs)
+// Run Command: RDIResourceCommand.RDICommands_SETTINGS
+// d (cs): Settings: addNotify
+selectButton(PAResourceQtoS.RTLOptionsPanel_SELECT_TOP_MODULE_OF_YOUR_DESIGN, (String) null); // t (ai, d)
+// bz (d):  Analyze source files for top modules : addNotify
+// R (d): Select Top Module: addNotify
+selectList(PAResourceQtoS.SelectTopModuleDialog_SELECT_TOP_MODULE, "new_staged_mac", 1); // S (J, R)
+selectList(PAResourceQtoS.SelectTopModuleDialog_SELECT_TOP_MODULE, "new_staged_mac", 1, false, false, false, false, true); // S (J, R) - Double Click
+dismissDialog("Select Top Module"); // R (d)
+selectButton(RDIResource.BaseDialog_APPLY, "Apply"); // a (d)
+// A (cs): Create New Run: addNotify
+selectButton(RDIResource.BaseDialog_NO, "No"); // a (A)
+dismissDialog("Create New Run"); // A (cs)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (d)
+// A (cs): Create New Run: addNotify
+selectButton(RDIResource.BaseDialog_YES, "Yes"); // a (A)
+// b (cs): Create Run: addNotify
+dismissDialog("Create New Run"); // A (cs)
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (b)
+dismissDialog("Create Run"); // b (cs)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (d)
+// A (cs): Create New Run: addNotify
+selectButton(RDIResource.BaseDialog_NO, "No"); // a (A)
+dismissDialog("Create New Run"); // A (cs)
+dismissDialog("Settings"); // d (cs)
+selectButton(RDIResourceCommand.RDICommands_SETTINGS, "Verilog"); // h (Q, cs)
+// Run Command: RDIResourceCommand.RDICommands_SETTINGS
+// d (cs): Settings: addNotify
+selectButton(PAResourceTtoZ.VerilogOptionsChooserPanel_SPECIFY_COMPILATION_OPTIONS_FOR_VERILOG, (String) null); // t (a, d)
+// b (d): Verilog Options: addNotify
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (b)
+dismissDialog("Verilog Options"); // b (d)
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (d)
+dismissDialog("Settings"); // d (cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "staged_mac.vhd", 1); // m (l, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, false); // B (F, cs)
