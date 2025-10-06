@@ -81,6 +81,7 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
                         state <= OUTPUT_RESULT;
                         SD_AXIS_TREADY <= 0;
                         MO_AXIS_TVALID <= 1;
+                        MO_AXIS_TLAST <= 1;
                     end
                 end
                 OUTPUT_RESULT: begin
@@ -90,6 +91,7 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
                         state <= WAIT_FOR_BIAS;
                         SD_AXIS_TREADY <= 1;
                         MO_AXIS_TVALID <= 0;
+                        MO_AXIS_TLAST <= 1;
                     end
                 end
                 default: begin
