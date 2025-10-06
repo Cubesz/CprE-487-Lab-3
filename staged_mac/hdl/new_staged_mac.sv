@@ -48,11 +48,11 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
     wire [C_DATA_WIDTH - 1 : 0] new_weight = SD_AXIS_TDATA[C_DATA_WIDTH - 1 : 0];
     wire [C_DATA_WIDTH - 1 : 0] new_input = SD_AXIS_TDATA[C_DATA_WIDTH * 2 - 1 : C_DATA_WIDTH];
     
-    reg [31:0] product;
-    reg [31:0] new_accumulated;
+    reg signed [31:0] product;
+    reg signed [31:0] new_accumulated;
     always @* begin
-        product = new_weight * new_input;
-        new_accumulated = accumulator + product;
+        product = $signed(new_weight) * $signed(new_input);
+        new_accumulated = $signed(accumulator) + product;
     end
     
     assign MO_AXIS_TDATA = accumulator; // it shouldn't sample it until its ready
@@ -71,7 +71,7 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
             case (state)
                 WAIT_FOR_BIAS: begin
                     if (SD_AXIS_TVALID) begin
-                        accumulator <= MO_AXIS_TDATA;
+                        accumulator <= SD_AXIS_TDATA;
                         state <= TAKE_IN_WEIGHTS_AND_INPUTS;
                     end
                 end

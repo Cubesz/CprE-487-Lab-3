@@ -51,3 +51,42 @@ set_property top_lib xil_defaultlib [get_filesets sim_1]
 # Re-enabling previously disabled source management mode.
 set_property source_mgmt_mode All [current_project]
 update_compile_order -fileset sim_1
+launch_simulation
+launch_simulation
+launch_simulation
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+add_files -fileset sim_1 -norecurse /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/hdl/new_staged_mac.sv
+update_compile_order -fileset sim_1
+launch_simulation
+launch_simulation
+source new_staged_mac_tb.tcl
+add_bp {/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/tb/new_staged_mac_tb.sv} 73
+close_sim
+launch_simulation
+source new_staged_mac_tb.tcl
+add_bp {/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/tb/new_staged_mac_tb.sv} 74
+restart
+run all
+step
+step
+step
+step
+step
+step
+add_bp {/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/tb/new_staged_mac_tb.sv} 78
+run all
+close_sim
+launch_simulation
+source new_staged_mac_tb.tcl
+run all
+add_bp {/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/tb/new_staged_mac_tb.sv} 82
+run all
+relaunch_sim
+run all
+run all
+close_sim
+launch_simulation
+source new_staged_mac_tb.tcl
+run all
+run all
+run all
