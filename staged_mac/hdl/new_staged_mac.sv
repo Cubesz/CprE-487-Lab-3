@@ -71,17 +71,19 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
             case (state)
                 WAIT_FOR_BIAS: begin
                     if (SD_AXIS_TVALID) begin
-                        accumulator <= SD_AXIS_TDATA;
+                        accumulator <= $signed(SD_AXIS_TDATA);
                         state <= TAKE_IN_WEIGHTS_AND_INPUTS;
                     end
                 end
                 TAKE_IN_WEIGHTS_AND_INPUTS: begin
-                    accumulator <= new_accumulated;
-                    if (SD_AXIS_TLAST) begin
-                        state <= OUTPUT_RESULT;
-                        SD_AXIS_TREADY <= 0;
-                        MO_AXIS_TVALID <= 1;
-                        MO_AXIS_TLAST <= 1;
+                    if (SD_AXIS_TVALID) begin
+                        accumulator <= new_accumulated;
+                        if (SD_AXIS_TLAST) begin
+                            state <= OUTPUT_RESULT;
+                            SD_AXIS_TREADY <= 0;
+                            MO_AXIS_TVALID <= 1;
+                            MO_AXIS_TLAST <= 1;
+                        end
                     end
                 end
                 OUTPUT_RESULT: begin
