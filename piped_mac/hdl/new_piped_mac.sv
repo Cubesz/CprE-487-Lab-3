@@ -1,0 +1,155 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 06.10.2025 15:24:04
+// Design Name: 
+// Module Name: new_staged_mac
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+module new_piped_mac #(parameter C_DATA_WIDTH = 8) (
+        input ACLK,
+        input ARESETN,
+        
+        output reg SD_AXIS_TREADY,
+        input [C_DATA_WIDTH*2-1 : 0] SD_AXIS_TDATA,
+        input SD_AXIS_TLAST,
+        input SD_AXIS_TUSER,
+        input SD_AXIS_TVALID,
+        input [7:0] SD_AXIS_TID,
+        
+        output reg MO_AXIS_TVALID,
+        output [31:0] MO_AXIS_TDATA,
+        output reg MO_AXIS_TLAST,
+        input MO_AXIS_TREADY,
+        output reg [7:0] MO_AXIS_TID
+    );
+    
+    typedef enum logic [1:0] {WAIT_FOR_BIAS, TAKE_IN_WEIGHTS_AND_INPUTS, OUTPUT_RESULT} STATE_TYPE;
+    
+    wire [31:0] mac_debug = 0;
+    
+    STATE_TYPE state;
+    
+    // Pipeline registers
+    reg signed [C_DATA_WIDTH-1:0] weight_s1, input_s1; 
+    reg signed [C_DATA_WIDTH*2-1:0] product_s2;
+    reg signed [31:0] accumulator;
+    // Pipeline Registers for Control Signals
+    reg tlast_s1;
+    reg tlast_s2;
+    reg valid_s1;
+    reg valid_s2;
+
+    
+    wire [C_DATA_WIDTH - 1 : 0] new_weight = SD_AXIS_TDATA[C_DATA_WIDTH - 1 : 0];
+    wire [C_DATA_WIDTH - 1 : 0] new_input = SD_AXIS_TDATA[C_DATA_WIDTH * 2 - 1 : C_DATA_WIDTH];
+    
+    // reg signed [31:0] product;
+    // reg signed [31:0] new_accumulated;
+    // always @* begin
+    //     product = $signed(new_weight) * $signed(new_input);
+    //     new_accumulated = $signed(accumulator) + product;
+    // end
+    
+    assign MO_AXIS_TDATA = accumulator; // it shouldn't sample it until its ready
+    
+    always @(posedge ACLK) begin
+        SD_AXIS_TREADY <= 1;
+        MO_AXIS_TVALID <= 0;
+        MO_AXIS_TLAST <= 0;
+        MO_AXIS_TID <= 0;
+        if (ARESETN == 0) begin // is in reset
+            state <= WAIT_FOR_BIAS;
+            accumulator <= 0;
+            SD_AXIS_TREADY <= 0;
+            // Reset pipeline registers
+            weight_s1 <= 0;
+            input_s1 <= 0;
+            tlast_s1 <= 0;
+            tlast_s2 <= 0;
+            product_s2 <= 0;
+            valid_s1 <= 0;
+            valid_s2 <= 0;
+        end
+        else begin            
+            case (state)
+                WAIT_FOR_BIAS: begin
+                    if (SD_AXIS_TVALID) begin
+                        accumulator <= $signed(SD_AXIS_TDATA);
+                        state <= TAKE_IN_WEIGHTS_AND_INPUTS;
+                        // Flush pipeline on state transition to prevent stale data
+                        valid_s1 <= 1'b0; 
+                        valid_s2 <= 1'b0;
+                    end
+                end
+
+                TAKE_IN_WEIGHTS_AND_INPUTS: begin
+                    // Stage 1 -> Stage 2 logic
+                    if (SD_AXIS_TREADY && SD_AXIS_TVALID) begin
+                        weight_s1 <= $signed(new_weight);
+                        input_s1  <= $signed(new_input);
+                        tlast_s1  <= SD_AXIS_TLAST;
+                        valid_s1  <= 1'b1;
+                    end else begin
+                        valid_s1 <= 1'b0; // Inject bubble if input is not valid
+                    end
+
+                    // Stage 2 -> Stage 3 logic
+                    product_s2 <= weight_s1 * input_s1;
+                    tlast_s2   <= tlast_s1;
+                    valid_s2   <= valid_s1;
+
+                    // Accumulation Logic
+                    if (valid_s2) begin
+                        accumulator <= accumulator + product_s2;
+                    end
+
+                    // State Transition Logic
+                    if (tlast_s2) begin
+                        state <= OUTPUT_RESULT;
+                        SD_AXIS_TREADY <= 0;
+                        MO_AXIS_TVALID <= 1;
+                        MO_AXIS_TLAST <= 1;
+                    end
+                end
+                OUTPUT_RESULT: begin
+                    SD_AXIS_TREADY <= 0;
+                    MO_AXIS_TVALID <= 1;
+                    if (MO_AXIS_TREADY) begin // it should get our result... move on
+                        state <= WAIT_FOR_BIAS;
+                        
+                        weight_s1 <= 0;
+                        input_s1 <= 0;
+                        product_s2 <= 0;
+                        tlast_s1 <= 0;
+                        tlast_s2 <= 0;
+                        valid_s1 <= 0;
+                        valid_s2 <= 0;
+
+                        SD_AXIS_TREADY <= 1;
+                        MO_AXIS_TVALID <= 0;
+                        MO_AXIS_TLAST <= 1;
+                    end
+                end
+                default: begin
+                    state <= WAIT_FOR_BIAS;
+                end
+            endcase
+        end
+    end
+    
+    
+endmodule
