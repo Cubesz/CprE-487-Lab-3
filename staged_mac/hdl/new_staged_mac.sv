@@ -51,7 +51,7 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
     wire signed [31:0] new_accumulated;
     assign MO_AXIS_TDATA = accumulator; // it shouldn't sample it until its ready
     
-    multadd_8x8p32_comb mult_add (
+    multadd_8x8p32_com mult_add (
           .A(new_input),
           .B(new_weight),
           .C(accumulator),

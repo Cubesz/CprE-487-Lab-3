@@ -1,4 +1,0 @@
-vhdl xil_defaultlib  \
-"../../../../tc_staged_mac.srcs/sources_1/ip/multadd_8x8p32_comb/sim/multadd_8x8p32_comb.vhd" \
-
-nosort
