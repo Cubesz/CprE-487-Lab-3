@@ -1,0 +1,45 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Tue Oct  7 22:10:56 2025
+# Process ID: 32989
+# Current directory: /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado
+# Command line: vivado
+# Log file: /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/vivado.log
+# Journal file: /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/vivado.jou
+#-----------------------------------------------------------
+start_gui
+ls
+source tc_piped_mac_ip.tcl
+update_compile_order -fileset sources_1
+add_files {/home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/hdl/new_piped_mac.sv /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/hdl/piped_mac.vhd}
+update_compile_order -fileset sources_1
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+add_files -fileset sim_1 /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/tb/new_piped_mac_tb.sv
+update_compile_order -fileset sim_1
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top new_piped_mac [current_fileset]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+update_compile_order -fileset sources_1
+set_property target_language Verilog [current_project]
+create_ip -name xbip_multadd -vendor xilinx.com -library ip -version 3.0 -module_name xbip_multadd_0
+set_property -dict [list CONFIG.c_use_pcin {true} CONFIG.c_a_width {8} CONFIG.c_b_width {8} CONFIG.c_c_width {32} CONFIG.c_out_high {31} CONFIG.c_ab_latency {-1} CONFIG.c_ce_overrides_sclr {0} CONFIG.c_c_width {32} CONFIG.c_out_high {31} CONFIG.c_out_low {0} CONFIG.c_c_latency {0}] [get_ips xbip_multadd_0]
+generate_target {instantiation_template} [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.srcs/sources_1/ip/xbip_multadd_0/xbip_multadd_0.xci]
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.srcs/sources_1/ip/xbip_multadd_0/xbip_multadd_0.xci] -no_script -reset -force -quiet
+remove_files  /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.srcs/sources_1/ip/xbip_multadd_0/xbip_multadd_0.xci
+file delete -force /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.srcs/sources_1/ip/xbip_multadd_0
+create_ip -name xbip_multadd -vendor xilinx.com -library ip -version 3.0 -module_name multadd_8x8p32_piped
+set_property -dict [list CONFIG.Component_Name {multadd_8x8p32_piped} CONFIG.c_c_type {0} CONFIG.c_use_pcin {true} CONFIG.c_a_width {8} CONFIG.c_b_width {8} CONFIG.c_out_high {31} CONFIG.c_c_width {48} CONFIG.c_out_high {31} CONFIG.c_out_low {0} CONFIG.c_c_latency {0}] [get_ips multadd_8x8p32_piped]
+generate_target {instantiation_template} [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.srcs/sources_1/ip/multadd_8x8p32_piped/multadd_8x8p32_piped.xci]
+generate_target all [get_files  /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.srcs/sources_1/ip/multadd_8x8p32_piped/multadd_8x8p32_piped.xci]
+catch { config_ip_cache -export [get_ips -all multadd_8x8p32_piped] }
+export_ip_user_files -of_objects [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.srcs/sources_1/ip/multadd_8x8p32_piped/multadd_8x8p32_piped.xci] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.srcs/sources_1/ip/multadd_8x8p32_piped/multadd_8x8p32_piped.xci]
+launch_runs multadd_8x8p32_piped_synth_1 -jobs 4
+wait_on_run multadd_8x8p32_piped_synth_1
+export_simulation -of_objects [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.srcs/sources_1/ip/multadd_8x8p32_piped/multadd_8x8p32_piped.xci] -directory /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.ip_user_files/sim_scripts -ip_user_files_dir /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.ip_user_files -ipstatic_source_dir /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.ip_user_files/ipstatic -lib_map_path [list {modelsim=/home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/Xilinx/Vivado/Modelsim_libs} {questa=/home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.cache/compile_simlib/questa} {ies=/home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.cache/compile_simlib/ies} {xcelium=/home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.cache/compile_simlib/xcelium} {vcs=/home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.cache/compile_simlib/vcs} {riviera=/home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/vivado/tc_piped_mac/tc_piped_mac.cache/compile_simlib/riviera}] -use_ip_compiled_libs -force -quiet
+ipx::open_ipxact_file /home/zfsalti/487/lab3/CprE-487-Lab-3/piped_mac/component.xml

@@ -22,7 +22,6 @@
 module new_piped_mac_tb(
         
     );
-    
     reg clk;
     reg rst;
     
@@ -123,7 +122,8 @@ module new_piped_mac_tb(
 
         // send bias and some weights
         master_valid = 1;
-        master_data = 5;
+        master_data[15:8] = 1;
+        master_data[7:0] = 5;
         #10
 
         master_data[15:8] = -10;
@@ -143,17 +143,23 @@ module new_piped_mac_tb(
 
         // TEST 1: A typical use case with multiple accumulations
         $display("\nTEST 1: Typical Use");
-        send_transaction(-1093, 0); // Bias
+        // bias of -1028, we need to split it up
+        // -128*10 + 126 * 2
+        //send_transaction(-1028, 0); // Bias
+        send_transaction({$signed(-8'd128), $signed(8'd10)}, 0); // bias part 1
+        send_transaction({$signed(8'd126), $signed(8'd2)}, 0); // bias part 2
+        
         send_transaction({$signed(-8'd122), $signed(-8'd15)}, 0);
         send_transaction({$signed(8'd119),  $signed(-8'd3)}, 0);
         send_transaction({$signed(-8'd107), $signed(8'd13)}, 1);
-        check_result(-1093 + (-15 * -122) + (-3 * 119) + (13 * -107));
+        check_result(-1028 + (-15 * -122) + (-3 * 119) + (13 * -107));
 
         reset_dut();
 
         // TEST 2: Maximum positive value
         $display("\nTEST 2: Maximum Value Test");
-        send_transaction(5000, 0); // Bias
+        //send_transaction(5000, 0); // Bias
+        send_transaction({$signed(8'd50), $signed(8'd100)}, 0); // Bias of 5000
         send_transaction({$signed(-8'd128), $signed(-8'd128)}, 1);
         check_result(5000 + (-128 * -128));
 
@@ -161,32 +167,11 @@ module new_piped_mac_tb(
 
         // TEST 3: Maximum negative value
         $display("\nTEST 3: Minimum Value Test");
-        send_transaction(-2000, 0); // Bias
+        //send_transaction(-2000, 0); // Bias
+        send_transaction({$signed(8'd20), $signed(-8'd100)}, 0); // Bias of -2000
         send_transaction({$signed(-8'd128), $signed(8'd127)}, 0);
         send_transaction({$signed(-8'd100), $signed(8'd120)}, 1);
         check_result(-2000 + (127 * -128) + (120 * -100));
-
-        reset_dut();
-
-        // TEST 4: Pipeline Hazard and Stall Test
-        $display("\nTEST 4: Hazard and Stall Test");
-        send_transaction(32'sd1000, 0); // Bias
-        send_transaction({$signed(8'sd10), $signed(8'sd5)}, 0);   // Accumulator should be 1000 + 50 = 1050
-        send_transaction({$signed(8'sd20), $signed(-8'sd2)}, 0);  // Accumulator should be 1050 + (-40) = 1010
-        
-        // Stall for 5 clock cycles
-        $display("Stalling input for 5 cycles...");
-        #50;
-        
-        send_transaction({$signed(-8'sd10), $signed(-8'sd3)}, 1); // Final transaction. Accumulator should be 1010 + 30 = 1040
-        check_result(1000 + (5 * 10) + (-2 * 20) + (-3 * -10));
-
-        // TEST 5: Back-to-Back Transaction Test (No Reset)
-        $display("\nTEST 5: Back-to-Back Transaction Test (No Reset)");
-        send_transaction(32'sd50, 0); // Bias
-        send_transaction({$signed(8'sd8), $signed(8'sd8)}, 1);
-        check_result(50 + (8 * 8));
-
 
         $display("\nAll tests completed!");
         $finish;

@@ -37,34 +37,67 @@ module new_piped_mac #(parameter C_DATA_WIDTH = 8) (
         output reg [7:0] MO_AXIS_TID
     );
     
-    typedef enum logic [1:0] {WAIT_FOR_BIAS, TAKE_IN_WEIGHTS_AND_INPUTS, OUTPUT_RESULT} STATE_TYPE;
+    typedef enum logic [1:0] {TAKE_IN_WEIGHTS_AND_INPUTS, DELAY, OUTPUT_RESULT} STATE_TYPE;
     
     wire [31:0] mac_debug = 0;
     
     STATE_TYPE state;
     
-    // Pipeline registers
-    reg signed [C_DATA_WIDTH-1:0] weight_s1, input_s1; 
-    reg signed [C_DATA_WIDTH*2-1:0] product_s2;
-    reg signed [31:0] accumulator;
-    // Pipeline Registers for Control Signals
-    reg tlast_s1;
-    reg tlast_s2;
-    reg valid_s1;
-    reg valid_s2;
-
-    
+        
     wire [C_DATA_WIDTH - 1 : 0] new_weight = SD_AXIS_TDATA[C_DATA_WIDTH - 1 : 0];
     wire [C_DATA_WIDTH - 1 : 0] new_input = SD_AXIS_TDATA[C_DATA_WIDTH * 2 - 1 : C_DATA_WIDTH];
     
-    // reg signed [31:0] product;
-    // reg signed [31:0] new_accumulated;
-    // always @* begin
-    //     product = $signed(new_weight) * $signed(new_input);
-    //     new_accumulated = $signed(accumulator) + product;
-    // end
     
-    assign MO_AXIS_TDATA = accumulator; // it shouldn't sample it until its ready
+    wire [47:0] cascaded_accumulator_out;
+    wire [31:0] accumulator_out;
+    
+    assign MO_AXIS_TDATA = accumulator_out; // it shouldn't sample it until its ready
+    
+    reg mult_add_accum_ce;
+    reg mult_add_accum_sclr;
+    always @* begin // combinatorial because we want to control clock enable and sclr without delay. Use clock enable to stop the internal accumulator from updating when relevant
+        // sclr only works when ce
+        mult_add_accum_ce = 1;
+        mult_add_accum_sclr = 0;
+        
+        if (!ARESETN) begin
+            mult_add_accum_ce = 1;
+            mult_add_accum_sclr = 1;
+        end
+        else if (state == TAKE_IN_WEIGHTS_AND_INPUTS && SD_AXIS_TVALID) begin
+            mult_add_accum_ce = 1;
+            mult_add_accum_sclr = 0;
+        end
+        else if (state == TAKE_IN_WEIGHTS_AND_INPUTS) begin // sd_axis_tvalid is false here
+            mult_add_accum_ce = 0; // freeze it
+        end
+        
+        
+        if (state == OUTPUT_RESULT && MO_AXIS_TREADY) begin
+            mult_add_accum_ce = 1;
+            mult_add_accum_sclr = 1;
+        end
+        else if (state == OUTPUT_RESULT) begin // mo_axis_tready is false here
+            mult_add_accum_ce = 0; // freeze it.
+        end
+        
+
+    end
+    
+    multadd_8x8p32_piped mult_add_accumulator (
+          .CLK(ACLK),
+          .CE(mult_add_accum_ce),
+          .SCLR(mult_add_accum_sclr),
+          .A(new_input),
+          .B(new_weight),
+          .PCIN(cascaded_accumulator_out),
+          .SUBTRACT(0),
+          .P(accumulator_out),
+          .PCOUT(cascaded_accumulator_out)
+    );
+
+    
+    reg delay_counter;
     
     always @(posedge ACLK) begin
         SD_AXIS_TREADY <= 1;
@@ -72,55 +105,30 @@ module new_piped_mac #(parameter C_DATA_WIDTH = 8) (
         MO_AXIS_TLAST <= 0;
         MO_AXIS_TID <= 0;
         if (ARESETN == 0) begin // is in reset
-            state <= WAIT_FOR_BIAS;
-            accumulator <= 0;
+            //state <= WAIT_FOR_BIAS;
+            state <= TAKE_IN_WEIGHTS_AND_INPUTS;
             SD_AXIS_TREADY <= 0;
-            // Reset pipeline registers
-            weight_s1 <= 0;
-            input_s1 <= 0;
-            tlast_s1 <= 0;
-            tlast_s2 <= 0;
-            product_s2 <= 0;
-            valid_s1 <= 0;
-            valid_s2 <= 0;
+            delay_counter <= 0;
         end
-        else begin            
+        else begin
             case (state)
-                WAIT_FOR_BIAS: begin
+                TAKE_IN_WEIGHTS_AND_INPUTS: begin
                     if (SD_AXIS_TVALID) begin
-                        accumulator <= $signed(SD_AXIS_TDATA);
-                        state <= TAKE_IN_WEIGHTS_AND_INPUTS;
-                        // Flush pipeline on state transition to prevent stale data
-                        valid_s1 <= 1'b0; 
-                        valid_s2 <= 1'b0;
+                        if (SD_AXIS_TLAST) begin
+                            state <= DELAY;
+                            //state <= OUTPUT_RESULT;
+                            SD_AXIS_TREADY <= 0;
+                            MO_AXIS_TVALID <= 0;
+                            MO_AXIS_TLAST <= 0;
+                            delay_counter <= 0;
+                        end
                     end
                 end
-
-                TAKE_IN_WEIGHTS_AND_INPUTS: begin
-                    // Stage 1 -> Stage 2 logic
-                    if (SD_AXIS_TREADY && SD_AXIS_TVALID) begin
-                        weight_s1 <= $signed(new_weight);
-                        input_s1  <= $signed(new_input);
-                        tlast_s1  <= SD_AXIS_TLAST;
-                        valid_s1  <= 1'b1;
-                    end else begin
-                        valid_s1 <= 1'b0; // Inject bubble if input is not valid
-                    end
-
-                    // Stage 2 -> Stage 3 logic
-                    product_s2 <= weight_s1 * input_s1;
-                    tlast_s2   <= tlast_s1;
-                    valid_s2   <= valid_s1;
-
-                    // Accumulation Logic
-                    if (valid_s2) begin
-                        accumulator <= accumulator + product_s2;
-                    end
-
-                    // State Transition Logic
-                    if (tlast_s2) begin
+                DELAY: begin
+                    SD_AXIS_TREADY <= 0;
+                    delay_counter <= delay_counter + 1;
+                    if (delay_counter == 1) begin
                         state <= OUTPUT_RESULT;
-                        SD_AXIS_TREADY <= 0;
                         MO_AXIS_TVALID <= 1;
                         MO_AXIS_TLAST <= 1;
                     end
@@ -129,23 +137,16 @@ module new_piped_mac #(parameter C_DATA_WIDTH = 8) (
                     SD_AXIS_TREADY <= 0;
                     MO_AXIS_TVALID <= 1;
                     if (MO_AXIS_TREADY) begin // it should get our result... move on
-                        state <= WAIT_FOR_BIAS;
-                        
-                        weight_s1 <= 0;
-                        input_s1 <= 0;
-                        product_s2 <= 0;
-                        tlast_s1 <= 0;
-                        tlast_s2 <= 0;
-                        valid_s1 <= 0;
-                        valid_s2 <= 0;
-
+                        //state <= WAIT_FOR_BIAS;
+                        state <= TAKE_IN_WEIGHTS_AND_INPUTS;
                         SD_AXIS_TREADY <= 1;
                         MO_AXIS_TVALID <= 0;
-                        MO_AXIS_TLAST <= 1;
+                        MO_AXIS_TLAST <= 0; //
                     end
                 end
                 default: begin
-                    state <= WAIT_FOR_BIAS;
+                    //state <= WAIT_FOR_BIAS;
+                    state <= TAKE_IN_WEIGHTS_AND_INPUTS;
                 end
             endcase
         end
