@@ -107,7 +107,7 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
                         state <= TAKE_IN_WEIGHTS_AND_INPUTS;
                         SD_AXIS_TREADY <= 1;
                         MO_AXIS_TVALID <= 0;
-                        MO_AXIS_TLAST <= 1;
+                        MO_AXIS_TLAST <= 0;
                     end
                 end
                 default: begin
