@@ -90,3 +90,4 @@ source new_staged_mac_tb.tcl
 run all
 run all
 run all
+close_sim

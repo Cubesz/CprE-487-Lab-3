@@ -44,18 +44,30 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
     STATE_TYPE state;
     
     reg [31:0] accumulator;
-    
+        
     wire [C_DATA_WIDTH - 1 : 0] new_weight = SD_AXIS_TDATA[C_DATA_WIDTH - 1 : 0];
     wire [C_DATA_WIDTH - 1 : 0] new_input = SD_AXIS_TDATA[C_DATA_WIDTH * 2 - 1 : C_DATA_WIDTH];
     
-    reg signed [31:0] product;
-    reg signed [31:0] new_accumulated;
-    always @* begin
-        product = $signed(new_weight) * $signed(new_input);
-        new_accumulated = $signed(accumulator) + product;
-    end
-    
+    wire signed [31:0] new_accumulated;
     assign MO_AXIS_TDATA = accumulator; // it shouldn't sample it until its ready
+    
+    multadd_8x8p32_comb mult_add (
+          .A(new_input),
+          .B(new_weight),
+          .C(accumulator),
+          .SUBTRACT(0),
+          .P(new_accumulated)
+    );
+
+    
+//    reg signed [31:0] product;
+//    reg signed [31:0] new_accumulated;
+//    always @* begin
+//        product = $signed(new_weight) * $signed(new_input);
+//        new_accumulated = $signed(accumulator) + product;
+//    end
+    
+
     
     always @(posedge ACLK) begin
         SD_AXIS_TREADY <= 1;
