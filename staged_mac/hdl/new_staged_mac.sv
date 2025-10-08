@@ -37,7 +37,7 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
         output reg [7:0] MO_AXIS_TID
     );
     
-    typedef enum logic [1:0] {WAIT_FOR_BIAS, TAKE_IN_WEIGHTS_AND_INPUTS, OUTPUT_RESULT} STATE_TYPE;
+    typedef enum logic {TAKE_IN_WEIGHTS_AND_INPUTS, OUTPUT_RESULT} STATE_TYPE;
     
     wire [31:0] mac_debug = 0;
     
@@ -75,18 +75,19 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
         MO_AXIS_TLAST <= 0;
         MO_AXIS_TID <= 0;
         if (ARESETN == 0) begin // is in reset
-            state <= WAIT_FOR_BIAS;
+            //state <= WAIT_FOR_BIAS;
+            state <= TAKE_IN_WEIGHTS_AND_INPUTS;
             accumulator <= 0;
             SD_AXIS_TREADY <= 0;
         end
         else begin
             case (state)
-                WAIT_FOR_BIAS: begin
-                    if (SD_AXIS_TVALID) begin
-                        accumulator <= $signed(SD_AXIS_TDATA);
-                        state <= TAKE_IN_WEIGHTS_AND_INPUTS;
-                    end
-                end
+//                WAIT_FOR_BIAS: begin // Bias state not needed, why multiplex input into accumulator? Just send something like 1 * bias instead in the beginning or whenever. 
+//                    if (SD_AXIS_TVALID) begin
+//                        accumulator <= $signed(SD_AXIS_TDATA);
+//                        state <= TAKE_IN_WEIGHTS_AND_INPUTS;
+//                    end
+//                end
                 TAKE_IN_WEIGHTS_AND_INPUTS: begin
                     if (SD_AXIS_TVALID) begin
                         accumulator <= new_accumulated;
@@ -102,14 +103,16 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
                     SD_AXIS_TREADY <= 0;
                     MO_AXIS_TVALID <= 1;
                     if (MO_AXIS_TREADY) begin // it should get our result... move on
-                        state <= WAIT_FOR_BIAS;
+                        //state <= WAIT_FOR_BIAS;
+                        state <= TAKE_IN_WEIGHTS_AND_INPUTS;
                         SD_AXIS_TREADY <= 1;
                         MO_AXIS_TVALID <= 0;
                         MO_AXIS_TLAST <= 1;
                     end
                 end
                 default: begin
-                    state <= WAIT_FOR_BIAS;
+                    //state <= WAIT_FOR_BIAS;
+                    state <= TAKE_IN_WEIGHTS_AND_INPUTS;
                 end
             endcase
         end

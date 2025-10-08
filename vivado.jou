@@ -2,8 +2,8 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Tue Oct  7 20:51:30 2025
-# Process ID: 13730
+# Start of session at: Tue Oct  7 21:40:27 2025
+# Process ID: 25228
 # Current directory: /home/zfsalti/487/lab3/CprE-487-Lab-3
 # Command line: vivado
 # Log file: /home/zfsalti/487/lab3/CprE-487-Lab-3/vivado.log
@@ -12,33 +12,19 @@
 start_gui
 open_project /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.xpr
 update_compile_order -fileset sources_1
+launch_simulation
+source new_staged_mac_tb.tcl
+relaunch_sim
+relaunch_sim
+close_sim
+launch_simulation
+source new_staged_mac_tb.tcl
 reset_run synth_1
 launch_runs synth_1 -jobs 4
 wait_on_run synth_1
-create_ip -name xbip_multadd -vendor xilinx.com -library ip -version 3.0 -module_name xbip_multadd_0
-set_property -dict [list CONFIG.c_use_pcin {false} CONFIG.c_a_width {8} CONFIG.c_b_width {8} CONFIG.c_c_width {32} CONFIG.c_out_high {31} CONFIG.c_ab_latency {0} CONFIG.c_c_latency {0} CONFIG.c_ce_overrides_sclr {0} CONFIG.c_c_width {32} CONFIG.c_out_high {31} CONFIG.c_out_low {0}] [get_ips xbip_multadd_0]
-generate_target {instantiation_template} [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/ip/xbip_multadd_0/xbip_multadd_0.xci]
-update_compile_order -fileset sources_1
-export_ip_user_files -of_objects  [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/ip/xbip_multadd_0/xbip_multadd_0.xci] -no_script -reset -force -quiet
-remove_files  /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/ip/xbip_multadd_0/xbip_multadd_0.xci
-file delete -force /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/ip/xbip_multadd_0
-create_ip -name xbip_multadd -vendor xilinx.com -library ip -version 3.0 -module_name multadd_8x8p32_comb
-set_property -dict [list CONFIG.Component_Name {multadd_8x8p32_comb} CONFIG.c_a_width {8} CONFIG.c_b_width {8} CONFIG.c_c_width {32} CONFIG.c_out_high {31} CONFIG.c_ab_latency {0} CONFIG.c_c_latency {0} CONFIG.c_out_low {0}] [get_ips multadd_8x8p32_comb]
-generate_target {instantiation_template} [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/ip/multadd_8x8p32_comb/multadd_8x8p32_comb.xci]
-update_compile_order -fileset sources_1
-generate_target all [get_files  /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/ip/multadd_8x8p32_comb/multadd_8x8p32_comb.xci]
-catch { config_ip_cache -export [get_ips -all multadd_8x8p32_comb] }
-export_ip_user_files -of_objects [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/ip/multadd_8x8p32_comb/multadd_8x8p32_comb.xci] -no_script -sync -force -quiet
-create_ip_run [get_files -of_objects [get_fileset sources_1] /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/ip/multadd_8x8p32_comb/multadd_8x8p32_comb.xci]
-launch_runs multadd_8x8p32_comb_synth_1 -jobs 4
-wait_on_run multadd_8x8p32_comb_synth_1
-export_simulation -of_objects [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.srcs/sources_1/ip/multadd_8x8p32_comb/multadd_8x8p32_comb.xci] -directory /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.ip_user_files/sim_scripts -ip_user_files_dir /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.ip_user_files -ipstatic_source_dir /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.ip_user_files/ipstatic -lib_map_path [list {modelsim=/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/Xilinx/Vivado/Modelsim_libs} {questa=/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.cache/compile_simlib/questa} {ies=/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.cache/compile_simlib/ies} {xcelium=/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.cache/compile_simlib/xcelium} {vcs=/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.cache/compile_simlib/vcs} {riviera=/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.cache/compile_simlib/riviera}] -use_ip_compiled_libs -force -quiet
-reset_run synth_1
-launch_runs synth_1 -jobs 4
-wait_on_run synth_1
+close_sim
 launch_runs impl_1 -jobs 4
 wait_on_run impl_1
 open_run impl_1
-launch_simulation
-source new_staged_mac_tb.tcl
-close_sim
+open_run synth_1 -name synth_1
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_1
