@@ -1,0 +1,39 @@
+-makelib xcelium_lib/xpm -sv \
+  "/remote/Xilinx/2020.1/Vivado/2020.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv" \
+  "/remote/Xilinx/2020.1/Vivado/2020.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv" \
+  "/remote/Xilinx/2020.1/Vivado/2020.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv" \
+-endlib
+-makelib xcelium_lib/xpm \
+  "/remote/Xilinx/2020.1/Vivado/2020.1/data/ip/xpm/xpm_VCOMP.vhd" \
+-endlib
+-makelib xcelium_lib/xbip_utils_v3_0_10 \
+  "../../../ipstatic/hdl/xbip_utils_v3_0_vh_rfs.vhd" \
+-endlib
+-makelib xcelium_lib/xbip_pipe_v3_0_6 \
+  "../../../ipstatic/hdl/xbip_pipe_v3_0_vh_rfs.vhd" \
+-endlib
+-makelib xcelium_lib/xbip_bram18k_v3_0_6 \
+  "../../../ipstatic/hdl/xbip_bram18k_v3_0_vh_rfs.vhd" \
+-endlib
+-makelib xcelium_lib/mult_gen_v12_0_16 \
+  "../../../ipstatic/hdl/mult_gen_v12_0_vh_rfs.vhd" \
+-endlib
+-makelib xcelium_lib/xbip_dsp48_wrapper_v3_0_4 \
+  "../../../ipstatic/hdl/xbip_dsp48_wrapper_v3_0_vh_rfs.vhd" \
+-endlib
+-makelib xcelium_lib/xbip_dsp48_addsub_v3_0_6 \
+  "../../../ipstatic/hdl/xbip_dsp48_addsub_v3_0_vh_rfs.vhd" \
+-endlib
+-makelib xcelium_lib/xbip_dsp48_multadd_v3_0_6 \
+  "../../../ipstatic/hdl/xbip_dsp48_multadd_v3_0_vh_rfs.vhd" \
+-endlib
+-makelib xcelium_lib/xbip_multadd_v3_0_15 \
+  "../../../ipstatic/hdl/xbip_multadd_v3_0_vh_rfs.vhd" \
+-endlib
+-makelib xcelium_lib/xil_defaultlib \
+  "../../../../../../../staged_mac/IPs/multadd_8x8p32_com/sim/multadd_8x8p32_com.vhd" \
+-endlib
+-makelib xcelium_lib/xil_defaultlib \
+  glbl.v
+-endlib
+

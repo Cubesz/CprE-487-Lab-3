@@ -1,0 +1,2 @@
+multadd_8x8p32_com.vhd,vhdl,xil_defaultlib,../../../../../../../staged_mac/IPs/multadd_8x8p32_com/sim/multadd_8x8p32_com.vhd,
+glbl.v,Verilog,xil_defaultlib,glbl.v

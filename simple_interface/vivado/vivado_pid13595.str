@@ -1,0 +1,1329 @@
+/*
+
+Xilinx Vivado v2020.1 (64-bit) [Major: 2020, Minor: 1]
+SW Build: 2902540 on Wed May 27 19:54:35 MDT 2020
+IP Build: 2902112 on Wed May 27 22:43:36 MDT 2020
+
+Process ID (PID): 13595
+License: Customer
+
+Current time: 	Wed Oct 08 17:40:49 CDT 2025
+Time zone: 	Central Standard Time (America/Chicago)
+
+OS: Red Hat Enterprise Linux release 9.6 (Plow)
+OS Version: 5.14.0-570.19.1.el9_6.x86_64
+OS Architecture: amd64
+Available processors (cores): 4
+
+Display: :100
+Screen size: 2560x1440
+Screen resolution (DPI): 100
+Available screens: 1
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	9.0.4 64-bit
+Java home: 	/remote/Xilinx/2020.1/Vivado/2020.1/tps/lnx64/jre9.0.4
+Java executable location: 	/remote/Xilinx/2020.1/Vivado/2020.1/tps/lnx64/jre9.0.4/bin/java
+Java initial memory (-Xms): 	128 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	zfsalti
+User home directory: /home/zfsalti
+User working directory: /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado
+User country: 	null
+User language: 	en
+User locale: 	en
+
+RDI_BASEROOT: /remote/Xilinx/2020.1/Vivado
+HDI_APPROOT: /remote/Xilinx/2020.1/Vivado/2020.1
+RDI_DATADIR: /remote/Xilinx/2020.1/Vivado/2020.1/data
+RDI_BINDIR: /remote/Xilinx/2020.1/Vivado/2020.1/bin
+
+Vivado preferences file location: /home/zfsalti/.Xilinx/Vivado/2020.1/vivado.xml
+Vivado preferences directory: /home/zfsalti/.Xilinx/Vivado/2020.1/
+Vivado layouts directory: /home/zfsalti/.Xilinx/Vivado/2020.1/data/layouts
+PlanAhead jar file location: 	/remote/Xilinx/2020.1/Vivado/2020.1/lib/classes/planAhead.jar
+Vivado log file location: 	/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/vivado.log
+Vivado journal file location: 	/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/vivado.jou
+Engine tmp dir: 	./.Xil/Vivado-13595-linuxvdi-f25-07.ece.iastate.edu
+
+Xilinx Environment Variables
+----------------------------
+XILINX: /remote/Xilinx/2020.1/Vivado/2020.1/ids_lite/ISE
+XILINX_DSP: /remote/Xilinx/2020.1/Vivado/2020.1/ids_lite/ISE
+XILINX_PLANAHEAD: /remote/Xilinx/2020.1/Vivado/2020.1
+XILINX_SDK: /remote/Xilinx/2020.1/Vitis/2020.1
+XILINX_VITIS: /remote/Xilinx/2020.1/Vitis/2020.1
+XILINX_VIVADO: /remote/Xilinx/2020.1/Vivado/2020.1
+XILINX_VIVADO_HLS: /remote/Xilinx/2020.1/Vivado/2020.1
+
+
+GUI allocated memory:	185 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 1,433 MB
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// Tcl Command: 'rdi::info_commands {device::*}'
+// Tcl Command: 'rdi::info_commands {debug::*}'
+// Tcl Command: 'rdi::info_commands {*}'
+// HMemoryUtils.trashcanNow. Engine heap size: 1,433 MB. GUI used memory: 71 MB. Current time: 10/8/25, 5:40:50 PM CDT
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "ls", true); // aF (ac, cs)
+// Tcl Command: 'ls'
+// Tcl Command: 'ls'
+// Tcl Message: ls 
+// Tcl Message: simple_interface.tcl vivado.jou vivado.log vivado_pid13595.str 
+// Tcl Command: 'rdi::info_commands {sourc*}'
+// Tcl Command: 'rdi::info_commands {source*}'
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "source simple_interface.tcl", true); // aF (ac, cs)
+// Tcl Command: 'source simple_interface.tcl'
+// Tcl Command: 'source simple_interface.tcl'
+// bz (cs):  Tcl Command Line : addNotify
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// Tcl Message: source simple_interface.tcl 
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_ADD
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_NEW
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 114 MB (+117407kb) [00:00:39]
+// [Engine Memory]: 1,453 MB (+1372318kb) [00:00:39]
+// [GUI Memory]: 128 MB (+8659kb) [00:00:39]
+// WARNING: HEventQueue.dispatchEvent() is taking  1633 ms.
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/remote/Xilinx/2020.1/Vivado/2020.1/data/ip'. 
+// HMemoryUtils.trashcanNow. Engine heap size: 1,484 MB. GUI used memory: 78 MB. Current time: 10/8/25, 5:41:21 PM CDT
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: BOARD_MODIFIED
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: LOAD_FEATURE
+// Tcl Message: create_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 7309.855 ; gain = 35.023 ; free physical = 8980 ; free virtual = 19782 
+// Tcl Message: INFO: [BD::TCL 103-2010] Currently there is no design <staged_mac_bd> in project, so creating one... 
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: RSB_OPEN_DIAGRAM
+// Tcl Message: Wrote  : </home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd>  
+// TclEventType: RSB_OPEN_DIAGRAM
+// [GUI Memory]: 136 MB (+1558kb) [00:00:47]
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// Elapsed time: 17 seconds
+closeView(PAResourceOtoP.PAViews_PROJECT_SUMMARY, "Project Summary"); // v
+// Tcl Message: create_bd_design: Time (s): cpu = 00:00:06 ; elapsed = 00:00:05 . Memory (MB): peak = 7339.781 ; gain = 27.711 ; free physical = 8782 ; free virtual = 19646 
+// Tcl Message: INFO: [BD::TCL 103-2011] Checking if the following IPs exist in the project's IP catalog:     xilinx.com:ip:axi_fifo_mm_s:4.2 xilinx.com:ip:processing_system7:5.5 xilinx.com:ip:proc_sys_reset:5.0  . 
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: LOAD_FEATURE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_LAYOUT_STATE
+// TclEventType: RSB_REGENERATE_LAYOUT
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: INFO: [Ipptcl 7-1463] No Compatible Board Interface found. Board Tab not created in customize GUI 
+// Tcl Message: Slave segment '/axi_fifo_mm_s_0/S_AXI/Mem0' is being assigned into address space '/processing_system7_0/Data' at <0x43C0_0000 [ 64K ]>. 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: RSB_CLOSE_DIAGRAM
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// Tcl Message: Wrote  : </home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd>  Wrote  : </home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/ui/bd_65dee2cb.ui>  
+// TclEventType: PROJ_DESIGN_MODE_SET
+// TclEventType: RUN_MODIFY
+// TclEventType: PROJECT_DASHBOARD_CHANGE
+// Tcl Message: INFO: Project created:simple_interface 
+dismissDialog("Tcl Command Line"); // bz (cs)
+// [Engine Memory]: 1,532 MB (+5921kb) [00:01:00]
+// G (cs): Invalid Top Module: addNotify
+// Tcl Message: update_compile_order -fileset sources_1 
+// HMemoryUtils.trashcanNow. Engine heap size: 1,532 MB. GUI used memory: 87 MB. Current time: 10/8/25, 5:41:40 PM CDT
+// Elapsed time: 12 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (G)
+dismissDialog("Invalid Top Module"); // G (cs)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator, Open Block Design]", 7, false); // u (J, cs)
+// Run Command: PAResourceCommand.PACommandNames_OPEN_BLOCK_DESIGN
+// bz (cs):  Open Block Design : addNotify
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_OPEN_DIAGRAM
+// Tcl Message: open_bd_design {/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd} 
+// Tcl Message: Adding component instance block -- xilinx.com:ip:axi_fifo_mm_s:4.2 - axi_fifo_mm_s_0 Adding component instance block -- xilinx.com:ip:processing_system7:5.5 - processing_system7_0 
+// Tcl Message: Adding component instance block -- xilinx.com:ip:axi_interconnect:2.1 - ps7_0_axi_periph Adding component instance block -- xilinx.com:ip:proc_sys_reset:5.0 - rst_ps7_0_100M Successfully read diagram <staged_mac_bd> from BD file </home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd> 
+// TclEventType: RSB_OPEN_DIAGRAM
+// TclEventType: RSB_CONNECTION_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 1,574 MB. GUI used memory: 88 MB. Current time: 10/8/25, 5:41:56 PM CDT
+closeView(PAResourceOtoP.PAViews_PROJECT_SUMMARY, "Project Summary"); // v
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+dismissDialog("Open Block Design"); // bz (cs)
+// Tcl Command: 'set_property location {1 225 319} [get_bd_cells processing_system7_0]'
+// TclEventType: RSB_CANVAS_LOCATION
+// Tcl Message: set_property location {1 225 319} [get_bd_cells processing_system7_0] 
+// Run Command: RDIResourceCommand.RDICommands_UNDO
+typeControlKey(null, null, 'z');
+// TclEventType: RSB_CANVAS_LOCATION
+// Tcl Message: undo 
+// Tcl Message: INFO: [Common 17-17] undo 'set_property location {1 225 319} [get_bd_cells processing_system7_0]' 
+// Elapsed time: 43 seconds
+selectTab((HResource) null, (HResource) null, "Sources", 0); // aL (aI, cs)
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // E (g, cs)
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c (cs): Add Sources: addNotify
+selectButton("NEXT", "Next >"); // JButton (j, c)
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_HDL_AND_NETLIST_FILES_TO_YOUR_PROJECT, "Add Files"); // a (E, c)
+// Elapsed time: 15 seconds
+setFileChooser("/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/hdl/new_staged_mac.sv");
+selectCheckBox(PAResourceQtoS.SrcChooserPanel_ADD_SOURCES_FROM_SUBDIRECTORIES, "Add sources from subdirectories", false); // g (bm, c): FALSE
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_HDL_AND_NETLIST_FILES_TO_YOUR_PROJECT, "Add Files"); // a (E, c)
+// Elapsed time: 25 seconds
+dismissFileChooser();
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_DIRECTORIES, "Add Directories"); // a (E, c)
+setFolderChooser("/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/IPs/multadd_8x8p32_com");
+// Elapsed time: 10 seconds
+selectCheckBox(PAResourceQtoS.SrcChooserPanel_ADD_SOURCES_FROM_SUBDIRECTORIES, "Add sources from subdirectories", false); // g (bm, c): FALSE
+selectCheckBox(PAResourceQtoS.SrcChooserPanel_ADD_SOURCES_FROM_SUBDIRECTORIES, "Add sources from subdirectories", true); // g (bm, c): TRUE
+selectCheckBox(PAResourceQtoS.SrcChooserPanel_ADD_SOURCES_FROM_SUBDIRECTORIES, "Add sources from subdirectories", false); // g (bm, c): FALSE
+selectTable(PAResourceQtoS.SrcChooserTable_SRC_CHOOSER_TABLE, "SourceRoot ; 2 ; multadd_8x8p32_com ; xil_defaultlib ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/IPs", 1, "multadd_8x8p32_com", 2); // bQ (J, c)
+selectButton("BACK", "< Back"); // JButton (j, c)
+selectButton("NEXT", "Next >"); // JButton (j, c)
+selectTable(PAResourceQtoS.SrcChooserTable_SRC_CHOOSER_TABLE, "SourceRoot ; 2 ; multadd_8x8p32_com ; xil_defaultlib ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/IPs", 1, "multadd_8x8p32_com", 2, false, false, false, true, false); // bQ (J, c) - Popup Trigger
+selectTable(PAResourceQtoS.SrcChooserTable_SRC_CHOOSER_TABLE, "SourceRoot ; 2 ; multadd_8x8p32_com ; xil_defaultlib ; /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/IPs", 1, "multadd_8x8p32_com", 2, false, false, false, true, false); // bQ (J, c) - Popup Trigger
+selectButton(RDIResource.AbstractCombinedPanel_REMOVE_SELECTED_ELEMENTS, "Remove"); // E (g, c)
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_HDL_AND_NETLIST_FILES_TO_YOUR_PROJECT, "Add Files"); // a (E, c)
+// Elapsed time: 18 seconds
+setFileChooser("/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/IPs/multadd_8x8p32_com/multadd_8x8p32_com.xci");
+selectButton("FINISH", "Finish"); // JButton (j, c)
+// 'h' command handler elapsed time: 110 seconds
+// [GUI Memory]: 151 MB (+8809kb) [00:03:59]
+dismissDialog("Add Sources"); // c (cs)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files -norecurse /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/IPs/multadd_8x8p32_com/multadd_8x8p32_com.xci 
+// bz (cs):  Add Sources  : addNotify
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files -norecurse /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/hdl/new_staged_mac.sv 
+dismissDialog("Add Sources"); // bz (cs)
+// TclEventType: FILE_SET_CHANGE
+// [Engine Memory]: 1,611 MB (+3497kb) [00:04:04]
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// G (cs): Invalid Top Module: addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 1,611 MB. GUI used memory: 90 MB. Current time: 10/8/25, 5:44:45 PM CDT
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (G)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Invalid Top Module"); // G (cs)
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv), mult_add : multadd_8x8p32_com (multadd_8x8p32_com.xci)]", 2, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv), mult_add : multadd_8x8p32_com (multadd_8x8p32_com.xci)]", 2, false, false, false, false, false, true); // B (F, cs) - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// O (cs):  Re-customize IP : addNotify
+// r (cs): Re-customize IP: addNotify
+dismissDialog("Re-customize IP"); // O (cs)
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (r)
+dismissDialog("Re-customize IP"); // r (cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true); // B (F, cs) - Node
+selectCheckBox(PAResourceQtoS.SrcFilePropPanels_SYNTHESIS, "Synthesis", false); // g (Q, cs): FALSE
+// Elapsed time: 17 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true); // B (F, cs) - Node
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true); // B (F, cs) - Node
+// Elapsed time: 15 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator, Open Block Design]", 7, false); // u (J, cs)
+// Run Command: PAResourceCommand.PACommandNames_OPEN_BLOCK_DESIGN
+// bz (cs):  Open Block Design : addNotify
+// TclEventType: RSB_OPEN_DIAGRAM
+// Tcl Message: open_bd_design {/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd} 
+dismissDialog("Open Block Design"); // bz (cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true); // B (F, cs) - Node
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv), mult_add : multadd_8x8p32_com (multadd_8x8p32_com.xci)]", 2, false); // B (F, cs)
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true, false, false, false, true, false); // B (F, cs) - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true, false, false, false, true, false); // B (F, cs) - Popup Trigger - Node
+selectMenu(PAResourceQtoS.SrcMenu_IP_DOCUMENTATION, "IP Documentation"); // af (ao, cs)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 2, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 2, true, false, false, false, false, true); // B (F, cs) - Double Click - Node
+// bz (cs):  Open Block Design : addNotify
+// TclEventType: RSB_OPEN_DIAGRAM
+// Tcl Message: open_bd_design {/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd} 
+dismissDialog("Open Block Design"); // bz (cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 2, true, false, false, false, true, false); // B (F, cs) - Popup Trigger - Node
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenuItem(PAResourceCommand.PACommandNames_SET_AS_TOP, "Set as Top"); // ai (ao, cs)
+selectMenuItem(PAResourceCommand.PACommandNames_SET_AS_TOP, "Set as Top"); // ai (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true, false, false, false, true, false); // B (F, cs) - Popup Trigger - Node
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectTab(PAResourceEtoH.FileSetView_TABBED_PANE, (HResource) null, "IP Sources", 1); // i (N, cs)
+selectTab(PAResourceEtoH.FileSetView_TABBED_PANE, (HResource) null, "Hierarchy", 0); // i (N, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true); // B (F, cs) - Node
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 2); // B (F, cs)
+selectView(PAResourceOtoP.PAViews_SYSTEM, "System", 150, 504, 1832, 914, false, false, false, true, false); // hq (m, cs) - Popup Trigger
+selectButton(PAResourceQtoS.SystemBuilderView_ADD_IP, "System_RSB_ADD_IP"); // E (g, cs)
+setText("PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE_SEARCH_FIELD", (String) null); // OverlayTextField (az)
+selectView(PAResourceOtoP.PAViews_SYSTEM, "System", 64, 126, 1832, 914, false, false, false, true, false); // hq (m, cs) - Popup Trigger
+selectMenuItem(PAResourceQtoS.SystemBuilderMenu_ADD_MODULE, "Add Module..."); // ai (ao, cs)
+// cU (cs): Add Module: addNotify
+selectList(PAResourceQtoS.RSBAddModuleDialog_MODULE_LIST, null, -1); // cY (J, cU)
+selectCheckBox(PAResourceQtoS.RSBAddModuleDialog_HIDE_INCOMPATIBLE_MODULES, "Hide incompatible modules", false); // g (Q, cU): FALSE
+selectList(PAResourceQtoS.RSBAddModuleDialog_MODULE_LIST, "new_staged_mac (new_staged_mac.sv)", 1); // cY (J, cU)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (cU)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (cU)
+selectList(PAResourceQtoS.RSBAddModuleDialog_MODULE_LIST, "new_staged_mac (new_staged_mac.sv)", 1); // cY (J, cU)
+selectList(PAResourceQtoS.RSBAddModuleDialog_MODULE_LIST, "new_staged_mac (new_staged_mac.sv)", 1, false, false, false, false, true); // cY (J, cU) - Double Click
+selectList(PAResourceQtoS.RSBAddModuleDialog_MODULE_LIST, "new_staged_mac (new_staged_mac.sv)", 1); // cY (J, cU)
+selectList(PAResourceQtoS.RSBAddModuleDialog_MODULE_LIST, "new_staged_mac (new_staged_mac.sv)", 1); // cY (J, cU)
+selectCheckBox(PAResourceQtoS.RSBAddModuleDialog_HIDE_INCOMPATIBLE_MODULES, "Hide incompatible modules", true); // g (Q, cU): TRUE
+selectCheckBox(PAResourceQtoS.RSBAddModuleDialog_HIDE_INCOMPATIBLE_MODULES, "Hide incompatible modules", false); // g (Q, cU): FALSE
+selectList(PAResourceQtoS.RSBAddModuleDialog_MODULE_LIST, "new_staged_mac (new_staged_mac.sv)", 1); // cY (J, cU)
+selectList(PAResourceQtoS.RSBAddModuleDialog_MODULE_LIST, "new_staged_mac (new_staged_mac.sv)", 1); // cY (J, cU)
+selectList(PAResourceQtoS.RSBAddModuleDialog_MODULE_LIST, "new_staged_mac (new_staged_mac.sv)", 1, false, false, false, false, true); // cY (J, cU) - Double Click
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (cU)
+dismissDialog("Add Module"); // cU (cs)
+// Elapsed time: 49 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1); // B (F, cs)
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // E (g, cs)
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c (cs): Add Sources: addNotify
+selectButton("NEXT", "Next >"); // JButton (j, c)
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_HDL_AND_NETLIST_FILES_TO_YOUR_PROJECT, "Add Files"); // a (E, c)
+dismissFileChooser();
+selectButton(PAResourceQtoS.SrcChooserPanel_CREATE_FILE, "Create File"); // a (E, c)
+// F (c): Create Source File: addNotify
+selectComboBox(PAResourceAtoD.CreateSrcFileDialog_FILE_LOCATION, "Choose Location...", 1); // e (Q, F)
+// Elapsed time: 14 seconds
+setFolderChooser("/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/hdl");
+setText(PAResourceAtoD.CreateSrcFileDialog_FILE_NAME, "staged_mac_wrapper"); // ac (Q, F)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (F)
+dismissDialog("Create Source File"); // F (c)
+selectButton("FINISH", "Finish"); // JButton (j, c)
+// 'h' command handler elapsed time: 41 seconds
+dismissDialog("Add Sources"); // c (cs)
+// Tcl Message: close [ open /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/hdl/staged_mac_wrapper.v w ] 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/hdl/staged_mac_wrapper.v 
+// I (cs): Define Module: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (I)
+selectButton("OptionPane.button", "Yes"); // JButton (v, C)
+// TclEventType: FILE_SET_CHANGE
+dismissDialog("Define Module"); // I (cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// HMemoryUtils.trashcanNow. Engine heap size: 1,666 MB. GUI used memory: 94 MB. Current time: 10/8/25, 5:48:40 PM CDT
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_wrapper (staged_mac_wrapper.v)]", 4, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_wrapper (staged_mac_wrapper.v)]", 4, false, false, false, false, false, true); // B (F, cs) - Double Click
+selectCodeEditor("staged_mac_wrapper.v", 331, 244, false, false, false, true, false); // bP (w, cs) - Popup Trigger
+selectCodeEditor("staged_mac_wrapper.v", 200, 364); // bP (w, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true); // B (F, cs) - Node
+typeControlKey(null, null, 'z');
+selectCodeEditor("staged_mac_wrapper.v", 503, 228, false, false, false, true, false); // bP (w, cs) - Popup Trigger
+selectCodeEditor("staged_mac_wrapper.v", 164, 237); // bP (w, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1, true, false, false, false, false, true); // B (F, cs) - Double Click - Node
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "new_staged_mac.sv", 3); // m (l, cs)
+selectMenuItem((HResource) null, "New Vertical Group"); // JMenuItem (JidePopupMenu)
+selectCodeEditor("staged_mac_wrapper.v", 170, 373); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 186, 352); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 177, 338); // bP (w, cs)
+// Elapsed time: 10 seconds
+selectCodeEditor("new_staged_mac.sv", 56, 339); // bP (w, cs)
+typeControlKey((HResource) null, "new_staged_mac.sv", 'c'); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 255, 356); // bP (w, cs)
+typeControlKey((HResource) null, "staged_mac_wrapper.v", 'v'); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 1, 352); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 91, 567); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 113, 396); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 113, 396, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("staged_mac_wrapper.v", 118, 505); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 118, 505, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("staged_mac_wrapper.v", 120, 531); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 120, 531, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("staged_mac_wrapper.v", 111, 564); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 111, 564, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("staged_mac_wrapper.v", 112, 637); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 367, 549); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 351, 582); // bP (w, cs)
+// Elapsed time: 71 seconds
+selectCodeEditor("staged_mac_wrapper.v", 183, 612); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 192, 608); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 192, 608, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("staged_mac_wrapper.v", 410, 591); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 404, 612); // bP (w, cs)
+// Elapsed time: 20 seconds
+selectCodeEditor("staged_mac_wrapper.v", 496, 596); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 493, 607); // bP (w, cs)
+// Elapsed time: 137 seconds
+selectCodeEditor("staged_mac_wrapper.v", 177, 807); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 126, 803); // bP (w, cs)
+// Elapsed time: 14 seconds
+selectCodeEditor("staged_mac_wrapper.v", 59, 651); // bP (w, cs)
+// Elapsed time: 24 seconds
+selectCodeEditor("staged_mac_wrapper.v", 273, 791); // bP (w, cs)
+// Elapsed time: 16 seconds
+selectCodeEditor("staged_mac_wrapper.v", 266, 803); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 156, 654); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 130, 784); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 136, 771); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 138, 758); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 142, 746); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 142, 730); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 145, 713); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 146, 699); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 153, 687); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 156, 673); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 159, 653); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 88, 562); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 98, 544); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 103, 527); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 105, 512); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 106, 497); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 108, 472); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 108, 456); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 108, 443); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 109, 428); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 111, 413); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 114, 398); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 207, 404); // bP (w, cs)
+selectCodeEditor("staged_mac_wrapper.v", 205, 406); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// [Engine Memory]: 1,698 MB (+6220kb) [00:14:10]
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 2); // B (F, cs)
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 2); // B (F, cs)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_wrapper (staged_mac_wrapper.v), staged_mac : new_staged_mac (new_staged_mac.sv)]", 3); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 1, true); // B (F, cs) - Node
+// HMemoryUtils.trashcanNow. Engine heap size: 1,714 MB. GUI used memory: 95 MB. Current time: 10/8/25, 5:54:55 PM CDT
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 1, true, false, false, false, false, true); // B (F, cs) - Double Click - Node
+// bz (cs):  Open Block Design : addNotify
+// TclEventType: RSB_OPEN_DIAGRAM
+// Tcl Message: open_bd_design {/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd} 
+dismissDialog("Open Block Design"); // bz (cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// PAResourceOtoP.PAViews_CODE: Code: close view
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_wrapper (staged_mac_wrapper.v)]", 1, true); // B (F, cs) - Node
+// Tcl Message: create_bd_cell -type module -reference staged_mac_wrapper staged_mac_wrapper_0 
+// Tcl Message: ERROR: [filemgmt 56-328] Reference 'staged_mac_wrapper' contains sub-design file '/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/IPs/multadd_8x8p32_com/multadd_8x8p32_com.xci', which is configured for out-of-context synthesis. OOC sub-designs are not allowed in the reference. To change the setting, use TCL command: 'set_property generate_synth_checkpoint 0 [get_files multadd_8x8p32_com.xci]'. ERROR: [BD 41-1690] Unable to resolve module-source based on inputs: staged_mac_wrapper ERROR: [BD 5-7] Error: running create_bd_cell  -type module -reference staged_mac_wrapper -name staged_mac_wrapper_0 . 
+// Tcl Message: ERROR: [Common 17-39] 'create_bd_cell' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'create_bd_cell' failed due to earlier errors.  
+// a (cs): Critical Messages: addNotify
+// Elapsed time: 56 seconds
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // aa (q, cs)
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // af (cs)
+selectMenuItem(PAResourceCommand.PACommandNames_CLOSE_PROJECT, "Close Project"); // ai (cs)
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // aa (q, cs)
+// Run Command: PAResourceCommand.PACommandNames_CLOSE_PROJECT
+// A (cs): Close Project: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (A)
+// bz (cs):  Close Project : addNotify
+// TclEventType: PROJECT_CLOSE
+dismissDialog("Close Project"); // A (cs)
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// HMemoryUtils.trashcanNow. Engine heap size: 1,591 MB. GUI used memory: 90 MB. Current time: 10/8/25, 5:56:08 PM CDT
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// Tcl Message: close_project 
+dismissDialog("Close Project"); // bz (cs)
+selectList(PAResourceQtoS.SyntheticaGettingStartedView_RECENT_PROJECTS, "/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.xpr", 1); // r (J, cs)
+// bz (cs):  Open Project : addNotify
+// Opening Vivado Project: /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.xpr. Version: Vivado v2020.1 
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.xpr 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac'. 
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/remote/Xilinx/2020.1/Vivado/2020.1/data/ip'. 
+// Project name: tc_staged_mac; location: /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac; part: xc7z020clg484-1
+dismissDialog("Open Project"); // bz (cs)
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed time: 20 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv)]", 1); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv), mult_add : multadd_8x8p32_com (multadd_8x8p32_com.xci)]", 2, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv), mult_add : multadd_8x8p32_com (multadd_8x8p32_com.xci)]", 2, false, false, false, false, false, true); // B (F, cs) - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// O (cs):  Re-customize IP : addNotify
+// r (cs): Re-customize IP: addNotify
+dismissDialog("Re-customize IP"); // O (cs)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (r)
+dismissDialog("Re-customize IP"); // r (cs)
+selectTab(PAResourceEtoH.FileSetView_TABBED_PANE, (HResource) null, "IP Sources", 1); // i (N, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, IP, multadd_8x8p32_com]", 1, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, IP, multadd_8x8p32_com]", 1, true, false, false, false, true, false); // B (F, cs) - Popup Trigger - Node
+selectMenuItem(PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE, "Re-customize IP..."); // ai (ao, cs)
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cs): Re-customize IP: addNotify
+applyEscape(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, (String) null); // B (F, cs)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (r)
+dismissDialog("Re-customize IP"); // r (cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, IP, multadd_8x8p32_com]", 1, true, false, false, false, true, false); // B (F, cs) - Popup Trigger - Node
+selectMenuItem(PAResourceCommand.PACommandNames_GENERATE_COMPOSITE_FILE, "Generate Output Products..."); // ai (ao, cs)
+// Run Command: PAResourceCommand.PACommandNames_GENERATE_COMPOSITE_FILE
+// aI (cs): Generate Output Products: addNotify
+selectRadioButton(PAResourceQtoS.SimpleOutputProductDialog_SYNTHESIZE_DESIGN_GLOBALLY, "Global"); // a (Q, aI)
+selectButton(PAResourceQtoS.SimpleOutputProductDialog_GENERATE_OUTPUT_PRODUCTS_IMMEDIATELY, "Generate"); // a (aI)
+// bz (cs):  Managing Output Products : addNotify
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILESET_UPDATE_IP
+// TclEventType: PROJ_DESIGN_MODE_SET
+// Tcl Message: set_property generate_synth_checkpoint false [get_files  /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/IPs/multadd_8x8p32_com/multadd_8x8p32_com.xci] 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: generate_target all [get_files  /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/IPs/multadd_8x8p32_com/multadd_8x8p32_com.xci] 
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'multadd_8x8p32_com'... INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'multadd_8x8p32_com'... INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'multadd_8x8p32_com'... INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'multadd_8x8p32_com'... 
+// Tcl Message: export_ip_user_files -of_objects [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/IPs/multadd_8x8p32_com/multadd_8x8p32_com.xci] -no_script -sync -force -quiet 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: FILE_SET_CHANGE
+// 'bv' command handler elapsed time: 10 seconds
+selectButton("OptionPane.button", "OK"); // JButton (v, B)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, IP, multadd_8x8p32_com]", 1, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, IP, multadd_8x8p32_com]", 1, true, false, false, false, false, true); // B (F, cs) - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cs): Re-customize IP: addNotify
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (r)
+// [GUI Memory]: 159 MB (+117kb) [00:16:36]
+dismissDialog("Re-customize IP"); // r (cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, IP, multadd_8x8p32_com]", 1, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, IP, multadd_8x8p32_com]", 1, true, false, false, false, true, false); // B (F, cs) - Popup Trigger - Node
+selectMenu(PAResourceQtoS.SrcMenu_IP_DOCUMENTATION, "IP Documentation"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_DOCUMENTATION, "IP Documentation"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_DOCUMENTATION, "IP Documentation"); // af (ao, cs)
+selectMenuItem(PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE, "Re-customize IP..."); // ai (ao, cs)
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cs): Re-customize IP: addNotify
+applyEscape(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, (String) null); // B (F, cs)
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (r)
+dismissDialog("Re-customize IP"); // r (cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, IP, multadd_8x8p32_com]", 1, true, false, false, false, true, false); // B (F, cs) - Popup Trigger - Node
+selectMenuItem(PAResourceCommand.PACommandNames_GENERATE_COMPOSITE_FILE, "Generate Output Products..."); // ai (ao, cs)
+// Run Command: PAResourceCommand.PACommandNames_GENERATE_COMPOSITE_FILE
+// aI (cs): Generate Output Products: addNotify
+selectButton(PAResourceQtoS.SimpleOutputProductDialog_CLOSE_DIALOG_UNSAVED_CHANGES_WILL, "Cancel"); // a (aI)
+dismissDialog("Generate Output Products"); // aI (cs)
+selectTab(PAResourceEtoH.FileSetView_TABBED_PANE, (HResource) null, "Hierarchy", 0); // i (N, cs)
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv), mult_add : multadd_8x8p32_com (multadd_8x8p32_com.xci)]", 2); // B (F, cs)
+// A (cs): Show IP Hierarchy: addNotify
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (A)
+dismissDialog("Show IP Hierarchy"); // A (cs)
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, new_staged_mac (new_staged_mac.sv), mult_add : multadd_8x8p32_com (multadd_8x8p32_com.xci)]", 2); // B (F, cs)
+// A (cs): Show IP Hierarchy: addNotify
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (A)
+dismissDialog("Show IP Hierarchy"); // A (cs)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 15, false); // u (J, cs)
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// bz (cs):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f (cs): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (f)
+// bz (cs):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f (cs)
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: launch_runs synth_1 -jobs 4 
+// Tcl Message: [Wed Oct  8 17:57:47 2025] Launched synth_1... Run output will be captured here: /home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/vivado/tc_staged_mac/tc_staged_mac.runs/synth_1/runme.log 
+dismissDialog("Starting Design Runs"); // bz (cs)
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// ag (cs): Synthesis Completed: addNotify
+// Elapsed time: 74 seconds
+selectRadioButton(PAResourceCommand.PACommandNames_REPORTS_WINDOW, "View Reports"); // a (Q, ag)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (ag)
+// Run Command: PAResourceCommand.PACommandNames_REPORTS_WINDOW
+dismissDialog("Synthesis Completed"); // ag (cs)
+collapseTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Open Synthesized Design]", 16); // u (J, cs)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Open Synthesized Design]", 16); // u (J, cs)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Open Synthesized Design, Report Timing Summary]", 20, false); // u (J, cs)
+// bz (cs):  Open Synthesized Design : addNotify
+// Tcl Message: open_run synth_1 -name synth_1 
+// Tcl Message: Design is defaulting to impl run constrset: constrs_1 Design is defaulting to synth run part: xc7z020clg484-1 
+// TclEventType: READ_XDC_FILE_START
+// TclEventType: POWER_CNS_STALE
+// TclEventType: POWER_REPORT_STALE
+// TclEventType: SDC_CONSTRAINT_ADD
+// TclEventType: READ_XDC_FILE_END
+// TclEventType: FLOORPLAN_MODIFY
+// TclEventType: DESIGN_NEW
+// HMemoryUtils.trashcanNow. Engine heap size: 1,686 MB. GUI used memory: 105 MB. Current time: 10/8/25, 5:59:19 PM CDT
+// TclEventType: DESIGN_NEW
+// TclEventType: HFED_INIT_ROUTE_STORAGE_COMPLETED
+// [Engine Memory]: 1,863 MB (+83755kb) [00:18:41]
+// [GUI Memory]: 181 MB (+14300kb) [00:18:41]
+// Device: addNotify
+// DeviceView Instantiated
+// [GUI Memory]: 192 MB (+1981kb) [00:18:41]
+// WARNING: HEventQueue.dispatchEvent() is taking  1400 ms.
+// TclEventType: CURR_DESIGN_SET
+// Tcl Message: INFO: [Device 21-403] Loading part xc7z020clg484-1 
+// Tcl Message: Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 7521.996 ; gain = 0.000 ; free physical = 8188 ; free virtual = 19078 
+// Tcl Message: INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds INFO: [Project 1-479] Netlist was created with Vivado 2020.1 INFO: [Project 1-570] Preparing netlist for logic optimization 
+// Tcl Message: Parsing XDC File [/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/hdl/zedboard.xdc] 
+// Tcl Message: Finished Parsing XDC File [/home/zfsalti/487/lab3/CprE-487-Lab-3/staged_mac/hdl/zedboard.xdc] 
+// Tcl Message: INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s). 
+// Tcl Message: Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 7521.996 ; gain = 0.000 ; free physical = 8114 ; free virtual = 19004 
+// Tcl Message: INFO: [Project 1-111] Unisim Transformation Summary: No Unisim elements were transformed.  
+// Device view-level: 0.0
+// Tcl Message: open_run: Time (s): cpu = 00:00:10 ; elapsed = 00:00:08 . Memory (MB): peak = 7595.922 ; gain = 73.926 ; free physical = 7971 ; free virtual = 18861 
+// Run Command: PAResourceCommand.PACommandNames_REPORT_TIMING_SUMMARY
+// aJ (cs): Report Timing Summary: addNotify
+// V (cs): Critical Messages: addNotify
+// Elapsed time: 10 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (aJ)
+dismissDialog("Report Timing Summary"); // aJ (cs)
+// bz (cs):  Report Timing Summary : addNotify
+// Tcl Message: report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_1 
+// RouteApi::initDelayMediator elapsed time: 6.3s
+// RouteApi: Init Delay Mediator Swing Worker Finished
+// TclEventType: TIMING_RESULTS_STALE
+// TclEventType: TIMING_SUMMARY_UPDATED
+// [Engine Memory]: 2,318 MB (+379874kb) [00:18:48]
+// [GUI Memory]: 201 MB (+95kb) [00:18:48]
+// Tcl Message: INFO: [Timing 38-35] Done setting XDC timing constraints. INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max. INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 4 CPUs 
+dismissDialog("Report Timing Summary"); // bz (cs)
+// Elapsed time: 11 seconds
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (V)
+dismissDialog("Critical Messages"); // V (cs)
+// Elapsed time: 42 seconds
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // aa (q, cs)
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // af (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // af (cs)
+selectMenuItem(PAResourceCommand.PACommandNames_CLOSE_PROJECT, "Close Project"); // ai (cs)
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // aa (q, cs)
+// Run Command: PAResourceCommand.PACommandNames_CLOSE_PROJECT
+// A (cs): Close Project: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (A)
+// bz (cs):  Close Project : addNotify
+// TclEventType: PROJECT_CLOSE
+dismissDialog("Close Project"); // A (cs)
+// HMemoryUtils.trashcanNow. Engine heap size: 2,328 MB. GUI used memory: 128 MB. Current time: 10/8/25, 6:00:27 PM CDT
+// TclEventType: TIMING_RESULTS_UNLOAD
+// Engine heap size: 2,328 MB. GUI used memory: 133 MB. Current time: 10/8/25, 6:00:27 PM CDT
+// TclEventType: DESIGN_CLOSE
+// Tcl Message: close_project 
+dismissDialog("Close Project"); // bz (cs)
+selectList(PAResourceQtoS.SyntheticaGettingStartedView_RECENT_PROJECTS, "/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.xpr", 1); // r (J, cs)
+// Opening Vivado Project: /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.xpr. Version: Vivado v2020.1 
+// bz (cs):  Open Project : addNotify
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.xpr 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/remote/Xilinx/2020.1/Vivado/2020.1/data/ip'. 
+// Project name: simple_interface; location: /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface; part: xc7z020clg484-1
+dismissDialog("Open Project"); // bz (cs)
+// Tcl Message: update_compile_order -fileset sources_1 
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_wrapper (staged_mac_wrapper.v)]", 1, true); // B (F, cs) - Node
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_wrapper (staged_mac_wrapper.v)]", 1); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 4, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 4, true, false, false, false, false, true); // B (F, cs) - Double Click - Node
+// bz (cs):  Open Block Design : addNotify
+// Tcl Message: open_bd_design {/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd} 
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_OPEN_DIAGRAM
+// Tcl Message: Adding component instance block -- xilinx.com:ip:axi_fifo_mm_s:4.2 - axi_fifo_mm_s_0 Adding component instance block -- xilinx.com:ip:processing_system7:5.5 - processing_system7_0 
+// Tcl Message: Adding component instance block -- xilinx.com:ip:axi_interconnect:2.1 - ps7_0_axi_periph Adding component instance block -- xilinx.com:ip:proc_sys_reset:5.0 - rst_ps7_0_100M Successfully read diagram <staged_mac_bd> from BD file </home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd> 
+// TclEventType: RSB_OPEN_DIAGRAM
+// TclEventType: RSB_CONNECTION_CHANGE
+closeView(PAResourceOtoP.PAViews_PROJECT_SUMMARY, "Project Summary"); // v
+// TclEventType: RSB_LOCK_CHANGE
+dismissDialog("Open Block Design"); // bz (cs)
+selectTab((HResource) null, (HResource) null, "Sources", 0); // aL (aI, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_wrapper (staged_mac_wrapper.v)]", 1, true); // B (F, cs) - Node
+// TclEventType: PACKAGER_OBJECT_ADD
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: RSB_BITABEN_IPREPODATA_REFRESH
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// bz (cs):  Add Module : addNotify
+// Tcl Message: create_bd_cell -type module -reference staged_mac_wrapper staged_mac_wrapper_0 
+dismissDialog("Add Module"); // bz (cs)
+// Run Command: PAResourceCommand.PACommandNames_CUSTOMIZE_RSB_PIN
+// r (cs): Customize Pin: addNotify
+// Elapsed time: 19 seconds
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (r)
+dismissDialog("Customize Pin"); // r (cs)
+// Run Command: PAResourceCommand.PACommandNames_CUSTOMIZE_RSB_BLOC
+// r (cs): Re-customize Module Reference: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (r)
+dismissDialog("Re-customize Module Reference"); // r (cs)
+// Elapsed time: 47 seconds
+selectTab(PAResourceEtoH.FileSetView_TABBED_PANE, (HResource) null, "Libraries", 2); // i (N, cs)
+selectTab(PAResourceEtoH.FileSetView_TABBED_PANE, (HResource) null, "IP Sources", 1); // i (N, cs)
+selectTab(PAResourceEtoH.FileSetView_TABBED_PANE, (HResource) null, "Hierarchy", 0); // i (N, cs)
+// Run Command: PAResourceCommand.PACommandNames_SAVE_RSB_DESIGN
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// Tcl Message: save_bd_design 
+// Tcl Message: Wrote  : </home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd>  Wrote  : </home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/ui/bd_65dee2cb.ui>  
+selectButton(PAResourceQtoS.SystemBuilderView_ADD_IP, "System_RSB_ADD_IP"); // E (g, cs)
+// HMemoryUtils.trashcanNow. Engine heap size: 2,393 MB. GUI used memory: 114 MB. Current time: 10/8/25, 6:02:10 PM CDT
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// Elapsed time: 15 seconds
+setText("PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE_SEARCH_FIELD", "axi stream conv"); // OverlayTextField (az, ResizableWindow)
+selectTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "AXI4-Stream Subset Converter", 2, "AXI4-Stream Subset Converter", 0, false); // L (J, ResizableWindow)
+selectTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "AXI4-Stream Subset Converter", 2, "AXI4-Stream Subset Converter", 0, false); // L (J, ResizableWindow)
+expandTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "AXI4-Stream Subset Converter", 2); // L (J, ResizableWindow)
+selectTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "AXI4-Stream Subset Converter", 2, "AXI4-Stream Subset Converter", 0, false, false, false, false, false, true); // L (J, ResizableWindow) - Double Click
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// Tcl Message: startgroup 
+// Tcl Message: create_bd_cell -type ip -vlnv xilinx.com:ip:axis_subset_converter:1.1 axis_subset_converter_0 
+// Tcl Message: endgroup 
+// Tcl Command: 'set_property location {4.5 1765 -16} [get_bd_cells axis_subset_converter_0]'
+// TclEventType: RSB_CANVAS_LOCATION
+// Tcl Message: set_property location {4.5 1765 -16} [get_bd_cells axis_subset_converter_0] 
+// Tcl Command: 'set_property location {4 1749 49} [get_bd_cells axis_subset_converter_0]'
+// TclEventType: RSB_CANVAS_LOCATION
+// Tcl Message: set_property location {4 1749 49} [get_bd_cells axis_subset_converter_0] 
+// Run Command: PAResourceCommand.PACommandNames_CUSTOMIZE_RSB_BLOC
+// r (cs): Re-customize IP: addNotify
+// Elapsed time: 46 seconds
+setText("TDATA Width (bytes)", "1"); // D (bj, r)
+selectButton(PAResourceEtoH.HACGCTextField_VALUE_OF_SPECIFIED_PARAMETER, "TDATA Width (bytes) (S_TDATA_NUM_BYTES)"); // x (E, r): TRUE
+// Elapsed time: 21 seconds
+setText("TDATA Width (bytes)", "4"); // D (bj, r)
+setText("TDATA Width (bytes)", "1"); // D (bj, r)
+selectButton(PAResourceEtoH.HACGCTextField_VALUE_OF_SPECIFIED_PARAMETER, "TDATA Width (bytes) (M_TDATA_NUM_BYTES)"); // x (E, r): TRUE
+// Elapsed time: 12 seconds
+setText("TDATA Width (bytes)", "2"); // D (bj, r)
+// Elapsed time: 68 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (r)
+// Tcl Command: 'set_property -dict [list CONFIG.S_TDATA_NUM_BYTES.VALUE_SRC USER CONFIG.M_TDATA_NUM_BYTES.VALUE_SRC USER] [get_bd_cells axis_subset_converter_0]'
+// TclEventType: RSB_PROPERTY_CHANGE
+dismissDialog("Re-customize IP"); // r (cs)
+// Tcl Message: set_property -dict [list CONFIG.S_TDATA_NUM_BYTES.VALUE_SRC USER CONFIG.M_TDATA_NUM_BYTES.VALUE_SRC USER] [get_bd_cells axis_subset_converter_0] 
+// Tcl Command: 'set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {4} CONFIG.M_TDATA_NUM_BYTES {2} CONFIG.TDATA_REMAP {tdata[15:0]}] [get_bd_cells axis_subset_converter_0]'
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// r (cs): Re-customize IP: addNotify
+// bz (r):  Customize IP : addNotify
+// Tcl Message: set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {4} CONFIG.M_TDATA_NUM_BYTES {2} CONFIG.TDATA_REMAP {tdata[15:0]}] [get_bd_cells axis_subset_converter_0] 
+dismissDialog("Customize IP"); // bz (r)
+// Tcl Command: 'set_property location {4 1744 145} [get_bd_cells axis_subset_converter_0]'
+// TclEventType: RSB_CANVAS_LOCATION
+// Tcl Message: set_property location {4 1744 145} [get_bd_cells axis_subset_converter_0] 
+// Tcl Command: 'set_property location {4 1691 139} [get_bd_cells axis_subset_converter_0]'
+// TclEventType: RSB_CANVAS_LOCATION
+// Tcl Message: set_property location {4 1691 139} [get_bd_cells axis_subset_converter_0] 
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// Tcl Message: connect_bd_intf_net [get_bd_intf_pins axi_fifo_mm_s_0/AXI_STR_TXD] [get_bd_intf_pins axis_subset_converter_0/S_AXIS] 
+// Tcl Command: 'set_property location {4.5 2090 141} [get_bd_cells staged_mac_wrapper_0]'
+// TclEventType: RSB_CANVAS_LOCATION
+// Tcl Message: set_property location {4.5 2090 141} [get_bd_cells staged_mac_wrapper_0] 
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// Tcl Message: connect_bd_intf_net [get_bd_intf_pins axis_subset_converter_0/M_AXIS] [get_bd_intf_pins staged_mac_wrapper_0/SD_AXIS] 
+// Elapsed time: 85 seconds
+selectButton(PAResourceQtoS.RSBApplyAutomationBar_RUN_CONNECTION_AUTOMATION, "Run Connection Automation"); // h (dq, cs)
+// ai (cs): Run Connection Automation: addNotify
+// Elapsed time: 30 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (ai)
+// TclEventType: XGUI_UPDATE_GUI_ELEMENT
+// TclEventType: RSB_CONNECTION_CHANGE
+dismissDialog("Run Connection Automation"); // ai (cs)
+// TclEventType: XGUI_RESET_GUI_ELEMENT
+// Tcl Message: apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config { Clk {/processing_system7_0/FCLK_CLK0 (100 MHz)} Freq {100} Ref_Clk0 {} Ref_Clk1 {} Ref_Clk2 {}}  [get_bd_pins axis_subset_converter_0/aclk] 
+selectView(PAResourceOtoP.PAViews_SYSTEM, "System", 671, 657, 1832, 914, false, false, false, true, false); // hq (m, cs) - Popup Trigger
+// Elapsed time: 42 seconds
+selectView(PAResourceOtoP.PAViews_SYSTEM, "System", 593, 663, 1832, 914, false, false, false, true, false); // hq (m, cs) - Popup Trigger
+// Elapsed time: 55 seconds
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 4); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 4, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 4, true, false, false, false, false, true); // B (F, cs) - Double Click - Node
+// bz (cs):  Open Block Design : addNotify
+// TclEventType: RSB_OPEN_DIAGRAM
+// Tcl Message: open_bd_design {/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd} 
+dismissDialog("Open Block Design"); // bz (cs)
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 4); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 4, true, false, false, false, true, false); // B (F, cs) - Popup Trigger - Node
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenuItem(PAResourceCommand.PACommandNames_SET_AS_TOP, "Set as Top"); // ai (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+// Elapsed time: 20 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd (staged_mac_bd.bd)]", 4, true, false, false, false, true, false); // B (F, cs) - Popup Trigger - Node
+selectMenuItem(PAResourceCommand.PACommandNames_CREATE_TOP_HDL, "Create HDL Wrapper..."); // ai (ao, cs)
+// Run Command: PAResourceCommand.PACommandNames_CREATE_TOP_HDL
+// a (cs): Create HDL Wrapper: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (a)
+// 'ag' command handler elapsed time: 6 seconds
+// TclEventType: RSB_SCRIPT_TASK
+dismissDialog("Create HDL Wrapper"); // a (cs)
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// bz (cs):  Create HDL Wrapper : addNotify
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: make_wrapper -files [get_files /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd] -top 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: RSB_SCRIPT_TASK
+// Tcl Message: INFO: [Ipptcl 7-1463] No Compatible Board Interface found. Board Tab not created in customize GUI 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files -norecurse /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/hdl/staged_mac_bd_wrapper.v 
+dismissDialog("Create HDL Wrapper"); // bz (cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// HMemoryUtils.trashcanNow. Engine heap size: 2,427 MB. GUI used memory: 115 MB. Current time: 10/8/25, 6:09:20 PM CDT
+// Elapsed time: 10 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd_wrapper (staged_mac_bd_wrapper.v)]", 4); // B (F, cs)
+// [Engine Memory]: 2,443 MB (+9662kb) [00:28:47]
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd_wrapper (staged_mac_bd_wrapper.v)]", 4, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd_wrapper (staged_mac_bd_wrapper.v)]", 4, true, false, false, false, true, false); // B (F, cs) - Popup Trigger - Node
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // af (ao, cs)
+selectMenuItem(PAResourceCommand.PACommandNames_SET_AS_TOP, "Set as Top"); // ai (ao, cs)
+// Run Command: PAResourceCommand.PACommandNames_SET_AS_TOP
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// Tcl Message: set_property top staged_mac_bd_wrapper [current_fileset] 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd_wrapper (staged_mac_bd_wrapper.v), staged_mac_bd_i : staged_mac_bd (staged_mac_bd.bd), staged_mac_bd (staged_mac_bd.v)]", 3); // B (F, cs)
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, staged_mac_bd_wrapper (staged_mac_bd_wrapper.v), staged_mac_bd_i : staged_mac_bd (staged_mac_bd.bd), staged_mac_bd (staged_mac_bd.v)]", 3); // B (F, cs)
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// Tcl Message: connect_bd_intf_net [get_bd_intf_pins staged_mac_wrapper_0/MO_AXIS] [get_bd_intf_pins axi_fifo_mm_s_0/AXI_STR_RXD] 
+// Run Command: PAResourceCommand.PACommandNames_SAVE_RSB_DESIGN
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// Tcl Message: save_bd_design 
+// Tcl Message: Wrote  : </home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd>  Wrote  : </home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/ui/bd_65dee2cb.ui>  
+// HMemoryUtils.trashcanNow. Engine heap size: 2,492 MB. GUI used memory: 115 MB. Current time: 10/8/25, 6:10:35 PM CDT
+// Elapsed time: 57 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Generate Bitstream]", 20, false); // u (J, cs)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// A (cs): No Implementation Results Available: addNotify
+selectButton(RDIResource.BaseDialog_YES, "Yes"); // a (A)
+// bz (cs):  Resetting Runs : addNotify
+// f (cs): Launch Runs: addNotify
+dismissDialog("No Implementation Results Available"); // A (cs)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (f)
+// 'cD' command handler elapsed time: 7 seconds
+// TclEventType: RSB_SCRIPT_TASK
+dismissDialog("Launch Runs"); // f (cs)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_OBJECT
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 4 
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// bz (cs):  Generate Bitstream : addNotify
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: RSB_SCRIPT_TASK
+// Tcl Message: Wrote  : </home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd>  VHDL Output written to : /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/synth/staged_mac_bd.v VHDL Output written to : /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/sim/staged_mac_bd.v VHDL Output written to : /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/hdl/staged_mac_bd_wrapper.v 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_fifo_mm_s_0 . 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block processing_system7_0 . INFO: [BD 41-1029] Generation completed for the IP Integrator block rst_ps7_0_100M . INFO: [BD 41-1029] Generation completed for the IP Integrator block staged_mac_wrapper_0 . 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block axis_subset_converter_0 . 
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block ps7_0_axi_periph/s00_couplers/auto_pc . 
+// TclEventType: RUN_ADD
+// Tcl Message: Exporting to file /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/hw_handoff/staged_mac_bd.hwh Generated Block Design Tcl file /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/hw_handoff/staged_mac_bd_bd.tcl Generated Hardware Definition File /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/synth/staged_mac_bd.hwdef 
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// HMemoryUtils.trashcanNow. Engine heap size: 2,534 MB. GUI used memory: 117 MB. Current time: 10/8/25, 6:11:10 PM CDT
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// Elapsed time: 24 seconds
+selectButton(RDIResource.ProgressDialog_BACKGROUND, "Background"); // a (bz)
+selectButton(PAResourceQtoS.SystemBuilderView_ADD_IP, "System_RSB_ADD_IP"); // E (g, cs)
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs: Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 8143.395 ; gain = 56.027 ; free physical = 7280 ; free virtual = 18235 
+dismissDialog("Generate Bitstream"); // bz (cs)
+// TclEventType: RUN_STATUS_CHANGE
+selectButton(PAResourceQtoS.SystemBuilderView_ADD_IP, "System_RSB_ADD_IP"); // E (g, cs)
+// Elapsed time: 29 seconds
+setText("PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE_SEARCH_FIELD", "fourier"); // OverlayTextField (az)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Address Editor", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "System", 0); // m (l, cs)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 2,601 MB. GUI used memory: 118 MB. Current time: 10/8/25, 6:12:20 PM CDT
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: FILE_SET_CHANGE
+// WARNING: HEventQueue.dispatchEvent() is taking  1219 ms.
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// Elapsed time: 70 seconds
+selectButton(PAResourceQtoS.SystemBuilderView_ADD_IP, "System_RSB_ADD_IP"); // E (g, cs)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// ag (cs): Bitstream Generation Completed: addNotify
+// Elapsed time: 175 seconds
+setText("PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE_SEARCH_FIELD", "trans"); // OverlayTextField (az, ResizableWindow)
+selectRadioButton(PAResourceCommand.PACommandNames_GOTO_IMPLEMENTED_DESIGN, "Open Implemented Design"); // a (Q, ag)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (ag)
+// Run Command: PAResourceCommand.PACommandNames_GOTO_IMPLEMENTED_DESIGN
+// bz (cs):  Open Implemented Design : addNotify
+// Tcl Message: open_run impl_1 
+// TclEventType: SDC_CONSTRAINT_ADD
+// TclEventType: POWER_CNS_STALE
+// TclEventType: SDC_CONSTRAINT_ADD
+// TclEventType: FLOORPLAN_MODIFY
+// TclEventType: DESIGN_NEW
+// HMemoryUtils.trashcanNow. Engine heap size: 2,619 MB. GUI used memory: 136 MB. Current time: 10/8/25, 6:16:12 PM CDT
+// [Engine Memory]: 2,619 MB (+56021kb) [00:35:32]
+// TclEventType: DESIGN_NEW
+// [Engine Memory]: 2,796 MB (+48484kb) [00:35:32]
+// TclEventType: HFED_INIT_ROUTE_STORAGE_COMPLETED
+// Device: addNotify
+// DeviceView Instantiated
+// TclEventType: CURR_DESIGN_SET
+// Tcl Message: Netlist sorting complete. Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.04 . Memory (MB): peak = 8196.438 ; gain = 0.000 ; free physical = 7152 ; free virtual = 18176 
+// Tcl Message: INFO: [Netlist 29-17] Analyzing 203 Unisim elements for replacement INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds INFO: [Project 1-479] Netlist was created with Vivado 2020.1 INFO: [Project 1-570] Preparing netlist for logic optimization INFO: [Timing 38-478] Restoring timing data from binary archive. INFO: [Timing 38-479] Binary timing data restore complete. INFO: [Project 1-856] Restoring constraints from binary archive. INFO: [Constraints 18-5170] The checkpoint was created with non-default parameter values which do not match the current Vivado settings.  Mismatching parameters are: 
+// Tcl Message:   general.maxThreads 
+// Tcl Message: INFO: [Project 1-853] Binary constraint restore complete. 
+// Tcl Message: Reading XDEF placement. Reading placer database... Reading XDEF routing. 
+// Tcl Message: Read XDEF File: Time (s): cpu = 00:00:00.21 ; elapsed = 00:00:00.21 . Memory (MB): peak = 8225.227 ; gain = 5.000 ; free physical = 7036 ; free virtual = 18060 
+// Tcl Message: Restored from archive | CPU: 0.210000 secs | Memory: 2.974670 MB | 
+// Tcl Message: Finished XDEF File Restore: Time (s): cpu = 00:00:00.21 ; elapsed = 00:00:00.21 . Memory (MB): peak = 8225.227 ; gain = 5.000 ; free physical = 7036 ; free virtual = 18060 Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 8225.227 ; gain = 0.000 ; free physical = 7037 ; free virtual = 18061 
+// Tcl Message: INFO: [Project 1-111] Unisim Transformation Summary:   A total of 72 instances were transformed.   RAM64M => RAM64M (RAMD64E(x4)): 56 instances   RAM64X1D => RAM64X1D (RAMD64E(x2)): 16 instances  
+// RouteApi: Init Delay Mediator Swing Worker Finished
+// Device view-level: 0.0
+// TclEventType: DRC_ADDED
+// TclEventType: METHODOLOGY_ADDED
+// TclEventType: POWER_UPDATED
+// [GUI Memory]: 215 MB (+3641kb) [00:35:34]
+// [GUI Memory]: 226 MB (+475kb) [00:35:34]
+// TclEventType: TIMING_SUMMARY_UPDATED
+// 'dZ' command handler elapsed time: 5 seconds
+dismissDialog("Open Implemented Design"); // bz (cs)
+// Elapsed time: 18 seconds
+selectTree(PAResourceItoN.NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE, "[Root, Clock Summary]", 3, false); // a (J, cs)
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // aa (q, cs)
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // af (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_CONSTRAINTS, "Constraints"); // af (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_CHECKPOINT, "Checkpoint"); // af (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_IP, "IP"); // af (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_TEXT_EDITOR, "Text Editor"); // af (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_IMPORT, "Import"); // af (cs)
+selectMenu(PAResourceItoN.MainMenuMgr_EXPORT, "Export"); // af (cs)
+selectMenuItem(PAResourceCommand.PACommandNames_EXPORT_HARDWARE, "Export Hardware..."); // ai (cs)
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // aa (q, cs)
+// Run Command: PAResourceCommand.PACommandNames_EXPORT_HARDWARE
+// Tcl Command: 'get_property pfm_name [get_files -all {/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd}]'
+// Tcl Command: 'get_property pfm_name [get_files -all {/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd}]'
+// k (cs): Export Hardware Platform: addNotify
+selectButton("NEXT", "Next >"); // JButton (j, k)
+selectRadioButton((HResource) null, "Include bitstream. This platform includes the complete hardware implementation and bitstream, in addition to the hardware specification for software tools."); // b (a, k)
+selectButton("NEXT", "Next >"); // JButton (j, k)
+selectButton("NEXT", "Next >"); // JButton (j, k)
+// Tcl Command: 'get_property pfm_name [get_files -all {/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd}]'
+// Tcl Command: 'set_property pfm_name {} [get_files -all {/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd}]'
+selectButton("FINISH", "Finish"); // JButton (j, k)
+// 'm' command handler elapsed time: 31 seconds
+// Tcl Message: set_property pfm_name {} [get_files -all {/home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/simple_interface.srcs/sources_1/bd/staged_mac_bd/staged_mac_bd.bd}] 
+dismissDialog("Export Hardware Platform"); // k (cs)
+// bz (cs):  Export Hardware Platform : addNotify
+// Tcl Message: write_hw_platform -fixed -include_bit -force -file /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/staged_mac_bd_wrapper.xsa 
+// Tcl Message: INFO: [Vivado 12-4895] Creating Hardware Platform: /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/staged_mac_bd_wrapper.xsa ... 
+// Tcl Message: INFO: [Hsi 55-2053] elapsed time for repository (/remote/Xilinx/2020.1/Vivado/2020.1/data/embeddedsw) loading 1 seconds 
+// Tcl Message: INFO: [Vivado 12-4896] Successfully created Hardware Platform: /home/zfsalti/487/lab3/CprE-487-Lab-3/simple_interface/vivado/simple_interface/staged_mac_bd_wrapper.xsa 
+// Tcl Message: write_hw_platform: Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 8407.223 ; gain = 0.000 ; free physical = 6964 ; free virtual = 17993 
+dismissDialog("Export Hardware Platform"); // bz (cs)
+// [GUI Memory]: 247 MB (+9484kb) [00:36:52]
