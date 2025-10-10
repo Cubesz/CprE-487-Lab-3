@@ -11,6 +11,6 @@
   "../../../ipstatic/hdl/xbip_dsp48_macro_v3_0_vh_rfs.vhd" \
 -endlib
 -makelib ies_lib/xil_defaultlib \
-  "../../../../tc_piped_mac.srcs/sources_1/ip/dsp48_custom_mult_add_piped/sim/dsp48_custom_mult_add_piped.vhd" \
+  "../../../../../../hdl/dsp48_custom_mult_add_piped/sim/dsp48_custom_mult_add_piped.vhd" \
 -endlib
 

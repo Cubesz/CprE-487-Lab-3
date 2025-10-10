@@ -26,6 +26,6 @@ vcom -work xbip_dsp48_macro_v3_0_17 -93 \
 "../../../ipstatic/hdl/xbip_dsp48_macro_v3_0_vh_rfs.vhd" \
 
 vcom -work xil_defaultlib -93 \
-"../../../../tc_piped_mac.srcs/sources_1/ip/dsp48_custom_mult_add_piped/sim/dsp48_custom_mult_add_piped.vhd" \
+"../../../../../../hdl/dsp48_custom_mult_add_piped/sim/dsp48_custom_mult_add_piped.vhd" \
 
 
