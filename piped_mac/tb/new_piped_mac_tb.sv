@@ -28,6 +28,7 @@ module new_piped_mac_tb(
     reg master_ready;
     reg master_valid;
     reg [15:0] master_data;
+    reg [31:0] master_tuser;
     reg master_last;
     
     wire slave_ready;
@@ -42,13 +43,14 @@ module new_piped_mac_tb(
     
     always #5 clk = ~clk;
     
-    new_piped_mac DUT (
+    piped_mac DUT (
         .ACLK(clk),
         .ARESETN(rst),
         .SD_AXIS_TREADY(slave_ready),
         .SD_AXIS_TDATA(master_data),
         .SD_AXIS_TLAST(master_last),
         .SD_AXIS_TVALID(master_valid),
+        .SD_AXIS_TUSER(master_tuser),
         .MO_AXIS_TVALID(slave_valid),
         .MO_AXIS_TDATA(slave_data),
         .MO_AXIS_TLAST(slave_last),
@@ -56,7 +58,7 @@ module new_piped_mac_tb(
     );
 
     // Task to send a single AXI-Stream transaction
-    task send_transaction(input [15:0] data, input is_last);
+    task send_transaction(input [15:0] data, input [31:0] initial_bias, input is_last);
         begin
             @(posedge clk);
             // Wait until the DUT is ready to accept data
@@ -65,6 +67,7 @@ module new_piped_mac_tb(
             end
 
             master_valid <= 1;
+            master_tuser <= initial_bias;
             master_data  <= data;
             master_last  <= is_last;
 
@@ -84,6 +87,7 @@ module new_piped_mac_tb(
             #40;
             rst = 1;
             @(posedge clk);
+            #5;
         end
     endtask
 
@@ -102,6 +106,7 @@ module new_piped_mac_tb(
 
             @(posedge clk);
             master_ready = 0;
+            #5;
         end
     endtask
 
@@ -112,6 +117,7 @@ module new_piped_mac_tb(
         master_valid = 0;
         master_data = 0;
         master_last = 0;
+        master_tuser = 0;
         #40;
         rst = 1;
         #20
@@ -119,15 +125,54 @@ module new_piped_mac_tb(
 
         $display("\nTest 0");
 
+        
 
-        // send bias and some weights
         master_valid = 1;
-        master_data[15:8] = 1;
-        master_data[7:0] = 5;
+        master_tuser = -600;
+        master_data[15:8] = -50;
+        master_data[7:0] = 38;
         #10
+        
+        master_data[15:8] = 5;
+        master_data[7:0] = 2;
+        master_last = 1;
+        #10
+        
+        #20
+        
+        // test duel plex bias load with multiply add AND receiving output at same time
+        // new bias load with multiply add but also expecting to get the output
+        master_ready = 1;
+        master_last = 0;
+        master_data[15:8] = 37;
+        master_data[7:0] = 3;
+        master_tuser = 99;
+        $display("Expected result: %d", -600 + (-50 * 38) + (5 * 2));
+        $display("Actual result: %d", $signed(slave_data));
+        if ($signed(slave_data) == $signed(-600 + (50 * 38) + (5*2))) $display("[PASS]");
+        else $display("[FAIL]");
+        #10
+        
+        //check_result(-600 + -50 * 38 + 5*2);
+        
+        master_data[15:8] = 18;
+        master_data[7:0] = 23;
+        master_last = 1;
+        #10
+        master_valid = 0;
+        master_last = 0;
+        check_result(99 + 37*3 + 18*23);
+  
+        $display("\nTest 1");
+        
+        // send bias and some weights
+        
+        reset_dut();
 
+        master_tuser = 5;
         master_data[15:8] = -10;
         master_data[7:0] = 5;
+        master_valid = 1;
         #10
 
         master_data[15:8] = 25;
@@ -142,35 +187,31 @@ module new_piped_mac_tb(
         reset_dut();
 
         // TEST 1: A typical use case with multiple accumulations
-        $display("\nTEST 1: Typical Use");
+        $display("\nTEST 2: Typical Use");
         // bias of -1028, we need to split it up
         // -128*10 + 126 * 2
         //send_transaction(-1028, 0); // Bias
-        send_transaction({$signed(-8'd128), $signed(8'd10)}, 0); // bias part 1
-        send_transaction({$signed(8'd126), $signed(8'd2)}, 0); // bias part 2
         
-        send_transaction({$signed(-8'd122), $signed(-8'd15)}, 0);
-        send_transaction({$signed(8'd119),  $signed(-8'd3)}, 0);
-        send_transaction({$signed(-8'd107), $signed(8'd13)}, 1);
+        send_transaction({$signed(-8'd122), $signed(-8'd15)}, -1028, 0);
+        send_transaction({$signed(8'd119),  $signed(-8'd3)}, 'x, 0);
+        send_transaction({$signed(-8'd107), $signed(8'd13)}, 'x, 1);
         check_result(-1028 + (-15 * -122) + (-3 * 119) + (13 * -107));
 
         reset_dut();
 
         // TEST 2: Maximum positive value
-        $display("\nTEST 2: Maximum Value Test");
+        $display("\nTEST 3: Maximum Value Test");
         //send_transaction(5000, 0); // Bias
-        send_transaction({$signed(8'd50), $signed(8'd100)}, 0); // Bias of 5000
-        send_transaction({$signed(-8'd128), $signed(-8'd128)}, 1);
+        send_transaction({$signed(-8'd128), $signed(-8'd128)}, 5000, 1);
         check_result(5000 + (-128 * -128));
 
         reset_dut();
 
         // TEST 3: Maximum negative value
-        $display("\nTEST 3: Minimum Value Test");
+        $display("\nTEST 4: Minimum Value Test");
         //send_transaction(-2000, 0); // Bias
-        send_transaction({$signed(8'd20), $signed(-8'd100)}, 0); // Bias of -2000
-        send_transaction({$signed(-8'd128), $signed(8'd127)}, 0);
-        send_transaction({$signed(-8'd100), $signed(8'd120)}, 1);
+        send_transaction({$signed(-8'd128), $signed(8'd127)}, -2000, 0);
+        send_transaction({$signed(-8'd100), $signed(8'd120)}, 'x, 1);
         check_result(-2000 + (127 * -128) + (120 * -100));
 
         $display("\nAll tests completed!");

@@ -59,7 +59,7 @@ multadd_8x8p32_piped your_instance_name (
   .CE(CE),              // input wire CE
   .SCLR(SCLR),          // input wire SCLR
   .A(A),                // input wire [7 : 0] A
-  .B(B),                // input wire [7 : 0] B
+  .B(B),                // input wire [31 : 0] B
   .C(C),                // input wire [47 : 0] C
   .PCIN(PCIN),          // input wire [47 : 0] PCIN
   .SUBTRACT(SUBTRACT),  // input wire SUBTRACT
