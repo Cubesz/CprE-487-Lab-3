@@ -63,25 +63,28 @@ module piped_mac #(parameter C_DATA_WIDTH = 8) (
         HOLD = 2
     } custom_mult_add_instruction_t;
     
+    typedef struct packed {
+        logic signed [C_DATA_WIDTH - 1 : 0] inp;
+        logic signed [C_DATA_WIDTH - 1 : 0] weight;
+    } input_data_t;
+    
     custom_mult_add_instruction_t instruction;
     
     wire [47:0] cascaded_accumulator_out;
     wire [31:0] accumulator_out;
     assign MO_AXIS_TDATA = accumulator_out; // it shouldn't sample it until its ready
     
-    wire signed [C_DATA_WIDTH - 1 : 0] new_input;
-    wire signed [C_DATA_WIDTH - 1 : 0] new_weight;
+    input_data_t input_mult_data;
     wire signed [31:0] new_bias;
-    assign new_input = SD_AXIS_TDATA[C_DATA_WIDTH * 2 - 1 : C_DATA_WIDTH];
-    assign new_weight = SD_AXIS_TDATA[C_DATA_WIDTH - 1 : 0];
+    assign input_mult_data = input_data_t'(SD_AXIS_TDATA);
     assign new_bias = SD_AXIS_TUSER;
 
     dsp48_custom_mult_add_piped mult_add (
         .CLK(ACLK),
         .SEL(instruction),
         .PCIN(cascaded_accumulator_out),
-        .A(new_input),
-        .B(new_weight),
+        .A(input_mult_data.inp),
+        .B(input_mult_data.weight),
         .C(new_bias),
         .P(accumulator_out),
         .PCOUT(cascaded_accumulator_out)
