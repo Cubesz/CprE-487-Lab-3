@@ -26,7 +26,7 @@ module piped_mac #(parameter C_DATA_WIDTH = 8) (
         output reg SD_AXIS_TREADY,
         input [C_DATA_WIDTH*2-1 : 0] SD_AXIS_TDATA,
         input SD_AXIS_TLAST,
-        input [31:0] SD_AXIS_TUSER,
+        input [15:0] SD_AXIS_TUSER,
         input SD_AXIS_TVALID,
         input [7:0] SD_AXIS_TID,
         
@@ -70,24 +70,21 @@ module piped_mac #(parameter C_DATA_WIDTH = 8) (
     
     custom_mult_add_instruction_t instruction;
     
-    wire [47:0] cascaded_accumulator_out;
     wire [31:0] accumulator_out;
     assign MO_AXIS_TDATA = accumulator_out; // it shouldn't sample it until its ready
     
     input_data_t input_mult_data;
-    wire signed [31:0] new_bias;
+    wire signed [15:0] new_bias;
     assign input_mult_data = input_data_t'(SD_AXIS_TDATA);
     assign new_bias = SD_AXIS_TUSER;
 
     dsp48_custom_mult_add_piped mult_add (
         .CLK(ACLK),
         .SEL(instruction),
-        .PCIN(cascaded_accumulator_out),
         .A(input_mult_data.inp),
         .B(input_mult_data.weight),
         .C(new_bias),
-        .P(accumulator_out),
-        .PCOUT(cascaded_accumulator_out)
+        .P(accumulator_out)
     );
 
     always @* begin

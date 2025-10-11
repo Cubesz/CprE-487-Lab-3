@@ -1,0 +1,2 @@
+dsp48_custom_mult_add_piped.vhd,vhdl,xil_defaultlib,../../../../../../../piped_mac/hdl/dsp48_custom_mult_add_piped/sim/dsp48_custom_mult_add_piped.vhd,
+glbl.v,Verilog,xil_defaultlib,glbl.v

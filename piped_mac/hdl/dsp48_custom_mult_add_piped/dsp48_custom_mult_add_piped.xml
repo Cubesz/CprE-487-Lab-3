@@ -1719,11 +1719,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Oct 10 23:33:53 UTC 2025</spirit:value>
+            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:33db17e5</spirit:value>
+            <spirit:value>9:312eced0</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1748,11 +1748,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Oct 10 23:33:53 UTC 2025</spirit:value>
+            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:33db17e5</spirit:value>
+            <spirit:value>9:312eced0</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1763,7 +1763,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:33db17e5</spirit:value>
+            <spirit:value>9:312eced0</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1779,11 +1779,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Oct 10 23:33:53 UTC 2025</spirit:value>
+            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:33db17e5</spirit:value>
+            <spirit:value>9:312eced0</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1808,11 +1808,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Oct 10 23:33:53 UTC 2025</spirit:value>
+            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:a7c39217</spirit:value>
+            <spirit:value>9:f5e8d4e0</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1828,11 +1828,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Oct 10 23:33:53 UTC 2025</spirit:value>
+            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:a7c39217</spirit:value>
+            <spirit:value>9:f5e8d4e0</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1846,11 +1846,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Oct 10 23:33:53 UTC 2025</spirit:value>
+            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:33db17e5</spirit:value>
+            <spirit:value>9:312eced0</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2020,7 +2020,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.PCIN" xilinx:dependency="spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_PCIN&apos;)) != 0">true</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.PCIN" xilinx:dependency="spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_PCIN&apos;)) != 0">false</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -2138,7 +2138,7 @@
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:vector>
-            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_C_WIDTH&apos;)) - 1)">31</spirit:left>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_C_WIDTH&apos;)) - 1)">15</spirit:left>
             <spirit:right spirit:format="long">0</spirit:right>
           </spirit:vector>
           <spirit:wireTypeDefs>
@@ -2336,7 +2336,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.PCOUT" xilinx:dependency="spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_PCOUT&apos;)) != 0">true</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.PCOUT" xilinx:dependency="spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_PCOUT&apos;)) != 0">false</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -3393,7 +3393,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_HAS_PCIN</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_PCIN">1</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_PCIN">0</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_HAS_A</spirit:name>
@@ -3425,7 +3425,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_C_WIDTH</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_C_WIDTH">32</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_C_WIDTH">16</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_D_WIDTH</spirit:name>
@@ -3465,7 +3465,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_HAS_PCOUT</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_PCOUT">1</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_PCOUT">0</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_CONSTANT_1</spirit:name>
@@ -3477,7 +3477,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="string">
         <spirit:name>C_OPMODES</spirit:name>
-        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OPMODES">000000000011010100000000,000000000001010100000000,000000000001000000000000</spirit:value>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OPMODES">000000000011010100000000,000000000010010100000000,000000000010000000000000</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="string">
         <spirit:name>C_REG_CONFIG</spirit:name>
@@ -6866,11 +6866,11 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>instruction2</spirit:name>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.instruction2" spirit:choiceRef="choice_list_a66ffb3b" spirit:order="5">A*B+PCIN</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.instruction2" spirit:choiceRef="choice_list_a66ffb3b" spirit:order="5">A*B+P</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>instruction3</spirit:name>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.instruction3" spirit:choiceRef="choice_list_a66ffb3b" spirit:order="6">PCIN</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.instruction3" spirit:choiceRef="choice_list_a66ffb3b" spirit:order="6">P</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>instruction4</spirit:name>
@@ -7088,7 +7088,7 @@
     <spirit:parameter>
       <spirit:name>c_width</spirit:name>
       <spirit:displayName>C</spirit:displayName>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.c_width" spirit:order="59" spirit:minimum="2" spirit:maximum="48" spirit:rangeType="long">32</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.c_width" spirit:order="59" spirit:minimum="2" spirit:maximum="48" spirit:rangeType="long">16</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>c_binarywidth</spirit:name>
@@ -7139,7 +7139,7 @@
     <spirit:parameter>
       <spirit:name>has_pcout</spirit:name>
       <spirit:displayName>Use PCOUT</spirit:displayName>
-      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.has_pcout" spirit:order="70">true</spirit:value>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.has_pcout" spirit:order="70">false</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>has_ce</spirit:name>
