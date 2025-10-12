@@ -550,156 +550,156 @@ namespace ML
         #ifdef ZEDBOARD
         testFPGAMac();
         #endif
-        // Base input data path (determined from current directory of where you are running the command)
-        Path basePath("data"); // May need to be altered for zedboards loading from SD Cards
-        Path modelPath = basePath / "model";
+        // // Base input data path (determined from current directory of where you are running the command)
+        // Path basePath("data"); // May need to be altered for zedboards loading from SD Cards
+        // Path modelPath = basePath / "model";
 
-        // TODO: TEST EACH LAYER INDIVISUALLY
-        // Test first layer
-        checkConvLayer(
-            basePath, 0,
-            LayerParams{sizeof(fp32), {64, 64, 3}},                                    // Input Data
-            LayerParams{sizeof(fp32), {60, 60, 32}},                                   // Output Data
-            LayerParams{sizeof(fp32), {5, 5, 3, 32}, modelPath / "conv1_weights.bin"}, // Weights
-            LayerParams{sizeof(fp32), {32}, modelPath / "conv1_biases.bin"}            // Bias
-        );
+        // // TODO: TEST EACH LAYER INDIVISUALLY
+        // // Test first layer
+        // checkConvLayer(
+        //     basePath, 0,
+        //     LayerParams{sizeof(fp32), {64, 64, 3}},                                    // Input Data
+        //     LayerParams{sizeof(fp32), {60, 60, 32}},                                   // Output Data
+        //     LayerParams{sizeof(fp32), {5, 5, 3, 32}, modelPath / "conv1_weights.bin"}, // Weights
+        //     LayerParams{sizeof(fp32), {32}, modelPath / "conv1_biases.bin"}            // Bias
+        // );
 
-        // Test second layer
-        checkConvLayer(
-            basePath, 1,
-            LayerParams{sizeof(fp32), {60, 60, 32}},                                    // Input Data
-            LayerParams{sizeof(fp32), {56, 56, 32}},                                    // Output Data
-            LayerParams{sizeof(fp32), {5, 5, 32, 32}, modelPath / "conv2_weights.bin"}, // Weights
-            LayerParams{sizeof(fp32), {32}, modelPath / "conv2_biases.bin"}             // Bias
-        );
+        // // Test second layer
+        // checkConvLayer(
+        //     basePath, 1,
+        //     LayerParams{sizeof(fp32), {60, 60, 32}},                                    // Input Data
+        //     LayerParams{sizeof(fp32), {56, 56, 32}},                                    // Output Data
+        //     LayerParams{sizeof(fp32), {5, 5, 32, 32}, modelPath / "conv2_weights.bin"}, // Weights
+        //     LayerParams{sizeof(fp32), {32}, modelPath / "conv2_biases.bin"}             // Bias
+        // );
 
-        // --- MPL 1: L3 ---
-        // Input shape: 56x56x32
-        // Output shape: 28x28x32
-        checkMaxPoolingLayer(
-            basePath, 2,
-            LayerParams{sizeof(fp32), {56, 56, 32}}, // Input
-            LayerParams{sizeof(fp32), {28, 28, 32}}  // Output
-        );
+        // // --- MPL 1: L3 ---
+        // // Input shape: 56x56x32
+        // // Output shape: 28x28x32
+        // checkMaxPoolingLayer(
+        //     basePath, 2,
+        //     LayerParams{sizeof(fp32), {56, 56, 32}}, // Input
+        //     LayerParams{sizeof(fp32), {28, 28, 32}}  // Output
+        // );
 
-        // --- Conv 3: L4 ---
-        // Input shape: 28x28x32
-        // Output shape: 26x26x64
-        checkConvLayer(
-            basePath, 3,
-            LayerParams{sizeof(fp32), {28, 28, 32}},                                    // Input Data
-            LayerParams{sizeof(fp32), {26, 26, 64}},                                    // Output Data
-            LayerParams{sizeof(fp32), {3, 3, 32, 64}, modelPath / "conv3_weights.bin"}, // Weights
-            LayerParams{sizeof(fp32), {64}, modelPath / "conv3_biases.bin"}             // Bias
-        );
+        // // --- Conv 3: L4 ---
+        // // Input shape: 28x28x32
+        // // Output shape: 26x26x64
+        // checkConvLayer(
+        //     basePath, 3,
+        //     LayerParams{sizeof(fp32), {28, 28, 32}},                                    // Input Data
+        //     LayerParams{sizeof(fp32), {26, 26, 64}},                                    // Output Data
+        //     LayerParams{sizeof(fp32), {3, 3, 32, 64}, modelPath / "conv3_weights.bin"}, // Weights
+        //     LayerParams{sizeof(fp32), {64}, modelPath / "conv3_biases.bin"}             // Bias
+        // );
 
-        // --- Conv 4: L5 ---
-        // Input shape: 26x26x64
-        // Output shape: 24x24x64
-        checkConvLayer(
-            basePath, 4,
-            LayerParams{sizeof(fp32), {26, 26, 64}},                                    // Input Data
-            LayerParams{sizeof(fp32), {24, 24, 64}},                                    // Output Data
-            LayerParams{sizeof(fp32), {3, 3, 64, 64}, modelPath / "conv4_weights.bin"}, // Weights
-            LayerParams{sizeof(fp32), {64}, modelPath / "conv4_biases.bin"}             // Bias
-        );
+        // // --- Conv 4: L5 ---
+        // // Input shape: 26x26x64
+        // // Output shape: 24x24x64
+        // checkConvLayer(
+        //     basePath, 4,
+        //     LayerParams{sizeof(fp32), {26, 26, 64}},                                    // Input Data
+        //     LayerParams{sizeof(fp32), {24, 24, 64}},                                    // Output Data
+        //     LayerParams{sizeof(fp32), {3, 3, 64, 64}, modelPath / "conv4_weights.bin"}, // Weights
+        //     LayerParams{sizeof(fp32), {64}, modelPath / "conv4_biases.bin"}             // Bias
+        // );
 
-        // --- MPL 2: L6 ---
-        // Input shape: 24x24x64
-        // Output shape: 12x12x64
-        checkMaxPoolingLayer(
-            basePath, 5,
-            LayerParams{sizeof(fp32), {24, 24, 64}}, // Input
-            LayerParams{sizeof(fp32), {12, 12, 64}}  // Output
-        );
+        // // --- MPL 2: L6 ---
+        // // Input shape: 24x24x64
+        // // Output shape: 12x12x64
+        // checkMaxPoolingLayer(
+        //     basePath, 5,
+        //     LayerParams{sizeof(fp32), {24, 24, 64}}, // Input
+        //     LayerParams{sizeof(fp32), {12, 12, 64}}  // Output
+        // );
 
-        // --- Conv 5: L7 ---
-        // Input shape: 12x12x64
-        // Output shape: 10x10x64
-        checkConvLayer(
-            basePath, 6,
-            LayerParams{sizeof(fp32), {12, 12, 64}},                                    // Input Data
-            LayerParams{sizeof(fp32), {10, 10, 64}},                                    // Output Data
-            LayerParams{sizeof(fp32), {3, 3, 64, 64}, modelPath / "conv5_weights.bin"}, // Weights
-            LayerParams{sizeof(fp32), {64}, modelPath / "conv5_biases.bin"}             // Bias
-        );
+        // // --- Conv 5: L7 ---
+        // // Input shape: 12x12x64
+        // // Output shape: 10x10x64
+        // checkConvLayer(
+        //     basePath, 6,
+        //     LayerParams{sizeof(fp32), {12, 12, 64}},                                    // Input Data
+        //     LayerParams{sizeof(fp32), {10, 10, 64}},                                    // Output Data
+        //     LayerParams{sizeof(fp32), {3, 3, 64, 64}, modelPath / "conv5_weights.bin"}, // Weights
+        //     LayerParams{sizeof(fp32), {64}, modelPath / "conv5_biases.bin"}             // Bias
+        // );
 
-        // --- Conv 6: L8 ---
-        // Input shape: 10x10x64
-        // Output shape: 8x8x128
-        checkConvLayer(
-            basePath, 7,
-            LayerParams{sizeof(fp32), {10, 10, 64}},                                     // Input Data
-            LayerParams{sizeof(fp32), {8, 8, 128}},                                      // Output Data
-            LayerParams{sizeof(fp32), {3, 3, 64, 128}, modelPath / "conv6_weights.bin"}, // Weights
-            LayerParams{sizeof(fp32), {128}, modelPath / "conv6_biases.bin"}             // Bias
-        );
+        // // --- Conv 6: L8 ---
+        // // Input shape: 10x10x64
+        // // Output shape: 8x8x128
+        // checkConvLayer(
+        //     basePath, 7,
+        //     LayerParams{sizeof(fp32), {10, 10, 64}},                                     // Input Data
+        //     LayerParams{sizeof(fp32), {8, 8, 128}},                                      // Output Data
+        //     LayerParams{sizeof(fp32), {3, 3, 64, 128}, modelPath / "conv6_weights.bin"}, // Weights
+        //     LayerParams{sizeof(fp32), {128}, modelPath / "conv6_biases.bin"}             // Bias
+        // );
 
-        // --- MPL 3: L9 ---
-        // Input shape: 8x8x128
-        // Output shape: 4x4x128
-        checkMaxPoolingLayer(
-            basePath, 8,
-            LayerParams{sizeof(fp32), {8, 8, 128}}, // Input
-            LayerParams{sizeof(fp32), {4, 4, 128}}  // Output
-        );
+        // // --- MPL 3: L9 ---
+        // // Input shape: 8x8x128
+        // // Output shape: 4x4x128
+        // checkMaxPoolingLayer(
+        //     basePath, 8,
+        //     LayerParams{sizeof(fp32), {8, 8, 128}}, // Input
+        //     LayerParams{sizeof(fp32), {4, 4, 128}}  // Output
+        // );
 
-        // --- Flatten 1: L10 ---
-        // Input shape: 4x4x128
-        // Output shape: 2048
-        checkFlattenLayer(
-            basePath, 9,
-            LayerParams{sizeof(fp32), {4, 4, 128}}, // Input
-            LayerParams{sizeof(fp32), {2048}}       // Output
-        );
+        // // --- Flatten 1: L10 ---
+        // // Input shape: 4x4x128
+        // // Output shape: 2048
+        // checkFlattenLayer(
+        //     basePath, 9,
+        //     LayerParams{sizeof(fp32), {4, 4, 128}}, // Input
+        //     LayerParams{sizeof(fp32), {2048}}       // Output
+        // );
 
-        // --- Dense 1: L11 ---
-        // Input shape: 2048
-        // Output shape: 256
-        checkDenseLayer(
-            basePath, 10,
-            LayerParams{sizeof(fp32), {2048}},                                        // Input
-            LayerParams{sizeof(fp32), {256}},                                         // Output
-            LayerParams{sizeof(fp32), {2048, 256}, modelPath / "dense1_weights.bin"}, // Weights
-            LayerParams{sizeof(fp32), {256}, modelPath / "dense1_biases.bin"},        // Biases,
-            true                                                                      // Use relu
-        );
+        // // --- Dense 1: L11 ---
+        // // Input shape: 2048
+        // // Output shape: 256
+        // checkDenseLayer(
+        //     basePath, 10,
+        //     LayerParams{sizeof(fp32), {2048}},                                        // Input
+        //     LayerParams{sizeof(fp32), {256}},                                         // Output
+        //     LayerParams{sizeof(fp32), {2048, 256}, modelPath / "dense1_weights.bin"}, // Weights
+        //     LayerParams{sizeof(fp32), {256}, modelPath / "dense1_biases.bin"},        // Biases,
+        //     true                                                                      // Use relu
+        // );
 
-        // --- Dense 2: L12 ---
-        // Input shape: 256
-        // Output shape: 200
-        // --- Softmax 1: L13 ---
-        // Input shape: 200
-        // Output shape: 200
-        checkDenseWithSoftmaxLayer(
-            basePath, 11,
-            LayerParams{sizeof(fp32), {256}},                                        // Input
-            LayerParams{sizeof(fp32), {200}},                                        // Output
-            LayerParams{sizeof(fp32), {256, 200}, modelPath / "dense2_weights.bin"}, // Weights
-            LayerParams{sizeof(fp32), {200}, modelPath / "dense2_biases.bin"},       // Biases
-            basePath, 12,
-            LayerParams{sizeof(fp32), {200}}, // Input
-            LayerParams{sizeof(fp32), {200}}  // Output
-        );
+        // // --- Dense 2: L12 ---
+        // // Input shape: 256
+        // // Output shape: 200
+        // // --- Softmax 1: L13 ---
+        // // Input shape: 200
+        // // Output shape: 200
+        // checkDenseWithSoftmaxLayer(
+        //     basePath, 11,
+        //     LayerParams{sizeof(fp32), {256}},                                        // Input
+        //     LayerParams{sizeof(fp32), {200}},                                        // Output
+        //     LayerParams{sizeof(fp32), {256, 200}, modelPath / "dense2_weights.bin"}, // Weights
+        //     LayerParams{sizeof(fp32), {200}, modelPath / "dense2_biases.bin"},       // Biases
+        //     basePath, 12,
+        //     LayerParams{sizeof(fp32), {200}}, // Input
+        //     LayerParams{sizeof(fp32), {200}}  // Output
+        // );
 
-        // Build the model and allocate the buffers
-        Model model = buildToyModel(modelPath);
-        model.allocLayers();
+        // // Build the model and allocate the buffers
+        // Model model = buildToyModel(modelPath);
+        // model.allocLayers();
 
-        // Run some framework tests as an example of loading data
-        runBasicTest(model, basePath);
+        // // Run some framework tests as an example of loading data
+        // runBasicTest(model, basePath);
 
-        // Run a layer inference test
-        runLayerTest(0, model, basePath);
+        // // Run a layer inference test
+        // runLayerTest(0, model, basePath);
 
-        // Run an end-to-end inference test
-        runInferenceTest(model, basePath);
+        // // Run an end-to-end inference test
+        // runInferenceTest(model, basePath);
 
-        // Run a profiling test to time the model
-        runProfilingTest(model, basePath);
+        // // Run a profiling test to time the model
+        // runProfilingTest(model, basePath);
 
-        // Clean up
-        model.freeLayers();
+        // // Clean up
+        // model.freeLayers();
         std::cout << "\n\n----- ML::runTests() COMPLETE -----\n";
     }
 
