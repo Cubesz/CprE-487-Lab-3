@@ -1,0 +1,971 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 42K of event 'cpu_atom/cycles/Pu'
+# Event count (approx.): 4284000
+#
+# Overhead  Command  Shared Object         Symbol                            
+# ........  .......  ....................  ..................................
+#
+    65.13%  ml       ld-linux-x86-64.so.2  [.] __GI___tunables_init
+     6.10%  ml       ld-linux-x86-64.so.2  [.] _dl_map_object_from_fd
+     5.92%  ml       ld-linux-x86-64.so.2  [.] _dl_cache_libcmp
+     4.18%  ml       ld-linux-x86-64.so.2  [.] _dl_start
+     3.98%  ml       ld-linux-x86-64.so.2  [.] strcmp
+     1.93%  ml       ld-linux-x86-64.so.2  [.] _dl_map_object
+     1.78%  ml       ld-linux-x86-64.so.2  [.] search_cache
+     1.02%  ml       ld-linux-x86-64.so.2  [.] memset
+     0.97%  ml       ld-linux-x86-64.so.2  [.] open_verify.constprop.0
+     0.87%  ml       ld-linux-x86-64.so.2  [.] _dl_new_object
+     0.86%  ml       ld-linux-x86-64.so.2  [.] _dl_sysdep_parse_arguments
+     0.85%  ml       ld-linux-x86-64.so.2  [.] strlen
+     0.78%  ml       ld-linux-x86-64.so.2  [.] _dl_name_match_p
+     0.74%  ml       ld-linux-x86-64.so.2  [.] update_active.constprop.0
+     0.47%  ml       ld-linux-x86-64.so.2  [.] _dl_map_object_deps
+     0.45%  ml       ld-linux-x86-64.so.2  [.] _dl_load_cache_lookup
+     0.44%  ml       ld-linux-x86-64.so.2  [.] rtld_malloc
+     0.38%  ml       ld-linux-x86-64.so.2  [.] mmap64
+     0.34%  ml       ld-linux-x86-64.so.2  [.] strchr
+     0.27%  ml       ld-linux-x86-64.so.2  [.] _dl_catch_exception
+     0.22%  ml       ld-linux-x86-64.so.2  [.] memmove
+     0.21%  ml       ld-linux-x86-64.so.2  [.] _dl_add_to_namespace_list
+     0.18%  ml       ld-linux-x86-64.so.2  [.] get_common_indices.constprop.0
+     0.17%  ml       ld-linux-x86-64.so.2  [.] _dl_setup_hash
+     0.17%  ml       ld-linux-x86-64.so.2  [.] __GI___sigsetjmp
+     0.17%  ml       ld-linux-x86-64.so.2  [.] cache_rpath
+     0.17%  ml       ld-linux-x86-64.so.2  [.] __tunable_get_val
+     0.13%  ml       ld-linux-x86-64.so.2  [.] _dl_dst_count
+     0.13%  ml       ld-linux-x86-64.so.2  [.] init_cpu_features.constprop.0
+     0.12%  ml       ld-linux-x86-64.so.2  [.] strdup
+     0.12%  ml       ld-linux-x86-64.so.2  [.] openaux
+     0.11%  ml       ld-linux-x86-64.so.2  [.] __GI___open64_nocancel
+     0.10%  ml       ld-linux-x86-64.so.2  [.] dl_main
+     0.09%  ml       ld-linux-x86-64.so.2  [.] _dl_process_pt_gnu_property
+     0.05%  ml       ld-linux-x86-64.so.2  [.] rtld_calloc
+     0.05%  ml       ld-linux-x86-64.so.2  [.] _dl_audit_activity_map
+     0.04%  ml       ld-linux-x86-64.so.2  [.] _dl_debug_initialize
+     0.04%  ml       ld-linux-x86-64.so.2  [.] _dl_audit_objopen
+     0.03%  ml       ld-linux-x86-64.so.2  [.] _dl_sysdep_read_whole_file
+     0.03%  ml       ld-linux-x86-64.so.2  [.] _dl_sort_maps_init
+     0.03%  ml       ld-linux-x86-64.so.2  [.] _dl_sysdep_start
+     0.03%  ml       ld-linux-x86-64.so.2  [.] rtld_mutex_dummy
+     0.02%  ml       ld-linux-x86-64.so.2  [.] __rtld_malloc_init_stubs
+     0.02%  ml       ld-linux-x86-64.so.2  [.] _dl_assign_tls_modid
+     0.02%  ml       ld-linux-x86-64.so.2  [.] rtld_free
+     0.02%  ml       ld-linux-x86-64.so.2  [.] __GI___close_nocancel
+     0.02%  ml       ld-linux-x86-64.so.2  [.] fstat64
+     0.02%  ml       ld-linux-x86-64.so.2  [.] mempcpy
+     0.01%  ml       ld-linux-x86-64.so.2  [.] __GI___read_nocancel
+     0.01%  ml       ld-linux-x86-64.so.2  [.] _dl_x86_init_cpu_features
+     0.01%  ml       ld-linux-x86-64.so.2  [.] _start
+     0.01%  ml       ld-linux-x86-64.so.2  [.] access
+     0.01%  ml       ld-linux-x86-64.so.2  [.] brk
+     0.00%  ml       ld-linux-x86-64.so.2  [.] _dl_debug_state
+
+
+# Samples: 7M of event 'cpu_core/cycles/Pu'
+# Event count (approx.): 795178200
+#
+# Overhead  Command  Shared Object              Symbol                                                                                                                                                                                                                                                            
+# ........  .......  .........................  ..................................................................................................................................................................................................................................................................
+#
+    96.45%  ml       ml                         [.] ML::ConvolutionalLayer::computeNaive(ML::LayerData const&) const
+     1.02%  ml       ml                         [.] ML::DenseLayer::computeNaive(ML::LayerData const&) const
+     0.38%  ml       ld-linux-x86-64.so.2       [.] do_lookup_x
+     0.30%  ml       ld-linux-x86-64.so.2       [.] _dl_lookup_symbol_x
+     0.18%  ml       ld-linux-x86-64.so.2       [.] _dl_relocate_object
+     0.15%  ml       ml                         [.] ML::MaxPoolingLayer::computeNaive(ML::LayerData const&) const
+     0.13%  ml       ld-linux-x86-64.so.2       [.] strcmp
+     0.10%  ml       libc.so.6                  [.] _int_free
+     0.09%  ml       libstdc++.so.6.0.29        [.] __dynamic_cast
+     0.07%  ml       ld-linux-x86-64.so.2       [.] check_match
+     0.06%  ml       libc.so.6                  [.] _int_malloc
+     0.05%  ml       libc.so.6                  [.] _IO_file_xsputn@@GLIBC_2.2.5
+     0.05%  ml       libstdc++.so.6.0.29        [.] __cxxabiv1::__si_class_type_info::__do_dyncast(long, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const
+     0.05%  ml       libstdc++.so.6.0.29        [.] std::locale::_Impl::_M_install_facet(std::locale::id const*, std::locale::facet const*)
+     0.04%  ml       libstdc++.so.6.0.29        [.] __cxxabiv1::__vmi_class_type_info::__do_dyncast(long, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const
+     0.04%  ml       libc.so.6                  [.] cfree@GLIBC_2.2.5
+     0.03%  ml       libc.so.6                  [.] malloc
+     0.03%  ml       libc.so.6                  [.] _IO_fwrite
+     0.03%  ml       ld-linux-x86-64.so.2       [.] _dl_check_map_versions
+     0.02%  ml       libstdc++.so.6.0.29        [.] std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+     0.02%  ml       ld-linux-x86-64.so.2       [.] _dl_map_object_from_fd
+     0.02%  ml       libc.so.6                  [.] wctob
+     0.02%  ml       ml                         [.] ML::LayerData::loadData(ML::Path)
+     0.02%  ml       ld-linux-x86-64.so.2       [.] _dl_map_object_deps
+     0.02%  ml       libc.so.6                  [.] malloc_consolidate
+     0.02%  ml       libstdc++.so.6.0.29        [.] std::ostream::sentry::sentry(std::ostream&)
+     0.01%  ml       ld-linux-x86-64.so.2       [.] _dl_map_object
+     0.01%  ml       libc.so.6                  [.] __GI__IO_un_link.part.0
+     0.01%  ml       libc.so.6                  [.] _IO_link_in
+     0.01%  ml       ld-linux-x86-64.so.2       [.] _dl_name_match_p
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::locale::id::_M_id() const
+     0.01%  ml       libc.so.6                  [.] fclose@@GLIBC_2.2.5
+     0.01%  ml       libc.so.6                  [.] __memmove_avx_unaligned_erms
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::ctype<wchar_t>::_M_initialize_ctype()
+     0.01%  ml       libc.so.6                  [.] new_do_write
+     0.01%  ml       libc.so.6                  [.] __strcmp_avx2
+     0.01%  ml       ld-linux-x86-64.so.2       [.] _dl_fixup
+     0.01%  ml       libc.so.6                  [.] _IO_fflush
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::locale::locale()
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::basic_filebuf<char, std::char_traits<char> >::basic_filebuf()
+     0.01%  ml       libc.so.6                  [.] _IO_file_fopen@@GLIBC_2.2.5
+     0.01%  ml       libstdc++.so.6.0.29        [.] operator new(unsigned long)
+     0.01%  ml       libc.so.6                  [.] sysmalloc
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::ostream::put(char)
+     0.01%  ml       libc.so.6                  [.] _IO_file_close_it@@GLIBC_2.2.5
+     0.01%  ml       libc.so.6                  [.] _IO_file_overflow@@GLIBC_2.2.5
+     0.01%  ml       libc.so.6                  [.] ptmalloc_init.part.0
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::basic_filebuf<char, std::char_traits<char> >::close()
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::ios_base::ios_base()
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::basic_ios<char, std::char_traits<char> >::_M_cache_locale(std::locale const&)
+     0.01%  ml       ld-linux-x86-64.so.2       [.] _dl_cache_libcmp
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::basic_filebuf<char, std::char_traits<char> >::xsgetn(char*, long)
+     0.01%  ml       libc.so.6                  [.] __btowc
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::ios_base::_M_init()
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::basic_ios<char, std::char_traits<char> >::init(std::basic_streambuf<char, std::char_traits<char> >*)
+     0.01%  ml       libstdc++.so.6.0.29        [.] bool std::has_facet<std::ctype<char> >(std::locale const&)
+     0.01%  ml       libstdc++.so.6.0.29        [.] bool std::has_facet<std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::locale::operator=(std::locale const&)
+     0.01%  ml       libstdc++.so.6.0.29        [.] bool std::has_facet<std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)
+     0.01%  ml       libstdc++.so.6.0.29        [.] std::basic_filebuf<char, std::char_traits<char> >::open(char const*, std::_Ios_Openmode)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_filebuf<char, std::char_traits<char> >::_M_terminate_output()
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ctype<char> const& std::use_facet<std::ctype<char> >(std::locale const&)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > > const& std::use_facet<std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::istream::read(char*, long)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > > const& std::use_facet<std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)
+     0.00%  ml       libc.so.6                  [.] __strstr_sse2
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::~locale()
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::istream::sentry::sentry(std::istream&, bool)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::numpunct<char>::_M_initialize_numpunct(__locale_struct*)
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_runtime_resolve_xsavec
+     0.00%  ml       libc.so.6                  [.] __fopen_internal
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::is_open() const
+     0.00%  ml       libc.so.6                  [.] unlink_chunk.constprop.0
+     0.00%  ml       libc.so.6                  [.] _IO_file_open
+     0.00%  ml       libc.so.6                  [.] _IO_no_init
+     0.00%  ml       libc.so.6                  [.] _IO_old_init
+     0.00%  ml       libc.so.6                  [.] __GI___libc_cleanup_push_defer
+     0.00%  ml       libc.so.6                  [.] __overflow
+     0.00%  ml       libc.so.6                  [.] _IO_setb
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::close()
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_filebuf<char, std::char_traits<char> >::_M_destroy_internal_buffer()
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_catch_exception
+     0.00%  ml       ld-linux-x86-64.so.2       [.] memset
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] __cpu_indicator_init
+     0.00%  ml       libc.so.6                  [.] __internal_atexit
+     0.00%  ml       libc.so.6                  [.] _IO_file_sync@@GLIBC_2.2.5
+     0.00%  ml       libc.so.6                  [.] __strchr_avx2
+     0.00%  ml       ld-linux-x86-64.so.2       [.] strchr
+     0.00%  ml       ld-linux-x86-64.so.2       [.] call_init
+     0.00%  ml       ld-linux-x86-64.so.2       [.] __tunable_get_val
+     0.00%  ml       ld-linux-x86-64.so.2       [.] open_verify.constprop.0
+     0.00%  ml       libc.so.6                  [.] _IO_putc
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_new_object
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::_Impl::_Impl(unsigned long)
+     0.00%  ml       ml                         [.] ML::ConvolutionalLayer::allocLayer()
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_filebuf<char, std::char_traits<char> >::underflow()
+     0.00%  ml       libc.so.6                  [.] __new_exitfn
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::open(char const*, std::_Ios_Openmode, int)
+     0.00%  ml       libc.so.6                  [.] _IO_file_write@@GLIBC_2.2.5
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::id::_M_id() const@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] bool std::has_facet<std::codecvt<char, char, __mbstate_t> >(std::locale const&)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ostream::flush()
+     0.00%  ml       libc.so.6                  [.] __GI___libc_cleanup_pop_restore
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_streambuf<char, std::char_traits<char> >::xsgetn(char*, long)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::codecvt<char, char, __mbstate_t> const& std::use_facet<std::codecvt<char, char, __mbstate_t> >(std::locale const&)
+     0.00%  ml       ld-linux-x86-64.so.2       [.] rtld_malloc
+     0.00%  ml       libstdc++.so.6.0.29        [.] __dynamic_cast@plt
+     0.00%  ml       ld-linux-x86-64.so.2       [.] search_cache
+     0.00%  ml       ml                         [.] ML::FlattenLayer::FlattenLayer(ML::LayerParams const&, ML::LayerParams const&)
+     0.00%  ml       libc.so.6                  [.] _IO_default_finish
+     0.00%  ml       libc.so.6                  [.] pthread_once@GLIBC_2.2.5
+     0.00%  ml       libc.so.6                  [.] _IO_do_write@@GLIBC_2.2.5
+     0.00%  ml       ld-linux-x86-64.so.2       [.] dfs_traversal.part.0
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long&, unsigned long)
+     0.00%  ml       ml                         [.] ML::ConvolutionalLayer::~ConvolutionalLayer()
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ios_base::_M_dispose_callbacks()
+     0.00%  ml       ld-linux-x86-64.so.2       [.] dl_main
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_filebuf<char, std::char_traits<char> >::_M_allocate_internal_buffer()
+     0.00%  ml       ld-linux-x86-64.so.2       [.] __GI___sigsetjmp
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ios_base::_M_call_callbacks(std::ios_base::event)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ios_base::~ios_base()
+     0.00%  ml       ml                         [.] ML::runTests()
+     0.00%  ml       ml                         [.] ML::runProfilingTest(ML::Model const&, ML::Path const&)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::xsgetn(char*, long)
+     0.00%  ml       libc.so.6                  [.] __GI___libc_open
+     0.00%  ml       ld-linux-x86-64.so.2       [.] memmove
+     0.00%  ml       ld-linux-x86-64.so.2       [.] openaux
+     0.00%  ml       libstdc++.so.6.0.29        [.] free@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_dst_count
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long)
+     0.00%  ml       libstdc++.so.6.0.29        [.] wctob@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long)
+     0.00%  ml       ld-linux-x86-64.so.2       [.] strlen
+     0.00%  ml       libc.so.6                  [.] systrim.constprop.0
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_sort_maps
+     0.00%  ml       libc.so.6                  [.] _IO_unsave_markers
+     0.00%  ml       ml                         [.] ML::buildToyModel(ML::Path)
+     0.00%  ml       ml                         [.] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [clone .constprop.0]
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__timepunct<char>::_M_initialize_timepunct(__locale_struct*)
+     0.00%  ml       libc.so.6                  [.] _IO_file_finish@@GLIBC_2.2.5
+     0.00%  ml       libc.so.6                  [.] alloc_perturb
+     0.00%  ml       ml                         [.] operator delete(void*)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] __gnu_cxx::stdio_sync_filebuf<char, std::char_traits<char> >::xsputn(char const*, long)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::moneypunct<char, false>::_M_initialize_moneypunct(__locale_struct*, char const*)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::moneypunct<char, true>::_M_initialize_moneypunct(__locale_struct*, char const*)
+     0.00%  ml       ml                         [.] ML::LayerParams::LayerParams(unsigned long, std::vector<unsigned long, std::allocator<unsigned long> >) [clone .constprop.0]
+     0.00%  ml       ml                         [.] std::vector<unsigned long, std::allocator<unsigned long> >::vector(std::initializer_list<unsigned long>, std::allocator<unsigned long> const&) [clone .constprop.3]
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::is_open() const@plt
+     0.00%  ml       libc.so.6                  [.] __GI___fileno
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_ios<char, std::char_traits<char> >::clear(std::_Ios_Iostate)
+     0.00%  ml       ml                         [.] ML::Timer::stop()
+     0.00%  ml       libc.so.6                  [.] _IO_un_link
+     0.00%  ml       libc.so.6                  [.] __GI___libc_write
+     0.00%  ml       libc.so.6                  [.] __mmap
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ostream& std::ostream::_M_insert<long>(long)
+     0.00%  ml       libstdc++.so.6.0.29        [.] malloc@plt
+     0.00%  ml       ml                         [.] ML::MaxPoolingLayer::allocLayer()
+     0.00%  ml       libc.so.6                  [.] _IO_new_file_init_internal
+     0.00%  ml       ml                         [.] ML::DenseLayer::allocLayer()
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_add_to_namespace_list
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ostream::sentry::sentry(std::ostream&)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] operator new(unsigned long)@plt
+     0.00%  ml       ml                         [.] ML::LayerParams::isCompatible(ML::LayerParams const&) const
+     0.00%  ml       ld-linux-x86-64.so.2       [.] mmap64
+     0.00%  ml       libstdc++.so.6.0.29        [.] pthread_once@plt
+     0.00%  ml       libc.so.6                  [.] munmap_chunk
+     0.00%  ml       ml                         [.] ML::DenseLayer::~DenseLayer()
+     0.00%  ml       ld-linux-x86-64.so.2       [.] __libc_scratch_buffer_set_array_size
+     0.00%  ml       libstdc++.so.6.0.29        [.] strcmp@plt
+     0.00%  ml       ml                         [.] ML::Path::operator/(char const*) const
+     0.00%  ml       libc.so.6                  [.] __pthread_once_slow
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_init
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::locale()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1e96
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1e9b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1ea2
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1ea6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1ea8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1eac
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1e84
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1e88
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1e8f
+     0.00%  ml       libc.so.6                  [.] read
+     0.00%  ml       libc.so.6                  [.] __sbrk
+     0.00%  ml       libc.so.6                  [.] __mempcpy@plt
+     0.00%  ml       libc.so.6                  [.] __mempcpy_avx_unaligned_erms
+     0.00%  ml       libstdc++.so.6.0.29        [.] fwrite@plt
+     0.00%  ml       ml                         [.] ML::LayerParams::LayerParams(unsigned long, std::vector<unsigned long, std::allocator<unsigned long> >, ML::Path) [clone .constprop.0]
+     0.00%  ml       ml                         [.] std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::facet::_S_get_c_locale()
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::~locale()@plt
+     0.00%  ml       libc.so.6                  [.] __libc_start_main@@GLIBC_2.34
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::__basic_file(pthread_mutex_t*)
+     0.00%  ml       ml                         [.] ML::MaxPoolingLayer::~MaxPoolingLayer()
+     0.00%  ml       libc.so.6                  [.] __strnlen_ifunc
+     0.00%  ml       libstdc++.so.6.0.29        [.] __gnu_cxx::stdio_sync_filebuf<char, std::char_traits<char> >::overflow(int)
+     0.00%  ml       libc.so.6                  [.] __wcschr_ifunc
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000007310
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000007315
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x000000000000731a
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x000000000000731d
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x000000000000731f
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000007322
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000007325
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x000000000000732c
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x000000000000732e
+     0.00%  ml       ml                         [.] void ML::logInfo<>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_load_cache_lookup
+     0.00%  ml       libc.so.6                  [.] __close_nocancel
+     0.00%  ml       libc.so.6                  [.] __wmemchr_ifunc
+     0.00%  ml       libstdc++.so.6.0.29        [.] operator delete(void*)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::close()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct(unsigned long, char)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ctype<char>::ctype(unsigned short const*, bool, unsigned long)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::codecvt<char, char, __mbstate_t>::do_always_noconv() const
+     0.00%  ml       libc.so.6                  [.] __wmemset_ifunc
+     0.00%  ml       libc.so.6                  [.] __newlocale
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_process_pt_gnu_property
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ios_base::Init::Init()
+     0.00%  ml       ml                         [.] ML::Model::inferenceLayer(ML::LayerData const&, int, ML::Layer::InfType) const
+     0.00%  ml       libc.so.6                  [.] tcache_init.part.0
+     0.00%  ml       libstdc++.so.6.0.29        [.] bool std::has_facet<std::ctype<char> >(std::locale const&)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] bool std::has_facet<std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] bool std::has_facet<std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_ios<char, std::char_traits<char> >::_M_cache_locale(std::locale const&)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ctype<char> const& std::use_facet<std::ctype<char> >(std::locale const&)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ios_base::_M_init()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::operator=(std::locale const&)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > > const& std::use_facet<std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > > const& std::use_facet<std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)@plt
+     0.00%  ml       libc.so.6                  [.] __lll_elision_init
+     0.00%  ml       libstdc++.so.6.0.29        [.] btowc@plt
+     0.00%  ml       ml                         [.] operator new[](unsigned long)@plt
+     0.00%  ml       ml                         [.] std::basic_ios<char, std::char_traits<char> >::init(std::basic_streambuf<char, std::char_traits<char> >*)@plt
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_add_to_slotinfo
+     0.00%  ml       ml                         [.] ML::LayerParams::~LayerParams()
+     0.00%  ml       libc.so.6                  [.] __default_morecore@GLIBC_2.2.5
+     0.00%  ml       libc.so.6                  [.] __x86_cacheinfo_ifunc
+     0.00%  ml       libstdc++.so.6.0.29        [.] memcpy@plt
+     0.00%  ml       ld-linux-x86-64.so.2       [.] rtld_calloc
+     0.00%  ml       libc.so.6                  [.] __memrchr_ifunc
+     0.00%  ml       ml                         [.] ML::FlattenLayer::~FlattenLayer()
+     0.00%  ml       libc.so.6                  [.] __tunable_get_val@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] __gnu_cxx::stdio_sync_filebuf<char, std::char_traits<char> >::sync()
+     0.00%  ml       libstdc++.so.6.0.29        [.] fflush@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] putc@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::chrono::_V2::steady_clock::now()
+     0.00%  ml       ml                         [.] .plt
+     0.00%  ml       ml                         [.] ML::SoftmaxLayer::allocLayer()
+     0.00%  ml       libc.so.6                  [.] __init_misc
+     0.00%  ml       libc.so.6                  [.] __strchrnul_ifunc
+     0.00%  ml       libc.so.6                  [.] __uselocale
+     0.00%  ml       libc.so.6                  [.] __wcscmp_ifunc
+     0.00%  ml       libc.so.6                  [.] memset
+     0.00%  ml       libc.so.6                  [.] strlen
+     0.00%  ml       libc.so.6                  [.] strrchr
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__timepunct<char>::__timepunct(std::__timepunct_cache<char>*, unsigned long)
+     0.00%  ml       ml                         [.] std::ostream::put(char)@plt
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_debug_initialize
+     0.00%  ml       libc.so.6                  [.] __libc_early_init
+     0.00%  ml       libc.so.6                  [.] __mempcpy
+     0.00%  ml       libc.so.6                  [.] clock_gettime@@GLIBC_2.17
+     0.00%  ml       libc.so.6                  [.] memcpy@@GLIBC_2.14
+     0.00%  ml       libc.so.6                  [.] memmove
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::messages<char>::messages(unsigned long)
+     0.00%  ml       ml                         [.] std::__basic_file<char>::is_open() const@plt
+     0.00%  ml       ml                         [.] std::__basic_file<char>::~__basic_file()@plt
+     0.00%  ml       ml                         [.] std::basic_ios<char, std::char_traits<char> >::clear(std::_Ios_Iostate)@plt
+     0.00%  ml       ml                         [.] std::ios_base::~ios_base()@plt
+     0.00%  ml       ml                         [.] std::istream::read(char*, long)@plt
+     0.00%  ml       ml                         [.] std::locale::~locale()@plt
+     0.00%  ml       ml                         [.] std::ostream::flush()@plt
+     0.00%  ml       libc.so.6                  [.] _IO_file_close
+     0.00%  ml       libc.so.6                  [.] __rawmemchr
+     0.00%  ml       libc.so.6                  [.] __wmemcmp_ifunc
+     0.00%  ml       libc.so.6                  [.] free@plt
+     0.00%  ml       libc.so.6                  [.] memchr
+     0.00%  ml       libc.so.6                  [.] memcmp
+     0.00%  ml       libc.so.6                  [.] strchr@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] fclose@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] fileno@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] operator delete[](void*)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] operator new[](unsigned long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] read@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long&, unsigned long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_filebuf<char, std::char_traits<char> >::_M_allocate_internal_buffer()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_filebuf<char, std::char_traits<char> >::_M_destroy_internal_buffer()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ios_base::_M_call_callbacks(std::ios_base::event)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ios_base::_M_dispose_callbacks()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::istream::sentry::sentry(std::istream&, bool)@plt
+     0.00%  ml       ml                         [.] std::basic_filebuf<char, std::char_traits<char> >::close()@plt
+     0.00%  ml       libc.so.6                  [.] __ctype_init
+     0.00%  ml       libc.so.6                  [.] __pthread_tunables_init
+     0.00%  ml       libc.so.6                  [.] __strrchr_avx2
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::fd()
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::fd()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::xsgetn(char*, long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_filebuf<char, std::char_traits<char> >::_M_terminate_output()@plt
+     0.00%  ml       ml                         [.] operator delete[](void*)@plt
+     0.00%  ml       libc.so.6                  [.] strchr
+     0.00%  ml       libc.so.6                  [.] strcmp
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::codecvt<char, char, __mbstate_t>::codecvt(unsigned long)
+     0.00%  ml       ml                         [.] operator new(unsigned long)@plt
+     0.00%  ml       ml                         [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)@plt
+     0.00%  ml       ld-linux-x86-64.so.2       [.] __GI___open64_nocancel
+     0.00%  ml       libc.so.6                  [.] __munmap
+     0.00%  ml       libc.so.6                  [.] __strcasecmp
+     0.00%  ml       libc.so.6                  [.] __strcasecmp_l
+     0.00%  ml       libc.so.6                  [.] __strncasecmp_ifunc
+     0.00%  ml       libc.so.6                  [.] __strncasecmp_l
+     0.00%  ml       libc.so.6                  [.] __wcslen_ifunc
+     0.00%  ml       libc.so.6                  [.] __wcsnlen_ifunc
+     0.00%  ml       libc.so.6                  [.] _init_first
+     0.00%  ml       libc.so.6                  [.] strncmp
+     0.00%  ml       libstdc++.so.6.0.29        [.] bool std::has_facet<std::codecvt<char, char, __mbstate_t> >(std::locale const&)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::__basic_file(pthread_mutex_t*)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::codecvt<char, char, __mbstate_t> const& std::use_facet<std::codecvt<char, char, __mbstate_t> >(std::locale const&)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ctype<wchar_t>::ctype(unsigned long)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::_Impl::_M_install_facet(std::locale::id const*, std::locale::facet const*)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ostream::operator<<(int)
+     0.00%  ml       ml                         [.] std::basic_filebuf<char, std::char_traits<char> >::basic_filebuf()@plt
+     0.00%  ml       ml                         [.] std::ios_base::ios_base()@plt
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_protect_relro
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_start_user
+     0.00%  ml       libc.so.6                  [.] __cxa_atexit
+     0.00%  ml       libc.so.6                  [.] __stpcpy
+     0.00%  ml       libc.so.6                  [.] __stpncpy
+     0.00%  ml       libc.so.6                  [.] _pthread_cleanup_push@@GLIBC_2.34
+     0.00%  ml       libc.so.6                  [.] fopen@@GLIBC_2.2.5
+     0.00%  ml       libc.so.6                  [.] malloc@plt
+     0.00%  ml       libc.so.6                  [.] strcat
+     0.00%  ml       libc.so.6                  [.] strcpy
+     0.00%  ml       libc.so.6                  [.] strncpy
+     0.00%  ml       libstdc++.so.6.0.29        [.] fopen64@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__basic_file<char>::open(char const*, std::_Ios_Openmode, int)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000d0be0
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000d0be3
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000d0be8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000d0bef
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000d0bf3
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000d0bf6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000d0c60
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000d0c67
+     0.00%  ml       ml                         [.] memcpy@plt
+     0.00%  ml       ml                         [.] std::basic_filebuf<char, std::char_traits<char> >::open(char const*, std::_Ios_Openmode)@plt
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_start
+     0.00%  ml       ld-linux-x86-64.so.2       [.] strdup
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_receive_error
+     0.00%  ml       ml                         [.] ML::FlattenLayer::allocLayer()
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_check_all_versions
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_unload_cache
+     0.00%  ml       ld-linux-x86-64.so.2       [.] cache_rpath
+     0.00%  ml       libstdc++.so.6.0.29        [.] __cxa_atexit@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::error_category::error_category()
+     0.00%  ml       ml                         [.] register_tm_clones
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_assign_tls_modid
+     0.00%  ml       ld-linux-x86-64.so.2       [.] rtld_mutex_dummy
+     0.00%  ml       libc.so.6                  [.] check_stdfiles_vtables
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::basic_streambuf<char, std::char_traits<char> >::xsgetn(char*, long)@plt
+     0.00%  ml       ml                         [.] _start
+     0.00%  ml       ld-linux-x86-64.so.2       [.] __GI___pread64_nocancel
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_audit_activity_nsid
+     0.00%  ml       libc.so.6                  [.] __brk
+     0.00%  ml       libc.so.6                  [.] __strlen_avx2
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::facet::_S_create_c_locale(__locale_struct*&, char const*, __locale_struct*)
+     0.00%  ml       ml                         [.] memmove@plt
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_audit_objopen
+     0.00%  ml       ld-linux-x86-64.so.2       [.] rtld_free
+     0.00%  ml       libc.so.6                  [.] __wcscpy_ifunc
+     0.00%  ml       libc.so.6                  [.] strcspn
+     0.00%  ml       libc.so.6                  [.] strpbrk
+     0.00%  ml       libc.so.6                  [.] strspn
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::facet::_S_get_c_locale()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::facet::_S_get_c_name()
+     0.00%  ml       ml                         [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long)@plt
+     0.00%  ml       ld-linux-x86-64.so.2       [.] version_check_doit
+     0.00%  ml       libc.so.6                  [.] __getrlimit
+     0.00%  ml       ml                         [.] _init
+     0.00%  ml       ld-linux-x86-64.so.2       [.] __GI___close_nocancel
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_sysdep_start
+     0.00%  ml       ld-linux-x86-64.so.2       [.] fstat64
+     0.00%  ml       libc.so.6                  [.] _pthread_cleanup_pop@GLIBC_2.2.5
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::future_category()
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a4e6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a4ea
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a4ed
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a4f1
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a4f5
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a4f8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a4fb
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a501
+     0.00%  ml       [vdso]                     [.] 0x0000000000000aff
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::facet::_S_get_c_name()@plt
+     0.00%  ml       ml                         [.] _GLOBAL__sub_I__ZN2ML13buildToyModelENS_4PathE
+     0.00%  ml       ml                         [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct(unsigned long, char)@plt
+     0.00%  ml       ml                         [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long&, unsigned long)@plt
+     0.00%  ml       ml                         [.] std::chrono::_V2::steady_clock::now()@plt
+     0.00%  ml       [vdso]                     [.] 0x0000000000000ab0
+     0.00%  ml       [vdso]                     [.] 0x0000000000000ab4
+     0.00%  ml       [vdso]                     [.] 0x0000000000000ab6
+     0.00%  ml       [vdso]                     [.] 0x0000000000000ab8
+     0.00%  ml       [vdso]                     [.] 0x0000000000000aba
+     0.00%  ml       [vdso]                     [.] 0x0000000000000abc
+     0.00%  ml       [vdso]                     [.] 0x0000000000000abd
+     0.00%  ml       [vdso]                     [.] 0x0000000000000ac0
+     0.00%  ml       [vdso]                     [.] 0x0000000000000ac4
+     0.00%  ml       [vdso]                     [.] 0x0000000000000acd
+     0.00%  ml       [vdso]                     [.] 0x0000000000000ad4
+     0.00%  ml       [vdso]                     [.] 0x0000000000000adb
+     0.00%  ml       [vdso]                     [.] 0x0000000000000adf
+     0.00%  ml       [vdso]                     [.] 0x0000000000000aeb
+     0.00%  ml       [vdso]                     [.] 0x0000000000000af5
+     0.00%  ml       [vdso]                     [.] 0x0000000000000af8
+     0.00%  ml       [vdso]                     [.] 0x0000000000000afc
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b02
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b0c
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b10
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b15
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b1a
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b1e
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b21
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b24
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b28
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b2f
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b33
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b36
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b3b
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b3d
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b41
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b44
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b48
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b4c
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b4f
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b54
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b5d
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b75
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b78
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b7e
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b82
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b83
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b85
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b87
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b89
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b8b
+     0.00%  ml       [vdso]                     [.] 0x0000000000000b8c
+     0.00%  ml       ld-linux-x86-64.so.2       [.] __GI___read_nocancel
+     0.00%  ml       ld-linux-x86-64.so.2       [.] mempcpy
+     0.00%  ml       ld-linux-x86-64.so.2       [.] mprotect
+     0.00%  ml       ld-linux-x86-64.so.2       [.] munmap
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000003000
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d000
+     0.00%  ml       libstdc++.so.6.0.29        [.] clock_gettime@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] operator delete(void*)
+     0.00%  ml       libstdc++.so.6.0.29        [.] operator new[](unsigned long)
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::error_category::error_category()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ostream& std::ostream::_M_insert<long>(long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ostream::flush()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ostream::put(char)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x0000000000099000
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9cbe
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9cd7
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f4b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f50
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa2d0
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a4ca
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a4cf
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a509
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a50d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a50f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a512
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012a514
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012bde4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012bde6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012bde8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012bde9
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012bded
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012bdf1
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012bdf8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012be00
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012be03
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012be07
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012be0b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012be0f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012be14
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012be18
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012be19
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012be1a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012be1c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000012be1e
+     0.00%  ml       ml                         [.] std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)@plt
+     0.00%  ml       ml                         [.] std::ios_base::Init::Init()@plt
+     0.00%  ml       ml                         [.] std::ostream::operator<<(int)@plt
+     0.00%  ml       [vdso]                     [.] __vdso_clock_gettime
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_debug_state
+     0.00%  ml       ld-linux-x86-64.so.2       [.] _dl_sysdep_start_cleanup
+     0.00%  ml       libc.so.6                  [.] strrchr@plt
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000003004
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000003008
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000003012
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000003016
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x000000000000301a
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000004610
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000004617
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x000000000000461e
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000004624
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000004628
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x000000000000462c
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x000000000000462f
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000004632
+     0.00%  ml       libgcc_s-11-20240719.so.1  [.] 0x0000000000004648
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d004
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d008
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d012
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d016
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d01a
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d3d0
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d3d7
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d3de
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d3e4
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d3e8
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d3ec
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d3ef
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d3f2
+     0.00%  ml       libm.so.6                  [.] 0x000000000000d408
+     0.00%  ml       libstdc++.so.6.0.29        [.] __newlocale@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] __uselocale@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::messages<char>::messages(unsigned long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::moneypunct<char, false>::_M_initialize_moneypunct(__locale_struct*, char const*)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::moneypunct<char, true>::_M_initialize_moneypunct(__locale_struct*, char const*)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__cxx11::numpunct<char>::_M_initialize_numpunct(__locale_struct*)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__timepunct<char>::_M_initialize_timepunct(__locale_struct*)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::__timepunct<char>::__timepunct(std::__timepunct_cache<char>*, unsigned long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::codecvt<char, char, __mbstate_t>::codecvt(unsigned long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ctype<char>::ctype(unsigned short const*, bool, unsigned long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ctype<wchar_t>::_M_initialize_ctype()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::ctype<wchar_t>::ctype(unsigned long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::future_category()@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::_Impl::_Impl(unsigned long)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] std::locale::facet::_S_create_c_locale(__locale_struct*&, char const*, __locale_struct*)@plt
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x0000000000099004
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x0000000000099008
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x0000000000099012
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x0000000000099016
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x000000000009901a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9a74
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9a76
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9a7d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9a7e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9a88
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9a8c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9a97
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9aa2
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9aa9
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ab0
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ab7
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9abe
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ac6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ad1
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ad6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ae3
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9aea
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9aee
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9af5
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9af6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b04
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b08
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b0d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b14
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b17
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b1b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b24
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b2c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b31
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b3c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b47
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b4e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b55
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b5a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b61
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b66
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b6d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b74
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b7c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9b80
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ba4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bab
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bae
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bb0
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bb3
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bba
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bc1
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bc9
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bd1
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bd8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bdb
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bdd
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9be4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9be7
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9be9
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bf0
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bf3
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bfa
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9bfc
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c03
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c06
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c08
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c0b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c12
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c19
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c21
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c29
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c30
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c33
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c35
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c3c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c3f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c41
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c48
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c4b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c52
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c54
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c55
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c58
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c5f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c66
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c69
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c71
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c7e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c81
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c88
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c8f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c92
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9c9a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9cb4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9cc9
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9cd0
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9cde
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ce9
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9cf0
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9cfa
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d01
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d0b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d12
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d1c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d27
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d32
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d3d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d48
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d53
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d5e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d69
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d74
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d7f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d8a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9d95
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9da0
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9dab
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9db6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9dc1
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9dcc
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9dd7
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9de2
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ded
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9df8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e03
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e0e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e19
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e24
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e2f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e36
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e40
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e4b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e56
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e61
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e6c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e77
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e82
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e8d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e94
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9e9f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9eaa
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9eb4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ec4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ecb
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ed2
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ee4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ee6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9eed
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ef7
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9efe
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f06
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f08
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f0f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f24
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f2b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f32
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f44
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f4e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f53
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f5a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f5d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f5f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f62
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f69
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f6c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f6e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f71
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f78
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f7b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f7d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f80
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f87
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f8a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f8c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f8f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f96
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f99
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f9b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9f9e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fa5
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fa8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9faa
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fad
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fb4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fb7
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fb9
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fbc
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fc4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fcb
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fce
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fd0
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fd3
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fda
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fdd
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fdf
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fe2
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fe9
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fec
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9fee
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ff1
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ff8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ffb
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000a9ffd
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa000
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa007
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa00a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa00c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa00f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa016
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa019
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa01b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa01e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa025
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa028
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa02a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa02d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa034
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa037
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa039
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa03c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa044
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa04b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa04e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa050
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa053
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa05a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa05d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa05f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa062
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa069
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa06c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa06e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa071
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa078
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa07b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa07d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa080
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa087
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa08a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa08c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa08f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa096
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa099
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa09b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa09e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0a5
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0a8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0aa
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0ad
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0b4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0b7
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0b9
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0bc
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0c3
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0c6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0c8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0cb
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0d2
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0d5
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0d7
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0da
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0e1
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0e4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0e6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0e9
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0f0
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0f3
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0f5
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa0f8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa104
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa10b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa10e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa110
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa113
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa11a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa11d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa11f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa122
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa129
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa12c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa12e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa131
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa138
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa13b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa13d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa140
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa147
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa14a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa14c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa14f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa156
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa159
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa15b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa15e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa165
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa168
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa16a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa16d
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa174
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa177
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa179
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa17c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa183
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa186
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa188
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa18b
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa192
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa195
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa197
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa19a
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1a1
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1a4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1a6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1a9
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1b0
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1b3
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1b5
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1b8
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1c4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1c6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1cd
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1d7
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1de
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1e6
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1ed
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1f4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1fc
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa1fe
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa205
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa250
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa257
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa25e
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa264
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa268
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa26c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa26f
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa272
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa288
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000aa2d4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000bf8a4
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000bf8ab
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1e44
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1e45
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1e4c
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1e54
+     0.00%  ml       libstdc++.so.6.0.29        [.] 0x00000000000c1e80
+     0.00%  ml       ml                         [.] strlen@plt
+
+
+#
+# (Tip: To show inline functions in call traces add --inline to perf report)
+#

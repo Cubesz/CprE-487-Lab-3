@@ -93,3 +93,21 @@ cache
 *.run*
 *.sim*
 *.src*
+
+
+# Lab 2 gitignore
+workspace*
+*.log
+*.str
+build
+.Xil
+Packages
+.vscode/settings.json
+
+# Remove these when they work
+.vscode/launch.json
+.vscode/tasks.json
+
+# mine
+.vscode/c_cpp_properties.json
+
