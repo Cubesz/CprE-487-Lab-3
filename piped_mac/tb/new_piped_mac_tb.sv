@@ -218,6 +218,97 @@ module new_piped_mac_tb(
         send_transaction({$signed(-8'd128), $signed(8'd127)}, 0);
         send_transaction({$signed(-8'd100), $signed(8'd120)}, 1);
         check_result(-2000 + (127 * -128) + (120 * -100));
+        
+        // TEST 4: Test back to back to back
+        $display("\nTEST 5: Back to back to back");
+        master_valid = 1;
+        master_ready = 1;
+        master_data = 10;
+        #10
+        master_data[15:8] = -13;
+        master_data[7:0] = -1;
+        #10
+        master_data[15:8] = 9;
+        master_data[7:0] = 3;
+        #10
+        master_data[15:8] = 1;
+        master_data[7:0] = 127;
+        master_last = 1;
+        #10
+        master_data = 33;
+        master_last = 0;
+        #10
+        master_data[15:8] = 1;
+        master_data[7:0] = 2;
+        master_last = 1;
+        #10
+        master_last = 1;
+        master_data = 64;
+        // Expecting first to be done
+        $display("Actual result: %d", $signed(slave_data));
+        #10
+        master_last = 0;
+        master_valid = 0;
+        #10
+        // Expecting second to be done
+        $display("Actual result: %d", $signed(slave_data));
+        #10
+        // Expecting third to be done
+        $display("Actual result: %d", $signed(slave_data));
+        #10
+
+        // TEST 4: Test back to back to back with stall
+        $display("\n TEST 6: Back to back to back with a stall");
+        master_valid = 1;
+        master_ready = 0;
+        master_data = 10;
+        #10
+        master_data[15:8] = -13;
+        master_data[7:0] = -1;
+        #10
+        master_data[15:8] = 9;
+        master_data[7:0] = 3;
+        #10
+        master_data[15:8] = 1;
+        master_data[7:0] = 127;
+        master_last = 1;
+        #10
+        master_data = 33;
+        master_last = 0;
+        #10
+        master_data[15:8] = 1;
+        master_data[7:0] = 2;
+        master_last = 1;
+        #10
+        master_last = 1;
+        master_data = 64;
+        // Expecting first to be done, but we are not taking the data (master_tready = 0). Thus, slave_tready should be false as it should not be willing to proceed unless we are ready to take this data
+        $display("Actual result: %d", $signed(slave_data));
+        $display("Expected result: %d", $signed(177));
+        $display("Actual slave tready: %d", slave_ready);
+        $display("Expected slave tready: 0");
+        #10
+        master_last = 1;
+        master_data = 64;
+        master_ready = 1; // lets take it now
+        #1
+        $display("Actual slave tready: %d", slave_ready);
+        $display("Expected slave tready: 1");
+        #9
+        master_last = 0;
+        master_valid = 0;
+        #10
+        // Expecting second to be done
+        $display("Actual result: %d", $signed(slave_data));
+        $display("Expected result: %d", $signed(35));
+        #10
+        // Expecting third to be done
+        $display("Actual result: %d", $signed(slave_data));
+        $display("Expected result: %d", $signed(64));        
+        #10
+
+        
+        
 
         $display("\nAll tests completed!");
         $finish;

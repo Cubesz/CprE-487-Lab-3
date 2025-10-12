@@ -131,7 +131,7 @@ module piped_mac #(parameter C_DATA_WIDTH = 8) (
         else begin
             case (state)
                 LOAD_BIAS: begin
-                    if (SD_AXIS_TVALID && !stall) begin
+                    if (SD_AXIS_TVALID && !stall && !SD_AXIS_TLAST) begin
                         state <= MAC_W_AND_I;
                     end;
                 end
