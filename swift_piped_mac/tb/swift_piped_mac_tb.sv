@@ -220,6 +220,49 @@ module swift_piped_mac_tb(
         check_result(-2000 + (127 * -128) + (120 * -100));
 
         $display("\nAll tests completed!");
+        
+        // TEST: Test back to back to back
+        $display("\nTEST 5: Back to back to back");
+        master_valid = 1;
+        master_ready = 1;
+        master_data = 10;
+        #10
+        master_data[15:8] = -13;
+        master_data[7:0] = -1;
+        #10
+        master_data[15:8] = 9;
+        master_data[7:0] = 3;
+        #10
+        master_data[15:8] = 1;
+        master_data[7:0] = 127;
+        master_last = 1;
+        #10
+        master_data = 33;
+        master_last = 0;
+        #10
+        master_data[15:8] = 1;
+        master_data[7:0] = 2;
+        master_last = 1;
+        #10
+        master_last = 1;
+        master_data = 64;
+        // Expecting first to be done
+        $display("Actual result: %d", $signed(slave_data));
+        $display("Expected result: %d", $signed(177));        
+        #10
+        master_last = 0;
+        master_valid = 0;
+        #10
+        // Expecting second to be done
+        $display("Actual result: %d", $signed(slave_data));
+        $display("Expected result: %d", $signed(35));        
+        #10
+        // Expecting third to be done
+        $display("Actual result: %d", $signed(slave_data));
+        $display("Expected result: %d", $signed(64));               
+        #10
+
+        
         $finish;
     end
     

@@ -191,7 +191,7 @@ module new_piped_mac_tb(
 
         reset_dut();
 
-        // TEST 1: A typical use case with multiple accumulations
+        // TEST: A typical use case with multiple accumulations
         $display("\nTEST 2: Typical Use");
         // bias of -1028, we need to split it up
         // -128*10 + 126 * 2
@@ -204,7 +204,7 @@ module new_piped_mac_tb(
 
         reset_dut();
 
-        // TEST 2: Maximum positive value
+        // TEST: Maximum positive value
         $display("\nTEST 3: Maximum Value Test");
         send_transaction(5000, 0); // Bias
         send_transaction({$signed(-8'd128), $signed(-8'd128)}, 1);
@@ -212,14 +212,14 @@ module new_piped_mac_tb(
 
         reset_dut();
 
-        // TEST 3: Maximum negative value
+        // TEST: Maximum negative value
         $display("\nTEST 4: Minimum Value Test");
         send_transaction(-2000, 0); // Bias
         send_transaction({$signed(-8'd128), $signed(8'd127)}, 0);
         send_transaction({$signed(-8'd100), $signed(8'd120)}, 1);
         check_result(-2000 + (127 * -128) + (120 * -100));
         
-        // TEST 4: Test back to back to back
+        // TEST: Test back to back to back
         $display("\nTEST 5: Back to back to back");
         master_valid = 1;
         master_ready = 1;
@@ -246,18 +246,21 @@ module new_piped_mac_tb(
         master_data = 64;
         // Expecting first to be done
         $display("Actual result: %d", $signed(slave_data));
+        $display("Expected result: %d", $signed(177));        
         #10
         master_last = 0;
         master_valid = 0;
         #10
         // Expecting second to be done
         $display("Actual result: %d", $signed(slave_data));
+        $display("Expected result: %d", $signed(35));        
         #10
         // Expecting third to be done
         $display("Actual result: %d", $signed(slave_data));
+        $display("Expected result: %d", $signed(64));               
         #10
 
-        // TEST 4: Test back to back to back with stall
+        // TEST: Test back to back to back with stall
         $display("\n TEST 6: Back to back to back with a stall");
         master_valid = 1;
         master_ready = 0;
