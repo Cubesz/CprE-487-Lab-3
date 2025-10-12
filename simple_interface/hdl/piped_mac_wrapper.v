@@ -27,7 +27,7 @@ module piped_mac_wrapper #(parameter C_DATA_WIDTH = 8)(
         output SD_AXIS_TREADY,
         input [C_DATA_WIDTH*2-1 : 0] SD_AXIS_TDATA,
         input SD_AXIS_TLAST,
-        input [15:0] SD_AXIS_TUSER,
+        input SD_AXIS_TUSER,
         input SD_AXIS_TVALID,
         input [7:0] SD_AXIS_TID,
         
