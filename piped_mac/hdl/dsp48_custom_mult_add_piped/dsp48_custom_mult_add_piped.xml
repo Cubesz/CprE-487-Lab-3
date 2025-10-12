@@ -1719,11 +1719,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
+            <spirit:value>Sun Oct 12 04:27:44 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:312eced0</spirit:value>
+            <spirit:value>9:07db509c</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1748,11 +1748,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
+            <spirit:value>Sun Oct 12 04:27:44 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:312eced0</spirit:value>
+            <spirit:value>9:07db509c</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1763,7 +1763,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:312eced0</spirit:value>
+            <spirit:value>9:07db509c</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1779,11 +1779,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
+            <spirit:value>Sun Oct 12 04:27:44 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:312eced0</spirit:value>
+            <spirit:value>9:07db509c</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1808,11 +1808,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
+            <spirit:value>Sun Oct 12 04:27:44 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f5e8d4e0</spirit:value>
+            <spirit:value>9:a5295ed9</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1828,11 +1828,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
+            <spirit:value>Sun Oct 12 04:27:44 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f5e8d4e0</spirit:value>
+            <spirit:value>9:a5295ed9</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1846,11 +1846,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Oct 11 16:00:30 UTC 2025</spirit:value>
+            <spirit:value>Sun Oct 12 04:27:44 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:312eced0</spirit:value>
+            <spirit:value>9:07db509c</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1897,7 +1897,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.CE" xilinx:dependency="spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_CE&apos;)) != 0 and spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_INDEP_CE&apos;)) = 0">false</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.CE" xilinx:dependency="spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_CE&apos;)) != 0 and spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_INDEP_CE&apos;)) = 0">true</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -3297,7 +3297,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_HAS_CE</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_CE">0</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_CE">1</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_HAS_INDEP_CE</spirit:name>
@@ -3477,7 +3477,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="string">
         <spirit:name>C_OPMODES</spirit:name>
-        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OPMODES">000000000011010100000000,000000000010010100000000,000000000010000000000000</spirit:value>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OPMODES">000000000000110000000000,000000000010010100000000,000000000010000000000000</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="string">
         <spirit:name>C_REG_CONFIG</spirit:name>
@@ -6862,7 +6862,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>instruction1</spirit:name>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.instruction1" spirit:choiceRef="choice_list_a66ffb3b" spirit:order="4">A*B+C</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.instruction1" spirit:choiceRef="choice_list_a66ffb3b" spirit:order="4">C</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>instruction2</spirit:name>
@@ -7144,7 +7144,7 @@
     <spirit:parameter>
       <spirit:name>has_ce</spirit:name>
       <spirit:displayName>Global</spirit:displayName>
-      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.has_ce" spirit:order="71">false</spirit:value>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.has_ce" spirit:order="71">true</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>has_d_ce</spirit:name>
@@ -7258,7 +7258,9 @@
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.creg_4" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.creg_5" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.d_width" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.has_ce" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.has_pcout" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.instruction1" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.instruction2" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.instruction3" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.mreg_5" xilinx:valueSource="user"/>

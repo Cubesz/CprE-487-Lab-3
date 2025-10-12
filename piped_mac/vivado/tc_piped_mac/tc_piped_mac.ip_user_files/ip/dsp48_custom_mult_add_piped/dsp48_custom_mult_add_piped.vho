@@ -55,6 +55,7 @@
 COMPONENT dsp48_custom_mult_add_piped
   PORT (
     CLK : IN STD_LOGIC;
+    CE : IN STD_LOGIC;
     SEL : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
     A : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     B : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -71,6 +72,7 @@ END COMPONENT;
 your_instance_name : dsp48_custom_mult_add_piped
   PORT MAP (
     CLK => CLK,
+    CE => CE,
     SEL => SEL,
     A => A,
     B => B,

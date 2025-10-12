@@ -56,6 +56,7 @@
 //----------- Begin Cut here for INSTANTIATION Template ---// INST_TAG
 dsp48_custom_mult_add_piped your_instance_name (
   .CLK(CLK),  // input wire CLK
+  .CE(CE),    // input wire CE
   .SEL(SEL),  // input wire [1 : 0] SEL
   .A(A),      // input wire [7 : 0] A
   .B(B),      // input wire [7 : 0] B
