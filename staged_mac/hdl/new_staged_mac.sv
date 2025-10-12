@@ -34,85 +34,123 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
         output [31:0] MO_AXIS_TDATA,
         output reg MO_AXIS_TLAST,
         input MO_AXIS_TREADY,
-        output reg [7:0] MO_AXIS_TID
+        output [7:0] MO_AXIS_TID
     );
-    
-    typedef enum logic {TAKE_IN_WEIGHTS_AND_INPUTS, OUTPUT_RESULT} STATE_TYPE;
-    
-    wire [31:0] mac_debug = 0;
+    assign MO_AXIS_TID = 0;
+    typedef enum logic [1:0] { LOAD_BIAS, MAC_W_AND_I, OUTPUT_RES } STATE_TYPE;
+    typedef enum logic [1:0] {
+        LOAD = 0,
+        MAC = 1,
+        HOLD = 2
+    } instruction_t;
+    typedef struct packed {
+        logic signed [C_DATA_WIDTH - 1 : 0] inp;
+        logic signed [C_DATA_WIDTH - 1 : 0] weight;
+    } input_data_t;
     
     STATE_TYPE state;
+    instruction_t instruction;
+    input_data_t input_data;
     
-    reg [31:0] accumulator;
-        
-    wire [C_DATA_WIDTH - 1 : 0] new_weight = SD_AXIS_TDATA[C_DATA_WIDTH - 1 : 0];
-    wire [C_DATA_WIDTH - 1 : 0] new_input = SD_AXIS_TDATA[C_DATA_WIDTH * 2 - 1 : C_DATA_WIDTH];
+    wire signed [15:0] new_bias;
+    assign input_data = input_data_t'(SD_AXIS_TDATA);
+    assign new_bias = SD_AXIS_TDATA;
     
-    wire signed [31:0] new_accumulated;
-    assign MO_AXIS_TDATA = accumulator; // it shouldn't sample it until its ready
-    
-    multadd_8x8p32_com mult_add (
-          .A(new_input),
-          .B(new_weight),
-          .C(accumulator),
-          .SUBTRACT(0),
-          .P(new_accumulated)
-    );
+    wire signed [31:0] accumulator;
+    assign MO_AXIS_TDATA = accumulator;   
 
+  
     
-//    reg signed [31:0] product;
-//    reg signed [31:0] new_accumulated;
-//    always @* begin
-//        product = $signed(new_weight) * $signed(new_input);
-//        new_accumulated = $signed(accumulator) + product;
-//    end
+    dsp48_load_mac_hold_comb com (
+        .CLK(ACLK),
+        .SEL(instruction),
+        .A(input_data.inp),
+        .B(input_data.weight),
+        .C(new_bias),
+        .P(accumulator)
+    );
     
+
+    always @* begin
+        SD_AXIS_TREADY = 1;
+        if (state == OUTPUT_RES && ARESETN) begin
+            MO_AXIS_TVALID = 1;
+            MO_AXIS_TLAST = 1;
+        end
+        else begin
+            MO_AXIS_TVALID = 0;
+            MO_AXIS_TLAST = 0;
+        end
+        
+        
+        if (state == OUTPUT_RES) begin
+
+            if (MO_AXIS_TREADY && SD_AXIS_TVALID) begin
+                instruction = LOAD;
+            end
+            else if (!MO_AXIS_TREADY) begin // if master isn't ready to receive then hold
+                instruction = HOLD;
+                SD_AXIS_TREADY = 0;
+            end
+            else begin
+                instruction = LOAD; // don't care here. Once tvalid is a yea and the state changes, this should change to what it should be.
+            end
+        end
+        else if (state == LOAD_BIAS) begin
+            instruction = LOAD;
+        end
+        else begin
+            instruction = MAC;
+        end
+        
+        if (!SD_AXIS_TVALID) begin
+            instruction = HOLD;
+        end
+        
+        if (!ARESETN) begin
+            SD_AXIS_TREADY = 0;
+        end
+
+    end
 
     
     always @(posedge ACLK) begin
-        SD_AXIS_TREADY <= 1;
-        MO_AXIS_TVALID <= 0;
-        MO_AXIS_TLAST <= 0;
-        MO_AXIS_TID <= 0;
+
         if (ARESETN == 0) begin // is in reset
             //state <= WAIT_FOR_BIAS;
-            state <= TAKE_IN_WEIGHTS_AND_INPUTS;
-            accumulator <= 0;
-            SD_AXIS_TREADY <= 0;
+            state <= LOAD_BIAS;
         end
         else begin
             case (state)
-//                WAIT_FOR_BIAS: begin // Bias state not needed, why multiplex input into accumulator? Just send something like 1 * bias instead in the beginning or whenever. 
-//                    if (SD_AXIS_TVALID) begin
-//                        accumulator <= $signed(SD_AXIS_TDATA);
-//                        state <= TAKE_IN_WEIGHTS_AND_INPUTS;
-//                    end
-//                end
-                TAKE_IN_WEIGHTS_AND_INPUTS: begin
+                LOAD_BIAS: begin
                     if (SD_AXIS_TVALID) begin
-                        accumulator <= new_accumulated;
+                        state <= MAC_W_AND_I;
                         if (SD_AXIS_TLAST) begin
-                            state <= OUTPUT_RESULT;
-                            SD_AXIS_TREADY <= 0;
-                            MO_AXIS_TVALID <= 1;
-                            MO_AXIS_TLAST <= 1;
+                            state <= OUTPUT_RES;
                         end
                     end
                 end
-                OUTPUT_RESULT: begin
-                    SD_AXIS_TREADY <= 0;
-                    MO_AXIS_TVALID <= 1;
+                MAC_W_AND_I: begin
+                    if (SD_AXIS_TVALID && SD_AXIS_TLAST) begin
+                        state <= OUTPUT_RES;
+                    end
+                end
+                OUTPUT_RES: begin
                     if (MO_AXIS_TREADY) begin // it should get our result... move on
-                        //state <= WAIT_FOR_BIAS;
-                        state <= TAKE_IN_WEIGHTS_AND_INPUTS;
-                        SD_AXIS_TREADY <= 1;
-                        MO_AXIS_TVALID <= 0;
-                        MO_AXIS_TLAST <= 0;
+                        if (SD_AXIS_TVALID && SD_AXIS_TLAST) begin
+                            state <= OUTPUT_RES;
+                        end
+                        else if (SD_AXIS_TVALID) begin
+                            state <= MAC_W_AND_I;
+                        end
+                        else begin
+                            state <= LOAD_BIAS;
+                        end
                     end
                 end
                 default: begin
                     //state <= WAIT_FOR_BIAS;
-                    state <= TAKE_IN_WEIGHTS_AND_INPUTS;
+                    state <= LOAD_BIAS;
                 end
             endcase
         end

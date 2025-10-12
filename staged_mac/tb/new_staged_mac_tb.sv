@@ -124,8 +124,7 @@ module new_staged_mac_tb(
 
         // send bias and some weights
         master_valid = 1;
-        master_data[15:8] = 1;
-        master_data[7:0] = 5;
+        master_data = 5;
         #10
 
         master_data[15:8] = -10;
@@ -145,11 +144,8 @@ module new_staged_mac_tb(
 
         // TEST 1: A typical use case with multiple accumulations
         $display("\nTEST 1: Typical Use");
-        // bias of -1028, we need to split it up
-        // -128*10 + 126 * 2
-        //send_transaction(-1028, 0); // Bias
-        send_transaction({$signed(-8'd128), $signed(8'd10)}, 0); // bias part 1
-        send_transaction({$signed(8'd126), $signed(8'd2)}, 0); // bias part 2
+
+        send_transaction(-1028, 0); // Bias
         
         send_transaction({$signed(-8'd122), $signed(-8'd15)}, 0);
         send_transaction({$signed(8'd119),  $signed(-8'd3)}, 0);
@@ -160,8 +156,7 @@ module new_staged_mac_tb(
 
         // TEST 2: Maximum positive value
         $display("\nTEST 2: Maximum Value Test");
-        //send_transaction(5000, 0); // Bias
-        send_transaction({$signed(8'd50), $signed(8'd100)}, 0); // Bias of 5000
+        send_transaction(5000, 0); // Bias
         send_transaction({$signed(-8'd128), $signed(-8'd128)}, 1);
         check_result(5000 + (-128 * -128));
 
@@ -169,8 +164,7 @@ module new_staged_mac_tb(
 
         // TEST 3: Maximum negative value
         $display("\nTEST 3: Minimum Value Test");
-        //send_transaction(-2000, 0); // Bias
-        send_transaction({$signed(8'd20), $signed(-8'd100)}, 0); // Bias of -2000
+        send_transaction(-2000, 0); // Bias
         send_transaction({$signed(-8'd128), $signed(8'd127)}, 0);
         send_transaction({$signed(-8'd100), $signed(8'd120)}, 1);
         check_result(-2000 + (127 * -128) + (120 * -100));
