@@ -1,0 +1,4 @@
+vhdl xil_defaultlib  \
+"../../../../tc_plexed_swift_piped_mac.srcs/sources_1/ip/piped_mult_add/sim/piped_mult_add.vhd" \
+
+nosort

@@ -19,6 +19,8 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+`define USEDSPMACRO
+
 module swift_piped_mac #(parameter C_DATA_WIDTH = 8) (
         input ACLK,
         input ARESETN,
@@ -64,6 +66,7 @@ module swift_piped_mac #(parameter C_DATA_WIDTH = 8) (
     wire signed [15:0] new_bias;
     assign input_mult_data = input_data_t'(SD_AXIS_TDATA);
     assign new_bias = SD_AXIS_TDATA;
+    `ifdef USEDSPMACRO
     dsp48_custom_mult_add_piped mult_add (
         .CLK(ACLK),
         .SEL(instruction),
@@ -72,6 +75,47 @@ module swift_piped_mac #(parameter C_DATA_WIDTH = 8) (
         .C(new_bias),
         .P(accumulator_out)
     );
+    `else
+    
+    reg macP1load;
+    reg signed [C_DATA_WIDTH-1:0] macP1input;
+    reg signed [C_DATA_WIDTH-1:0] macP1weight;
+    reg signed [31:0] macP1bias;
+    reg macP2load;
+    reg signed[C_DATA_WIDTH*2 - 1 : 0] macP2product;
+    reg signed [31:0] macP2bias;
+    reg signed [31:0] macP3;
+    always @(posedge ACLK) begin
+        // non pipelined instruction for this non dsp version
+        case (instruction)
+            LOAD: begin
+                macP1input <= 0;
+                macP1weight <= 0;
+                macP1bias <= new_bias;
+                macP1load <= 1;
+            end
+            MAC: begin
+                macP1input <= input_mult_data.inp;
+                macP1weight <= input_mult_data.weight;
+                macP1bias <= 0; // don't care
+                macP1load <= 0;
+            end
+            NOOP: begin
+                macP1input <= 0;
+                macP1weight <= 0; // dont care
+                macP1bias <= 0; // don't care
+                macP1load <= 0;
+            end
+        endcase
+        
+        macP2load <= macP1load;
+        macP2product <= macP1input * macP1weight;
+        macP2bias <= macP1bias;
+        macP3 <= macP2load ? macP2bias : (macP2product + macP3);
+        
+    end
+    assign accumulator_out = macP3;
+    `endif
     // pipeline parallel with dsp slice
     reg p1, p2, output_ready;
     always @(posedge ACLK) begin
