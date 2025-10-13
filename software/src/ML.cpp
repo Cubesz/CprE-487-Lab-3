@@ -225,187 +225,187 @@ namespace ML
         layer.freeLayer();
     }
 
-    void checkMaxPoolingLayer(
-        const Path &basePath,
-        int layer_idx,
-        const LayerParams &inParams,
-        const LayerParams &outParams)
-    {
-        std::string layer_name = "Layer " + std::to_string(layer_idx) + ": MaxPooling";
-        logInfo("----- Verifying " + layer_name + " -----");
+    // void checkMaxPoolingLayer(
+    //     const Path &basePath,
+    //     int layer_idx,
+    //     const LayerParams &inParams,
+    //     const LayerParams &outParams)
+    // {
+    //     std::string layer_name = "Layer " + std::to_string(layer_idx) + ": MaxPooling";
+    //     logInfo("----- Verifying " + layer_name + " -----");
 
-        MaxPoolingLayer layer(inParams, outParams);
-        layer.allocLayer();
+    //     MaxPoolingLayer layer(inParams, outParams);
+    //     layer.allocLayer();
 
-        Path input_file_path = getLayerInputPath(basePath, layer_idx);
-        LayerData inputData(inParams, input_file_path);
-        inputData.loadData();
+    //     Path input_file_path = getLayerInputPath(basePath, layer_idx);
+    //     LayerData inputData(inParams, input_file_path);
+    //     inputData.loadData();
 
-        Timer timer(layer_name + " Inference");
-        timer.start();
-        layer.computeNaive(inputData);
-        timer.stop();
+    //     Timer timer(layer_name + " Inference");
+    //     timer.start();
+    //     layer.computeNaive(inputData);
+    //     timer.stop();
 
-        const LayerData &actual_output = layer.getOutputData();
-        std::string expected_output_filename = "layer_" + std::to_string(layer_idx) + "_output.bin";
-        LayerData expected_output(outParams, basePath / "image_0_data" / expected_output_filename.c_str());
-        expected_output.loadData();
+    //     const LayerData &actual_output = layer.getOutputData();
+    //     std::string expected_output_filename = "layer_" + std::to_string(layer_idx) + "_output.bin";
+    //     LayerData expected_output(outParams, basePath / "image_0_data" / expected_output_filename.c_str());
+    //     expected_output.loadData();
 
-        log("Comparing C++ output against TensorFlow output...");
-        actual_output.compareWithinPrint<fp32>(expected_output, 1e-4);
+    //     log("Comparing C++ output against TensorFlow output...");
+    //     actual_output.compareWithinPrint<fp32>(expected_output, 1e-4);
 
-        layer.freeLayer();
-    }
+    //     layer.freeLayer();
+    // }
 
-    void checkFlattenLayer(
-        const Path &basePath,
-        int layer_idx,
-        const LayerParams &inParams,
-        const LayerParams &outParams)
-    {
-        std::string layer_name = "Layer " + std::to_string(layer_idx) + ": Flatten";
-        logInfo("----- Verifying " + layer_name + " -----");
+    // void checkFlattenLayer(
+    //     const Path &basePath,
+    //     int layer_idx,
+    //     const LayerParams &inParams,
+    //     const LayerParams &outParams)
+    // {
+    //     std::string layer_name = "Layer " + std::to_string(layer_idx) + ": Flatten";
+    //     logInfo("----- Verifying " + layer_name + " -----");
 
-        FlattenLayer layer(inParams, outParams);
-        layer.allocLayer();
+    //     FlattenLayer layer(inParams, outParams);
+    //     layer.allocLayer();
 
-        Path input_file_path = getLayerInputPath(basePath, layer_idx);
-        LayerData inputData(inParams, input_file_path);
-        inputData.loadData();
+    //     Path input_file_path = getLayerInputPath(basePath, layer_idx);
+    //     LayerData inputData(inParams, input_file_path);
+    //     inputData.loadData();
 
-        Timer timer(layer_name + " Inference");
-        timer.start();
-        layer.computeNaive(inputData);
-        timer.stop();
+    //     Timer timer(layer_name + " Inference");
+    //     timer.start();
+    //     layer.computeNaive(inputData);
+    //     timer.stop();
 
-        const LayerData &actual_output = layer.getOutputData();
-        std::string expected_output_filename = "layer_" + std::to_string(layer_idx) + "_output.bin";
-        LayerData expected_output(outParams, basePath / "image_0_data" / expected_output_filename.c_str());
-        expected_output.loadData();
+    //     const LayerData &actual_output = layer.getOutputData();
+    //     std::string expected_output_filename = "layer_" + std::to_string(layer_idx) + "_output.bin";
+    //     LayerData expected_output(outParams, basePath / "image_0_data" / expected_output_filename.c_str());
+    //     expected_output.loadData();
 
-        log("Comparing C++ output against TensorFlow output...");
-        actual_output.compareWithinPrint<fp32>(expected_output, 1e-4);
+    //     log("Comparing C++ output against TensorFlow output...");
+    //     actual_output.compareWithinPrint<fp32>(expected_output, 1e-4);
 
-        layer.freeLayer();
-    }
+    //     layer.freeLayer();
+    // }
 
-    std::string formatDims(const ML::dimVec &dims)
-    {
-        std::stringstream ss;
-        ss << "[";
-        for (size_t i = 0; i < dims.size(); ++i)
-        {
-            ss << dims[i];
-            if (i < dims.size() - 1)
-            {
-                ss << ", ";
-            }
-        }
-        ss << "]";
-        return ss.str();
-    }
+    // std::string formatDims(const ML::dimVec &dims)
+    // {
+    //     std::stringstream ss;
+    //     ss << "[";
+    //     for (size_t i = 0; i < dims.size(); ++i)
+    //     {
+    //         ss << dims[i];
+    //         if (i < dims.size() - 1)
+    //         {
+    //             ss << ", ";
+    //         }
+    //     }
+    //     ss << "]";
+    //     return ss.str();
+    // }
 
-    void checkDenseLayer(
-        const Path &basePath,
-        int layer_idx,
-        const LayerParams &inParams,
-        const LayerParams &outParams,
-        const LayerParams &weightParams,
-        const LayerParams &biasParams,
-        bool useRelu)
-    {
-        std::string layer_name = "Layer " + std::to_string(layer_idx) + ": Dense";
-        logInfo("----- Verifying " + layer_name + " -----");
+    // void checkDenseLayer(
+    //     const Path &basePath,
+    //     int layer_idx,
+    //     const LayerParams &inParams,
+    //     const LayerParams &outParams,
+    //     const LayerParams &weightParams,
+    //     const LayerParams &biasParams,
+    //     bool useRelu)
+    // {
+    //     std::string layer_name = "Layer " + std::to_string(layer_idx) + ": Dense";
+    //     logInfo("----- Verifying " + layer_name + " -----");
 
-        DenseLayer layer(inParams, outParams, weightParams, biasParams, useRelu);
-        layer.allocLayer();
+    //     DenseLayer layer(inParams, outParams, weightParams, biasParams, useRelu);
+    //     layer.allocLayer();
 
-        std::cout << "Layer " << layer_idx << " Input Shape:  " << formatDims(inParams.dims) << std::endl;
-        std::cout << "Layer " << layer_idx << " Output Shape: " << formatDims(outParams.dims) << std::endl;
+    //     std::cout << "Layer " << layer_idx << " Input Shape:  " << formatDims(inParams.dims) << std::endl;
+    //     std::cout << "Layer " << layer_idx << " Output Shape: " << formatDims(outParams.dims) << std::endl;
 
-        std::cout << "--- Inspecting Layer " << layer_idx << " Data ---" << std::endl;
-        const float *weights = static_cast<const float *>(layer.getWeightData().raw());
-        const float *biases = static_cast<const float *>(layer.getBiasData().raw());
-        std::cout << "First 5 weights: ";
-        for (int i = 0; i < 5; ++i)
-            std::cout << weights[i] << " ";
-        std::cout << std::endl;
-        std::cout << "First 5 biases: ";
-        for (int i = 0; i < 5; ++i)
-            std::cout << biases[i] << " ";
-        std::cout << std::endl;
+    //     std::cout << "--- Inspecting Layer " << layer_idx << " Data ---" << std::endl;
+    //     const float *weights = static_cast<const float *>(layer.getWeightData().raw());
+    //     const float *biases = static_cast<const float *>(layer.getBiasData().raw());
+    //     std::cout << "First 5 weights: ";
+    //     for (int i = 0; i < 5; ++i)
+    //         std::cout << weights[i] << " ";
+    //     std::cout << std::endl;
+    //     std::cout << "First 5 biases: ";
+    //     for (int i = 0; i < 5; ++i)
+    //         std::cout << biases[i] << " ";
+    //     std::cout << std::endl;
 
-        Path input_file_path = getLayerInputPath(basePath, layer_idx);
-        LayerData inputData(inParams, input_file_path);
-        inputData.loadData();
+    //     Path input_file_path = getLayerInputPath(basePath, layer_idx);
+    //     LayerData inputData(inParams, input_file_path);
+    //     inputData.loadData();
 
-        Timer timer(layer_name + " Inference");
-        timer.start();
-        layer.computeNaive(inputData);
-        timer.stop();
+    //     Timer timer(layer_name + " Inference");
+    //     timer.start();
+    //     layer.computeNaive(inputData);
+    //     timer.stop();
 
-        const LayerData &actual_output = layer.getOutputData();
-        std::string expected_output_filename = "layer_" + std::to_string(layer_idx) + "_output.bin";
-        LayerData expected_output(outParams, basePath / "image_0_data" / expected_output_filename.c_str());
-        expected_output.loadData();
+    //     const LayerData &actual_output = layer.getOutputData();
+    //     std::string expected_output_filename = "layer_" + std::to_string(layer_idx) + "_output.bin";
+    //     LayerData expected_output(outParams, basePath / "image_0_data" / expected_output_filename.c_str());
+    //     expected_output.loadData();
 
-        log("Comparing C++ output against TensorFlow output...");
-        actual_output.compareWithinPrint<fp32>(expected_output, 1e-4);
+    //     log("Comparing C++ output against TensorFlow output...");
+    //     actual_output.compareWithinPrint<fp32>(expected_output, 1e-4);
 
-        layer.freeLayer();
-    }
+    //     layer.freeLayer();
+    // }
 
-    void checkDenseWithSoftmaxLayer(
-        const Path &denseBasePath,
-        int denseLayer_idx,
-        const LayerParams &denseInParams,
-        const LayerParams &denseOutParams,
-        const LayerParams &denseWeightParams,
-        const LayerParams &denseBiasParams,
-        const Path &softmaxBasePath,
-        int softmaxLayer_idx,
-        const LayerParams &softmaxInParams,
-        const LayerParams &softmaxOutParams)
-    {
+    // void checkDenseWithSoftmaxLayer(
+    //     const Path &denseBasePath,
+    //     int denseLayer_idx,
+    //     const LayerParams &denseInParams,
+    //     const LayerParams &denseOutParams,
+    //     const LayerParams &denseWeightParams,
+    //     const LayerParams &denseBiasParams,
+    //     const Path &softmaxBasePath,
+    //     int softmaxLayer_idx,
+    //     const LayerParams &softmaxInParams,
+    //     const LayerParams &softmaxOutParams)
+    // {
 
-        std::string denseLayer_name = "Layer " + std::to_string(denseLayer_idx) + ": Dense";
-        std::string softmaxLayer_name = "Layer " + std::to_string(softmaxLayer_idx) + ": Softmax";
-        logInfo("----- Verifying " + denseLayer_name + " + " + softmaxLayer_name + " -----");
+    //     std::string denseLayer_name = "Layer " + std::to_string(denseLayer_idx) + ": Dense";
+    //     std::string softmaxLayer_name = "Layer " + std::to_string(softmaxLayer_idx) + ": Softmax";
+    //     logInfo("----- Verifying " + denseLayer_name + " + " + softmaxLayer_name + " -----");
 
-        DenseLayer denseLayer(denseInParams, denseOutParams, denseWeightParams, denseBiasParams, false);
-        SoftmaxLayer softmaxLayer(softmaxInParams, softmaxOutParams);
-        denseLayer.allocLayer();
-        softmaxLayer.allocLayer();
+    //     DenseLayer denseLayer(denseInParams, denseOutParams, denseWeightParams, denseBiasParams, false);
+    //     SoftmaxLayer softmaxLayer(softmaxInParams, softmaxOutParams);
+    //     denseLayer.allocLayer();
+    //     softmaxLayer.allocLayer();
 
-        std::cout << "Dense Layer " << denseLayer_idx << " Input Shape:  " << formatDims(denseInParams.dims) << std::endl;
-        std::cout << "Dense Layer " << denseLayer_idx << " Output Shape: " << formatDims(denseOutParams.dims) << std::endl;
+    //     std::cout << "Dense Layer " << denseLayer_idx << " Input Shape:  " << formatDims(denseInParams.dims) << std::endl;
+    //     std::cout << "Dense Layer " << denseLayer_idx << " Output Shape: " << formatDims(denseOutParams.dims) << std::endl;
 
-        std::cout << "Softmax Layer " << denseLayer_idx << " Input Shape:  " << formatDims(denseInParams.dims) << std::endl;
-        std::cout << "Softmax Layer " << denseLayer_idx << " Output Shape: " << formatDims(denseOutParams.dims) << std::endl;
+    //     std::cout << "Softmax Layer " << denseLayer_idx << " Input Shape:  " << formatDims(denseInParams.dims) << std::endl;
+    //     std::cout << "Softmax Layer " << denseLayer_idx << " Output Shape: " << formatDims(denseOutParams.dims) << std::endl;
 
-        Path dense_input_file_path = getLayerInputPath(denseBasePath, denseLayer_idx);
-        LayerData denseInputData(denseInParams, dense_input_file_path);
-        denseInputData.loadData();
+    //     Path dense_input_file_path = getLayerInputPath(denseBasePath, denseLayer_idx);
+    //     LayerData denseInputData(denseInParams, dense_input_file_path);
+    //     denseInputData.loadData();
 
-        Timer denseTimer(denseLayer_name + " Inference");
-        denseTimer.start();
-        denseLayer.computeNaive(denseInputData);
-        denseTimer.stop();
-        Timer softmaxTimer(softmaxLayer_name + " Inference");
-        softmaxTimer.start();
-        softmaxLayer.computeNaive(denseLayer.getOutputData());
-        softmaxTimer.stop();
+    //     Timer denseTimer(denseLayer_name + " Inference");
+    //     denseTimer.start();
+    //     denseLayer.computeNaive(denseInputData);
+    //     denseTimer.stop();
+    //     Timer softmaxTimer(softmaxLayer_name + " Inference");
+    //     softmaxTimer.start();
+    //     softmaxLayer.computeNaive(denseLayer.getOutputData());
+    //     softmaxTimer.stop();
 
-        const LayerData &actual_output = softmaxLayer.getOutputData();
-        std::string expected_output_filename = "layer_" + std::to_string(denseLayer_idx) + "_output.bin";
-        LayerData expected_output(denseOutParams, denseBasePath / "image_0_data" / expected_output_filename.c_str());
-        expected_output.loadData();
+    //     const LayerData &actual_output = softmaxLayer.getOutputData();
+    //     std::string expected_output_filename = "layer_" + std::to_string(denseLayer_idx) + "_output.bin";
+    //     LayerData expected_output(denseOutParams, denseBasePath / "image_0_data" / expected_output_filename.c_str());
+    //     expected_output.loadData();
 
-        log("Comparing C++ output against TensorFlow output...");
-        actual_output.compareWithinPrint<fp32>(expected_output, 1e-4);
+    //     log("Comparing C++ output against TensorFlow output...");
+    //     actual_output.compareWithinPrint<fp32>(expected_output, 1e-4);
 
-        denseLayer.freeLayer();
-    }
+    //     denseLayer.freeLayer();
+    // }
 
     void runBasicTest(const Model &model, const Path &basePath)
     {
@@ -545,10 +545,139 @@ namespace ML
         std::cout << "Total Time: " << total << " ms (" << total / 1000.0f << " s)\n";
     }
 
+
+    void inspectQuantizedLayer(const Path& basePath, const std::string& layerName, const dimVec& weightDims, const dimVec& biasDims) {
+        printf("Inspecting quantized layer: %s", layerName.c_str());
+        Path quantizedModelPath = basePath / "model" / "quantized_model_binaries"; 
+        Path weightsPath = quantizedModelPath / (layerName + "_quantized_weights.bin");
+        Path biasPath = quantizedModelPath / (layerName + "_quantized_biases.bin");
+        
+        try {
+
+            // Weights: 
+            LayerParams qWeightsParams{sizeof(int8_t), weightDims, weightsPath};
+            LayerData quantizedWeightsData(qWeightsParams);
+            quantizedWeightsData.loadData();
+            const int8_t* weightsPointer = static_cast<const int8_t*>(quantizedWeightsData.raw());
+            
+            printf("First 10 weights: [");
+            for (int i = 0; i<10; i++) {
+                printf("%d", (int) weightsPointer[i]);
+                if (i < 9) {
+                    printf(", ");
+                }   
+            }
+            printf("\n");
+
+            // Biases:
+            LayerParams qBiasesParams{sizeof(int32_t), biasDims, biasPath};
+            LayerData quantizedBiasesData(qBiasesParams);
+            quantizedBiasesData.loadData();
+
+            const int32_t* biasesPtr = static_cast<const int32_t*>(quantizedBiasesData.raw());
+
+            printf("  Biases: [");
+            for (size_t i = 0; i < 10; ++i) {
+                printf("%d", (int)biasesPtr[i]);
+                if (i < 9) {
+                    printf(", ");
+                }
+            }
+            printf("]\n\n");
+
+
+        } catch (const std::exception& e) {
+            printf("\n[ERROR] Failed to load or process weights or biases: %s\n", weightsPath.c_str());
+            std::cerr << "  Reason: " << e.what() << '\n';
+        }
+    }
+
+    void compareQuantizedData(const LayerData& actual, const LayerData& expected) {
+        size_t mismatches = 0;
+        const auto& dims = actual.getParams().dims;
+        size_t elements = 1;
+        for (auto d : dims) {
+            elements *= d;
+        }
+        const int8_t* actual_ptr = static_cast<const int8_t*>(actual.raw());
+        const int8_t* expected_ptr = static_cast<const int8_t*>(expected.raw());
+
+        for (size_t i = 0; i < elements; ++i) {
+            if (actual_ptr[i] != expected_ptr[i]) {
+                mismatches++;
+            }
+        }
+
+        if (mismatches == 0) {
+            printf("     - Outputs match perfectly!\n");
+        } else {
+            printf("     - Outputs do not match. Mismatches: %zu / %zu (%.2f%%)\n",
+                mismatches, elements, (double)mismatches / elements * 100.0);
+        }
+    }
+
+    void checkLayerAccelerated(
+        const Path& basePath,
+        const std::string& layerName,
+        const LayerParams& inParams,
+        const LayerParams& outParams,
+        const LayerParams& weightParams,
+        const LayerParams& biasParams)
+    {
+        logInfo("Verifying Accelerated Layer: " + layerName);
+
+        ConvolutionalLayer layer(inParams, outParams, weightParams, biasParams);
+        layer.allocLayer();
+
+        // Load the quantized input data
+        Path quantizedModelPath = basePath / "model" / "quantized_model_binaries";
+        Path input_file_path = quantizedModelPath / "quantized_image_0.bin";
+        LayerData inputData(inParams, input_file_path);
+        inputData.loadData();
+
+        // Run accelerated
+        Timer timer(layerName + " Accelerated Inference");
+        timer.start();
+        layer.computeAccelerated(inputData);
+        timer.stop();
+
+        // Load the quantized output reference
+        const LayerData& actual_output = layer.getOutputData();
+        Path expected_output_path = quantizedModelPath / ("quantized_" + layerName + "_output.bin");
+        LayerData expected_output(outParams, expected_output_path);
+        expected_output.loadData();
+
+        // Compare results
+        log("Comparing C++ hardware output against Python quantized output...");
+        compareQuantizedData(actual_output, expected_output);
+
+        layer.freeLayer();
+    }
+
     void runTests()
     {
         #ifdef ZEDBOARD
         testFPGAMac();
+    
+        Path basePath("/data"); // May need to be altered for zedboards loading from SD Cards
+
+        inspectQuantizedLayer(basePath, "conv2d", {5, 5, 3, 32}, {32});
+        inspectQuantizedLayer(basePath, "dense", {2048, 256}, {256});
+
+        Path modelPath = basePath / "model";
+        Path quantizedModelPath = modelPath / "quantized_model_binaries";
+
+        checkLayerAccelerated(
+            basePath,
+            "conv2d",
+            LayerParams{sizeof(int8_t), {64, 64, 3}},
+            LayerParams{sizeof(int8_t), {60, 60, 32}},
+            LayerParams{sizeof(int8_t), {5, 5, 3, 32}, quantizedModelPath / "conv2d_quantized_weights.bin"},
+            LayerParams{sizeof(int32_t), {32}, quantizedModelPath / "conv2d_quantized_biases.bin"}
+        );
+
+
+
         #endif
         // // Base input data path (determined from current directory of where you are running the command)
         // Path basePath("data"); // May need to be altered for zedboards loading from SD Cards
