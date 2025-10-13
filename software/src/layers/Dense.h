@@ -53,6 +53,7 @@ namespace ML
         {
             computeNaive(dataIn);
         }
+        void computeAccelerated(const LayerData &dataIn) const override;
 
     private:
         LayerParams weightParam;

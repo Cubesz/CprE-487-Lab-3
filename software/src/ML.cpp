@@ -654,6 +654,145 @@ namespace ML
         layer.freeLayer();
     }
 
+    void checkDenseLayerAccelerated(
+        const Path& basePath,
+        const std::string& layerName,
+        const LayerParams& inParams,
+        const LayerParams& outParams,
+        const LayerParams& weightParams,
+        const LayerParams& biasParams,
+        bool useRelu)
+    {
+        logInfo("Verifying Accelerated Dense Layer: " + layerName);
+
+        DenseLayer layer(inParams, outParams, weightParams, biasParams, useRelu);
+        layer.allocLayer();
+
+        // Load the quantized input data
+        Path quantizedModelPath = basePath / "model" / "quantized_model_binaries";
+        Path input_file_path = quantizedModelPath / ("quantized_" + layerName + "_input.bin");
+        LayerData inputData(inParams, input_file_path);
+        inputData.loadData();
+
+        // Run accelerated
+        Timer timer(layerName + " Accelerated Inference");
+        timer.start();
+        layer.computeAccelerated(inputData);
+        timer.stop();
+
+        // Load quantized output reference (from python)
+        const LayerData& actual_output = layer.getOutputData();
+        Path expected_output_path = quantizedModelPath / ("quantized_" + layerName + "_output.bin");
+        LayerData expected_output(outParams, expected_output_path);
+        expected_output.loadData();
+
+        // Compare results
+        log("Comparing C++ hardware output against Python quantized output...");
+        compareQuantizedData(actual_output, expected_output);
+
+// I used gemeni 2.5 to help add debug print statements as the dense output was not matching the one 
+// from the python code. The result is the following
+#if 1 // Set to 0 to disable these debug prints
+    printf("\n--- DEBUG: Inspecting Inputs for Layer '%s' ---\n", layerName.c_str());
+
+    // --- 1. Get pointers to all relevant data ---
+    const int8_t* input_ptr = static_cast<const int8_t*>(inputData.raw());
+    const int8_t* weight_ptr = static_cast<const int8_t*>(layer.getWeightData().raw());
+    const int32_t* bias_ptr = static_cast<const int32_t*>(layer.getBiasData().raw());
+    const int8_t* actual_output_ptr = static_cast<const int8_t*>(actual_output.raw());
+    const int8_t* expected_output_ptr = static_cast<const int8_t*>(expected_output.raw());
+    
+    // Get dimensions
+    const size_t inputWidth = layer.getInputParams().dims[0];
+    const size_t nOutputChannels = layer.getOutputParams().dims[0];
+
+    // --- 2. Print the first few INPUT values ---
+    // These are the values that will be multiplied.
+    printf("  - First 10 Input Activations: [");
+    for (int i = 0; i < 10; ++i) {
+        printf("%d", (int)input_ptr[i]);
+        if (i < 9) printf(", ");
+    }
+    printf("]\n");
+
+    // --- 3. Print the Bias and Weights for the FIRST output neuron (index 0) ---
+    // This will tell you if your weight indexing is correct.
+    printf("  - Bias for Output Neuron 0: %d\n", (int)bias_ptr[0]);
+    printf("  - First 10 Weights for Output Neuron 0: [");
+    for (int i = 0; i < 10; ++i) {
+        // This uses the EXACT SAME indexing formula as your computeAccelerated function
+        size_t filterIdx = 0 * inputWidth + i; // outputPixelIdx * inputWidth + inputPixelIdx
+        printf("%d", (int)weight_ptr[filterIdx]);
+        if (i < 9) printf(", ");
+    }
+    printf("]\n");
+
+    printf("\n--- DEBUG: Inspecting Outputs for Layer '%s' ---\n", layerName.c_str());
+
+    // --- 4. Print the first few OUTPUT values ---
+    // Compare these two lines. They should be identical if everything is working.
+    printf("  - First 10 ACTUAL (C++/FPGA) Outputs:   [");
+    for (int i = 0; i < 10; ++i) {
+        printf("%d", (int)actual_output_ptr[i]);
+        if (i < 9) printf(", ");
+    }
+    printf("]\n");
+
+    printf("  - First 10 EXPECTED (Python) Outputs: [");
+    for (int i = 0; i < 10; ++i) {
+        printf("%d", (int)expected_output_ptr[i]);
+        if (i < 9) printf(", ");
+    }
+    printf("]\n\n");
+
+#endif
+
+        layer.freeLayer();
+    }
+
+// (In main.cpp, inside the ML namespace)
+
+#include <fstream> // Required for std::ifstream
+
+/**
+ * @brief Manually reads a binary file into an int8_t vector to verify file integrity.
+ * 
+ * This function bypasses the LayerData class to isolate potential file-loading bugs.
+ */
+void manualFileReadTest(const Path& basePath, const std::string& layerName)
+{
+    logInfo("--- Running Manual File Read Test for: " + layerName + " ---");
+    
+    Path quantizedModelPath = basePath / "model" / "quantized_model_binaries";
+    Path weights_filepath = quantizedModelPath / (layerName + "_quantized_weights.bin");
+
+    std::ifstream file(weights_filepath.c_str(), std::ios::binary | std::ios::ate);
+    if (!file.is_open()) {
+        printf("  [ERROR] Could not open file: %s\n", weights_filepath.c_str());
+        return;
+    }
+
+    std::streamsize size = file.tellg();
+    file.seekg(0, std::ios::beg);
+
+    std::vector<int8_t> buffer(size);
+    // IMPORTANT: We read into a char* because that's what the API requires,
+    // but we cast our int8_t vector's data pointer. This is safer.
+    if (file.read(reinterpret_cast<char*>(buffer.data()), size)) {
+        printf("  Successfully read %ld bytes from the file.\n", (long)size);
+        printf("  First 10 values read directly from file: [");
+        for (int i = 0; i < 10; ++i) {
+            printf("%d", (int)buffer[i]);
+            if (i < 9) {
+                printf(", ");
+            }
+        }
+        printf("]\n");
+    } else {
+        printf("  [ERROR] Failed to read from file.\n");
+    }
+}
+
     void runTests()
     {
         #ifdef ZEDBOARD
@@ -676,6 +815,14 @@ namespace ML
             LayerParams{sizeof(int32_t), {32}, quantizedModelPath / "conv2d_quantized_biases.bin"}
         );
 
+        checkDenseLayerAccelerated(
+            basePath, "dense",
+            LayerParams{sizeof(int8_t), {2048}},
+            LayerParams{sizeof(int8_t), {256}},
+            LayerParams{sizeof(int8_t), {2048, 256}, quantizedModelPath / "dense_quantized_weights.bin"},
+            LayerParams{sizeof(int32_t), {256}, quantizedModelPath / "dense_quantized_biases.bin"},
+            true // first dense layer uses relu
+        );
 
 
         #endif
