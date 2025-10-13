@@ -38,7 +38,7 @@ module staged_mac_wrapper #(parameter C_DATA_WIDTH = 8)(
         output [7:0] MO_AXIS_TID
     );
     
-    new_staged_mac #(.C_DATA_WIDTH(C_DATA_WIDTH)) staged_mac (
+    plexed_staged_mac #(.C_DATA_WIDTH(C_DATA_WIDTH)) staged_mac (
         .ACLK(ACLK),
         .ARESETN(ARESETN),
         .SD_AXIS_TREADY(SD_AXIS_TREADY),
