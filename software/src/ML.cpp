@@ -225,6 +225,7 @@ namespace ML
         layer.freeLayer();
     }
 
+
     // void checkMaxPoolingLayer(
     //     const Path &basePath,
     //     int layer_idx,
@@ -638,7 +639,9 @@ namespace ML
         // Run accelerated
         Timer timer(layerName + " Accelerated Inference");
         timer.start();
+        #ifdef ZEDBOARD
         layer.computeAccelerated(inputData);
+        #endif
         timer.stop();
 
         // Load the quantized output reference
@@ -677,7 +680,9 @@ namespace ML
         // Run accelerated
         Timer timer(layerName + " Accelerated Inference");
         timer.start();
+        #ifdef ZEDBOARD
         layer.computeAccelerated(inputData);
+        #endif
         timer.stop();
 
         // Load quantized output reference (from python)
@@ -692,7 +697,7 @@ namespace ML
 
 // I used gemeni 2.5 to help add debug print statements as the dense output was not matching the one 
 // from the python code. The result is the following
-#if 1 // Set to 0 to disable these debug prints
+#if 0 // Set to 0 to disable these debug prints
     printf("\n--- DEBUG: Inspecting Inputs for Layer '%s' ---\n", layerName.c_str());
 
     // --- 1. Get pointers to all relevant data ---
@@ -827,17 +832,42 @@ void manualFileReadTest(const Path& basePath, const std::string& layerName)
 
         #endif
         // // Base input data path (determined from current directory of where you are running the command)
-        // Path basePath("data"); // May need to be altered for zedboards loading from SD Cards
-        // Path modelPath = basePath / "model";
+        Path basePath("data"); // May need to be altered for zedboards loading from SD Cards
+        Path modelPath = basePath / "model";
+
+
+        ConvolutionalLayer layer(LayerParams{sizeof(i8), {64,64,3}}, LayerParams{sizeof(fp32), {60, 60, 32}}, LayerParams{sizeof(i8), {5, 5, 3, 32}, "quant/param_layer_0/weights_8q.bin"}, LayerParams{sizeof(i16), {32}, "quant/param_layer_0/biases_8q.bin"});
+        layer.allocLayer();
+
+        Path input_file_path = "quant/given_image0_8q.bin";
+        LayerData inputData(LayerParams{sizeof(i8), {64,64,3}}, input_file_path);
+        inputData.loadData();
+
+        Timer timer(" Inference");
+        timer.start();
+        layer.computeQuantized(inputData, {player0outputscaler, 226, 419, Zp_macced_player0, -99});
+        timer.stop();
+
+        const LayerData &actual_output = layer.getOutputData();
+        std::string expected_output_filename = "layer_" + std::to_string(0) + "_output.bin";
+        LayerData expected_output(LayerParams{sizeof(fp32), {60, 60, 32}}, basePath / "image_0_data" / expected_output_filename.c_str());
+        expected_output.loadData();
+        for (int i = 0; i < 10; i++)
+            std::cout << actual_output.get<fp32>(i) << std::endl;
+
+        log("Comparing C++ output against TensorFlow output...");
+        actual_output.compareWithinPrint<fp32>(expected_output, 1e-4);
+
+        layer.freeLayer();
 
         // // TODO: TEST EACH LAYER INDIVISUALLY
         // // Test first layer
         // checkConvLayer(
         //     basePath, 0,
-        //     LayerParams{sizeof(fp32), {64, 64, 3}},                                    // Input Data
+        //     LayerParams{sizeof(i8), {64, 64, 3}},                                    // Input Data
         //     LayerParams{sizeof(fp32), {60, 60, 32}},                                   // Output Data
-        //     LayerParams{sizeof(fp32), {5, 5, 3, 32}, modelPath / "conv1_weights.bin"}, // Weights
-        //     LayerParams{sizeof(fp32), {32}, modelPath / "conv1_biases.bin"}            // Bias
+        //     LayerParams{sizeof(i8), {5, 5, 3, 32}, modelPath / "conv1_weights.bin"}, // Weights
+        //     LayerParams{sizeof(i16), {32}, modelPath / "conv1_biases.bin"}            // Bias
         // );
 
         // // Test second layer

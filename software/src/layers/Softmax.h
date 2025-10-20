@@ -21,6 +21,7 @@ namespace ML
         void computeTiled(const LayerData &dataIn) const override { computeNaive(dataIn); }
 
         void computeSIMD(const LayerData &dataIn) const override { computeNaive(dataIn); }
+        void computeQuantized(const LayerData &dataIn, QParams qparam) const override { computeNaive(dataIn); }
     };
 
 } // namespace ML

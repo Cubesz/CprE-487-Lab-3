@@ -5,6 +5,7 @@
 #include "../Types.h"
 #include "../Utils.h"
 #include "Layer.h"
+#include "QuantParams.h"
 
 #ifdef ZEDBOARD
 #include <xllfifo_hw.h>
@@ -70,7 +71,8 @@ void ConvolutionalLayer::computeNaive(const LayerData& dataIn) const {
 
     const LayerData& filterData = getWeightData();
     LayerData& outputData = getOutputData();
-    const float* biases = static_cast<const float*>(getBiasData().raw());
+    const LayerData& biasData = getBiasData();
+    // const float* biases = static_cast<const float*>(getBiasData().raw());
 
     const LayerParams& filterParams = getWeightParams();
     const size_t nFilterChannels = filterParams.dims[2];
@@ -94,7 +96,8 @@ void ConvolutionalLayer::computeNaive(const LayerData& dataIn) const {
                 
                 // this pixel should be the 3D filter that corresponds with the output channel smashed against a 3D portion of the input
 
-                fp96 outputPixel = biases[outputChannel];
+                // fp96 outputPixel = biases[outputChannel];
+                fp96 outputPixel = biasData.get<fp32>(outputChannel);
 
                 for (size_t filterChannel = 0; filterChannel < nFilterChannels; filterChannel++) {
                     for (size_t filterColumn = 0; filterColumn < filterWidth; filterColumn++) {
@@ -216,10 +219,77 @@ void ConvolutionalLayer::computeSIMD(const LayerData& dataIn) const {
     // TODO: Your Code Here...
 }
 
-#ifdef ZEDBOARD
+void ConvolutionalLayer::computeQuantized(const LayerData& dataIn, QParams qparam) const {
+    const LayerData& filterData = getWeightData();
+    LayerData& outputData = getOutputData();
+    const LayerData& biasData = getBiasData();
+
+    const LayerParams& filterParams = getWeightParams();
+    const size_t nFilterChannels = filterParams.dims[2];
+    const size_t filterWidth = filterParams.dims[0];
+    const size_t filterHeight = filterParams.dims[1];
+    const LayerParams& outputParams = getOutputData().getParams();
+    const LayerParams& inputParams = dataIn.getParams();
+    // const size_t inputWidth = inputParams.dims[0];
+    const size_t inputHeight = inputParams.dims[1];
+    const size_t stride = 1;
+
+    const size_t nOutputChannels = outputParams.dims[2];
+    const size_t nOutputColumns = outputParams.dims[0];
+    const size_t nOutputRows = outputParams.dims[1];
+
+
+    for (size_t outputChannel = 0; outputChannel < nOutputChannels; outputChannel++) {
+        for (size_t outputColumn = 0; outputColumn < nOutputColumns; outputColumn++) {
+            for (size_t outputRow = 0; outputRow < nOutputRows; outputRow++) {
+                // at this point, we are in a specific pixel of an output channel
+                
+                // this pixel should be the 3D filter that corresponds with the output channel smashed against a 3D portion of the input
+
+                i32 outputPixel = biasData.get<i16>(outputChannel) - qparam.zp_macced[outputChannel];
+                // i32 outputPixel = biasData.get<i16>(outputChannel);
+
+                for (size_t filterChannel = 0; filterChannel < nFilterChannels; filterChannel++) {
+                    for (size_t filterColumn = 0; filterColumn < filterWidth; filterColumn++) {
+                        for (size_t filterRow = 0; filterRow < filterHeight; filterRow++) {
+                            size_t filterPixelIdx = filterColumn * (filterHeight * nFilterChannels * nOutputChannels) + filterRow * (nFilterChannels * nOutputChannels) + filterChannel * (nOutputChannels) + outputChannel;
+                            // input pixel of input channel: `filterChannel`
+                            // of column: Stride * outputColumn + filterColumn
+                            // of row: Stride * outputRow + filterRow
+                            size_t inputPixelColumn = stride * outputColumn + filterColumn;
+                            size_t inputPixelRow = stride * outputRow + filterRow;
+                            size_t inputPixelIdx = inputPixelColumn * (inputHeight * nFilterChannels) + inputPixelRow * (nFilterChannels) + filterChannel;
+
+                            i32 inputPixel = dataIn.get<i8>(inputPixelIdx);
+                            i32 filterPixel = filterData.get<i8>(filterPixelIdx);
+
+                            i32 mult = filterPixel * inputPixel;
+                            outputPixel += mult;
+
+                            // std::cout << getWeightData().get<fp32>(filterPixelIdx) << "\n";
+                        }
+                    }
+                }
+                fp32 testPixel = ((float) outputPixel) * (1.0f / (((float) qparam.S_i) * ((float) qparam.S_w)));
+                outputPixel = outputPixel / qparam.outputscaler;
+                // const i8 finalOutputPixel = (outputPixel > 0) ? (int8_t) outputPixel : 0;
+                const fp32 finalTestPixel = (testPixel > 0) ? testPixel : 0;
+                
+                size_t outputPixelIdx = outputColumn * (nOutputRows * nOutputChannels) + outputRow * (nOutputChannels) + outputChannel;
+                // outputData.get<i8>(outputPixelIdx) = finalOutputPixel;
+                outputData.get<fp32>(outputPixelIdx) = finalTestPixel;
+
+            }
+        }
+    }
+
+
+}
+
 
 // Compute the convolution using custom MAC
 void ConvolutionalLayer::computeAccelerated(const LayerData& dataIn) const {
+#ifdef ZEDBOARD
     // TODO: Your Code Here...
     
     const int8_t* filter_data_ptr = static_cast<const int8_t*>(getWeightData().raw());
@@ -331,9 +401,9 @@ void ConvolutionalLayer::computeAccelerated(const LayerData& dataIn) const {
     }
 
 
+#endif
 
 }
 
-#endif
 
 }  // namespace ML

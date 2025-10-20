@@ -46,6 +46,7 @@ namespace ML
 
 #endif
 
+
     void DenseLayer::computeNaive(const LayerData &dataIn) const
     {
         /*
@@ -79,10 +80,10 @@ namespace ML
         }
     }
 
-#ifdef ZEDBOARD
 
     void DenseLayer::computeAccelerated(const LayerData &dataIn) const
     {
+#ifdef ZEDBOARD
         /*
             weights: (filter width, n Filters / n output channels)
             input: (input width / filter width)
@@ -156,7 +157,7 @@ namespace ML
 
             output_data_ptr[outputPixelIdx] = finalOutputPixel;
         }
-    }
 #endif
+    }
 
 } // namespace ML

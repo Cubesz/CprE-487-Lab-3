@@ -31,7 +31,7 @@ namespace ML {
             Xil_Out32(XPAR_AXI_FIFO_0_BASEADDR + XLLF_TDFD_OFFSET, input_pair);
         }
 
-        uint32_t totalBytes = (1 + inputs.size() * 4);
+        uint32_t totalBytes = ((1 + inputs.size()) * 4);
         Xil_Out32(XPAR_AXI_FIFO_0_BASEADDR + XLLF_TLF_OFFSET, totalBytes);
 
         // Wait until FIFO receives data

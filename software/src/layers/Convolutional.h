@@ -39,6 +39,7 @@ class ConvolutionalLayer : public Layer {
     virtual void computeThreaded(const LayerData& dataIn) const override;
     virtual void computeTiled(const LayerData& dataIn) const override;
     virtual void computeSIMD(const LayerData& dataIn) const override;
+    virtual void computeQuantized(const LayerData& dataIn, QParams qparam) const override;
     virtual void computeAccelerated(const LayerData& dataIn) const override;
 
    private:

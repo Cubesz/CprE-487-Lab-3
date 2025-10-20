@@ -83,4 +83,9 @@ namespace ML
         // TODO: Your Code Here...
     }
 
+    void MaxPoolingLayer::computeQuantized(const LayerData &dataIn, QParams qparam) const
+    {
+        // TODO: Your Code Here...
+    }
+
 } // namespace ML

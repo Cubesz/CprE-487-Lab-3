@@ -8,6 +8,7 @@
 #include "../Config.h"
 #include "../Utils.h"
 #include "../Types.h"
+#include "QuantParams.h"
 
 namespace ML {
 
@@ -154,6 +155,7 @@ class Layer {
     virtual void computeThreaded(const LayerData& dataIn) const = 0;
     virtual void computeTiled(const LayerData& dataIn) const = 0;
     virtual void computeSIMD(const LayerData& dataIn) const = 0;
+    virtual void computeQuantized(const LayerData& dataIn, QParams qparam) const = 0;
     virtual void computeAccelerated(const LayerData& dataIn) const {};
 
    private:

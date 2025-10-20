@@ -16,6 +16,7 @@ namespace ML
         void computeThreaded(const LayerData &dataIn) const override;
         void computeTiled(const LayerData &dataIn) const override;
         void computeSIMD(const LayerData &dataIn) const override;
+        void computeQuantized(const LayerData &dataIn, QParams qparam) const override;
 
     private:
     };
