@@ -246,7 +246,34 @@ void ConvolutionalLayer::computeQuantized(const LayerData& dataIn, QParams qpara
                 
                 // this pixel should be the 3D filter that corresponds with the output channel smashed against a 3D portion of the input
 
+                #ifdef ZEDBOARD
+                fifo_write_data(biasData.get<i16>(outputChannel));
+                for (size_t filterChannel = 0; filterChannel < nFilterChannels; filterChannel++) {
+                    for (size_t filterColumn = 0; filterColumn < filterWidth; filterColumn++) {
+                        for (size_t filterRow = 0; filterRow < filterHeight; filterRow++) {
+                            size_t filterPixelIdx = filterColumn * (filterHeight * nFilterChannels * nOutputChannels) + filterRow * (nFilterChannels * nOutputChannels) + filterChannel * (nOutputChannels) + outputChannel;
+                            // input pixel of input channel: `filterChannel`
+                            // of column: Stride * outputColumn + filterColumn
+                            // of row: Stride * outputRow + filterRow
+                            size_t inputPixelColumn = stride * outputColumn + filterColumn;
+                            size_t inputPixelRow = stride * outputRow + filterRow;
+                            size_t inputPixelIdx = inputPixelColumn * (inputHeight * nFilterChannels) + inputPixelRow * (nFilterChannels) + filterChannel;
 
+                            i8 inputPixel = dataIn.get<i8>(inputPixelIdx);
+                            i8 filterPixel = filterData.get<i8>(filterPixelIdx);
+                            uint32_t multPacket = (inputPixel << 8) | (0xFF & filterPixel);
+                            fifo_write_data(multPacket);
+
+                            // std::cout << getWeightData().get<fp32>(filterPixelIdx) << "\n";
+                        }
+                    }
+                }
+                fifo_set_transmit_length((nFilterChannels * filterWidth * filterHeight + 1)*4);
+                fifo_wait_for_data();
+                i32 outputPixel = fifo_read_data();
+                outputPixel -= qparam.zp_macced[outputChannel];
+
+                #else
 
                 i32 outputPixel = biasData.get<i16>(outputChannel) - qparam.zp_macced[outputChannel];
                 // i32 outputPixel = biasData.get<i16>(outputChannel);
@@ -272,16 +299,19 @@ void ConvolutionalLayer::computeQuantized(const LayerData& dataIn, QParams qpara
                         }
                     }
                 }
-                fp32 testPixel = ((float) outputPixel) * (1.0f / (((float) qparam.S_i) * ((float) qparam.S_w)));
-                outputPixel = outputPixel / qparam.outputscaler;
-                const i8 finalOutputPixel = (outputPixel > 0) ? (int8_t) (outputPixel + qparam.Z_i_next) : (int8_t) qparam.Z_i_next;
-                const fp32 finalTestPixel = (testPixel > 0) ? testPixel : 0;
+                #endif
+
                 
                 size_t outputPixelIdx = outputColumn * (nOutputRows * nOutputChannels) + outputRow * (nOutputChannels) + outputChannel;
-                if (qparam.quantedOutput)
+                if (qparam.quantedOutput) {
+                    outputPixel = outputPixel / qparam.outputscaler;
+                    const i8 finalOutputPixel = (outputPixel > 0) ? (int8_t) (outputPixel + qparam.Z_i_next) : (int8_t) qparam.Z_i_next;
                     outputData.get<i8>(outputPixelIdx) = finalOutputPixel;
-                else
+                } else {
+                    fp32 testPixel = ((float) outputPixel) * (1.0f / (((float) qparam.S_i) * ((float) qparam.S_w)));
+                    const fp32 finalTestPixel = (testPixel > 0) ? testPixel : 0;
                     outputData.get<fp32>(outputPixelIdx) = finalTestPixel;
+                }
                 // outputData.get<fp32>(outputPixelIdx) = finalTestPixel;
 
             }
@@ -294,7 +324,7 @@ void ConvolutionalLayer::computeQuantized(const LayerData& dataIn, QParams qpara
 
 // Compute the convolution using custom MAC
 void ConvolutionalLayer::computeAccelerated(const LayerData& dataIn) const {
-#ifdef ZEDBOARD
+#ifdef BRUH
     // TODO: Your Code Here...
     
     const int8_t* filter_data_ptr = static_cast<const int8_t*>(getWeightData().raw());

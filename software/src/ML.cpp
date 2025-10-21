@@ -12,6 +12,7 @@
 #include "layers/Layer.h"
 #include "layers/MaxPooling.h"
 #include "layers/Softmax.h"
+#include "image_classes.h"
 
 #ifdef ZEDBOARD
 #include <file_transfer/file_transfer.h>
@@ -607,7 +608,7 @@ namespace ML
         output.compareWithinPrint<fp32>(expected);
     }
 
-    bool runInfTestQuant(const Model& model, Path inputPath, Path expectedPath, int actualClass, const QParams* qparams) {
+    bool runInfTestQuant(const Model& model, Path inputPath, int actualClass, const QParams* qparams) {
         // Load an image
         logInfo("--- Running Inference Test ---");
 
@@ -615,20 +616,13 @@ namespace ML
         LayerData img(model[0].getInputParams(), inputPath);
         img.loadData();
 
-        Timer timer("Full Inference");
+        // Timer timer("Full Inference");
 
         // Run inference on the model
-        timer.start();
+        // timer.start();
         const LayerData &output = model.inference(img, Layer::InfType::QUANTIZED, qparams);
-        timer.stop();
+        // timer.stop();
 
-        // Compare the output
-        // Construct a LayerData object from a LayerParams one
-        // LayerData expected(model.getOutputLayer().getOutputParams(), basePath / "image_0_data" / "layer_0_output.bin");
-        LayerData expected(model.getOutputLayer().getOutputParams(), expectedPath);
-        // while we have it as a seperate layer and also 0 vs 1 start indexing
-        expected.loadData();
-        output.compareWithinPrint<fp32>(expected);
         
         struct ClassPrediction {
             size_t classIdx;
@@ -645,10 +639,10 @@ namespace ML
             }
         }
 
-        printf("Top10:\n");
-        for (size_t i = 0; i < 10; i++) {
-            printf("Class: %ld, Confidence: %f\n", top10[i].classIdx, top10[i].confidence);
-        }
+        // printf("Top10:\n");
+        // for (size_t i = 0; i < 10; i++) {
+        //     printf("Class: %ld, Confidence: %f\n", top10[i].classIdx, top10[i].confidence);
+        // }
 
         return top10[0].classIdx == (size_t) actualClass;
 
@@ -1070,8 +1064,20 @@ void manualFileReadTest(const Path& basePath, const std::string& layerName)
         Model model8q = build8QModel();
         model8q.allocLayers();
 
-        std::string expected_output_filename = "layer_" + std::to_string(11) + "_output.bin";
-        runInfTestQuant(model8q, "quant/given_image1_8q.bin", basePath / "image_1_data" / expected_output_filename.c_str(), 163, modelQParams_8q);
+        // std::string expected_output_filename = "layer_" + std::to_string(11) + "_output.bin";
+        // runInfTestQuant(model8q, "quant/given_image0_8q.bin", 163, modelQParams_8q);
+
+        size_t imageIdx;
+        int successes = 0;
+        for (imageIdx = 0; imageIdx < 1000; imageIdx++) {
+            bool predictedAccurately = runInfTestQuant(model8q, "quant/images_1000_8b/" + std::to_string(imageIdx) + ".bin", images_8q_classes[imageIdx], modelQParams_8q);
+            if (predictedAccurately)
+                successes += 1;
+        }
+        fp32 accuracy = ((float) successes) / 1000.0f;
+        std::cout << "8q accuracy: " << std::endl;
+        std::cout << accuracy << std::endl;
+
 
         // const LayerData& output = model8q.inference(inputData, Layer::InfType::QUANTIZED, modelQParams_8q);
 

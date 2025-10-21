@@ -97,6 +97,23 @@ namespace ML
         for (size_t outputPixelIdx = 0; outputPixelIdx < nOutputChannels; outputPixelIdx++)
         {
 
+            #ifdef ZEDBOARD
+            fifo_write_data(biasData.get<i16>(outputPixelIdx));
+            for (size_t inputPixelIdx = 0; inputPixelIdx < inputWidth; inputPixelIdx++)
+            {
+                size_t filterIdx = inputPixelIdx * (nOutputChannels) + outputPixelIdx;
+                const i32 filterPixel = weightData.get<i8>(filterIdx);
+                const i32 inputPixel = dataIn.get<i8>(inputPixelIdx);
+                uint32_t multPacket = (filterPixel << 8) | (0xFF & inputPixel);
+                fifo_write_data(multPacket);
+            }
+            fifo_set_transmit_length((inputWidth + 1) * 4);
+            fifo_wait_for_data();
+            i32 accumulate = fifo_read_data();
+            accumulate -= qparam.zp_macced[outputPixelIdx];
+
+            #else
+
             i64 accumulate = biasData.get<i16>(outputPixelIdx) - qparam.zp_macced[outputPixelIdx];
 
             for (size_t inputPixelIdx = 0; inputPixelIdx < inputWidth; inputPixelIdx++)
@@ -107,6 +124,7 @@ namespace ML
                 accumulate += ((i64)filterPixel) * inputPixel;
             }
 
+            #endif
 
 
             if (qparam.quantedOutput) {
