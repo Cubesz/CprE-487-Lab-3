@@ -85,7 +85,54 @@ namespace ML
 
     void MaxPoolingLayer::computeQuantized(const LayerData &dataIn, QParams qparam) const
     {
-        // TODO: Your Code Here...
+        const auto &inParams = getInputParams();
+        const auto &outParams = getOutputParams();
+
+        const size_t inputWidth = inParams.dims[0]; // W
+        // const size_t inputHeight = inParams.dims[1]; // H
+        const size_t numChannels = inParams.dims[2]; // C
+
+        const size_t outputWidth = outParams.dims[0];  // Q
+        const size_t outputHeight = outParams.dims[1]; // P
+
+        const size_t poolHeight = 2; // R
+        const size_t poolWidth = 2;  // S
+        const size_t stride = 2;     // U
+
+        LayerData& output = getOutputData();
+
+        for (size_t c = 0; c < numChannels; ++c)
+        {
+            for (size_t p = 0; p < outputHeight; ++p)
+            {
+                for (size_t q = 0; q < outputWidth; ++q)
+                {
+
+                    // Find max in window
+
+                    i8 bruh = std::numeric_limits<i8>::lowest();
+
+                    for (size_t r = 0; r < poolHeight; r++)
+                    {
+                        for (size_t s = 0; s < poolWidth; s++)
+                        {
+                            size_t h = p * stride + r;
+                            size_t w = q * stride + s;
+                            // size_t input_idx = (c * inputHeight * inputWidth) + (h * inputWidth) + w;
+                            size_t input_idx = (h * inputWidth * numChannels) + (w * numChannels) + c;
+                            bruh = (bruh > dataIn.get<i8>(input_idx) ? bruh : dataIn.get<i8>(input_idx));
+                        }
+                    }
+                    // size_t output_idx = (c * outputHeight * outputWidth) + (p * outputWidth) + q;
+                    size_t output_idx = (p * outputWidth * numChannels) + (q * numChannels) + c;
+                    
+                    if (qparam.quantedOutput)
+                        output.get<i8>(output_idx) = bruh;
+                    else
+                        output.get<fp32>(output_idx) = bruh;
+                }
+            }
+        }
     }
 
 } // namespace ML

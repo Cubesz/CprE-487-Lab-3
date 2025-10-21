@@ -80,6 +80,49 @@ namespace ML
         }
     }
 
+    void DenseLayer::computeQuantized(const LayerData &dataIn, QParams qparam) const {
+        /*
+            weights: (filter width, n Filters / n output channels)
+            input: (input width / filter width)
+            output: (n output channels)
+        */
+
+        const LayerParams &outputParams = getOutputParams();
+        const LayerParams &inputParams = getInputParams();
+        LayerData &outputData = getOutputData();
+
+        const size_t nOutputChannels = outputParams.dims[0];
+        const size_t inputWidth = inputParams.dims[0];
+
+        for (size_t outputPixelIdx = 0; outputPixelIdx < nOutputChannels; outputPixelIdx++)
+        {
+
+            i64 accumulate = biasData.get<i16>(outputPixelIdx) - qparam.zp_macced[outputPixelIdx];
+
+            for (size_t inputPixelIdx = 0; inputPixelIdx < inputWidth; inputPixelIdx++)
+            {
+                size_t filterIdx = inputPixelIdx * (nOutputChannels) + outputPixelIdx;
+                const i32 filterPixel = weightData.get<i8>(filterIdx);
+                const i32 inputPixel = dataIn.get<i8>(inputPixelIdx);
+                accumulate += ((i64)filterPixel) * inputPixel;
+            }
+
+
+
+            if (qparam.quantedOutput) {
+                i32 outputPixel = accumulate / qparam.outputscaler;
+                const i8 finalOutputPixel = (outputPixel > 0 || !useRelu) ? (int8_t) (outputPixel + qparam.Z_i_next) : (int8_t) qparam.Z_i_next;
+                outputData.get<i8>(outputPixelIdx) = finalOutputPixel;
+            }
+            else {
+                fp64 testPixel = ((fp64) accumulate) * (1.0f / (((float) qparam.S_i) * ((float) qparam.S_w)));
+                const fp32 finalTestPixel = (testPixel > 0 || !useRelu) ? (fp32) testPixel : 0;
+                outputData.get<fp32>(outputPixelIdx) = finalTestPixel;
+            }
+        }
+
+    }
+
 
     void DenseLayer::computeAccelerated(const LayerData &dataIn) const
     {

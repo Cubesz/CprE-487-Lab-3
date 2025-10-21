@@ -246,6 +246,8 @@ void ConvolutionalLayer::computeQuantized(const LayerData& dataIn, QParams qpara
                 
                 // this pixel should be the 3D filter that corresponds with the output channel smashed against a 3D portion of the input
 
+
+
                 i32 outputPixel = biasData.get<i16>(outputChannel) - qparam.zp_macced[outputChannel];
                 // i32 outputPixel = biasData.get<i16>(outputChannel);
 
@@ -272,12 +274,15 @@ void ConvolutionalLayer::computeQuantized(const LayerData& dataIn, QParams qpara
                 }
                 fp32 testPixel = ((float) outputPixel) * (1.0f / (((float) qparam.S_i) * ((float) qparam.S_w)));
                 outputPixel = outputPixel / qparam.outputscaler;
-                // const i8 finalOutputPixel = (outputPixel > 0) ? (int8_t) outputPixel : 0;
+                const i8 finalOutputPixel = (outputPixel > 0) ? (int8_t) (outputPixel + qparam.Z_i_next) : (int8_t) qparam.Z_i_next;
                 const fp32 finalTestPixel = (testPixel > 0) ? testPixel : 0;
                 
                 size_t outputPixelIdx = outputColumn * (nOutputRows * nOutputChannels) + outputRow * (nOutputChannels) + outputChannel;
-                // outputData.get<i8>(outputPixelIdx) = finalOutputPixel;
-                outputData.get<fp32>(outputPixelIdx) = finalTestPixel;
+                if (qparam.quantedOutput)
+                    outputData.get<i8>(outputPixelIdx) = finalOutputPixel;
+                else
+                    outputData.get<fp32>(outputPixelIdx) = finalTestPixel;
+                // outputData.get<fp32>(outputPixelIdx) = finalTestPixel;
 
             }
         }

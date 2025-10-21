@@ -21,6 +21,150 @@
 namespace ML
 {
 
+    Model build8QModel() {
+        Model model;
+
+        std::cout << "Adding Layer 1: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {64, 64, 3}},                                    // Input Data
+            LayerParams{sizeof(i8), {60, 60, 32}},                                   // Output Data
+            LayerParams{sizeof(i8), {5, 5, 3, 32}, "quant/param_layer_0/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {32}, "quant/param_layer_0/biases_8q.bin"}            // Bias
+        );
+
+        // --- Conv 2: L2 ---
+        // Input shape: 60x60x32
+        // Output shape: 56x56x32
+
+        std::cout << "Adding Layer 2: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {60, 60, 32}},                                    // Input Data
+            LayerParams{sizeof(i8), {56, 56, 32}},                                    // Output Data
+            LayerParams{sizeof(i8), {5, 5, 32, 32}, "quant/param_layer_1/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {32}, "quant/param_layer_1/biases_8q.bin"}             // Bias
+        );
+
+        // --- MPL 1: L3 ---
+        // Input shape: 56x56x32
+        // Output shape: 28x28x32
+        std::cout << "Adding Layer 3: MaxPooling" << std::endl;
+        model.addLayer<MaxPoolingLayer>(
+            LayerParams{sizeof(i8), {56, 56, 32}}, // Input
+            LayerParams{sizeof(i8), {28, 28, 32}}  // Output
+        );
+
+        // --- Conv 3: L4 ---
+        // Input shape: 28x28x32
+        // Output shape: 26x26x64
+        std::cout << "Adding Layer 4: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {28, 28, 32}},                                    // Input Data
+            LayerParams{sizeof(i8), {26, 26, 64}},                                    // Output Data
+            LayerParams{sizeof(i8), {3, 3, 32, 64}, "quant/param_layer_2/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {64}, "quant/param_layer_2/biases_8q.bin"}             // Bias
+        );
+
+        // --- Conv 4: L5 ---
+        // Input shape: 26x26x64
+        // Output shape: 24x24x64
+        std::cout << "Adding Layer 5: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {26, 26, 64}},                                    // Input Data
+            LayerParams{sizeof(i8), {24, 24, 64}},                                    // Output Data
+            LayerParams{sizeof(i8), {3, 3, 64, 64}, "quant/param_layer_3/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {64}, "quant/param_layer_3/biases_8q.bin"}             // Bias
+        );
+
+        // --- MPL 2: L6 ---
+        // Input shape: 24x24x64
+        // Output shape: 12x12x64
+        std::cout << "Adding Layer 6: MaxPooling" << std::endl;
+        model.addLayer<MaxPoolingLayer>(
+            LayerParams{sizeof(i8), {24, 24, 64}}, // Input
+            LayerParams{sizeof(i8), {12, 12, 64}}  // Output
+        );
+
+        // --- Conv 5: L7 ---
+        // Input shape: 12x12x64
+        // Output shape: 10x10x64
+
+        std::cout << "Adding Layer 7: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {12, 12, 64}},                                    // Input Data
+            LayerParams{sizeof(i8), {10, 10, 64}},                                    // Output Data
+            LayerParams{sizeof(i8), {3, 3, 64, 64}, "quant/param_layer_4/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {64}, "quant/param_layer_4/biases_8q.bin"}             // Bias
+        );
+
+        // --- Conv 6: L8 ---
+        // Input shape: 10x10x64
+        // Output shape: 8x8x128
+        std::cout << "Adding Layer 8: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {10, 10, 64}},                                     // Input Data
+            LayerParams{sizeof(i8), {8, 8, 128}},                                      // Output Data
+            LayerParams{sizeof(i8), {3, 3, 64, 128}, "quant/param_layer_5/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {128}, "quant/param_layer_5/biases_8q.bin"}             // Bias
+        );
+
+        // --- MPL 3: L9 ---
+        // Input shape: 8x8x128
+        // Output shape: 4x4x128
+
+        std::cout << "Adding Layer 9: MaxPooling" << std::endl;
+        model.addLayer<MaxPoolingLayer>(
+            LayerParams{sizeof(i8), {8, 8, 128}}, // Input
+            LayerParams{sizeof(i8), {4, 4, 128}}  // Output
+        );
+
+        // --- Flatten 1: L10 ---
+        // Input shape: 4x4x128
+        // Output shape: 2048
+
+        std::cout << "Adding Layer 10: Flatten" << std::endl;
+        model.addLayer<FlattenLayer>(
+            LayerParams{sizeof(i8), {4, 4, 128}}, // Input
+            LayerParams{sizeof(i8), {2048}}       // Output
+        );
+
+        // --- Dense 1: L11 ---
+        // Input shape: 2048
+        // Output shape: 256
+
+        std::cout << "Adding Layer 11: Dense" << std::endl;
+        model.addLayer<DenseLayer>(
+            LayerParams{sizeof(i8), {2048}},                                        // Input
+            LayerParams{sizeof(i8), {256}},                                         // Output
+            LayerParams{sizeof(i8), {2048, 256},"quant/param_layer_6/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {256},"quant/param_layer_6/biases_8q.bin"},        // Biases,
+            true);
+
+        // --- Dense 2: L12 ---
+        // Input shape: 256
+        // Output shape: 200
+
+        std::cout << "Adding Layer 12: Dense" << std::endl;
+        model.addLayer<DenseLayer>(
+            LayerParams{sizeof(i8), {256}},                                        // Input
+            LayerParams{sizeof(fp32), {200}},                                        // Output
+            LayerParams{sizeof(i8), {256, 200}, "quant/param_layer_7/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {200}, "quant/param_layer_7/biases_8q.bin"},       // Biases
+            false                                                                    // Enable Relu
+        );
+
+        // --- Softmax 1: L13 ---
+        // Input shape: 200
+        // Output shape: 200
+
+        std::cout << "Adding Layer 13: Softmax" << std::endl;
+        model.addLayer<SoftmaxLayer>(
+            LayerParams{sizeof(fp32), {200}}, // Input
+            LayerParams{sizeof(fp32), {200}}  // Output
+        );
+
+        return model;
+    }
+
     // Build our ML toy model
     Model buildToyModel(const Path modelPath)
     {
@@ -463,6 +607,53 @@ namespace ML
         output.compareWithinPrint<fp32>(expected);
     }
 
+    bool runInfTestQuant(const Model& model, Path inputPath, Path expectedPath, int actualClass, const QParams* qparams) {
+        // Load an image
+        logInfo("--- Running Inference Test ---");
+
+        // Construct a LayerData object from a LayerParams one
+        LayerData img(model[0].getInputParams(), inputPath);
+        img.loadData();
+
+        Timer timer("Full Inference");
+
+        // Run inference on the model
+        timer.start();
+        const LayerData &output = model.inference(img, Layer::InfType::QUANTIZED, qparams);
+        timer.stop();
+
+        // Compare the output
+        // Construct a LayerData object from a LayerParams one
+        // LayerData expected(model.getOutputLayer().getOutputParams(), basePath / "image_0_data" / "layer_0_output.bin");
+        LayerData expected(model.getOutputLayer().getOutputParams(), expectedPath);
+        // while we have it as a seperate layer and also 0 vs 1 start indexing
+        expected.loadData();
+        output.compareWithinPrint<fp32>(expected);
+        
+        struct ClassPrediction {
+            size_t classIdx;
+            fp32 confidence;
+        };
+        ClassPrediction top10[10] = {0};
+        for (size_t i = 0; i < output.getParams().dims[0]; i++) {
+            fp32 confidence = output.get<fp32>(i);
+            for (size_t j = 0; j < 10; j++) {
+                if (confidence > top10[j].confidence) {
+                    top10[j] = { i, confidence };
+                    break;
+                }
+            }
+        }
+
+        printf("Top10:\n");
+        for (size_t i = 0; i < 10; i++) {
+            printf("Class: %ld, Confidence: %f\n", top10[i].classIdx, top10[i].confidence);
+        }
+
+        return top10[0].classIdx == (size_t) actualClass;
+
+    }
+
     void runInferenceTest(const Model &model, const Path &basePath)
     {
         // Load an image
@@ -833,32 +1024,86 @@ void manualFileReadTest(const Path& basePath, const std::string& layerName)
         #endif
         // // Base input data path (determined from current directory of where you are running the command)
         Path basePath("data"); // May need to be altered for zedboards loading from SD Cards
-        Path modelPath = basePath / "model";
+        // Path modelPath = basePath / "model";
 
 
-        ConvolutionalLayer layer(LayerParams{sizeof(i8), {64,64,3}}, LayerParams{sizeof(fp32), {60, 60, 32}}, LayerParams{sizeof(i8), {5, 5, 3, 32}, "quant/param_layer_0/weights_8q.bin"}, LayerParams{sizeof(i16), {32}, "quant/param_layer_0/biases_8q.bin"});
-        layer.allocLayer();
+        // ConvolutionalLayer layer(LayerParams{sizeof(i8), {64,64,3}}, LayerParams{sizeof(i8), {60, 60, 32}}, LayerParams{sizeof(i8), {5, 5, 3, 32}, "quant/param_layer_0/weights_8q.bin"}, LayerParams{sizeof(i16), {32}, "quant/param_layer_0/biases_8q.bin"});
+        // layer.allocLayer();
 
         Path input_file_path = "quant/given_image0_8q.bin";
         LayerData inputData(LayerParams{sizeof(i8), {64,64,3}}, input_file_path);
         inputData.loadData();
 
-        Timer timer(" Inference");
-        timer.start();
-        layer.computeQuantized(inputData, {player0outputscaler, 226, 419, Zp_macced_player0, -99});
-        timer.stop();
+        // layer.computeQuantized(inputData, {player0outputscaler, 226, 419, Zp_macced_player0, -3, true});
 
-        const LayerData &actual_output = layer.getOutputData();
-        std::string expected_output_filename = "layer_" + std::to_string(0) + "_output.bin";
-        LayerData expected_output(LayerParams{sizeof(fp32), {60, 60, 32}}, basePath / "image_0_data" / expected_output_filename.c_str());
-        expected_output.loadData();
-        for (int i = 0; i < 10; i++)
-            std::cout << actual_output.get<fp32>(i) << std::endl;
+        // const LayerData &actual_output = layer.getOutputData();
 
-        log("Comparing C++ output against TensorFlow output...");
-        actual_output.compareWithinPrint<fp32>(expected_output, 1e-4);
+        // ConvolutionalLayer layer2(LayerParams{sizeof(i8), {60,60,32}}, LayerParams{sizeof(i8), {56, 56, 32}}, LayerParams{sizeof(i8), {5, 5, 32, 32}, "quant/param_layer_1/weights_8q.bin"}, LayerParams{sizeof(i16), {32}, "quant/param_layer_1/biases_8q.bin"});
+        // layer2.allocLayer();
+        // layer2.computeQuantized(actual_output, {player1outputscaler, 78, 261, Zp_macced_player1, -2, true});
 
-        layer.freeLayer();
+        // const LayerData &next_actual_output = layer2.getOutputData();
+
+        // MaxPoolingLayer poolLayer(LayerParams{sizeof(i8), {56, 56, 32}}, LayerParams{sizeof(i8), {28, 28, 32}});
+        // poolLayer.allocLayer();
+        // poolLayer.computeQuantized(next_actual_output, {0, 0, 0, 0, 0, true});
+        // const LayerData& pool_actual_output = poolLayer.getOutputData();
+
+        // ConvolutionalLayer layer3(LayerParams{sizeof(i8), {28,28,32}}, LayerParams{sizeof(fp32), {26, 26, 64}}, LayerParams{sizeof(i8), {3, 3, 32, 64}, "quant/param_layer_2/weights_8q.bin"}, LayerParams{sizeof(i16), {64}, "quant/param_layer_2/biases_8q.bin"});
+        // layer3.allocLayer();
+        // layer3.computeQuantized(pool_actual_output, {player2outputscaler, 30, 183, Zp_macced_player2, -1, false});
+        // const LayerData& layer3_actual_output = layer3.getOutputData();
+
+        // std::string expected_output_filename = "layer_" + std::to_string(3) + "_output.bin";
+        // LayerData expected_output(LayerParams{sizeof(fp32), {26, 26, 64}}, basePath / "image_0_data" / expected_output_filename.c_str());
+        // expected_output.loadData();
+
+        // log("Comparing C++ output against TensorFlow output...");
+        // layer3_actual_output.compareWithinPrint<fp32>(expected_output, 1e-4);
+
+
+        // layer3.freeLayer();
+        // poolLayer.freeLayer();
+        // layer2.freeLayer();
+        // layer.freeLayer();
+
+        Model model8q = build8QModel();
+        model8q.allocLayers();
+
+        std::string expected_output_filename = "layer_" + std::to_string(11) + "_output.bin";
+        runInfTestQuant(model8q, "quant/given_image1_8q.bin", basePath / "image_1_data" / expected_output_filename.c_str(), 163, modelQParams_8q);
+
+        // const LayerData& output = model8q.inference(inputData, Layer::InfType::QUANTIZED, modelQParams_8q);
+
+        // LayerData expected_output(LayerParams{sizeof(fp32), {200}}, basePath / "image_0_data" / expected_output_filename.c_str());
+        // expected_output.loadData();
+
+        // output.compareWithinPrint<fp32>(expected_output, 1e-4);
+        // fp32 max = 0;
+        // fp32 maxIdx = 0;
+        // fp32 sMax = 0;
+        // fp32 sMaxIdx = 0;
+        // fp32 tMax = 0;
+        // fp32 tMaxIdx = 0;
+        // for (int i = 0; i < 200; i ++) {
+        //     if (output.get<fp32>(i) > max) {
+        //         max = output.get<fp32>(i);
+        //         maxIdx = i;
+        //     } else if (output.get<fp32>(i) > sMax) {
+        //         sMax = output.get<fp32>(i);
+        //         sMaxIdx = i;
+        //     } else if (output.get<fp32>(i) > tMax) {
+        //         tMax = output.get<fp32>(i);
+        //         tMaxIdx = i;
+        //     }
+        // }
+        // std::cout << max << std::endl;
+        // std::cout << maxIdx << std::endl;
+        // std::cout << sMax << std::endl;
+        // std::cout << sMaxIdx << std::endl;
+        // std::cout << tMax << std::endl;
+        // std::cout << tMaxIdx << std::endl;
+        model8q.freeLayers();
 
         // // TODO: TEST EACH LAYER INDIVISUALLY
         // // Test first layer

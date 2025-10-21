@@ -15,8 +15,8 @@ class Model {
     inline Model() : layers() {}  //, checkFinal(true), checkEachLayer(false) {}
 
     // Functions
-    const LayerData& inference(const LayerData& inData, const Layer::InfType infType = Layer::InfType::NAIVE) const;
-    const LayerData& inferenceLayer(const LayerData& inData, const int layerNum, const Layer::InfType infType = Layer::InfType::NAIVE) const;
+    const LayerData& inference(const LayerData& inData, const Layer::InfType infType = Layer::InfType::NAIVE, const QParams* qparams = nullptr) const;
+    const LayerData& inferenceLayer(const LayerData& inData, const int layerNum, const Layer::InfType infType = Layer::InfType::NAIVE, const QParams qparam = {0}) const;
 
     // Internal memory management
     // Allocate the internal output buffers for each layer in the model

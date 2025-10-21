@@ -122,7 +122,7 @@ class LayerData {
 class Layer {
    public:
     // Inference Type
-    enum class InfType { NAIVE, THREADED, TILED, SIMD, ACCELERATED };
+    enum class InfType { NAIVE, THREADED, TILED, SIMD, QUANTIZED, ACCELERATED };
 
     // Layer Type
     enum class LayerType { NONE, CONVOLUTIONAL, DENSE, SOFTMAX, MAX_POOLING };

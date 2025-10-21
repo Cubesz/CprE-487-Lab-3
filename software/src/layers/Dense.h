@@ -53,9 +53,7 @@ namespace ML
         {
             computeNaive(dataIn);
         }
-        void computeQuantized(const LayerData &dataIn, QParams qparam) const override {
-            computeNaive(dataIn);
-        }
+        virtual void computeQuantized(const LayerData &dataIn, QParams qparam) const override;
         void computeAccelerated(const LayerData &dataIn) const override;
 
     private:

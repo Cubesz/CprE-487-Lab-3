@@ -6,12 +6,21 @@ namespace ML {
 
 // Run inference on the entire model using the inData and outputting the outData
 // infType can be used to determine the inference function to call
-const LayerData& Model::inference(const LayerData& inData, const Layer::InfType infType) const {
+const LayerData& Model::inference(const LayerData& inData, const Layer::InfType infType, const QParams* qparams) const {
     assert(layers.size() > 0 && "There must be at least 1 layer to perform inference");
-    inferenceLayer(inData, 0, infType);
+    if (infType == Layer::InfType::QUANTIZED) {
+        inferenceLayer(inData, 0, infType, qparams[0]);
 
-    for (std::size_t i = 1; i < layers.size(); i++) {
-        inferenceLayer(layers[i - 1]->getOutputData(), i, infType);
+        for (std::size_t i = 1; i < layers.size(); i++) {
+            inferenceLayer(layers[i - 1]->getOutputData(), i, infType, qparams[i]);
+        }
+    }
+    else {
+        inferenceLayer(inData, 0, infType);
+
+        for (std::size_t i = 1; i < layers.size(); i++) {
+            inferenceLayer(layers[i - 1]->getOutputData(), i, infType);
+        }
     }
 
     return layers.back()->getOutputData();
@@ -19,7 +28,7 @@ const LayerData& Model::inference(const LayerData& inData, const Layer::InfType 
 
 // Run inference on a single layer of the model using the inData and outputting the outData
 // infType can be used to determine the inference function to call
-const LayerData& Model::inferenceLayer(const LayerData& inData, const int layerNum, const Layer::InfType infType) const {
+const LayerData& Model::inferenceLayer(const LayerData& inData, const int layerNum, const Layer::InfType infType, const QParams qparam) const {
     Layer& layer = *layers[layerNum];
 
     assert(layer.getInputParams().isCompatible(inData.getParams()) && "Input data is not compatible with layer");
@@ -37,6 +46,9 @@ const LayerData& Model::inferenceLayer(const LayerData& inData, const int layerN
         break;
     case Layer::InfType::SIMD:
         layer.computeSIMD(inData);
+        break;
+    case Layer::InfType::QUANTIZED:
+        layer.computeQuantized(inData, qparam);
         break;
     // case Layer::InfType::ACCELERATED:
     //     layer.computeAccelerated(inData);
