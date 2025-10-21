@@ -29,8 +29,8 @@ namespace ML
         model.addLayer<ConvolutionalLayer>(
             LayerParams{sizeof(i8), {64, 64, 3}},                                    // Input Data
             LayerParams{sizeof(i8), {60, 60, 32}},                                   // Output Data
-            LayerParams{sizeof(i8), {5, 5, 3, 32}, "quant/param_layer_0/weights_8q.bin"}, // Weights
-            LayerParams{sizeof(i16), {32}, "quant/param_layer_0/biases_8q.bin"}            // Bias
+            LayerParams{sizeof(i8), {5, 5, 3, 32}, "data/quant/param_layer_0/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_8q.bin"}            // Bias
         );
 
         // --- Conv 2: L2 ---
@@ -41,8 +41,8 @@ namespace ML
         model.addLayer<ConvolutionalLayer>(
             LayerParams{sizeof(i8), {60, 60, 32}},                                    // Input Data
             LayerParams{sizeof(i8), {56, 56, 32}},                                    // Output Data
-            LayerParams{sizeof(i8), {5, 5, 32, 32}, "quant/param_layer_1/weights_8q.bin"}, // Weights
-            LayerParams{sizeof(i16), {32}, "quant/param_layer_1/biases_8q.bin"}             // Bias
+            LayerParams{sizeof(i8), {5, 5, 32, 32}, "data/quant/param_layer_1/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_1/biases_8q.bin"}             // Bias
         );
 
         // --- MPL 1: L3 ---
@@ -61,8 +61,8 @@ namespace ML
         model.addLayer<ConvolutionalLayer>(
             LayerParams{sizeof(i8), {28, 28, 32}},                                    // Input Data
             LayerParams{sizeof(i8), {26, 26, 64}},                                    // Output Data
-            LayerParams{sizeof(i8), {3, 3, 32, 64}, "quant/param_layer_2/weights_8q.bin"}, // Weights
-            LayerParams{sizeof(i16), {64}, "quant/param_layer_2/biases_8q.bin"}             // Bias
+            LayerParams{sizeof(i8), {3, 3, 32, 64}, "data/quant/param_layer_2/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {64}, "data/quant/param_layer_2/biases_8q.bin"}             // Bias
         );
 
         // --- Conv 4: L5 ---
@@ -72,8 +72,8 @@ namespace ML
         model.addLayer<ConvolutionalLayer>(
             LayerParams{sizeof(i8), {26, 26, 64}},                                    // Input Data
             LayerParams{sizeof(i8), {24, 24, 64}},                                    // Output Data
-            LayerParams{sizeof(i8), {3, 3, 64, 64}, "quant/param_layer_3/weights_8q.bin"}, // Weights
-            LayerParams{sizeof(i16), {64}, "quant/param_layer_3/biases_8q.bin"}             // Bias
+            LayerParams{sizeof(i8), {3, 3, 64, 64}, "data/quant/param_layer_3/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {64}, "data/quant/param_layer_3/biases_8q.bin"}             // Bias
         );
 
         // --- MPL 2: L6 ---
@@ -93,8 +93,8 @@ namespace ML
         model.addLayer<ConvolutionalLayer>(
             LayerParams{sizeof(i8), {12, 12, 64}},                                    // Input Data
             LayerParams{sizeof(i8), {10, 10, 64}},                                    // Output Data
-            LayerParams{sizeof(i8), {3, 3, 64, 64}, "quant/param_layer_4/weights_8q.bin"}, // Weights
-            LayerParams{sizeof(i16), {64}, "quant/param_layer_4/biases_8q.bin"}             // Bias
+            LayerParams{sizeof(i8), {3, 3, 64, 64}, "data/quant/param_layer_4/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {64}, "data/quant/param_layer_4/biases_8q.bin"}             // Bias
         );
 
         // --- Conv 6: L8 ---
@@ -104,8 +104,8 @@ namespace ML
         model.addLayer<ConvolutionalLayer>(
             LayerParams{sizeof(i8), {10, 10, 64}},                                     // Input Data
             LayerParams{sizeof(i8), {8, 8, 128}},                                      // Output Data
-            LayerParams{sizeof(i8), {3, 3, 64, 128}, "quant/param_layer_5/weights_8q.bin"}, // Weights
-            LayerParams{sizeof(i16), {128}, "quant/param_layer_5/biases_8q.bin"}             // Bias
+            LayerParams{sizeof(i8), {3, 3, 64, 128}, "data/quant/param_layer_5/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {128}, "data/quant/param_layer_5/biases_8q.bin"}             // Bias
         );
 
         // --- MPL 3: L9 ---
@@ -136,8 +136,8 @@ namespace ML
         model.addLayer<DenseLayer>(
             LayerParams{sizeof(i8), {2048}},                                        // Input
             LayerParams{sizeof(i8), {256}},                                         // Output
-            LayerParams{sizeof(i8), {2048, 256},"quant/param_layer_6/weights_8q.bin"}, // Weights
-            LayerParams{sizeof(i16), {256},"quant/param_layer_6/biases_8q.bin"},        // Biases,
+            LayerParams{sizeof(i8), {2048, 256},"data/quant/param_layer_6/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {256},"data/quant/param_layer_6/biases_8q.bin"},        // Biases,
             true);
 
         // --- Dense 2: L12 ---
@@ -148,8 +148,8 @@ namespace ML
         model.addLayer<DenseLayer>(
             LayerParams{sizeof(i8), {256}},                                        // Input
             LayerParams{sizeof(fp32), {200}},                                        // Output
-            LayerParams{sizeof(i8), {256, 200}, "quant/param_layer_7/weights_8q.bin"}, // Weights
-            LayerParams{sizeof(i16), {200}, "quant/param_layer_7/biases_8q.bin"},       // Biases
+            LayerParams{sizeof(i8), {256, 200}, "data/quant/param_layer_7/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {200}, "data/quant/param_layer_7/biases_8q.bin"},       // Biases
             false                                                                    // Enable Relu
         );
 
@@ -1024,7 +1024,7 @@ void manualFileReadTest(const Path& basePath, const std::string& layerName)
         // ConvolutionalLayer layer(LayerParams{sizeof(i8), {64,64,3}}, LayerParams{sizeof(i8), {60, 60, 32}}, LayerParams{sizeof(i8), {5, 5, 3, 32}, "quant/param_layer_0/weights_8q.bin"}, LayerParams{sizeof(i16), {32}, "quant/param_layer_0/biases_8q.bin"});
         // layer.allocLayer();
 
-        Path input_file_path = "quant/given_image0_8q.bin";
+        Path input_file_path = "data/quant/given_image0_8q.bin";
         LayerData inputData(LayerParams{sizeof(i8), {64,64,3}}, input_file_path);
         inputData.loadData();
 
@@ -1070,7 +1070,7 @@ void manualFileReadTest(const Path& basePath, const std::string& layerName)
         size_t imageIdx;
         int successes = 0;
         for (imageIdx = 0; imageIdx < 1000; imageIdx++) {
-            bool predictedAccurately = runInfTestQuant(model8q, "quant/images_1000_8b/" + std::to_string(imageIdx) + ".bin", images_8q_classes[imageIdx], modelQParams_8q);
+            bool predictedAccurately = runInfTestQuant(model8q, "data/quant/images_1000_8b/" + std::to_string(imageIdx) + ".bin", images_8q_classes[imageIdx], modelQParams_8q);
             if (predictedAccurately)
                 successes += 1;
         }
