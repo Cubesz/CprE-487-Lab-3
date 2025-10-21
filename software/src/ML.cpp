@@ -689,7 +689,7 @@ namespace ML
 
         printf("Top10:\n");
         for (size_t i = 0; i < 10; i++) {
-            printf("Class: %ld, Confidence: %f\n", top10[i].classIdx, top10[i].confidence);
+            printf("Class: %d, Confidence: %f\n", top10[i].classIdx, top10[i].confidence);
         }
     }
 
@@ -985,7 +985,7 @@ void manualFileReadTest(const Path& basePath, const std::string& layerName)
 
     void runTests()
     {
-        #ifdef ZEDBOARD
+        #ifdef BRUH
         testFPGAMac();
     
         Path basePath("/data"); // May need to be altered for zedboards loading from SD Cards
@@ -1017,7 +1017,7 @@ void manualFileReadTest(const Path& basePath, const std::string& layerName)
 
         #endif
         // // Base input data path (determined from current directory of where you are running the command)
-        Path basePath("data"); // May need to be altered for zedboards loading from SD Cards
+        // Path basePath("data"); // May need to be altered for zedboards loading from SD Cards
         // Path modelPath = basePath / "model";
 
 

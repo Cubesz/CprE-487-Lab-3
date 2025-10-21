@@ -144,7 +144,7 @@ namespace ML
 
     void DenseLayer::computeAccelerated(const LayerData &dataIn) const
     {
-#ifdef ZEDBOARD
+#ifdef BRUH
         /*
             weights: (filter width, n Filters / n output channels)
             input: (input width / filter width)

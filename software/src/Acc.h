@@ -21,7 +21,7 @@ namespace ML {
         for (const auto& input_pair: inputs) {
             expectedResult += (int32_t) input_pair.weight * (int32_t) input_pair.inp;
         }
-        printf("    - Expected Result: %d \n", expectedResult);
+        printf("    - Expected Result: %ld \n", expectedResult);
 
         // Send inital accumulator value
         Xil_Out32(XPAR_AXI_FIFO_0_BASEADDR + XLLF_TDFD_OFFSET, initial_acc);
