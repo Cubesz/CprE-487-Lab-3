@@ -56,19 +56,36 @@ module new_staged_mac #(parameter C_DATA_WIDTH = 8) (
     assign input_data = input_data_t'(SD_AXIS_TDATA);
     assign new_bias = SD_AXIS_TDATA;
     
-    wire signed [31:0] accumulator;
-    assign MO_AXIS_TDATA = accumulator;   
+    reg signed [31:0] accumulator;
+    assign MO_AXIS_TDATA = accumulator;
 
-  
-    
-    dsp48_load_mac_hold_comb com (
-        .CLK(ACLK),
-        .SEL(instruction),
-        .A(input_data.inp),
-        .B(input_data.weight),
-        .C(new_bias),
-        .P(accumulator)
-    );
+    always @(posedge ACLK) begin
+        if (!ARESETN) begin
+            // Reset accumulator
+            accumulator <= 32'sd0;
+        end
+        else begin
+            if (instruction == LOAD) begin
+                // Load a new value (bias).
+                accumulator <= new_bias;
+            end
+            else if (instruction == MAC) begin
+                // MAC
+                accumulator <= accumulator + (input_data.inp * input_data.weight);
+            end
+            // If instruction is HOLD, do nothing
+        end
+    end
+
+    // dsp48_load_mac_hold_comb com (
+    //     .CLK(ACLK),
+    //     .SEL(instruction),
+    //     .A(input_data.inp),
+    //     .B(input_data.weight),
+    //     .C(new_bias),
+    //     .P(accumulator)
+    // );
+
     
 
     always @* begin
