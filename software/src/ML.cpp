@@ -21,6 +21,149 @@
 
 namespace ML
 {
+    Model build4QModel() {
+        Model model;
+
+        std::cout << "Adding Layer 1: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {64, 64, 3}},                                    // Input Data
+            LayerParams{sizeof(i8), {60, 60, 32}},                                   // Output Data
+            LayerParams{sizeof(i8), {5, 5, 3, 32}, "data/quant/param_layer_0/weights_4q.bin"}, // Weights
+            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_4q.bin"}            // Bias
+        );
+
+        // --- Conv 2: L2 ---
+        // Input shape: 60x60x32
+        // Output shape: 56x56x32
+
+        std::cout << "Adding Layer 2: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {60, 60, 32}},                                    // Input Data
+            LayerParams{sizeof(i8), {56, 56, 32}},                                    // Output Data
+            LayerParams{sizeof(i8), {5, 5, 32, 32}, "data/quant/param_layer_1/weights_4q.bin"}, // Weights
+            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_1/biases_4q.bin"}             // Bias
+        );
+
+        // --- MPL 1: L3 ---
+        // Input shape: 56x56x32
+        // Output shape: 28x28x32
+        std::cout << "Adding Layer 3: MaxPooling" << std::endl;
+        model.addLayer<MaxPoolingLayer>(
+            LayerParams{sizeof(i8), {56, 56, 32}}, // Input
+            LayerParams{sizeof(i8), {28, 28, 32}}  // Output
+        );
+
+        // --- Conv 3: L4 ---
+        // Input shape: 28x28x32
+        // Output shape: 26x26x64
+        std::cout << "Adding Layer 4: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {28, 28, 32}},                                    // Input Data
+            LayerParams{sizeof(i8), {26, 26, 64}},                                    // Output Data
+            LayerParams{sizeof(i8), {3, 3, 32, 64}, "data/quant/param_layer_2/weights_4q.bin"}, // Weights
+            LayerParams{sizeof(i16), {64}, "data/quant/param_layer_2/biases_4q.bin"}             // Bias
+        );
+
+        // --- Conv 4: L5 ---
+        // Input shape: 26x26x64
+        // Output shape: 24x24x64
+        std::cout << "Adding Layer 5: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {26, 26, 64}},                                    // Input Data
+            LayerParams{sizeof(i8), {24, 24, 64}},                                    // Output Data
+            LayerParams{sizeof(i8), {3, 3, 64, 64}, "data/quant/param_layer_3/weights_4q.bin"}, // Weights
+            LayerParams{sizeof(i16), {64}, "data/quant/param_layer_3/biases_4q.bin"}             // Bias
+        );
+
+        // --- MPL 2: L6 ---
+        // Input shape: 24x24x64
+        // Output shape: 12x12x64
+        std::cout << "Adding Layer 6: MaxPooling" << std::endl;
+        model.addLayer<MaxPoolingLayer>(
+            LayerParams{sizeof(i8), {24, 24, 64}}, // Input
+            LayerParams{sizeof(i8), {12, 12, 64}}  // Output
+        );
+
+        // --- Conv 5: L7 ---
+        // Input shape: 12x12x64
+        // Output shape: 10x10x64
+
+        std::cout << "Adding Layer 7: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {12, 12, 64}},                                    // Input Data
+            LayerParams{sizeof(i8), {10, 10, 64}},                                    // Output Data
+            LayerParams{sizeof(i8), {3, 3, 64, 64}, "data/quant/param_layer_4/weights_4q.bin"}, // Weights
+            LayerParams{sizeof(i16), {64}, "data/quant/param_layer_4/biases_4q.bin"}             // Bias
+        );
+
+        // --- Conv 6: L8 ---
+        // Input shape: 10x10x64
+        // Output shape: 8x8x128
+        std::cout << "Adding Layer 8: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {10, 10, 64}},                                     // Input Data
+            LayerParams{sizeof(i8), {8, 8, 128}},                                      // Output Data
+            LayerParams{sizeof(i8), {3, 3, 64, 128}, "data/quant/param_layer_5/weights_4q.bin"}, // Weights
+            LayerParams{sizeof(i16), {128}, "data/quant/param_layer_5/biases_4q.bin"}             // Bias
+        );
+
+        // --- MPL 3: L9 ---
+        // Input shape: 8x8x128
+        // Output shape: 4x4x128
+
+        std::cout << "Adding Layer 9: MaxPooling" << std::endl;
+        model.addLayer<MaxPoolingLayer>(
+            LayerParams{sizeof(i8), {8, 8, 128}}, // Input
+            LayerParams{sizeof(i8), {4, 4, 128}}  // Output
+        );
+
+        // --- Flatten 1: L10 ---
+        // Input shape: 4x4x128
+        // Output shape: 2048
+
+        std::cout << "Adding Layer 10: Flatten" << std::endl;
+        model.addLayer<FlattenLayer>(
+            LayerParams{sizeof(i8), {4, 4, 128}}, // Input
+            LayerParams{sizeof(i8), {2048}}       // Output
+        );
+
+        // --- Dense 1: L11 ---
+        // Input shape: 2048
+        // Output shape: 256
+
+        std::cout << "Adding Layer 11: Dense" << std::endl;
+        model.addLayer<DenseLayer>(
+            LayerParams{sizeof(i8), {2048}},                                        // Input
+            LayerParams{sizeof(i8), {256}},                                         // Output
+            LayerParams{sizeof(i8), {2048, 256},"data/quant/param_layer_6/weights_4q.bin"}, // Weights
+            LayerParams{sizeof(i16), {256},"data/quant/param_layer_6/biases_4q.bin"},        // Biases,
+            true);
+
+        // --- Dense 2: L12 ---
+        // Input shape: 256
+        // Output shape: 200
+
+        std::cout << "Adding Layer 12: Dense" << std::endl;
+        model.addLayer<DenseLayer>(
+            LayerParams{sizeof(i8), {256}},                                        // Input
+            LayerParams{sizeof(fp32), {200}},                                        // Output
+            LayerParams{sizeof(i8), {256, 200}, "data/quant/param_layer_7/weights_4q.bin"}, // Weights
+            LayerParams{sizeof(i16), {200}, "data/quant/param_layer_7/biases_4q.bin"},       // Biases
+            false                                                                    // Enable Relu
+        );
+
+        // --- Softmax 1: L13 ---
+        // Input shape: 200
+        // Output shape: 200
+
+        std::cout << "Adding Layer 13: Softmax" << std::endl;
+        model.addLayer<SoftmaxLayer>(
+            LayerParams{sizeof(fp32), {200}}, // Input
+            LayerParams{sizeof(fp32), {200}}  // Output
+        );
+
+        return model;
+    }
 
     Model build8QModel() {
         Model model;
@@ -689,7 +832,7 @@ namespace ML
 
         printf("Top10:\n");
         for (size_t i = 0; i < 10; i++) {
-            printf("Class: %d, Confidence: %f\n", top10[i].classIdx, top10[i].confidence);
+            printf("Class: %ld, Confidence: %f\n", top10[i].classIdx, top10[i].confidence);
         }
     }
 
@@ -1061,8 +1204,10 @@ void manualFileReadTest(const Path& basePath, const std::string& layerName)
         // layer2.freeLayer();
         // layer.freeLayer();
 
-        Model model8q = build8QModel();
-        model8q.allocLayers();
+        // Model model8q = build8QModel(); 
+        // model8q.allocLayers();
+        Model model4q = build4QModel();
+        model4q.allocLayers();
 
         // std::string expected_output_filename = "layer_" + std::to_string(11) + "_output.bin";
         // runInfTestQuant(model8q, "quant/given_image0_8q.bin", 163, modelQParams_8q);
@@ -1070,13 +1215,15 @@ void manualFileReadTest(const Path& basePath, const std::string& layerName)
         size_t imageIdx;
         int successes = 0;
         for (imageIdx = 0; imageIdx < 1000; imageIdx++) {
-            bool predictedAccurately = runInfTestQuant(model8q, "data/quant/images_1000_8b/" + std::to_string(imageIdx) + ".bin", images_8q_classes[imageIdx], modelQParams_8q);
+            // bool predictedAccurately = runInfTestQuant(model8q, "data/quant/images_1000_8b/" + std::to_string(imageIdx) + ".bin", images_8q_classes[imageIdx], modelQParams_8q);
+            bool predictedAccurately = runInfTestQuant(model4q, "data/quant/images_1000_4b/" + std::to_string(imageIdx) + ".bin", images_4q_classes[imageIdx], modelQParams_4q);
             if (predictedAccurately)
                 successes += 1;
         }
         fp32 accuracy = ((float) successes) / 1000.0f;
-        std::cout << "8q accuracy: " << std::endl;
+        std::cout << "4q accuracy: " << std::endl;
         std::cout << accuracy << std::endl;
+        model4q.freeLayers();
 
 
         // const LayerData& output = model8q.inference(inputData, Layer::InfType::QUANTIZED, modelQParams_8q);
@@ -1109,7 +1256,7 @@ void manualFileReadTest(const Path& basePath, const std::string& layerName)
         // std::cout << sMaxIdx << std::endl;
         // std::cout << tMax << std::endl;
         // std::cout << tMaxIdx << std::endl;
-        model8q.freeLayers();
+        // model8q.freeLayers();
 
         // // TODO: TEST EACH LAYER INDIVISUALLY
         // // Test first layer

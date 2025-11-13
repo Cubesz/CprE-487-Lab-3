@@ -25,11 +25,31 @@ const int player6outputscaler = (1.0f/(8.22409603f / (14.83324517f * 227.76791f)
 
 typedef struct {
     int outputscaler;
-    int S_i;
-    int S_w;
+    float S_i;
+    float S_w;
     const int32_t* zp_macced;
     int Z_i_next;
     bool quantedOutput;
 } QParams;
 
-const QParams modelQParams_8q[] = {{player0outputscaler, 226, 419, Zp_macced_player0, -3, true}, {player1outputscaler, 78, 261, Zp_macced_player1, -2, true}, {0, 0, 0, 0, 0, true}, {player2outputscaler, 30, 183, Zp_macced_player2, -1, true}, {player3outputscaler, 39, 235, Zp_macced_player3, -2, true}, {0, 0, 0, 0, 0, true}, {player4outputscaler, 35, 237, Zp_macced_player4, -3, true}, {player5outputscaler, 22, 249, Zp_macced_player5, -2, true}, {0, 0, 0, 0, 0, true}, {0, 0, 0, 0, 0, true}, {player6outputscaler, 15, 228, Zp_macced_player6, -5, true}, {0, 8, 96, Zp_macced_player7, 0, false}, {0, 0, 0, 0, 0, false}};
+const QParams modelQParams_8q[] = {{player0outputscaler, 226, 419, Zp_macced_player0, -3, true}, {player1outputscaler, 78, 261, Zp_macced_player1, -2, true}, {0, 0, 0, 0, 0, true}, {player2outputscaler, 30, 183, Zp_macced_player2, -1, true}, {player3outputscaler, 39, 235, Zp_macced_player3, -2, true}, {0, 0, 0, 0, 0, true}, {player4outputscaler, 35, 237, Zp_macced_player4, -3, true}, {player5outputscaler, 22, 249, Zp_macced_player5, -2, true}, {0, 0, 0, 0, 0, true}, {0, 0, 0, 0, 0, true}, {player6outputscaler, 15, 228, Zp_macced_player6, -5, true}, {0, 8.22409603, 95.91284, Zp_macced_player7, 0, false}, {0, 0, 0, 0, 0, false}};
+
+const int32_t Zp_macced_player0_4b[] = {22, 6, 47, -11, 95, 229, 60, 385, 8, 77, -4, 10, 36, -9, -1, 15, 79, 6, 442, -12, 207, 129, 5, 126, 239, -6, 6, 253, 20, 127, -10, -58 };
+const int32_t Zp_macced_player1_4b[] = {21, 39, -7, 18, 29, 18, 25, 16, 55, 51, 36, 49, 20, 33, 29, 8, 15, -4, 42, 39, 24, 19, 27, 47, 19, 19, 85, 15, 34, 9, 29, 20};
+const int32_t Zp_macced_player2_4b[] = {5, 4, 3, 4, 7, 4, 4, 3, 1, 4, 2, 1, 3, 3, 1, 2, 3, 6, 2, 4, 5, 5, 0, 2, 6, 3, 4, 5, 1, 6, 3, 5, 5, 2, 5, 3, 3, 1, 5, 1, 5, 2, 0, 4, -1, 0, 4, 5, 4, 5, 8, 2, 4, 2, 4, 1, 6, 1, 6, -1, 2, 5, 4, 1};
+const int32_t Zp_macced_player3_4b[] = {9, 5, 6, 6, 21, 10, 5, 13, 2, 7, 18, 6, 12, 8, 17, 9, -1, 17, 9, 9, 9, 12, -1, 3, 9, 13, 17, 10, 8, 14, 17, 10, 14, 13, 12, 2, 10, -4, 13, 7, 3, 13, 7, 9, 18, 6, 0, 17, 12, 2, 16, 2, 10, 1, 2, 14, 6, 18, 9, 11, 7, 7, 10, 2};
+const int32_t Zp_macced_player4_4b[] = {2, -1, 1, -8, 1, 5, -3, 17, -1, 5, 9, 21, 22, 16, 26, 12, 27, 9, 6, 14, 14, 13, -1, -6, 2, 4, 24, 5, 3, 17, 8, 13, 14, 17, 17, 9, 15, 28, 2, -1, 13, 4, 0, -3, 10, 22, 12, 13, 10, 3, 5, -3, 18, 8, 0, 2, 21, 12, 5, 0, 4, 9, 6, 1};
+const int32_t Zp_macced_player5_4b[] = {9, 17, 15, 1, 18, 12, 20, 8, 15, 15, 18, 19, 18, 23, 23, 13, 23, 7, 12, 12, -2, 11, 3, 13, 15, 27, 11, 23, 15, 22, 10, 24, 11, 8, 16, 14, 14, 13, 24, 13, 12, 15, 19, 20, 15, 9, 35, 10, 14, 18, 7, 9, 18, 12, 11, 18, 15, 12, 17, 15, 13, 18, 15, 15, 21, 20, 9, 17, 14, 11, 18, 11, 13, 1, 27, 15, 22, 21, 20, 16, 18, 19, 34, 9, 8, 9, 5, 18, 11, 17, 19, 41, 22, 5, 4, 12, 14, 31, 19, 28, 13, 15, 7, 10, 24, 13, 17, 20, 6, 20, 27, 7, 11, 14, 18, 24, 16, 12, 34, 10, 8, 11, 9, 14, 17, 48, 10, 13};
+const int32_t Zp_macced_player6_4b[] = {-12, -4, 45, 19, 2, 5, 43, 0, 22, 86, 31, -1, 29, -3, 23, 15, 4, 30, 68, 36, 35, 39, 47, -4, 31, 22, 58, 59, 37, -3, 29, 40, 28, -8, 46, 70, 4, 34, 24, 34, 53, -2, -11, 6, 47, -5, 20, 57, -5, 50, -6, 31, -9, 17, 35, 2, -23, 6, 31, -5, 5, 19, 10, 8, -9, 12, 30, 29, 0, -5, 30, -6, 25, 5, 36, 41, 31, 62, 26, 14, 27, 7, 26, 56, 36, 29, 25, 44, 60, 1, 60, 4, 20, 0, 31, 29, 1, 28, 2, -9, 37, 22, -2, 11, -14, 30, 28, 56, -7, -16, 56, 8, -1, -3, 46, 49, 8, 49, 38, 59, 16, 29, 5, 25, 30, 37, 36, 9, 18, 18, 10, 53, 3, 38, 40, 5, -7, 35, 1, 58, 15, 7, -4, 7, 23, 27, 21, 45, 33, 28, 46, -2, -13, 4, 60, -2, -7, 43, 18, 60, 21, 32, 17, 12, 16, 10, 13, 5, 5, -4, 55, 8, 38, 37, 23, 38, 10, 6, 56, -10, -11, 32, -10, 20, 7, -9, 25, 9, 8, 55, 30, 22, -7, 8, 21, 21, 38, 26, 26, 25, 68, -18, -19, 24, 22, 35, 46, 58, 36, 17, 1, 32, 17, 45, 20, 70, 62, 15, -18, 16, 9, 5, -11, -17, 4, 21, 45, 6, 54, 47, 24, 22, -6, 7, 28, 55, 45, 26, 28, 60, 12, 0, -1, 23, 27, 31, 2, 45, 24, 3, 14, 4, 91, 27, -14, 23};
+const int32_t Zp_macced_player7_4b[] = {10, 11, 9, 11, 9, 10, 11, 7, 8, 9, 9, 12, 9, 17, 12, 9, 10, 12, 8, 9, 10, 10, 9, 12, 10, 10, 8, 11, 10, 5, 8, 9, 10, 9, 8, 14, 9, 10, 11, 10, 10, 10, 14, 12, 10, 9, 7, 10, 7, 9, 10, 8, 14, 11, 12, 11, 10, 12, 9, 6, 11, 7, 9, 8, 15, 6, 11, 14, 14, 14, 10, 11, 12, 11, 10, 11, 11, 10, 12, 11, 11, 10, 11, 8, 9, 12, 6, 12, 12, 10, 14, 11, 8, 9, 7, 7, 9, 9, 7, 9, 9, 11, 13, 12, 7, 9, 13, 11, 15, 10, 10, 9, 8, 7, 12, 11, 11, 14, 9, 8, 7, 11, 12, 11, 7, 8, 6, 8, 12, 13, 11, 12, 11, 12, 9, 12, 9, 12, 12, 8, 7, 12, 10, 12, 7, 12, 12, 12, 10, 11, 10, 9, 17, 10, 9, 9, 10, 13, 11, 9, 11, 6, 6, 16, 8, 7, 7, 10, 11, 13, 10, 4, 10, 9, 9, 11, 9, 11, 4, 8, 7, 10, 8, 10, 8, 12, 8, 7, 12, 9, 8, 7, 10, 13, 9, 9, 14, 12, 9, 8};
+
+const int player0outputscaler_4b = (1.0f/(4.31475786f / (12.44419786f * 23.111511f)));
+const int player1outputscaler_4b = (1.0f/(1.6590903f / (4.31475786f * 14.380271f)));
+const int player2outputscaler_4b = (1.0f/(2.14854237f / (1.6590903f * 10.110082f)));
+const int player3outputscaler_4b = (1.0f/(1.90986815f / (2.14854237f * 12.925927f)));
+const int player4outputscaler_4b = (1.0f/(1.22221484f / (1.90986815f * 13.043175f)));
+const int player5outputscaler_4b = (1.0f/(0.81758044f / (1.22221484f * 13.707881f)));
+const int player6outputscaler_4b = (1.0f/(0.45329663f / (0.81758044f * 12.554137f)));
+
+
+const QParams modelQParams_4q[] = {{player0outputscaler_4b, 12, 23, Zp_macced_player0_4b, 0, true}, {player1outputscaler_4b, 4, 14, Zp_macced_player1_4b, 0, true}, {0, 0, 0, 0, 0, true}, {player2outputscaler_4b, 2, 10, Zp_macced_player2_4b, 0, true}, {player3outputscaler_4b, 2, 13, Zp_macced_player3_4b, 0, true}, {0, 0, 0, 0, 0, true}, {player4outputscaler_4b, 2, 13, Zp_macced_player4_4b, 0, true}, {player5outputscaler_4b, 1, 14, Zp_macced_player5_4b, 0, true}, {0, 0, 0, 0, 0, true}, {0, 0, 0, 0, 0, true}, {player6outputscaler_4b, 1, 13, Zp_macced_player6_4b, 0, true}, {0, 0.45329663, 5.2865343, Zp_macced_player7_4b, 0, false}, {0, 0, 0, 0, 0, false}};
