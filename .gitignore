@@ -111,3 +111,8 @@ Packages
 # mine
 .vscode/c_cpp_properties.json
 
+/lab1_venv
+
+/quant
+
+/unquant
