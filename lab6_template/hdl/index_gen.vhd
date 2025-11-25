@@ -8,6 +8,7 @@ library work;
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity index_gen is
     generic(
@@ -41,11 +42,81 @@ end index_gen;
 
 architecture Behavioral of index_gen is
 
--- TODO
+signal input_idx: std_logic_vector(INPUT_ADDR_WIDTH-1 downto 0) := (others => '0');
+signal filter_idx: std_logic_vector(INPUT_ADDR_WIDTH-1 downto 0) := (others => '0');
+
+signal filter_column_progress: std_logic_vector(DIM_WIDTH-1 downto 0) := (0 => '1', others => '0');
+signal filter_row_progress: std_logic_vector(DIM_WIDTH-1 downto 0) := (0 => '1', others => '0');
+signal filter_channel_progress: std_logic_vector(DIM_WIDTH-1 downto 0) := (0 => '1', others => '0');
+
+signal on_last_column: std_logic := '0';
+signal on_last_row: std_logic := '0';
+signal on_last_channel: std_logic := '0';
+
 
 begin
 
+on_last_column <= '1' when filter_column_progress = filter_w(filter_column_progress'length - 1 downto 0) else '0';
+on_last_row <= '1' when filter_row_progress = filter_h(filter_row_progress'length - 1 downto 0) else '0';
+on_last_channel <= '1' when filter_channel_progress = filter_c(filter_channel_progress'length - 1 downto 0) else '0';
+-- a width * height input might make some of this redundant.
 
--- TODO
+
+
+-- the "*_progress" start at 1 so to do inexpensive checking with given dimensions or, in the case of output_pixel_progress, to have the index of the next output pixel ready without having to do another add.
+-- assuming width (horizontal) is least significant dimension. Continually incrementing should result in incrementing rows next and then channels
+-- assuming dimensions of filter as channel x row x column
+-- assuming dimensions of input as channel x row x column
+-- assuming same stride in both dimensions.
+
+p_idx_gen: process(clk)
+begin
+    if rising_edge(clk) then
+        if (rst = '0' or conv_idle = '1') then
+            input_idx <= (others => '0');
+            filter_idx <= (others => '0');
+            
+            filter_column_progress <= (0 => '1', others => '0');
+            filter_row_progress <= (0 => '1', others => '0');
+            filter_channel_progress <= (0 => '1', others => '0');
+            
+        else
+            filter_idx <= filter_idx + 1;
+            input_idx <= input_idx + 1;
+            filter_column_progress <= filter_column_progress + 1;
+            
+            if (on_last_channel = '1' and on_last_row = '1' and on_last_column = '1') then -- new output pixel to work on / end of filter. Reset filter_idx and reset input_idx to the output iteration we are on.
+                filter_column_progress <= (0 => '1', others => '0');
+                filter_row_progress <= (0 => '1', others => '0');
+                filter_channel_progress <= (0 => '1', others => '0');
+                
+                
+                filter_idx <= (others => '0');
+                
+
+                input_idx <= input_idx + input_end_diff_ow; -- really the amount to add when starting a new output regardless. The input data should be organized such that a new output, regardless of at the end of a row, should require the same input index addition. This is assuming stride in both dimensions is the same.
+                
+            elsif (on_last_column = '1' and on_last_row = '1') then -- new channel
+                filter_column_progress <= (0 => '1', others => '0');
+                filter_row_progress <= (0 => '1', others => '0');
+                
+                filter_channel_progress <= filter_channel_progress + 1;
+                
+                input_idx <= input_idx + input_end_diff_fc;
+                
+            elsif (on_last_column = '1') then -- new row
+                filter_column_progress <= (0 => '1', others => '0');
+                
+                filter_row_progress <= filter_row_progress + 1;
+                
+                input_idx <= input_idx + input_end_diff_fw;
+            end if;
+            
+            
+            
+        end if;
+    end if;
+end process p_idx_gen;
+
 
 end Behavioral;
