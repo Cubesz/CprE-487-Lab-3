@@ -64,7 +64,7 @@ begin
 
 M_AXIS_TDATA_input_addr <= input_idx;
 M_AXIS_TDATA_filter_addr <= filter_idx;
-M_AXIS_TVALID <= (not conv_idle) and rst;
+M_AXIS_TVALID <= (not conv_idle) and (not rst);
 
 on_last_column <= '1' when filter_column_progress = filter_w(filter_column_progress'length - 1 downto 0) else '0';
 on_last_row <= '1' when filter_row_progress = filter_h(filter_row_progress'length - 1 downto 0) else '0';
@@ -75,10 +75,10 @@ on_last_output_row <= '1' when output_row_progress = output_h(output_row_progres
 
 -- a width * height input might make some of this redundant.
 
-M_AXIS_TLAST <= '1' when (rst = '1' and conv_idle = '0' and M_AXIS_TREADY = '1' and on_last_output_row = '1' and on_last_output_column = '1' and on_last_channel = '1' and on_last_row = '1' and on_last_column = '1') else '0';
+M_AXIS_TLAST <= '1' when (rst = '0' and conv_idle = '0' and M_AXIS_TREADY = '1' and on_last_output_row = '1' and on_last_output_column = '1' and on_last_channel = '1' and on_last_row = '1' and on_last_column = '1') else '0';
 
 
--- the "*_progress" start at 1 so to do inexpensive checking with given dimensions or, in the case of output_pixel_progress, to have the index of the next output pixel ready without having to do another add.
+-- the "*_progress" start at 1 so to do inexpensive checking with given dimensions
 -- assuming width (horizontal) is least significant dimension. Continually incrementing should result in incrementing rows next and then channels
 -- assuming dimensions of filter as channel x row x column
 -- assuming dimensions of input as channel x row x column
@@ -87,7 +87,7 @@ M_AXIS_TLAST <= '1' when (rst = '1' and conv_idle = '0' and M_AXIS_TREADY = '1' 
 p_idx_gen: process(clk)
 begin
     if rising_edge(clk) then
-        if (rst = '0' or conv_idle = '1') then
+        if (rst = '1' or conv_idle = '1') then
             input_idx <= (others => '0');
             filter_idx <= (others => '0');
             
@@ -100,7 +100,7 @@ begin
             
         elsif (M_AXIS_TREADY = '1') then
             filter_idx <= filter_idx + 1;
-            input_idx <= input_idx + 1;
+            input_idx <= input_idx + 1; -- Could maybe be input_idx + input_end_diff_fh, but assuming that that input is 1.
             filter_column_progress <= filter_column_progress + 1;
             
             if (on_last_channel = '1' and on_last_row = '1' and on_last_column = '1') then -- new output pixel to work on / end of filter. Reset filter_idx and reset input_idx to the output iteration we are on.
