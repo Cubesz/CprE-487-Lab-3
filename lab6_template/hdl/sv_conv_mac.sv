@@ -1,4 +1,5 @@
-`timescale 1ns / 1ps
+//`timescale 0.01ps / 0.001ps
+//`timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
@@ -57,8 +58,8 @@ module sv_conv_mac #(parameter C_DATA_WIDTH = 8, parameter C_OUTPUT_DATA_WIDTH =
     
     custom_mult_add_instruction_t instruction;
     
-    wire [31:0] accumulator_out;
-    assign MO_AXIS_TDATA = accumulator_out; // it shouldn't sample it until its ready
+    wire [47:0] accumulator_out;
+    assign MO_AXIS_TDATA = accumulator_out[C_OUTPUT_DATA_WIDTH-1 : 0]; // it shouldn't sample it until its ready
     
     input_data_t input_mult_data;
     wire signed [31:0] new_bias;
