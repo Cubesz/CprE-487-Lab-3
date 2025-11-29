@@ -70,12 +70,12 @@ on_last_column <= '1' when filter_column_progress = filter_w(filter_column_progr
 on_last_row <= '1' when filter_row_progress = filter_h(filter_row_progress'length - 1 downto 0) else '0';
 on_last_channel <= '1' when filter_channel_progress = filter_c(filter_channel_progress'length - 1 downto 0) else '0';
 
-on_last_output_column <= '1' when output_column_progress = output_w(output_column_progress'length - 1 downto 0) else '0';
+on_last_output_column <= '1' when output_column_progress = output_w(output_column_progress'length - 1 downto 0) else '0'; -- may cause issues with a 1x1 filter
 on_last_output_row <= '1' when output_row_progress = output_h(output_row_progress'length - 1 downto 0) else '0';
 
 -- a width * height input might make some of this redundant.
 
-M_AXIS_TLAST <= '1' when (rst = '0' and conv_idle = '0' and M_AXIS_TREADY = '1' and on_last_output_row = '1' and on_last_output_column = '1' and on_last_channel = '1' and on_last_row = '1' and on_last_column = '1') else '0';
+M_AXIS_TLAST <= '1' when (rst = '0' and conv_idle = '0' and M_AXIS_TREADY = '1' and on_last_channel = '1' and on_last_row = '1' and on_last_column = '1') else '0';
 
 
 -- the "*_progress" start at 1 so to do inexpensive checking with given dimensions
@@ -83,6 +83,7 @@ M_AXIS_TLAST <= '1' when (rst = '0' and conv_idle = '0' and M_AXIS_TREADY = '1' 
 -- assuming dimensions of filter as channel x row x column
 -- assuming dimensions of input as channel x row x column
 -- assuming same stride in both dimensions.
+-- it would seem that we have different interpreations of what "completeing a channel" and "completing a column" means
 
 p_idx_gen: process(clk)
 begin
@@ -103,7 +104,16 @@ begin
             input_idx <= input_idx + 1; -- Could maybe be input_idx + input_end_diff_fh, but assuming that that input is 1.
             filter_column_progress <= filter_column_progress + 1;
             
-            if (on_last_channel = '1' and on_last_row = '1' and on_last_column = '1') then -- new output pixel to work on / end of filter. Reset filter_idx and reset input_idx to the output iteration we are on.
+            if (on_last_output_row = '1' and on_last_output_column = '1' and on_last_channel = '1' and on_last_row = '1' and on_last_column = '1') then
+                filter_idx <= (others => '0');
+                input_idx <= (others => '0');
+                output_row_progress <= (0 => '1', others => '0');
+                output_column_progress <= (0 => '1', others => '0');
+                filter_column_progress <= (0 => '1', others => '0');
+                filter_row_progress <= (0 => '1', others => '0');
+                filter_channel_progress <= (0 => '1', others => '0');
+                
+            elsif (on_last_channel = '1' and on_last_row = '1' and on_last_column = '1') then -- new output pixel to work on / end of filter. Reset filter_idx and reset input_idx to the output iteration we are on.
                 filter_column_progress <= (0 => '1', others => '0');
                 filter_row_progress <= (0 => '1', others => '0');
                 filter_channel_progress <= (0 => '1', others => '0');
@@ -112,13 +122,14 @@ begin
                 filter_idx <= (others => '0');
                 
 
-                input_idx <= input_idx + input_end_diff_ow; -- really the amount to add when starting a new output regardless. The input data should be organized such that a new output, regardless of at the end of a row, should require the same input index addition. This is assuming stride in both dimensions is the same.
+                input_idx <= input_idx + input_end_diff_fc; -- the amount to add when starting a new output.
                 
                 output_column_progress <= output_column_progress + 1;
                 
                 if (on_last_output_column = '1') then
                     output_column_progress <= (0 => '1', others => '0');
                     output_row_progress <= output_row_progress + 1;
+                    input_idx <= input_idx + input_end_diff_ow; -- the amount to add when starting a new output on a new row.
                 end if;
                     
                 
@@ -128,7 +139,7 @@ begin
                 
                 filter_channel_progress <= filter_channel_progress + 1;
                 
-                input_idx <= input_idx + input_end_diff_fc;
+                input_idx <= input_idx + input_end_diff_fh;
                 
             elsif (on_last_column = '1') then -- new row
                 filter_column_progress <= (0 => '1', others => '0');
