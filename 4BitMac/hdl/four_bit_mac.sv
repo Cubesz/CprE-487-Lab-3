@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module two_bit_mac #(parameter C_DATA_WIDTH = 2) (
+module four_bit_mac #(parameter C_DATA_WIDTH = 4) (
         input ACLK,
         input ARESETN,
         
@@ -63,7 +63,7 @@ module two_bit_mac #(parameter C_DATA_WIDTH = 2) (
     input_data_t input_mult_data;
     wire signed [15:0] new_bias;
     assign input_mult_data = input_data_t'(SD_AXIS_TDATA);
-    assign new_bias = SD_AXIS_TDATA;
+    assign new_bias = $signed(SD_AXIS_TDATA);
     wire stall; // active high
     mac_math_core #(.C_DATA_WIDTH(C_DATA_WIDTH)) math_unit (
         .CLK(ACLK),
