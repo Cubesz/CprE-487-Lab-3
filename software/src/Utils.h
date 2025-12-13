@@ -182,7 +182,7 @@ class Timer {
         end = std::chrono::steady_clock::now();
         milliseconds = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() / 1000.0f;
 #endif
-        log("Timer " + name + ": elapsed=" + std::to_string(milliseconds) + "ms");
+        // log("Timer " + name + ": elapsed=" + std::to_string(milliseconds) + "ms");
 #endif
     }
 };

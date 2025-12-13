@@ -4,50 +4,56 @@
 #include "../Utils.h"
 #include "Layer.h"
 
-namespace ML {
-class ConvolutionalLayer : public Layer {
-   public:
-    ConvolutionalLayer(const LayerParams inParams, const LayerParams outParams, const LayerParams weightParams, const LayerParams biasParams)
-        : Layer(inParams, outParams, LayerType::CONVOLUTIONAL),
-          weightParam(weightParams),
-          weightData(weightParams),
-          biasParam(biasParams),
-          biasData(biasParams) {}
+namespace ML
+{
+    class ConvolutionalLayer : public Layer
+    {
+    public:
+        ConvolutionalLayer(const LayerParams inParams, const LayerParams outParams, const LayerParams weightParams, const LayerParams biasParams)
+            : Layer(inParams, outParams, LayerType::CONVOLUTIONAL),
+              weightParam(weightParams),
+              weightData(weightParams),
+              biasParam(biasParams),
+              biasData(biasParams) {}
 
-    // Getters
-    const LayerParams& getWeightParams() const { return weightParam; }
-    const LayerParams& getBiasParams() const { return biasParam; }
-    const LayerData& getWeightData() const { return weightData; }
-    const LayerData& getBiasData() const { return biasData; }
+        // Getters
+        const LayerParams &getWeightParams() const { return weightParam; }
+        const LayerParams &getBiasParams() const { return biasParam; }
+        const LayerData &getWeightData() const { return weightData; }
+        const LayerData &getBiasData() const { return biasData; }
 
-    // Allocate all resources needed for the layer & Load all of the required data for the layer
-    virtual void allocLayer() override {
-        Layer::allocLayer();
-        weightData.loadData();
-        biasData.loadData();
-    }
+        // Allocate all resources needed for the layer & Load all of the required data for the layer
+        virtual void allocLayer() override
+        {
+            Layer::allocLayer();
+            weightData.loadData();
+            biasData.loadData();
+        }
 
-    // Fre all resources allocated for the layer
-    virtual void freeLayer() override {
-        Layer::freeLayer();
-        weightData.freeData();
-        biasData.freeData();
-    }
+        // Fre all resources allocated for the layer
+        virtual void freeLayer() override
+        {
+            Layer::freeLayer();
+            weightData.freeData();
+            biasData.freeData();
+        }
 
-    // Virtual functions
-    virtual void computeNaive(const LayerData& dataIn) const override;
-    virtual void computeThreaded(const LayerData& dataIn) const override;
-    virtual void computeTiled(const LayerData& dataIn) const override;
-    virtual void computeSIMD(const LayerData& dataIn) const override;
-    virtual void computeQuantized(const LayerData& dataIn, QParams qparam) const override;
-    virtual void computeAccelerated(const LayerData& dataIn) const override;
+        // Virtual functions
+        virtual void computeNaive(const LayerData &dataIn) const override;
+        virtual void computeThreaded(const LayerData &dataIn) const override;
+        virtual void computeThreaded(const LayerData &dataIn, size_t threadCount) const;
+        virtual void computeTiled(const LayerData &dataIn) const override;
+        virtual void computeTiled(const LayerData &dataIn, size_t tileSize) const;
+        virtual void computeSIMD(const LayerData &dataIn) const override;
+        virtual void computeQuantized(const LayerData &dataIn, QParams qparam) const override;
+        virtual void computeAccelerated(const LayerData &dataIn) const override;
 
-   private:
-    LayerParams weightParam;
-    LayerData weightData;
+    private:
+        LayerParams weightParam;
+        LayerData weightData;
 
-    LayerParams biasParam;
-    LayerData biasData;
-};
+        LayerParams biasParam;
+        LayerData biasData;
+    };
 
-}  // namespace ML
+} // namespace ML

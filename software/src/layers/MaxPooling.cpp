@@ -75,6 +75,7 @@ namespace ML
     void MaxPoolingLayer::computeTiled(const LayerData &dataIn) const
     {
         // TODO: Your Code Here...
+        computeNaive(dataIn);
     }
 
     // Compute the Max Pooling using SIMD
