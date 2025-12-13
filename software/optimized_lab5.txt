@@ -1,0 +1,1546 @@
+make: Entering directory `/home/osamman/487/CprE-487-Lab-3/software/workspace/mlp/Debug'
+Building file: ../src/framework/layers/Convolutional.cpp
+Invoking: ARM v7 g++ compiler
+arm-none-eabi-g++ -DZEDBOARD -Wall -O0 -g3 -I../src/framework -I../src/zedboard -c -fmessage-length=0 -MT"src/framework/layers/Convolutional.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -std=c++17 -O3 -I/home/osamman/487/CprE-487-Lab-3/software/workspace/mlp_platform/export/mlp_platform/sw/mlp_platform/standalone_domain/bspinclude/include -MMD -MP -MF"src/framework/layers/Convolutional.d" -MT"src/framework/layers/Convolutional.o" -o "src/framework/layers/Convolutional.o" "../src/framework/layers/Convolutional.cpp"
+Finished building: ../src/framework/layers/Convolutional.cpp
+ 
+Building target: mlp.elf
+Invoking: ARM v7 g++ linker
+arm-none-eabi-g++ -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,--defsym=_HEAP_SIZE=0x8000000 -Wl,-T -Wl,../src/lscript.ld -L/home/osamman/487/CprE-487-Lab-3/software/workspace/mlp_platform/export/mlp_platform/sw/mlp_platform/standalone_domain/bsplib/lib -o "mlp.elf"  ./src/zedboard/file_transfer/networking.o ./src/zedboard/file_transfer/server.o  ./src/framework/layers/Convolutional.o ./src/framework/layers/Dense.o ./src/framework/layers/Flatten.o ./src/framework/layers/Layer.o ./src/framework/layers/MaxPooling.o ./src/framework/layers/Softmax.o  ./src/framework/ML.o ./src/framework/Model.o ./src/framework/Utils.o   -Wl,--start-group,-lxil,-lgcc,-lc,-lstdc++,--end-group -Wl,--start-group,-lxilffs,-lxil,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+Finished building target: mlp.elf
+ 
+make: Leaving directory `/home/osamman/487/CprE-487-Lab-3/software/workspace/mlp/Debug'
+Display is :192
+Connecting to hardware server
+No hardware server running, starting a local hardware server instead
+attempting to launch hw_server
+
+****** Xilinx hw_server v2020.1
+  **** Build date : May 27 2020 at 20:33:44
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+INFO: hw_server application started
+INFO: Use Ctrl-C to exit hw_server application
+
+INFO: To connect to this hw_server instance use url: TCP:127.0.0.1:3121
+
+Flashing fpga
+INFO: [Hsi 55-2053] elapsed time for repository (/remote/Xilinx/2020.1/Vitis/2020.1/data/embeddedsw) loading 4 seconds
+hsi::open_hw_design: Time (s): cpu = 00:00:02 ; elapsed = 00:00:07 . Memory (MB): peak = 1483.219 ; gain = 0.000 ; free physical = 4721 ; free virtual = 10747
+Done
+Reading from UART, press Ctrl-C to stop
+Opened binary file data/quant/given_image0_8q.bin
+xsdb% [[36mInfo[39m]: --- Building Toy Model ---
+Adding Layer 1: Convolutional
+Adding Layer 2: Convolutional
+Adding Layer 3: MaxPooling
+Adding Layer 4: Convolutional
+Adding Layer 5: Convolutional
+Adding Layer 6: MaxPooling
+Adding Layer 7: Convolutional
+Adding Layer 8: Convolutional
+Adding Layer 9: MaxPooling
+Adding Layer 10: Flatten
+Adding Layer 11: Dense
+Adding Layer 12: Dense
+Adding Layer 13: Softmax
+xsdb% Opened binary file data/model/conv1_weights.bin
+xsdb% Opened binary file data/model/conv1_biases.bin
+xsdb% Opened binary file data/model/conv2_weights.bin
+xsdb% Opened binary file data/model/conv2_biases.bin
+xsdb% Opened binary file data/model/conv3_weights.bin
+xsdb% Opened binary file data/model/conv3_biases.bin
+xsdb% Opened binary file data/model/conv4_weights.bin
+xsdb% Opened binary file data/model/conv4_biases.bin
+xsdb% Opened binary file data/model/conv5_weights.bin
+xsdb% Opened binary file data/model/conv5_biases.bin
+xsdb% Opened binary file data/model/conv6_weights.bin
+xsdb% Opened binary file data/model/conv6_biases.bin
+xsdb% Opened binary file data/model/dense1_weights.bin
+xsdb% Opened binary file data/model/dense1_biases.bin
+xsdb% Opened binary file data/model/dense2_weights.bin
+xsdb% Opened binary file data/model/dense2_biases.bin
+xsdb% [[36mInfo[39m]: --- Running Layer Test 0---
+xsdb% Opened binary file data/image_0.bin
+xsdb% Timer Layer Inference: elapsed=140.000000ms
+xsdb% Opened binary file data/image_0_data/layer_0_output.bin
+xsdb% Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: ----- Running Profiling Test -----
+xsdb% Opened binary file data/image_0.bin
+xsdb% Timer Layer 0: elapsed=140.000000ms
+xsdb% Timer Layer 1: elapsed=1306.000000ms
+xsdb% Timer Layer 2: elapsed=2.000000ms
+xsdb% Timer Layer 3: elapsed=199.000000ms
+xsdb% Timer Layer 4: elapsed=336.000000ms
+xsdb% Timer Layer 5: elapsed=0.000000ms
+xsdb% Timer Layer 6: elapsed=58.000000ms
+xsdb% Timer Layer 7: elapsed=74.000000ms
+Timer Layer 8: elapsed=0.000000ms
+Timer Layer 9: elapsed=0.000000ms
+xsdb% Timer Layer 10: elapsed=35.000000ms
+xsdb% Timer Layer 11: elapsed=0.000000ms
+Timer Layer 12: elapsed=0.000000ms
+[[36mInfo[39m]: ----- Profiling Results -----
+
+---- Indivisual Layer Times -----
+Layer 0: 140 ms (6.51163%)
+Layer 1: 1306 ms (60.7442%)
+Layer 2: 2 ms (0.0930233%)
+Layer 3: 199 ms (9.25581%)
+Layer 4: 336 ms (15.6279%)
+Layer 5: 0 ms (0%)
+Layer 6: 58 ms (2.69767%)
+Layer 7: 74 ms (3.44186%)
+Layer 8: 0 ms (0%)
+Layer 9: 0 ms (0%)
+Layer 10: 35 ms (1.62791%)
+Layer 11: 0 ms (0%)
+Layer 12: 0 ms (0%)
+Total Time: 2150 ms (2.15 s)
+[[36mInfo[39m]: --- Running FP32 Multi-Inference Profiling Test ---
+Starting profiling for 100 inferences...
+xsdb% Opened binary file data/unquant/images_1000_fp32/0.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/1.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/2.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/3.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/4.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/5.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/6.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/7.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/8.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/9.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+  ...completed 10/100 inferences.
+xsdb% Opened binary file data/unquant/images_1000_fp32/10.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/11.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/12.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/13.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/14.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/15.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/16.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/17.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/18.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/19.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+  ...completed 20/100 inferences.
+xsdb% Opened binary file data/unquant/images_1000_fp32/20.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/21.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/22.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/23.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/24.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/25.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/26.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/27.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/28.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/29.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+  ...completed 30/100 inferences.
+xsdb% Opened binary file data/unquant/images_1000_fp32/30.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/31.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/32.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/33.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/34.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/35.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/36.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/37.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/38.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/39.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+  ...completed 40/100 inferences.
+xsdb% Opened binary file data/unquant/images_1000_fp32/40.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/41.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/42.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/43.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/44.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/45.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/46.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/47.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/48.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/49.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+  ...completed 50/100 inferences.
+xsdb% Opened binary file data/unquant/images_1000_fp32/50.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/51.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/52.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/53.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/54.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/55.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/56.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/57.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/58.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/59.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+  ...completed 60/100 inferences.
+xsdb% Opened binary file data/unquant/images_1000_fp32/60.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/61.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/62.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/63.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/64.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/65.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/66.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/67.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/68.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/69.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+  ...completed 70/100 inferences.
+xsdb% Opened binary file data/unquant/images_1000_fp32/70.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/71.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/72.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/73.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/74.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/75.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/76.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/77.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/78.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/79.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+  ...completed 80/100 inferences.
+xsdb% Opened binary file data/unquant/images_1000_fp32/80.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/81.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/82.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/83.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/84.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/85.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/86.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/87.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/88.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/89.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+  ...completed 90/100 inferences.
+xsdb% Opened binary file data/unquant/images_1000_fp32/90.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/91.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/92.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/93.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/94.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/95.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/96.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/97.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/98.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+xsdb% Opened binary file data/unquant/images_1000_fp32/99.bin
+xsdb% Timer Layer_0: elapsed=140.000000ms
+xsdb% Timer Layer_1: elapsed=1307.000000ms
+xsdb% Timer Layer_2: elapsed=2.000000ms
+xsdb% Timer Layer_3: elapsed=199.000000ms
+xsdb% Timer Layer_4: elapsed=336.000000ms
+xsdb% Timer Layer_5: elapsed=0.000000ms
+xsdb% Timer Layer_6: elapsed=58.000000ms
+xsdb% Timer Layer_7: elapsed=74.000000ms
+Timer Layer_8: elapsed=0.000000ms
+Timer Layer_9: elapsed=0.000000ms
+xsdb% Timer Layer_10: elapsed=35.000000ms
+xsdb% Timer Layer_11: elapsed=0.000000ms
+Timer Layer_12: elapsed=0.000000ms
+  ...completed 100/100 inferences.
+[[36mInfo[39m]: --- FP32 Profiling Results ---
+
+--- Average Individual Layer Times (100 inferences) ---
+Layer 0: 140 ms
+Layer 1: 1307 ms
+Layer 2: 2 ms
+Layer 3: 199 ms
+Layer 4: 336 ms
+Layer 5: 0 ms
+Layer 6: 58 ms
+Layer 7: 74 ms
+Layer 8: 0 ms
+Layer 9: 0 ms
+Layer 10: 35 ms
+Layer 11: 0 ms
+Layer 12: 0 ms
+
+Total Average Inference Time: 2151 ms (2.151 s)
+
+
+
+----- ML::runTests() COMPLETE -----
+
+
+----- STARTING FILE TRANSFER SERVER -----
+IP:      192.168.1.2
+Netmask: 255.255.255.0
+Gateway: 192.168.1.1
+MAC:     00:0A:35:00:01:02
+xsdb% Start PHY autonegotiation 
+xsdb% Waiting for PHY to complete autonegotiation.
+xsdb% autonegotiation complete 
+link speed for phy address 0: 1000
+xsdb% HTTP file server started!
+xsdb% 

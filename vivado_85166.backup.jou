@@ -1,0 +1,41 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Thu Dec 11 22:20:57 2025
+# Process ID: 85166
+# Current directory: /home/osamman/487/CprE-487-Lab-3
+# Command line: vivado
+# Log file: /home/osamman/487/CprE-487-Lab-3/vivado.log
+# Journal file: /home/osamman/487/CprE-487-Lab-3/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project /home/osamman/487/CprE-487-Lab-3/variable_mac/vivado/tc_piped_mac/tc_piped_mac.xpr
+update_compile_order -fileset sources_1
+close_project
+open_project /home/osamman/487/CprE-487-Lab-3/2BitMac/vivado/tc_piped_mac/tc_piped_mac.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+source mac_2bit_tb.tcl
+export_ip_user_files -of_objects  [get_files /home/osamman/487/CprE-487-Lab-3/4BitMac/hdl/piped_mac.sv] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 /home/osamman/487/CprE-487-Lab-3/4BitMac/hdl/piped_mac.sv
+export_ip_user_files -of_objects  [get_files /home/osamman/487/CprE-487-Lab-3/4BitMac/vivado/tc_piped_mac/tc_piped_mac.srcs/sources_1/new/4_bit_mac.sv] -no_script -reset -force -quiet
+remove_files  /home/osamman/487/CprE-487-Lab-3/4BitMac/vivado/tc_piped_mac/tc_piped_mac.srcs/sources_1/new/4_bit_mac.sv
+add_files -norecurse /home/osamman/487/CprE-487-Lab-3/2BitMac/hdl/two_bit_mac.sv
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+close_sim
+launch_simulation
+source mac_2bit_tb.tcl
+close_sim
+close_project
+open_project /home/osamman/487/CprE-487-Lab-3/4BitMac/vivado/tc_piped_mac/tc_piped_mac.xpr
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files /home/osamman/487/CprE-487-Lab-3/4BitMac/hdl/piped_mac.sv] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 /home/osamman/487/CprE-487-Lab-3/4BitMac/hdl/piped_mac.sv
+launch_simulation
+source mac_4bit_tb.tcl
+close_sim
