@@ -157,7 +157,7 @@ class Layer {
     virtual void computeSIMD(const LayerData& dataIn) const = 0;
     virtual void computeQuantized(const LayerData& dataIn, QParams qparam) const = 0;
     virtual void computeAccelerated(const LayerData& dataIn) const {};
-    virtual void computeFastAccelerated(const LayerData& dataIn, QParams qparam) const {};
+    virtual void computeFastAccelerated(const LayerData& dataIn, AccelParams aparam) const {};
 
    private:
     LayerParams inParams;

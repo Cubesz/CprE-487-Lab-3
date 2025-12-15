@@ -55,7 +55,7 @@ namespace ML
         }
         virtual void computeQuantized(const LayerData &dataIn, QParams qparam) const override;
         void computeAccelerated(const LayerData &dataIn) const override;
-        void computeFastAccelerated(const LayerData &dataIn, QParams qparam) const override;
+        void computeFastAccelerated(const LayerData &dataIn, AccelParams aparam) const override;
 
     private:
         LayerParams weightParam;

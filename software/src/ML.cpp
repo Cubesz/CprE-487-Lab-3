@@ -1435,13 +1435,8 @@ namespace ML
         std::cout << "\n\n----- ML::runTests() COMPLETE -----\n";
     }
 
-
-
-    void lab6Stuff() {
-        #define ZEDBOARD
+    void smallRun() {
         #ifdef ZEDBOARD
-        runMemoryTest();
-
         int8_t inputs[2][3][4] = {
             {
                 { 127, -1, -128, 4 },
@@ -1545,27 +1540,85 @@ namespace ML
                 std::cout << static_cast<int>(outputs[i][j][0]) << ", " << static_cast<int>(outputs[i][j][1]) << std::endl;
             }
         }
+        #endif
+    }
 
-        int8_t new_filters[4][2][2] = {
-            {
-                { -1, 0 },
-                { 1, 2 },
-            },
-            {
-                { 0, 1 },
-                { 2, -1 },
-            },
-            {
-                { 1, 2 },
-                { -1, 0 },
-            },
-            {
-                { 2, -1 },
-                { 0, 1}
-            }
-        };
 
-    
+    void lab6Stuff() {
+        #define ZEDBOARD
+        #ifdef ZEDBOARD
+        runMemoryTest();
+
+
+        // WEIGHTS MUST BE FILTER x LAYERS x HEIGHT x WIDTH
+        // INPUTS MUST BE LAYERS x HEIGHT x WIDTH
+
+        LayerData ly0id = LayerData{LayerParams{sizeof(i8), {3, 64, 64}}, "data/quant_t/images/given_image0_8q_t.bin"}; // first layer only
+        LayerData ly0wd = LayerData{LayerParams{sizeof(i8), {32, 3, 5, 5}}, "data/quant_t/param_layer_0/weights_8q_t.bin"};
+        LayerData ly0bd = LayerData{LayerParams{sizeof(i16), {32}}, "data/quant_t/param_layer_0/biases_8q_t.bin"};;
+        ly0id.loadData(); // first layer only
+        ly0wd.loadData();
+        ly0bd.loadData();
+
+
+
+        // layer initialization
+        int singleFilterSize = 3*5*5;
+        int outputs_per_channel = 60*60;
+        int outputOffset = 0;
+        uint8_t q_scale = 0x00363129;
+        int qzero = modelQParams_8q[0].Z_i_next;
+        void* filterDataPtr = ly0wd.raw();
+
+        uint32_t ctrlb_flags = MLP_CTRLB_RELU;
+        Xil_Out32(MLP_CTRLB, ctrlb_flags);
+        memcpy_dma(MLP_INPUTS, ly0id.raw(), 3*64*64); // first layer only
+        memcpy_dma(MLP_FILTERS0, filterDataPtr+=singleFilterSize, singleFilterSize);
+        memcpy_dma(MLP_FILTERS1, filterDataPtr+=singleFilterSize, singleFilterSize);
+        memcpy_dma(MLP_FILTERS2, filterDataPtr+=singleFilterSize, singleFilterSize);
+        memcpy_dma(MLP_FILTERS3, filterDataPtr+=singleFilterSize, singleFilterSize);
+        ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
+        Xil_Out32(MLP_CTRLB, ctrlb_flags);
+
+        Xil_Out32(MLP_FILTER_W, 5);
+        Xil_Out32(MLP_FILTER_H, 5);
+        Xil_Out32(MLP_FILTER_C, 3);
+        Xil_Out32(MLP_OUTPUT_W, 60);
+        Xil_Out32(MLP_OUTPUT_H, 60);
+        Xil_Out32(MLP_OUTPUT_ELEMENTS_PER_CHANNEL, outputs_per_channel);
+        Xil_Out32(MLP_Q_SCALE, q_scale);
+        Xil_Out32(MLP_Q_SCALE, qzero);
+
+
+        for (int i = 0; i < 32; i += 4) {
+            Xil_Out32(MLP_OUTPUT_INITIAL_OFFSET, outputOffset);
+            outputOffset += 4 * outputs_per_channel;
+            
+            Xil_Out32(MLP_MAC0_BIAS, ly0bd.get<i16>(i) - Zp_macced_player0[i]);
+            Xil_Out32(MLP_MAC0_BIAS, ly0bd.get<i16>(i + 1) - Zp_macced_player0[i + 1]);
+            Xil_Out32(MLP_MAC0_BIAS, ly0bd.get<i16>(i + 2) - Zp_macced_player0[i + 2]);
+            Xil_Out32(MLP_MAC0_BIAS, ly0bd.get<i16>(i + 3) - Zp_macced_player0[i + 3]);
+
+            Xil_Out32(MLP_CTRLA, 0); // start
+            // as it goes, load upcoming filters
+            memcpy_dma(MLP_FILTERS0, filterDataPtr+=singleFilterSize, singleFilterSize);
+            memcpy_dma(MLP_FILTERS1, filterDataPtr+=singleFilterSize, singleFilterSize);
+            memcpy_dma(MLP_FILTERS2, filterDataPtr+=singleFilterSize, singleFilterSize);
+            memcpy_dma(MLP_FILTERS3, filterDataPtr+=singleFilterSize, singleFilterSize);
+
+            while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE)); // wait for it to finish
+            ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
+            Xil_Out32(MLP_CTRLB, ctrlb_flags);
+
+        }
+
+
+
+
+
+
+
+
 
 
         #endif

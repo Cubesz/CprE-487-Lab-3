@@ -22,6 +22,24 @@ const int player4outputscaler = (1.0f/(22.17446924f / (34.65046495f * 236.64046f
 const int player5outputscaler = (1.0f/(14.83324517f / (22.17446924f * 248.70012f)));
 const int player6outputscaler = (1.0f/(8.22409603f / (14.83324517f * 227.76791f)));
 
+typedef struct {
+    bool inputs_loaded;
+    bool do_set_outputs;
+    bool relu;
+    bool maxpool;
+    int filter_w;
+    int filter_h;
+    int filter_c;
+    int output_w; // width pre pooling if pooling
+    int output_h; // height pre pooling if pooling
+    int output_elments_per_channel; // output elements post pooling if pooling
+    int inp_diff_fw;
+    int inp_diff_fh;
+    int inp_diff_fc;
+    int inp_diff_ow;
+    int q_scale_fx_pnt;
+    int q_zero;
+} AccelParams;
 
 typedef struct {
     int outputscaler;
