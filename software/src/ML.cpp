@@ -13,6 +13,7 @@
 #include "layers/MaxPooling.h"
 #include "layers/Softmax.h"
 #include "image_classes.h"
+#include "MLP.h"
 
 #ifdef ZEDBOARD
 #include <file_transfer/file_transfer.h>
@@ -1202,6 +1203,7 @@ namespace ML
         );
 
 #endif
+    
         // // Base input data path (determined from current directory of where you are running the command)
         Path basePath("data"); // May need to be altered for zedboards loading from SD Cards
         Path modelPath = basePath / "model";
@@ -1433,6 +1435,142 @@ namespace ML
         std::cout << "\n\n----- ML::runTests() COMPLETE -----\n";
     }
 
+
+
+    void lab6Stuff() {
+        #define ZEDBOARD
+        #ifdef ZEDBOARD
+        runMemoryTest();
+
+        int8_t inputs[2][3][4] = {
+            {
+                { 127, -1, -128, 4 },
+                { 5, 6, 7, 8 },
+                { 9, 10, 11, 12 },
+            },
+            {
+                { 13, 14, 15, 16 },
+                { 17, 18, 19, 0 },
+                { 21, 3, 2, 1 },
+            }
+        };
+
+        int8_t filters[4][2][2][3] = {
+            {
+                {
+                    {127, -1, -128},
+                    {4, 5, 6},
+                },
+                {
+                    {7, 8, 9},
+                    {10, 11, 12},
+                },
+            },
+            {
+                {
+                    {-13, -14, -15},
+                    {-16, -17, -18},
+                },
+                {
+                    {-19, -20, -21},
+                    {-22, -23, -24},
+                },
+            },
+            {
+                {
+                    {25, 26, 27},
+                    {28, 29, 30},
+                },
+                {
+                    {31, 32, 33},
+                    {34, 35, 36},
+                },
+            },
+            {
+                {
+                    {37, 38, 39},
+                    {40, 41, 42},
+                },
+                {
+                    {43, 44, 45},
+                    {46, 47, 48},
+                },
+            }
+
+        };
+
+        int32_t biases[] = { 0, 1, 2, 3 };
+        uint32_t qscale = 0x04000000;
+        uint32_t qzero = 0;
+
+        Xil_Out32(MLP_CTRLB, 0); // Whatever filters you dma are going to the filters not in use
+        // so, invert after when applicable
+        memcpy_dma(MLP_INPUTS, inputs, sizeof(inputs));
+        memcpy_dma(MLP_FILTER0, filters[0], sizeof(filters[0]));
+        memcpy_dma(MLP_FILTER1, filters[1], sizeof(filters[1]));
+        memcpy_dma(MLP_FILTER2, filters[2], sizeof(filters[2]));
+        memcpy_dma(MLP_FILTER3, filters[3], sizeof(filters[3]));
+        Xil_Out32(MLP_CTRLB, 1);
+
+        Xil_Out32(MLP_FILTER_W, 3);
+        Xil_Out32(MLP_FILTER_H, 2);
+        Xil_Out32(MLP_FILTER_C, 2);
+        Xil_Out32(MLP_OUTPUT_W, 2);
+        Xil_Out32(MLP_OUTPUT_H, 2);
+        Xil_Out32(MLP_INPUT_END_DIFF_FW, 2);
+        Xil_Out32(MLP_INPUT_END_DIFF_FH, 6);
+        Xil_Out32(MLP_INPUT_END_DIFF_FC, -17);
+        Xil_Out32(MLP_INPUT_END_DIFF_OW, -15);
+        Xil_Out32(MLP_OUTPUT_ELEMENTS_PER_CHANNEL, 4);
+        Xil_Out32(MLP_OUTPUT_INITIAL_OFFSET, 0);
+        Xil_Out32(MLP_MAC0_BIAS, biases[0]);
+        Xil_Out32(MLP_MAC1_BIAS, biases[1]);
+        Xil_Out32(MLP_MAC2_BIAS, biases[2]);
+        Xil_Out32(MLP_MAC3_BIAS, biases[3]);
+        Xil_Out32(MLP_Q_SCALE, qscale);
+        Xil_Out32(MLP_Q_ZERO, qzero);
+
+        Xil_Out32(MLP_CTRLA, 0);
+
+        while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE)) {
+            std::cout << "not idle..." << std::endl;
+        }
+
+        int8_t outputs[4][2][2] = {0};
+
+        memcpy_dma(outputs, MLP_OUTPUTS, sizeof(outputs));
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 2; j++) {
+                std::cout << static_cast<int>(outputs[i][j][0]) << ", " << static_cast<int>(outputs[i][j][1]) << std::endl;
+            }
+        }
+
+        int8_t new_filters[4][2][2] = {
+            {
+                { -1, 0 },
+                { 1, 2 },
+            },
+            {
+                { 0, 1 },
+                { 2, -1 },
+            },
+            {
+                { 1, 2 },
+                { -1, 0 },
+            },
+            {
+                { 2, -1 },
+                { 0, 1}
+            }
+        };
+
+    
+
+
+        #endif
+    }
+
 } // namespace ML
 
 #ifdef ZEDBOARD
@@ -1445,7 +1583,10 @@ extern "C" int main()
         {
             throw std::runtime_error("Failed to mount SD card. Is it plugged in?");
         }
-        ML::runTests();
+
+        Xil_DCacheDisable();
+
+        ML::lab6Stuff();
     }
     catch (const std::exception &e)
     {

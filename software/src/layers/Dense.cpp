@@ -14,8 +14,8 @@ typedef struct __packed
 namespace ML
 {
 
-#ifdef ZEDBOARD
-#include <xllfifo_hw.h>
+#if defined(ZEDBOARD) && defined(FIFOSTUFF)
+// #include <xllfifo_hw.h>
 #include <xil_io.h>
 #include "xparameters.h"
 
@@ -97,7 +97,7 @@ namespace ML
         for (size_t outputPixelIdx = 0; outputPixelIdx < nOutputChannels; outputPixelIdx++)
         {
 
-            #ifdef ZEDBOARD
+            #if defined(ZEDBOARD) && defined(FIFOSTUFF)
             fifo_write_data(biasData.get<i16>(outputPixelIdx));
             for (size_t inputPixelIdx = 0; inputPixelIdx < inputWidth; inputPixelIdx++)
             {
@@ -138,6 +138,10 @@ namespace ML
                 outputData.get<fp32>(outputPixelIdx) = finalTestPixel;
             }
         }
+
+    }
+
+    void DenseLayer::computeFastAccelerated(const LayerData &dataIn, QParams qparam) const {
 
     }
 

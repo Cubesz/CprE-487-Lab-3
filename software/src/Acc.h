@@ -1,4 +1,4 @@
-#ifdef ZEDBOARD
+#if defined(ZEDBOARD) && defined(FIFOSTUFF)
 
 #pragma once
 

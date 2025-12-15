@@ -8,10 +8,11 @@
 #include "QuantParams.h"
 
 #ifdef ZEDBOARD
-#include <xllfifo_hw.h>
+//#include <xllfifo_hw.h>
 #include <xil_io.h>
 #include "xparameters.h"
 
+#ifdef FIFOSTUFF
 // Write a 32-bit data word to the FIFO's Transmit port
 static inline void fifo_write_data(uint32_t data) {
     Xil_Out32(XPAR_AXI_FIFO_0_BASEADDR + XLLF_TDFD_OFFSET, data);
@@ -31,6 +32,7 @@ static inline int32_t fifo_read_data() {
 static inline void fifo_wait_for_data() {
     while (Xil_In32(XPAR_AXI_FIFO_0_BASEADDR + XLLF_RDFO_OFFSET) == 0);
 }
+#endif
 
 #endif
 
@@ -248,7 +250,7 @@ void ConvolutionalLayer::computeQuantized(const LayerData& dataIn, QParams qpara
                 
                 // this pixel should be the 3D filter that corresponds with the output channel smashed against a 3D portion of the input
 
-                #ifdef ZEDBOARD
+                #if defined(ZEDBOARD) && defined(FIFOSTUFF)
                 fifo_write_data(biasData.get<i16>(outputChannel));
                 for (size_t filterChannel = 0; filterChannel < nFilterChannels; filterChannel++) {
                     for (size_t filterColumn = 0; filterColumn < filterWidth; filterColumn++) {
@@ -320,6 +322,10 @@ void ConvolutionalLayer::computeQuantized(const LayerData& dataIn, QParams qpara
         }
     }
 
+
+}
+
+void ConvolutionalLayer::computeFastAccelerated(const LayerData& dataIn, QParams qparam) const {
 
 }
 
