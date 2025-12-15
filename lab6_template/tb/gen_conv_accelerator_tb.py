@@ -69,7 +69,7 @@ def convolve(input, filter, biases, scale, zero, max_pooling, relu, output_initi
 
     control_process += f"""\
 conv_idle <= '1';
-wait for 10ps;
+wait for 10ns;
 BRAM_INPUT_data <= x"{('A5'*(BRAM_SIZE_BYTES-len(flat_input)))}{''.join(f'{np.uint8(x):02X}' for x in reversed(flat_input))}";
 BRAM_FILTER0_data <= x"{('A5'*(BRAM_SIZE_BYTES-len(flat_filter0)))}{''.join(f'{np.uint8(x):02X}' for x in reversed(flat_filter0))}";
 BRAM_FILTER1_data <= x"{('A5'*(BRAM_SIZE_BYTES-len(flat_filter1)))}{''.join(f'{np.uint8(x):02X}' for x in reversed(flat_filter1))}";
@@ -82,22 +82,22 @@ filter_h <= x"{np.shape(filter)[2]:08X}";
 filter_c <= x"{np.shape(filter)[1]:08X}";
 output_w <= x"{np.shape(input)[2] - np.shape(filter)[3] + 1:08X}";
 output_h <= x"{np.shape(input)[1] - np.shape(filter)[2] + 1:08X}";
-input_end_diff_fw <= x"{np.uint32(input_end_diff_fw):08X}";
-input_end_diff_fh <= x"{np.uint32(input_end_diff_fh):08X}";
-input_end_diff_fc <= x"{np.uint32(input_end_diff_fc):08X}";
-input_end_diff_ow <= x"{np.uint32(input_end_diff_ow):08X}";
+input_end_diff_fw <= x"{np.uint32(int(input_end_diff_fw) & 0xFFFFFFFF):08X}";
+input_end_diff_fh <= x"{np.uint32(int(input_end_diff_fh) & 0xFFFFFFFF):08X}";
+input_end_diff_fc <= x"{np.uint32(int(input_end_diff_fc) & 0xFFFFFFFF):08X}";
+input_end_diff_ow <= x"{np.uint32(int(input_end_diff_ow) & 0xFFFFFFFF):08X}";
 output_elements_per_channel <= x"{output_elements_per_channel:08X}";
 output_initial_offset <= x"{output_initial_offset:08X}";
-mac0_bias <= x"{np.uint32(biases[0]):08X}";
-mac1_bias <= x"{np.uint32(biases[1]):08X}";
-mac2_bias <= x"{np.uint32(biases[2]):08X}";
-mac3_bias <= x"{np.uint32(biases[3]):08X}";
+mac0_bias <= x"{np.uint32(int(biases[0]) & 0xFFFFFFFF):08X}";
+mac1_bias <= x"{np.uint32(int(biases[1]) & 0xFFFFFFFF):08X}";
+mac2_bias <= x"{np.uint32(int(biases[2]) & 0xFFFFFFFF):08X}";
+mac3_bias <= x"{np.uint32(int(biases[3]) & 0xFFFFFFFF):08X}";
 q_scale <= x"{scale:08X}";
-q_zero <= x"{np.uint32(zero):08X}";
-wait for 10ps;
+q_zero <= x"{np.int32(zero).view(np.uint32):08X}";
+wait for 10ns;
 conv_idle <= '0';
 wait until rising_edge(conv_complete);
-wait for 10ps;
+wait for 10ns;
 """
 
     output_buffer = np.zeros((4, int(OH/2) if max_pooling else OH, int(OW/2) if max_pooling else OW), dtype=np.int8)
@@ -105,10 +105,13 @@ wait for 10ps;
     for oh in range(OH):
         for ow in range(OW):
             output_addr = ((int(oh/2)*int(OW/2)) + int(ow/2)) if max_pooling else ((oh * OW) + (ow))
-            out0 = np.int32(biases[0])
-            out1 = np.int32(biases[1])
-            out2 = np.int32(biases[2])
-            out3 = np.int32(biases[3])
+            # out0 = np.int32(biases[0])
+            # out1 = np.int32(biases[1])
+            # out2 = np.int32(biases[2])
+            out0 = np.uint32(int(biases[0]) & 0xFFFFFFFF).view(np.int32)
+            out1 = np.uint32(int(biases[1]) & 0xFFFFFFFF).view(np.int32)
+            out2 = np.uint32(int(biases[2]) & 0xFFFFFFFF).view(np.int32)
+            out3 = np.uint32(int(biases[3]) & 0xFFFFFFFF).view(np.int32)
             for fc in range(FC):
                 for fh in range(FH):
                     for fw in range(FW):
@@ -123,10 +126,13 @@ wait for 10ps;
                         filter1_val = filter[1][fc][fh][fw]
                         filter2_val = filter[2][fc][fh][fw]
                         filter3_val = filter[3][fc][fh][fw]
-                        mac0_in_tdata.append((np.uint8(input_val) << 8) | np.uint8(filter0_val))
-                        mac1_in_tdata.append((np.uint8(input_val) << 8) | np.uint8(filter1_val))
-                        mac2_in_tdata.append((np.uint8(input_val) << 8) | np.uint8(filter2_val))
-                        mac3_in_tdata.append((np.uint8(input_val) << 8) | np.uint8(filter3_val))
+                        mac0_in_tdata.append((np.uint16(input_val & 0xFF) << 8) | np.uint16(filter0_val & 0xFF))
+                        mac1_in_tdata.append((np.uint16(input_val & 0xFF) << 8) | np.uint16(filter1_val & 0xFF))
+                        mac2_in_tdata.append((np.uint16(input_val & 0xFF) << 8) | np.uint16(filter2_val & 0xFF))
+                        mac3_in_tdata.append((np.uint16(input_val & 0xFF) << 8) | np.uint16(filter3_val & 0xFF))
+                        # mac1_in_tdata.append((np.uint8(input_val) << 8) | np.uint8(filter1_val))
+                        # mac2_in_tdata.append((np.uint8(input_val) << 8) | np.uint8(filter2_val))
+                        # mac3_in_tdata.append((np.uint8(input_val) << 8) | np.uint8(filter3_val))
                         mac0_in_tlast.append(last)
                         mac1_in_tlast.append(last)
                         mac2_in_tlast.append(last)
@@ -223,11 +229,13 @@ filters = np.array([
     ]
 ])
 
+#old scale 0x7A32BC81
+# Q0.18 but in Q0.32 format
 
 convolve(inputs, filters, [0, 1, 2, 3], 0x4000000, 0, False, False, 0)
-convolve(inputs, filters, [0, 1, -2, 0x8A32BC81], 0x7A32BC81, -127, False, False, 0)
-convolve(np.reshape(range(-20, 20), (2, 5, 4)), filters, [0, 1, 2, 3], 0x7A32BC81, -127, True, True, 0)
-convolve(np.reshape(range(-30, 30), (2, 5, 6)), filters, [4, 5, 6, 7], 0x7A32BC81, -100, True, True, 4)
+convolve(inputs, filters, [0, 1, -2, 0x8A32BC81], 0x01D0CB59 & ~0x3FFFF, -127, False, False, 0)
+convolve(np.reshape(range(-20, 20), (2, 5, 4)), filters, [0, 1, 2, 3], 0x003634f0 & ~0x3FFFF, -127, True, True, 0)
+convolve(np.reshape(range(-30, 30), (2, 5, 6)), filters, [4, 5, 6, 7], 0x009fd80a & ~0x3FFFF, -100, True, True, 4)
 
 inputs = [[[0x40, 0], [0, 0]]]
 filters = [[[[1, 0], [0, 0]]], [[[1, 0], [0, 0]]], [[[1, 0], [0, 0]]], [[[1, 0], [0, 0]]]]
@@ -253,7 +261,8 @@ def gen_axis_checking_process(prefix, signals):
     out += "    variable i : integer := 0;\n"
     num_values = len(signals[0][1])
     for name, values, bits in signals:
-        bitstring = ''.join(f"{np.uint32(v):0{bits}b}"[-bits:] for v in reversed(values))
+        print(f"{np.uint32(values[3]):0{bits}b}"[-bits:])
+        bitstring = ''.join(f"{np.int32(v).view(np.uint32):0{bits}b}"[-bits:] for v in reversed(values))
         out += f'    constant EXPECTED_VALUES_{name} : std_logic_vector({num_values*bits}-1 downto 0) := "{bitstring}";\n'
     out += "begin\n"
     for name, values, bits in signals:
@@ -587,7 +596,7 @@ begin
     end process;
  
 
-    clk <= not clk after 1ps;
+    clk <= not clk after 1ns;
 
     dut: entity work.conv_accelerator
         generic map(
@@ -733,7 +742,7 @@ begin
 
     process begin
         rst <= '1';
-        wait for 2ps;
+        wait for 2ns;
         conv_idle <= '1';
         rst <= '0';
         {indent(control_process, 2)}
