@@ -1566,17 +1566,21 @@ namespace ML
         int singleFilterSize = 3*5*5;
         int outputs_per_channel = 60*60;
         int outputOffset = 0;
-        uint8_t q_scale = 0x00363129;
+        uint32_t q_scale = 0x00363129;
         int qzero = modelQParams_8q[0].Z_i_next;
-        void* filterDataPtr = ly0wd.raw();
+        uint8_t* filterDataPtr = (uint8_t*) ly0wd.raw();
 
         uint32_t ctrlb_flags = MLP_CTRLB_RELU;
         Xil_Out32(MLP_CTRLB, ctrlb_flags);
         memcpy_dma(MLP_INPUTS, ly0id.raw(), 3*64*64); // first layer only
-        memcpy_dma(MLP_FILTERS0, filterDataPtr+=singleFilterSize, singleFilterSize);
-        memcpy_dma(MLP_FILTERS1, filterDataPtr+=singleFilterSize, singleFilterSize);
-        memcpy_dma(MLP_FILTERS2, filterDataPtr+=singleFilterSize, singleFilterSize);
-        memcpy_dma(MLP_FILTERS3, filterDataPtr+=singleFilterSize, singleFilterSize);
+        memcpy_dma(MLP_FILTER0, filterDataPtr, singleFilterSize);
+        filterDataPtr += singleFilterSize;
+        memcpy_dma(MLP_FILTER1, filterDataPtr, singleFilterSize);
+        filterDataPtr += singleFilterSize;
+        memcpy_dma(MLP_FILTER2, filterDataPtr, singleFilterSize);
+        filterDataPtr += singleFilterSize;
+        memcpy_dma(MLP_FILTER3, filterDataPtr, singleFilterSize);
+        filterDataPtr += singleFilterSize;
         ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
         Xil_Out32(MLP_CTRLB, ctrlb_flags);
 
@@ -1585,39 +1589,82 @@ namespace ML
         Xil_Out32(MLP_FILTER_C, 3);
         Xil_Out32(MLP_OUTPUT_W, 60);
         Xil_Out32(MLP_OUTPUT_H, 60);
+        Xil_Out32(MLP_INPUT_END_DIFF_FW, 60);
+        Xil_Out32(MLP_INPUT_END_DIFF_FH, 3836);
+        Xil_Out32(MLP_INPUT_END_DIFF_FC, -4355); // -4355
+        Xil_Out32(MLP_INPUT_END_DIFF_OW, -4351); // -4351
         Xil_Out32(MLP_OUTPUT_ELEMENTS_PER_CHANNEL, outputs_per_channel);
         Xil_Out32(MLP_Q_SCALE, q_scale);
-        Xil_Out32(MLP_Q_SCALE, qzero);
+        Xil_Out32(MLP_Q_ZERO, qzero);
 
 
         for (int i = 0; i < 32; i += 4) {
             Xil_Out32(MLP_OUTPUT_INITIAL_OFFSET, outputOffset);
             outputOffset += 4 * outputs_per_channel;
             
-            Xil_Out32(MLP_MAC0_BIAS, ly0bd.get<i16>(i) - Zp_macced_player0[i]);
-            Xil_Out32(MLP_MAC0_BIAS, ly0bd.get<i16>(i + 1) - Zp_macced_player0[i + 1]);
-            Xil_Out32(MLP_MAC0_BIAS, ly0bd.get<i16>(i + 2) - Zp_macced_player0[i + 2]);
-            Xil_Out32(MLP_MAC0_BIAS, ly0bd.get<i16>(i + 3) - Zp_macced_player0[i + 3]);
+            Xil_Out32(MLP_MAC0_BIAS, int(ly0bd.get<i16>(i)) - Zp_macced_player0[i]);
+            Xil_Out32(MLP_MAC1_BIAS, int(ly0bd.get<i16>(i + 1)) - Zp_macced_player0[i + 1]);
+            Xil_Out32(MLP_MAC2_BIAS, int(ly0bd.get<i16>(i + 2)) - Zp_macced_player0[i + 2]);
+            Xil_Out32(MLP_MAC3_BIAS, int(ly0bd.get<i16>(i + 3)) - Zp_macced_player0[i + 3]);
 
             Xil_Out32(MLP_CTRLA, 0); // start
             // as it goes, load upcoming filters
-            memcpy_dma(MLP_FILTERS0, filterDataPtr+=singleFilterSize, singleFilterSize);
-            memcpy_dma(MLP_FILTERS1, filterDataPtr+=singleFilterSize, singleFilterSize);
-            memcpy_dma(MLP_FILTERS2, filterDataPtr+=singleFilterSize, singleFilterSize);
-            memcpy_dma(MLP_FILTERS3, filterDataPtr+=singleFilterSize, singleFilterSize);
+            memcpy_dma(MLP_FILTER0, filterDataPtr, singleFilterSize);
+            filterDataPtr += singleFilterSize;
+            memcpy_dma(MLP_FILTER1, filterDataPtr, singleFilterSize);
+            filterDataPtr += singleFilterSize;
+            memcpy_dma(MLP_FILTER2, filterDataPtr, singleFilterSize);
+            filterDataPtr += singleFilterSize;
+            memcpy_dma(MLP_FILTER3, filterDataPtr, singleFilterSize);
+            filterDataPtr += singleFilterSize;
 
             while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE)); // wait for it to finish
             ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
             Xil_Out32(MLP_CTRLB, ctrlb_flags);
+            // break;
 
         }
 
+        ly0bd.freeData(); // maybe do later
+        ly0wd.freeData();
+
+        // verifying... (not verified)
+        int8_t couple_outputs[64] = {0};
+        memcpy_dma(couple_outputs, MLP_OUTPUTS, 64);
+        
+        for (int i = 0; i < 64; i++) {
+            std::cout << static_cast<int>(couple_outputs[i]) << ", ";
+        }
+        std::cout << std::endl;
 
 
+        Model model;
 
+        std::cout << "Adding Layer 1: Convolutional" << std::endl;
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {64, 64, 3}},                                              // Input Data
+            LayerParams{sizeof(i8), {60, 60, 32}},                                             // Output Data
+            LayerParams{sizeof(i8), {5, 5, 3, 32}, "data/quant/param_layer_0/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_8q.bin"}           // Bias
+        );
+        model.allocLayers();
+        LayerData inp = LayerData{LayerParams{sizeof(i8), {64, 64, 3}}, "data/quant/given_image0_8q.bin"};
+        inp.loadData();
+        LayerData out = model.inferenceLayer(inp, 0, Layer::InfType::QUANTIZED, modelQParams_8q[0]);
 
+        for (int i = 0; i < 64; i++) {
+            std::cout << static_cast<int>(out.get<i8>(i)) << ", ";
+        }
+        std::cout << std::endl;
 
+        std::cout << static_cast<int>(((int8_t*)ly0wd.raw())[0]) << std::endl;
+        LayerData dot = LayerData{LayerParams{sizeof(i8), {5, 5, 3, 32}}, "data/quant/param_layer_0/weights_8q.bin"};
+        std::cout << static_cast<int>(dot.get<i8>(0)) << std::endl;
 
+        std::cout << static_cast<int>(((int8_t*)ly0id.raw())[0]) << std::endl;
+        std::cout << static_cast<int>(inp.get<i8>(0)) << std::endl;
+
+        // for continuing, invert outputs to inputs and do above stuff with new layer initialization
 
 
 
