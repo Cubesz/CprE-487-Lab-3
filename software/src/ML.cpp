@@ -1591,8 +1591,8 @@ namespace ML
         Xil_Out32(MLP_OUTPUT_H, 60);
         Xil_Out32(MLP_INPUT_END_DIFF_FW, 60);
         Xil_Out32(MLP_INPUT_END_DIFF_FH, 3836);
-        Xil_Out32(MLP_INPUT_END_DIFF_FC, -4355); // -4355
-        Xil_Out32(MLP_INPUT_END_DIFF_OW, -4351); // -4351
+        Xil_Out32(MLP_INPUT_END_DIFF_FC, -8451);
+        Xil_Out32(MLP_INPUT_END_DIFF_OW, -8447);
         Xil_Out32(MLP_OUTPUT_ELEMENTS_PER_CHANNEL, outputs_per_channel);
         Xil_Out32(MLP_Q_SCALE, q_scale);
         Xil_Out32(MLP_Q_ZERO, qzero);
