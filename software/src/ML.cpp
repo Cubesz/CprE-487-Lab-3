@@ -1045,63 +1045,6 @@ namespace ML
         log("Comparing C++ hardware output against Python quantized output...");
         compareQuantizedData(actual_output, expected_output);
 
-// I used gemeni 2.5 to help add debug print statements as the dense output was not matching the one
-// from the python code. The result is the following
-#if 0 // Set to 0 to disable these debug prints
-    printf("\n--- DEBUG: Inspecting Inputs for Layer '%s' ---\n", layerName.c_str());
-
-    // --- 1. Get pointers to all relevant data ---
-    const int8_t* input_ptr = static_cast<const int8_t*>(inputData.raw());
-    const int8_t* weight_ptr = static_cast<const int8_t*>(layer.getWeightData().raw());
-    const int32_t* bias_ptr = static_cast<const int32_t*>(layer.getBiasData().raw());
-    const int8_t* actual_output_ptr = static_cast<const int8_t*>(actual_output.raw());
-    const int8_t* expected_output_ptr = static_cast<const int8_t*>(expected_output.raw());
-    
-    // Get dimensions
-    const size_t inputWidth = layer.getInputParams().dims[0];
-    const size_t nOutputChannels = layer.getOutputParams().dims[0];
-
-    // --- 2. Print the first few INPUT values ---
-    // These are the values that will be multiplied.
-    printf("  - First 10 Input Activations: [");
-    for (int i = 0; i < 10; ++i) {
-        printf("%d", (int)input_ptr[i]);
-        if (i < 9) printf(", ");
-    }
-    printf("]\n");
-
-    // --- 3. Print the Bias and Weights for the FIRST output neuron (index 0) ---
-    // This will tell you if your weight indexing is correct.
-    printf("  - Bias for Output Neuron 0: %d\n", (int)bias_ptr[0]);
-    printf("  - First 10 Weights for Output Neuron 0: [");
-    for (int i = 0; i < 10; ++i) {
-        // This uses the EXACT SAME indexing formula as your computeAccelerated function
-        size_t filterIdx = 0 * inputWidth + i; // outputPixelIdx * inputWidth + inputPixelIdx
-        printf("%d", (int)weight_ptr[filterIdx]);
-        if (i < 9) printf(", ");
-    }
-    printf("]\n");
-
-    printf("\n--- DEBUG: Inspecting Outputs for Layer '%s' ---\n", layerName.c_str());
-
-    // --- 4. Print the first few OUTPUT values ---
-    // Compare these two lines. They should be identical if everything is working.
-    printf("  - First 10 ACTUAL (C++/FPGA) Outputs:   [");
-    for (int i = 0; i < 10; ++i) {
-        printf("%d", (int)actual_output_ptr[i]);
-        if (i < 9) printf(", ");
-    }
-    printf("]\n");
-
-    printf("  - First 10 EXPECTED (Python) Outputs: [");
-    for (int i = 0; i < 10; ++i) {
-        printf("%d", (int)expected_output_ptr[i]);
-        if (i < 9) printf(", ");
-    }
-    printf("]\n\n");
-
-#endif
-
         layer.freeLayer();
     }
 
@@ -1203,7 +1146,7 @@ namespace ML
         );
 
 #endif
-    
+
         // // Base input data path (determined from current directory of where you are running the command)
         Path basePath("data"); // May need to be altered for zedboards loading from SD Cards
         Path modelPath = basePath / "model";
@@ -1435,20 +1378,20 @@ namespace ML
         std::cout << "\n\n----- ML::runTests() COMPLETE -----\n";
     }
 
-    void smallRun() {
-        #ifdef ZEDBOARD
+    void smallRun()
+    {
+#ifdef ZEDBOARD
         int8_t inputs[2][3][4] = {
             {
-                { 127, -1, -128, 4 },
-                { 5, 6, 7, 8 },
-                { 9, 10, 11, 12 },
+                {127, -1, -128, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
             },
             {
-                { 13, 14, 15, 16 },
-                { 17, 18, 19, 0 },
-                { 21, 3, 2, 1 },
-            }
-        };
+                {13, 14, 15, 16},
+                {17, 18, 19, 0},
+                {21, 3, 2, 1},
+            }};
 
         int8_t filters[4][2][2][3] = {
             {
@@ -1494,7 +1437,7 @@ namespace ML
 
         };
 
-        int32_t biases[] = { 0, 1, 2, 3 };
+        int32_t biases[] = {0, 1, 2, 3};
         uint32_t qscale = 0x04000000;
         uint32_t qzero = 0;
 
@@ -1527,7 +1470,8 @@ namespace ML
 
         Xil_Out32(MLP_CTRLA, 0);
 
-        while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE)) {
+        while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE))
+        {
             std::cout << "not idle..." << std::endl;
         }
 
@@ -1535,55 +1479,52 @@ namespace ML
 
         memcpy_dma(outputs, MLP_OUTPUTS, sizeof(outputs));
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 2; j++) {
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 2; j++)
+            {
                 std::cout << static_cast<int>(outputs[i][j][0]) << ", " << static_cast<int>(outputs[i][j][1]) << std::endl;
             }
         }
-        #endif
+#endif
     }
 
-
-    void lab6Stuff() {
-        #define ZEDBOARD
-        #ifdef ZEDBOARD
-        runMemoryTest();
-
+    void lab6Stuff()
+    {
+#define ZEDBOARD
+#ifdef ZEDBOARD
 
         // WEIGHTS MUST BE FILTER x LAYERS x HEIGHT x WIDTH
         // INPUTS MUST BE LAYERS x HEIGHT x WIDTH
 
-        LayerData ly0id = LayerData{LayerParams{sizeof(i8), {3, 64, 64}}, "data/quant_t/images/given_image0_8q_t.bin"}; // first layer only
-        LayerData ly0wd = LayerData{LayerParams{sizeof(i8), {32, 3, 5, 5}}, "data/quant_t/param_layer_0/weights_8q_t.bin"};
-        LayerData ly0bd = LayerData{LayerParams{sizeof(i16), {32}}, "data/quant_t/param_layer_0/biases_8q_t.bin"};;
+        // Layer 1
+        LayerData ly0id = LayerData{LayerParams{sizeof(i8), {3, 64, 64}}, "data/quant_t_new/given_image0_8q_t_new.bin"};
+        LayerData ly0wd = LayerData{LayerParams{sizeof(i8), {32, 3, 5, 5}}, "data/quant_t_new/layer0_weights_8q_t_new.bin"};
+        LayerData ly0bd = LayerData{LayerParams{sizeof(i16), {32}}, "data/quant/param_layer_0/biases_8q.bin"};
         ly0id.loadData(); // first layer only
         ly0wd.loadData();
         ly0bd.loadData();
 
-
+        printf("Running Layer 1 (64x64x3 -> 60x60x32)...\n");
 
         // layer initialization
-        int singleFilterSize = 3*5*5;
-        int outputs_per_channel = 60*60;
-        int outputOffset = 0;
-        uint32_t q_scale = 0x00363129;
-        int qzero = modelQParams_8q[0].Z_i_next;
-        uint8_t* filterDataPtr = (uint8_t*) ly0wd.raw();
+        Xil_Out32(MLP_CTRLB, MLP_CTRLB_SWAP_FILTERS);
+        memcpy_dma(MLP_INPUTS, ly0id.raw(), 3 * 64 * 64);
 
-        uint32_t ctrlb_flags = MLP_CTRLB_RELU;
-        Xil_Out32(MLP_CTRLB, ctrlb_flags);
-        memcpy_dma(MLP_INPUTS, ly0id.raw(), 3*64*64); // first layer only
-        memcpy_dma(MLP_FILTER0, filterDataPtr, singleFilterSize);
-        filterDataPtr += singleFilterSize;
-        memcpy_dma(MLP_FILTER1, filterDataPtr, singleFilterSize);
-        filterDataPtr += singleFilterSize;
-        memcpy_dma(MLP_FILTER2, filterDataPtr, singleFilterSize);
-        filterDataPtr += singleFilterSize;
-        memcpy_dma(MLP_FILTER3, filterDataPtr, singleFilterSize);
-        filterDataPtr += singleFilterSize;
-        ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
-        Xil_Out32(MLP_CTRLB, ctrlb_flags);
+        int singleFilterSize_L1 = 3 * 5 * 5;
+        uint8_t *filterDataPtr_L1 = (uint8_t *)ly0wd.raw();
 
+        memcpy_dma(MLP_FILTER0, filterDataPtr_L1, singleFilterSize_L1);
+        filterDataPtr_L1 += singleFilterSize_L1;
+        memcpy_dma(MLP_FILTER1, filterDataPtr_L1, singleFilterSize_L1);
+        filterDataPtr_L1 += singleFilterSize_L1;
+        memcpy_dma(MLP_FILTER2, filterDataPtr_L1, singleFilterSize_L1);
+        filterDataPtr_L1 += singleFilterSize_L1;
+        memcpy_dma(MLP_FILTER3, filterDataPtr_L1, singleFilterSize_L1);
+        filterDataPtr_L1 += singleFilterSize_L1;
+
+        // Register Config
+        Xil_Out32(MLP_CTRLB, MLP_CTRLB_RELU);
         Xil_Out32(MLP_FILTER_W, 5);
         Xil_Out32(MLP_FILTER_H, 5);
         Xil_Out32(MLP_FILTER_C, 3);
@@ -1593,15 +1534,22 @@ namespace ML
         Xil_Out32(MLP_INPUT_END_DIFF_FH, 3836);
         Xil_Out32(MLP_INPUT_END_DIFF_FC, -8451);
         Xil_Out32(MLP_INPUT_END_DIFF_OW, -8447);
-        Xil_Out32(MLP_OUTPUT_ELEMENTS_PER_CHANNEL, outputs_per_channel);
-        Xil_Out32(MLP_Q_SCALE, q_scale);
-        Xil_Out32(MLP_Q_ZERO, qzero);
+        Xil_Out32(MLP_OUTPUT_ELEMENTS_PER_CHANNEL, 60 * 60);
 
+        // Scale
+        uint32_t l1_scale = (uint32_t)(4294967296.0 / (double)modelQParams_8q[0].outputscaler);
+        Xil_Out32(MLP_Q_SCALE, l1_scale);
+        Xil_Out32(MLP_Q_ZERO, modelQParams_8q[0].Z_i_next);
 
-        for (int i = 0; i < 32; i += 4) {
+        // Process 32 Output Channels in batches of 4
+        uint32_t ctrlb_flags_L1 = MLP_CTRLB_RELU;
+        int outputOffset = 0;
+
+        for (int i = 0; i < 32; i += 4)
+        {
             Xil_Out32(MLP_OUTPUT_INITIAL_OFFSET, outputOffset);
-            outputOffset += 4 * outputs_per_channel;
-            
+            outputOffset += 4 * 60 * 60;
+
             Xil_Out32(MLP_MAC0_BIAS, int(ly0bd.get<i16>(i)) - Zp_macced_player0[i]);
             Xil_Out32(MLP_MAC1_BIAS, int(ly0bd.get<i16>(i + 1)) - Zp_macced_player0[i + 1]);
             Xil_Out32(MLP_MAC2_BIAS, int(ly0bd.get<i16>(i + 2)) - Zp_macced_player0[i + 2]);
@@ -1609,66 +1557,101 @@ namespace ML
 
             Xil_Out32(MLP_CTRLA, 0); // start
             // as it goes, load upcoming filters
-            memcpy_dma(MLP_FILTER0, filterDataPtr, singleFilterSize);
-            filterDataPtr += singleFilterSize;
-            memcpy_dma(MLP_FILTER1, filterDataPtr, singleFilterSize);
-            filterDataPtr += singleFilterSize;
-            memcpy_dma(MLP_FILTER2, filterDataPtr, singleFilterSize);
-            filterDataPtr += singleFilterSize;
-            memcpy_dma(MLP_FILTER3, filterDataPtr, singleFilterSize);
-            filterDataPtr += singleFilterSize;
 
-            while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE)); // wait for it to finish
-            ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
-            Xil_Out32(MLP_CTRLB, ctrlb_flags);
+            if (i < 28)
+            {
+                memcpy_dma(MLP_FILTER0, filterDataPtr_L1, singleFilterSize_L1);
+                filterDataPtr_L1 += singleFilterSize_L1;
+                memcpy_dma(MLP_FILTER1, filterDataPtr_L1, singleFilterSize_L1);
+                filterDataPtr_L1 += singleFilterSize_L1;
+                memcpy_dma(MLP_FILTER2, filterDataPtr_L1, singleFilterSize_L1);
+                filterDataPtr_L1 += singleFilterSize_L1;
+                memcpy_dma(MLP_FILTER3, filterDataPtr_L1, singleFilterSize_L1);
+                filterDataPtr_L1 += singleFilterSize_L1;
+            }
+
+            while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE))
+                ; // wait for it to finish
+            ctrlb_flags_L1 ^= MLP_CTRLB_SWAP_FILTERS;
+            Xil_Out32(MLP_CTRLB, ctrlb_flags_L1);
             // break;
-
         }
-
         ly0bd.freeData(); // maybe do later
         ly0wd.freeData();
 
-        // verifying... (not verified)
-        int8_t couple_outputs[64] = {0};
-        memcpy_dma(couple_outputs, MLP_OUTPUTS, 64);
-        
-        for (int i = 0; i < 64; i++) {
-            std::cout << static_cast<int>(couple_outputs[i]) << ", ";
-        }
-        std::cout << std::endl;
+        printf("Comparing Hardware Output vs Software Reference...\n");
 
+        // Get Hardware Output
+        std::vector<int8_t> hw_out_l1(32 * 60 * 60);
+        memcpy_dma(hw_out_l1.data(), MLP_OUTPUTS, 32 * 60 * 60);
 
-        Model model;
-
+        // Run Software Layer 1
+        Model model_l1;
         std::cout << "Adding Layer 1: Convolutional" << std::endl;
-        model.addLayer<ConvolutionalLayer>(
-            LayerParams{sizeof(i8), {64, 64, 3}},                                              // Input Data
-            LayerParams{sizeof(i8), {60, 60, 32}},                                             // Output Data
-            LayerParams{sizeof(i8), {5, 5, 3, 32}, "data/quant/param_layer_0/weights_8q.bin"}, // Weights
-            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_8q.bin"}           // Bias
-        );
-        model.allocLayers();
-        LayerData inp = LayerData{LayerParams{sizeof(i8), {64, 64, 3}}, "data/quant/given_image0_8q.bin"};
-        inp.loadData();
-        LayerData out = model.inferenceLayer(inp, 0, Layer::InfType::QUANTIZED, modelQParams_8q[0]);
 
-        for (int i = 0; i < 64; i++) {
-            std::cout << static_cast<int>(out.get<i8>(i)) << ", ";
+        model_l1.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {64, 64, 3}},
+            LayerParams{sizeof(i8), {60, 60, 32}},
+            LayerParams{sizeof(i8), {5, 5, 3, 32}, "data/quant/param_layer_0/weights_8q.bin"},
+            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_8q.bin"});
+        model_l1.allocLayers();
+
+        LayerData inp_sw = LayerData{LayerParams{sizeof(i8), {64, 64, 3}}, "data/quant/given_image0_8q.bin"};
+        inp_sw.loadData();
+        const LayerData &l1_out_sw = model_l1.inferenceLayer(inp_sw, 0, Layer::InfType::QUANTIZED, modelQParams_8q[0]);
+
+        // Compare each pixel
+        int mismatches = 0;
+        int diff_of_one = 0;
+        int print_limit = 10;
+
+        for (int ch = 0; ch < 32; ch++)
+        {
+            for (int r = 0; r < 60; r++)
+            {
+                for (int c = 0; c < 60; c++)
+                {
+                    // HW Output is [Ch][Row][Col]
+                    int hw_val = (int)hw_out_l1[(ch * 60 * 60) + (r * 60) + c];
+
+                    // SW Output is [Row][Col][Ch]
+                    int sw_val = (int)l1_out_sw.get<i8>((r * 60 * 32) + (c * 32) + ch);
+
+                    int diff = abs(hw_val - sw_val);
+
+                    if (diff > 0)
+                    {
+                        if (diff == 1)
+                        {
+                            diff_of_one++;
+                        }
+                        else
+                        {
+                            if (mismatches < print_limit)
+                            {
+                                printf("FAIL: Ch%d R%d C%d -> HW:%d SW:%d (Diff: %d)\n", ch, r, c, hw_val, sw_val, diff);
+                            }
+                            mismatches++;
+                        }
+                    }
+                }
+            }
         }
-        std::cout << std::endl;
 
-        std::cout << static_cast<int>(((int8_t*)ly0wd.raw())[0]) << std::endl;
-        LayerData dot = LayerData{LayerParams{sizeof(i8), {5, 5, 3, 32}}, "data/quant/param_layer_0/weights_8q.bin"};
-        std::cout << static_cast<int>(dot.get<i8>(0)) << std::endl;
+        printf("\n--- RESULTS ---\n");
+        printf("Total Pixels: %d\n", 32 * 60 * 60);
+        printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
 
-        std::cout << static_cast<int>(((int8_t*)ly0id.raw())[0]) << std::endl;
-        std::cout << static_cast<int>(inp.get<i8>(0)) << std::endl;
+        if (mismatches == 0)
+        {
+            printf(">> SUCCESS: Layer 1 matches perfectly (within +/- 1 tolerance).\n");
+        }
+        else
+        {
+            printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
+        }
 
-        // for continuing, invert outputs to inputs and do above stuff with new layer initialization
-
-
-
-        #endif
+#endif
     }
 
 } // namespace ML
