@@ -79,8 +79,7 @@ const AccelParams aplayer0 = {
 
 const AccelParams aplayer1 = {
     .relu = true,
-    // .maxpool = true,
-    .maxpool = false,
+    .maxpool = true,
     .input_size = 115200,
     .filter_w = 5,
     .filter_h = 5,
@@ -88,15 +87,36 @@ const AccelParams aplayer1 = {
     .single_filter_size = 5 * 5 * 32,
     .output_w = 56,
     .output_h = 56,
-    // .output_elements_per_channel = 784,
-    .output_elements_per_channel = 56*56,
+    .output_elements_per_channel = 28*28,
+    // .output_elements_per_channel = 56*56,
     .inp_diff_fw = 56,
     .inp_diff_fh = 3356,
     .inp_diff_fc = -111843,
-    .inp_diff_ow = -111838,
+    .inp_diff_ow = -111839,
     .q_scale_fx_pnt = 0x00609664, // 0.001473807791 in Q0.32.
     .q_zero = modelQParams_8q[1].Z_i_next,
     .zp_macced = Zp_macced_player1
+};
+
+const AccelParams aplayer2 = { // not complete yet
+    .relu = true,
+    .maxpool = false,
+    .input_size = 28*28*32,
+    .filter_w = 3,
+    .filter_h = 3,
+    .filter_c = 32,
+    .single_filter_size = 3 * 3 * 32,
+    .output_w = 26,
+    .output_h = 26,
+    .output_elements_per_channel = 26*26,
+    // .output_elements_per_channel = 56*56,
+    .inp_diff_fw = 56,
+    .inp_diff_fh = 3356,
+    .inp_diff_fc = -111843,
+    .inp_diff_ow = -111839,
+    .q_scale_fx_pnt = 0x00609664, // 0.001473807791 in Q0.32.
+    .q_zero = modelQParams_8q[3].Z_i_next,
+    .zp_macced = Zp_macced_player2
 };
 
 
