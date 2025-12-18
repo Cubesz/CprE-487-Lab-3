@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -12,7 +13,12 @@
 #include "layers/Layer.h"
 #include "layers/MaxPooling.h"
 #include "layers/Softmax.h"
+#include "layers/UpsampleLayer.h"
+#include "layers/YoloConvLayer.h"
+#include "layers/RouteLayer.h"
+#include "YoloLoader.h"
 #include "image_classes.h"
+#include "ImageUtils.h"
 
 #ifdef ZEDBOARD
 #include <file_transfer/file_transfer.h>
@@ -1804,6 +1810,408 @@ namespace ML
         std::cout << "\n\n----- ML::runTests() COMPLETE -----\n";
     }
 
+    // YOLO CODE
+
+    const int NUM_CLASSES = 80;
+    const float ANCHORS_ALL[6][2] = {
+        {10, 14}, {23, 27}, {37, 58}, {81, 82}, {135, 169}, {344, 319}};
+    const int MASK_13[] = {3, 4, 5};
+    const int MASK_26[] = {0, 1, 2};
+
+    struct Box
+    {
+        float x, y, w, h, score;
+        int class_id;
+    };
+
+    struct Anchor
+    {
+        float w, h;
+    };
+
+    inline float sigmoid(float x) { return 1.0f / (1.0f + std::exp(-x)); }
+
+    inline float iou(const Box &a, const Box &b)
+    {
+        float x1 = std::max(a.x - a.w / 2, b.x - b.w / 2);
+        float y1 = std::max(a.y - a.h / 2, b.y - b.h / 2);
+        float x2 = std::min(a.x + a.w / 2, b.x + b.w / 2);
+        float y2 = std::min(a.y + a.h / 2, b.y + b.h / 2);
+        float inter_w = std::max(0.0f, x2 - x1);
+        float inter_h = std::max(0.0f, y2 - y1);
+        float inter_area = inter_w * inter_h;
+        float area_a = a.w * a.h;
+        float area_b = b.w * b.h;
+        return inter_area / (area_a + area_b - inter_area + 1e-6f);
+    }
+
+    //  MODEL BUILDER
+
+    std::vector<QParams> yolo_qparams_store;
+
+    // Helper to calc multiplier with Reciprocal Scales
+    // Mult = So / (Si * Sw)
+    void calcYoloMult(float Si, float Sw, float So, QParams &q)
+    {
+        q.S_i = Si;
+        q.S_w = Sw;
+
+        double acc_scale = (double)Si * (double)Sw;
+        double real_mult = 0.0;
+
+        if (acc_scale > 1e-9)
+        {
+            real_mult = (double)So / acc_scale;
+        }
+
+        int shift;
+        const double d_q = std::frexp(real_mult, &shift);
+        auto q_fixed = (int64_t)std::round(d_q * (1LL << 31));
+        if (q_fixed == (1LL << 31))
+        {
+            q_fixed /= 2;
+            shift += 1;
+        }
+
+        q.output_multiplier = (int32_t)q_fixed;
+        q.output_shift = 31 - shift;
+    }
+
+    float getScale(const YoloLoader &loader, const std::string &name)
+    {
+        auto *l = loader.getLayerByName(name);
+        return l ? l->Si : 1.0f;
+    }
+
+    void addYoloConv(Model &model, const YoloLoader &loader, std::string name, std::string next_name, size_t inW, size_t inH, bool isHead = false)
+    {
+        auto *conf = loader.getLayerByName(name);
+        if (!conf)
+            throw std::runtime_error("Missing layer config: " + name);
+
+        size_t outW = inW / conf->stride;
+        size_t outH = inH / conf->stride;
+
+        size_t outElemSize = isHead ? sizeof(fp32) : sizeof(i8);
+
+        model.addLayer<YoloConvLayer>(
+            LayerParams{sizeof(i8), {inW, inH, (size_t)conf->in_ch}},
+            LayerParams{outElemSize, {outW, outH, (size_t)conf->out_ch}},
+            LayerParams{sizeof(i8), {(size_t)conf->k_w, (size_t)conf->k_h, (size_t)conf->in_ch, (size_t)conf->out_ch}, conf->weightsPath},
+            LayerParams{sizeof(i32), {(size_t)conf->out_ch}, conf->biasPath});
+
+        QParams q = {0};
+        q.Z_i = conf->zi;
+
+        float S_next = 1.0f;
+        if (!isHead)
+        {
+            S_next = getScale(loader, next_name);
+            q.quantedOutput = true;
+            auto *next = loader.getLayerByName(next_name);
+            if (next)
+                q.Z_i_next = next->zi;
+        }
+        else
+        {
+            q.quantedOutput = false;
+        }
+
+        calcYoloMult(conf->Si, conf->Sw, S_next, q);
+        yolo_qparams_store.push_back(q);
+    }
+
+    void addYoloPool(Model &model, size_t W, size_t H, size_t C)
+    {
+        model.addLayer<MaxPoolingLayer>(
+            LayerParams{sizeof(i8), {W, H, C}},
+            LayerParams{sizeof(i8), {W / 2, H / 2, C}});
+        QParams q = {0};
+        q.quantedOutput = true;
+        yolo_qparams_store.push_back(q);
+    }
+
+    Model buildYoloV3Tiny(const std::string &configPath, const std::string &dataDir)
+    {
+        Model model;
+        YoloLoader loader;
+        if (!loader.load(configPath, dataDir))
+            throw std::runtime_error("Load failed");
+        yolo_qparams_store.clear();
+
+        addYoloConv(model, loader, "layer0.0", "layer2.0", 416, 416);
+        addYoloPool(model, 416, 416, 16);
+        addYoloConv(model, loader, "layer2.0", "layer4.0", 208, 208);
+        addYoloPool(model, 208, 208, 32);
+        addYoloConv(model, loader, "layer4.0", "layer6.0", 104, 104);
+        addYoloPool(model, 104, 104, 64);
+        addYoloConv(model, loader, "layer6.0", "layer8.0", 52, 52);
+        addYoloPool(model, 52, 52, 128);
+        addYoloConv(model, loader, "layer8.0", "layer10.0", 26, 26);
+        const Layer *ptr_layer8 = &model.getOutputLayer();
+
+        addYoloPool(model, 26, 26, 256);
+        addYoloConv(model, loader, "layer10.0", "layer12.0", 13, 13);
+        addYoloConv(model, loader, "layer12.0", "layer13.0", 13, 13);
+        addYoloConv(model, loader, "layer13.0", "layer14.0", 13, 13);
+        const Layer *ptr_layer13 = &model.getOutputLayer();
+
+        // Head 1
+        addYoloConv(model, loader, "layer14.0", "layer15", 13, 13);
+        addYoloConv(model, loader, "layer15", "", 13, 13, true);
+
+        // Head 2 Branch
+        model.addLayer<RouteLayer>(
+            model.getOutputLayer().getOutputParams(),
+            ptr_layer13->getOutputParams(),
+            std::vector<const Layer *>{ptr_layer13});
+        yolo_qparams_store.push_back({0});
+
+        addYoloConv(model, loader, "layer18.0", "layer21.0", 13, 13);
+
+        const LayerParams &prevOut = model.getOutputLayer().getOutputParams();
+        std::vector<size_t> upDims = prevOut.dims;
+        upDims[0] *= 2;
+        upDims[1] *= 2;
+        LayerParams upOut(prevOut.elementSize, upDims);
+        model.addLayer<UpsampleLayer>(prevOut, upOut, 2);
+        yolo_qparams_store.push_back({0});
+
+        std::vector<size_t> concatDims = upDims;
+        concatDims[2] = upDims[2] + ptr_layer8->getOutputParams().dims[2];
+        LayerParams concatOut(upOut.elementSize, concatDims);
+        model.addLayer<RouteLayer>(
+            model.getOutputLayer().getOutputParams(),
+            concatOut,
+            std::vector<const Layer *>{&model.getOutputLayer(), ptr_layer8});
+        yolo_qparams_store.push_back({0});
+
+        addYoloConv(model, loader, "layer21.0", "layer22", 26, 26);
+        addYoloConv(model, loader, "layer22", "", 26, 26, true);
+
+        return model;
+    }
+
+    //  POST PROCESSING
+    void process_output(const LayerData &feature_map, const int *mask, int stride,
+                        std::vector<Box> &boxes, float conf_thresh = 0.4)
+    {
+        const float *data = (const float *)feature_map.raw();
+        const auto &dims = feature_map.getParams().dims;
+        int grid_w = dims[0];
+        int grid_h = dims[1];
+        int channels = dims[2];
+
+        for (int a = 0; a < 3; a++)
+        {
+            Anchor anchor = {ANCHORS_ALL[mask[a]][0], ANCHORS_ALL[mask[a]][1]};
+            int box_ch_start = a * (5 + NUM_CLASSES);
+
+            for (int y = 0; y < grid_h; y++)
+            {
+                for (int x = 0; x < grid_w; x++)
+                {
+
+                    auto get_val = [&](int ch_offset)
+                    {
+                        return data[(y * grid_w + x) * channels + box_ch_start + ch_offset];
+                    };
+
+                    float obj_logit = get_val(4);
+                    float obj_score = sigmoid(obj_logit);
+
+                    if (obj_score > conf_thresh)
+                    {
+                        float max_cls_score = 0;
+                        int cls_id = -1;
+                        for (int c = 0; c < NUM_CLASSES; c++)
+                        {
+                            float cls_score = sigmoid(get_val(5 + c));
+                            if (cls_score > max_cls_score)
+                            {
+                                max_cls_score = cls_score;
+                                cls_id = c;
+                            }
+                        }
+
+                        float final_score = obj_score * max_cls_score;
+                        if (final_score > conf_thresh)
+                        {
+                            float bx = (sigmoid(get_val(0)) + x) * stride;
+                            float by = (sigmoid(get_val(1)) + y) * stride;
+                            float bw = std::exp(get_val(2)) * anchor.w;
+                            float bh = std::exp(get_val(3)) * anchor.h;
+                            boxes.push_back({bx, by, bw, bh, final_score, cls_id});
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Helper to trim whitespace/CR from strings
+    std::string trim_name(const std::string &str)
+    {
+        size_t first = str.find_first_not_of(" \t\r\n");
+        if (std::string::npos == first)
+            return "";
+        size_t last = str.find_last_not_of(" \t\r\n");
+        return str.substr(first, (last - first + 1));
+    }
+
+    std::vector<std::string> load_coco_names(const std::string &path)
+    {
+        std::vector<std::string> names;
+        std::ifstream f(path);
+        if (!f.is_open())
+        {
+            std::cerr << "Warning: Could not open " << path << std::endl;
+            return names;
+        }
+        std::string line;
+        while (std::getline(f, line))
+        {
+            std::string clean = trim_name(line);
+            if (clean.length() > 0)
+                names.push_back(clean);
+        }
+        return names;
+    }
+
+    void loadDebugInput(LayerData &img, const std::string &filename)
+    {
+        std::ifstream file(filename);
+        if (!file.is_open())
+            throw std::runtime_error("Cannot open " + filename);
+        std::string line;
+        std::vector<int> values;
+        while (std::getline(file, line))
+        {
+            if (line.find("SHAPE") != std::string::npos)
+                continue;
+            std::stringstream ss(line);
+            int val;
+            while (ss >> val)
+                values.push_back(val);
+        }
+        i8 *dst = (i8 *)img.raw();
+        for (int c = 0; c < 3; ++c)
+            for (int i = 0; i < 416 * 416; ++i)
+                dst[i * 3 + c] = (i8)values[c * 416 * 416 + i];
+    }
+
+    void runYolo()
+    {
+        try
+        {
+            std::cout << "--- Building YOLOv3-Tiny Model ---" << std::endl;
+            Model model = buildYoloV3Tiny("yolov3_tiny_manual_int8.txt", "yolo_data");
+            model.allocLayers();
+
+            std::cout << "Model built with " << model.getNumLayers() << " layers." << std::endl;
+
+            LayerParams inputParams{sizeof(i8), {416, 416, 3}};
+            LayerData img(inputParams);
+            img.allocData();
+
+            std::vector<uint8_t> resized_img;
+            bool has_image = false;
+
+            // Try Loading Real Image
+            int iw, ih, ch;
+            // std::string imgPath = "zf.png";
+            std::string imgPath = "giraffe.jpg";
+            std::cout << "Loading image: " << imgPath << std::endl;
+            uint8_t *raw_img = stbi_load(imgPath.c_str(), &iw, &ih, &ch, 3);
+
+            if (raw_img)
+            {
+                has_image = true;
+                std::cout << "Loaded " << imgPath << " (" << iw << "x" << ih << ")" << std::endl;
+                resized_img = resize_bilinear(raw_img, iw, ih, 416, 416);
+                stbi_image_free(raw_img);
+
+                // Quantize for model input
+                // Get params from first layer
+                float Si = yolo_qparams_store[0].S_i;
+                int Zi = yolo_qparams_store[0].Z_i;
+                image_to_input(resized_img, img, Si, Zi);
+            }
+            else
+            {
+                std::cout << "Image not found. Falling back to input_int8.txt..." << std::endl;
+                loadDebugInput(img, "input_int8.txt");
+                // Create fake resized image for drawing (black) so code doesn't crash
+                resized_img.resize(416 * 416 * 3, 0);
+            }
+
+            // Inference
+            std::cout << "Running Inference..." << std::endl;
+            model.inference(img, Layer::InfType::QUANTIZED, yolo_qparams_store.data());
+
+            // Decode
+            std::cout << "Decoding detections..." << std::endl;
+            if (model.getNumLayers() <= 20)
+                throw std::runtime_error("Indices 14/20 invalid.");
+
+            const LayerData &head1 = model.getLayer(14).getOutputData();
+            const LayerData &head2 = model.getLayer(20).getOutputData();
+
+            std::vector<Box> detections;
+            process_output(head1, MASK_13, 32, detections, 0.4f);
+            process_output(head2, MASK_26, 16, detections, 0.4f);
+
+            std::cout << "Total candidates before NMS: " << detections.size() << std::endl;
+
+            // NMS
+            std::sort(detections.begin(), detections.end(), [](const Box &a, const Box &b)
+                      { return a.score > b.score; });
+            std::vector<Box> final_boxes;
+            for (auto &b : detections)
+            {
+                bool keep = true;
+                for (auto &f : final_boxes)
+                {
+                    if (b.class_id == f.class_id && iou(b, f) > 0.4)
+                    {
+                        keep = false;
+                        break;
+                    }
+                }
+                if (keep)
+                    final_boxes.push_back(b);
+            }
+
+            // Draw & Save
+            auto classes = load_coco_names("coco.names");
+            std::cout << "Found " << final_boxes.size() << " objects:" << std::endl;
+
+            for (auto &b : final_boxes)
+            {
+                std::string name = (b.class_id >= 0 && b.class_id < (int)classes.size()) ? classes[b.class_id] : "Unknown";
+
+                std::cout << " - " << name << " (" << (int)(b.score * 100) << "%) "
+                          << "at [x=" << (int)b.x << ", y=" << (int)b.y
+                          << ", w=" << (int)b.w << ", h=" << (int)b.h << "]" << std::endl;
+
+                // Draw Box
+                draw_box(resized_img, 416, 416, (int)b.x, (int)b.y, (int)b.w, (int)b.h, 0, 255, 0);
+            }
+
+            if (has_image)
+            {
+                stbi_write_jpg("prediction.jpg", 416, 416, 3, resized_img.data(), 90);
+                std::cout << "Saved visualization to 'prediction.jpg'" << std::endl;
+            }
+
+            model.freeLayers();
+        }
+        catch (std::exception &e)
+        {
+            std::cerr << "YOLO Error: " << e.what() << std::endl;
+        }
+    }
+
 } // namespace ML
 
 #ifdef ZEDBOARD
@@ -1829,6 +2237,7 @@ extern "C" int main()
 #else
 int main()
 {
-    ML::runTests();
+    ML::runYolo();
+    // ML::runTests();
 }
 #endif
