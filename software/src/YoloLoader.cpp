@@ -125,17 +125,11 @@ namespace ML
                                 {
                                     for (int kw = 0; kw < KW; ++kw)
                                     {
-                                        // Source Index
-                                        int src_idx = oc * (IC * KH * KW) +
-                                                      ic * (KH * KW) +
-                                                      kh * KW +
-                                                      kw;
+                                        // Source Index (OC, IC, KH, KW)
+                                        int src_idx = oc * (IC * KH * KW) + ic * (KH * KW) + kh * KW + kw;
 
-                                        // Dest Index
-                                        int dst_idx = kw * (KH * IC * OC) +
-                                                      kh * (IC * OC) +
-                                                      ic * OC +
-                                                      oc;
+                                        // Destination Index (OC, IC, KH, KW)
+                                        int dst_idx = oc * (IC * KH * KW) + ic * (KH * KW) + kh * KW + kw;
 
                                         dst_weights[dst_idx] = src_weights[src_idx];
                                     }

@@ -19,6 +19,8 @@
 #include "YoloLoader.h"
 #include "image_classes.h"
 #include "ImageUtils.h"
+#include <cstring>
+#include <algorithm>
 
 #ifdef ZEDBOARD
 #include <file_transfer/file_transfer.h>
@@ -1875,7 +1877,14 @@ namespace ML
 
         q.output_multiplier = (int32_t)q_fixed;
         q.output_shift = 31 - shift;
-        printf("Multiplier: 0x%08x, Shift: %d\n", q.output_multiplier, q.output_shift);
+
+        // printf("Layer %d\n", (int)yolo_qparams_store.size());
+        // printf("  Si:           %f\n", Si);
+        // printf("  Sw:           %f\n", Sw);
+        // printf("  Si_next:      %f\n", So);
+        // printf("  Mult:         %e\n", real_mult);
+        printf("%e\n", real_mult);
+        // printf("  Multiplier:   0x%08x, Shift: %d\n\n", q.output_multiplier, q.output_shift);
     }
 
     float getScale(const YoloLoader &loader, const std::string &name)
@@ -2224,6 +2233,325 @@ namespace ML
             std::cerr << "YOLO Error: " << e.what() << std::endl;
         }
     }
+
+    static i8 padded_scratchpad[1024 * 418 * 418];
+    static i8 layer8_persistent_storage[128 * 26 * 26];
+
+    void runYoloHW()
+    {
+        // Shift-adjusted Q0.32 values
+        static const uint32_t yolo_scales_hw[] = {
+            0x00a15bd2, 0x02a2748a, 0x03b46cda, 0x01b3fc0a, 0x020525f8, 0x01f3f42e,
+            0x00fd0a5c, 0x032b57f3, 0x00f6d357, 0x004a06ca, 0x00d81be0, 0x010875a7, 0x003ac0b9};
+
+        try
+        {
+            std::cout << "--- Building YOLOv3-Tiny Hardware Pipeline ---" << std::endl;
+            // Config file must be int8 manual config
+            Model model = buildYoloV3Tiny("yolov3_tiny_manual_int8.txt", "yolo_data");
+            model.allocLayers();
+
+            // Load and Pre-process Image
+            LayerParams inputParams{sizeof(i8), {416, 416, 3}};
+            LayerData img(inputParams);
+            img.allocData();
+
+            int iw, ih, ch;
+            std::string imgPath = "giraffe.jpg";
+            uint8_t *raw_img = stbi_load(imgPath.c_str(), &iw, &ih, &ch, 3);
+            if (!raw_img)
+                throw std::runtime_error("Could not load image: " + imgPath);
+
+            std::vector<uint8_t> resized_img = resize_bilinear(raw_img, iw, ih, 416, 416);
+            stbi_image_free(raw_img);
+
+            // Quantize to model input (Layer 0 scale/zero-point)
+            image_to_input(resized_img, img, yolo_qparams_store[0].S_i, yolo_qparams_store[0].Z_i);
+
+            // Transpose HWC (interleaved) to CHW (planar) for Hardware/Refactor compatibility
+            LayerData current_data(img.getParams());
+            current_data.allocData();
+            transpose_HWC_to_CHW((i8 *)img.raw(), (i8 *)current_data.raw(), 416, 416, 3);
+
+            resetYoloLayerId();
+            uint32_t ctrlb_flags = 0;
+            int hw_scale_idx = 0;
+
+            std::cout << "Starting Hardware Inference..." << std::endl;
+            for (size_t i = 0; i < model.getNumLayers(); i++)
+            {
+                Layer &l = model.getLayer(i);
+                const LayerParams &inP = l.getInputParams();
+                const LayerParams &outP = l.getOutputParams();
+
+                if (l.getLType() == Layer::LayerType::CONVOLUTIONAL)
+                {
+                    auto &conv = static_cast<YoloConvLayer &>(l);
+                    const LayerParams &weightP = conv.getWeightParams();
+
+                    int Fw = weightP.dims[0]; // Kernel Width
+                    int Fh = weightP.dims[1]; // Kernel Height
+                    int Cin = inP.dims[2];    // Input Channels
+                    int OC = outP.dims[2];    // Output Channels
+                    int stride = (inP.dims[0] / outP.dims[0]);
+
+                    bool isHead = (outP.elementSize == sizeof(fp32));
+
+                    if (Fw == 3) // Standard YOLO 3x3 Conv with SAME padding
+                    {
+                        // Software Padding (416->418, 208->210, etc.)
+                        prepare_padded_input(current_data, padded_scratchpad, Cin, inP.dims[1], inP.dims[0]);
+
+#ifdef ZEDBOARD
+                        memcpy_dma(MLP_INPUTS, padded_scratchpad, Cin * (inP.dims[1] + 2) * (inP.dims[0] + 2));
+
+                        // B. Config with Padded Dimensions
+                        AccelParams ap = getYoloAccelParams(inP.dims[0] + 2, inP.dims[1] + 2, Cin, 3, 3, outP.dims[0], outP.dims[1],
+                                                            yolo_scales_hw[hw_scale_idx], yolo_qparams_store[i].Z_i_next, stride);
+
+                        // Detection Heads don't use Leaky ReLU
+                        ap.relu = !isHead;
+                        ap.fixed_leaky_relu = !isHead;
+                        ap.zp_macced = nullptr;
+
+                        runAccLayer(ap, (int8_t *)conv.getWeightData().raw(), (int16_t *)conv.getBiasData().raw(), OC, ctrlb_flags);
+#endif
+                    }
+                    else // 1x1 Convolution (Heads and downsamplers)
+                    {
+#ifdef ZEDBOARD
+                        memcpy_dma(MLP_INPUTS, current_data.raw(), inP.byte_size());
+                        AccelParams ap = getYoloAccelParams(inP.dims[0], inP.dims[1], Cin, 1, 1, outP.dims[0], outP.dims[1],
+                                                            yolo_scales_hw[hw_scale_idx], yolo_qparams_store[i].Z_i_next, stride);
+
+                        ap.relu = !isHead;
+                        ap.fixed_leaky_relu = !isHead;
+                        ap.zp_macced = nullptr;
+
+                        runAccLayer(ap, (int8_t *)conv.getWeightData().raw(), (int16_t *)conv.getBiasData().raw(), OC, ctrlb_flags);
+#endif
+                    }
+                    hw_scale_idx++;
+
+                    current_data = l.getOutputData();
+#ifdef ZEDBOARD
+                    memcpy_dma(current_data.raw(), MLP_OUTPUTS, outP.byte_size());
+#endif
+
+                    if (i == 8)
+                    {
+                        std::memcpy(layer8_persistent_storage, current_data.raw(), outP.byte_size());
+                    }
+
+                    ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+                }
+                else if (l.getLType() == Layer::LayerType::MAX_POOLING || l.getLType() == Layer::LayerType::UPSAMPLE)
+                {
+                    l.computeQuantized(current_data, {0});
+                    current_data = l.getOutputData();
+                }
+                else if (l.getLType() == Layer::LayerType::ROUTE)
+                {
+
+                    l.computeQuantized(current_data, {0});
+                    current_data = l.getOutputData();
+                }
+            }
+
+            // Decode Results
+            std::cout << "Decoding detections..." << std::endl;
+            const LayerData &head1 = model.getLayer(14).getOutputData();
+            const LayerData &head2 = model.getLayer(20).getOutputData();
+
+            std::vector<Box> detections;
+            process_output(head1, MASK_13, 32, detections, 0.4f);
+            process_output(head2, MASK_26, 16, detections, 0.4f);
+
+            // NMS and Drawing
+            std::sort(detections.begin(), detections.end(), [](const Box &a, const Box &b)
+                      { return a.score > b.score; });
+            std::vector<Box> final_boxes;
+            for (auto &b : detections)
+            {
+                bool keep = true;
+                for (auto &f : final_boxes)
+                {
+                    if (b.class_id == f.class_id && iou(b, f) > 0.4)
+                    {
+                        keep = false;
+                        break;
+                    }
+                }
+                if (keep)
+                    final_boxes.push_back(b);
+            }
+
+            auto classes = load_coco_names("coco.names");
+            std::cout << "Found " << final_boxes.size() << " objects." << std::endl;
+            for (auto &b : final_boxes)
+            {
+                std::string name = (b.class_id < (int)classes.size()) ? classes[b.class_id] : "Unknown";
+                std::cout << " - " << name << " (" << (int)(b.score * 100) << "%) at [" << (int)b.x << "," << (int)b.y << "]" << std::endl;
+                draw_box(resized_img, 416, 416, (int)b.x, (int)b.y, (int)b.w, (int)b.h, 0, 255, 0);
+            }
+
+            stbi_write_jpg("prediction_hw.jpg", 416, 416, 3, resized_img.data(), 90);
+            model.freeLayers();
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << "YOLO Hardware Runtime Error: " << e.what() << std::endl;
+        }
+    }
+}
+
+void prepare_padded_input(const LayerData &src, int8_t *dma_buffer, int C, int H, int W)
+{
+    // pad H and W by 1 pixel on each side (for 3x3 kernels)
+    // New dimensions: C, H+2, W+2
+    int newH = H + 2;
+    int newW = W + 2;
+    std::memset(dma_buffer, 0, C * newH * newW); // Fill with 0 (Zero Padding)
+
+    for (int c = 0; c < C; ++c)
+    {
+        for (int h = 0; h < H; ++h)
+        {
+            // Copy row from src to the center of the padded buffer
+            int8_t *src_ptr = &((int8_t *)src.raw())[c * H * W + h * W];
+            int8_t *dst_ptr = &dma_buffer[c * newH * newW + (h + 1) * newW + 1];
+            std::memcpy(dst_ptr, src_ptr, W);
+        }
+    }
+}
+
+uint32_t runAccLayer(AccelParams ap, const int8_t *weights, const int16_t *biases, int nOutputChannels, uint32_t preflags)
+{
+#define ZEDBOARD
+#ifdef ZEDBOARD
+
+    uint32_t ctrlb_flags = preflags; // maintain given activations orientation
+    ctrlb_flags = ap.relu ? ctrlb_flags | MLP_CTRLB_RELU : ctrlb_flags & ~MLP_CTRLB_RELU;
+    ctrlb_flags = ap.maxpool ? ctrlb_flags | MLP_CTRLB_MAX_POOLING : ctrlb_flags & ~MLP_CTRLB_MAX_POOLING;
+    Xil_Out32(MLP_CTRLB, ctrlb_flags);
+
+    int8_t *filterDataPtr = (int8_t *)weights;
+    memcpy_dma(MLP_FILTER0, filterDataPtr, ap.single_filter_size);
+    filterDataPtr += ap.single_filter_size;
+
+    memcpy_dma(MLP_FILTER1, filterDataPtr, ap.single_filter_size);
+    filterDataPtr += ap.single_filter_size;
+
+    memcpy_dma(MLP_FILTER2, filterDataPtr, ap.single_filter_size);
+    filterDataPtr += ap.single_filter_size;
+
+    memcpy_dma(MLP_FILTER3, filterDataPtr, ap.single_filter_size);
+    filterDataPtr += ap.single_filter_size;
+
+    // Register Config
+    ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
+    Xil_Out32(MLP_CTRLB, ctrlb_flags);
+    Xil_Out32(MLP_FILTER_W, ap.filter_w);
+    Xil_Out32(MLP_FILTER_H, ap.filter_h);
+    Xil_Out32(MLP_FILTER_C, ap.filter_c);
+    Xil_Out32(MLP_OUTPUT_W, ap.output_w);
+    Xil_Out32(MLP_OUTPUT_H, ap.output_h);
+    Xil_Out32(MLP_INPUT_END_DIFF_FW, ap.inp_diff_fw);
+    Xil_Out32(MLP_INPUT_END_DIFF_FH, ap.inp_diff_fh);
+    Xil_Out32(MLP_INPUT_END_DIFF_FC, ap.inp_diff_fc);
+    Xil_Out32(MLP_INPUT_END_DIFF_OW, ap.inp_diff_ow);
+    Xil_Out32(MLP_OUTPUT_ELEMENTS_PER_CHANNEL, ap.output_elements_per_channel);
+
+    // Scale
+    Xil_Out32(MLP_Q_SCALE, ap.q_scale_fx_pnt);
+    Xil_Out32(MLP_Q_ZERO, ap.q_zero);
+
+    // In batches of 4
+    int outputOffset = 0;
+
+    for (int i = 0; i < nOutputChannels; i += 4)
+    {
+        Xil_Out32(MLP_OUTPUT_INITIAL_OFFSET, outputOffset);
+        outputOffset += 4 * ap.output_elements_per_channel;
+
+        Xil_Out32(MLP_MAC0_BIAS, (ap.zp_macced) ? (int(biases[i]) - ap.zp_macced[i]) : (int)biases[i]);
+        Xil_Out32(MLP_MAC1_BIAS, (ap.zp_macced) ? (int(biases[i + 1]) - ap.zp_macced[i + 1]) : (int)biases[i + 1]);
+        Xil_Out32(MLP_MAC2_BIAS, (ap.zp_macced) ? (int(biases[i + 2]) - ap.zp_macced[i + 2]) : (int)biases[i + 2]);
+        Xil_Out32(MLP_MAC3_BIAS, (ap.zp_macced) ? (int(biases[i + 3]) - ap.zp_macced[i + 3]) : (int)biases[i + 3]);
+
+        Xil_Out32(MLP_CTRLA, 0); // start
+        // as it goes, load upcoming filters
+
+        if (i < (nOutputChannels - 4))
+        {
+            memcpy_dma(MLP_FILTER0, filterDataPtr, ap.single_filter_size);
+            filterDataPtr += ap.single_filter_size;
+            memcpy_dma(MLP_FILTER1, filterDataPtr, ap.single_filter_size);
+            filterDataPtr += ap.single_filter_size;
+            memcpy_dma(MLP_FILTER2, filterDataPtr, ap.single_filter_size);
+            filterDataPtr += ap.single_filter_size;
+            memcpy_dma(MLP_FILTER3, filterDataPtr, ap.single_filter_size);
+            filterDataPtr += ap.single_filter_size;
+        }
+
+        while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE))
+            ; // wait for it to finish
+        ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
+        Xil_Out32(MLP_CTRLB, ctrlb_flags);
+    }
+
+#endif
+    return 0;
+}
+
+void debugYoloLeakyHW()
+{
+    printf("--- DEBUG: YOLO Layer 0 (Padded + Hardware Leaky) ---\n");
+    Model model = buildYoloV3Tiny("yolov3_tiny_manual_int8.txt", "yolo_data");
+    model.allocLayers();
+
+    // Setup Test Input
+    LayerData input(model.getLayer(0).getInputParams());
+    input.allocData();
+    for (size_t i = 0; i < input.getParams().flat_count(); ++i)
+        input.get<i8>(i) = (i % 255) - 128;
+
+    // Software Run
+    resetYoloLayerId();
+    model.getLayer(0).computeQuantized(input, yolo_qparams_store[0]);
+    LayerData sw_out = model.getLayer(0).getOutputData();
+
+    // Hardware Run
+    static i8 padded_input[3 * 418 * 418];
+    prepare_padded_input(input, padded_input, 3, 416, 416);
+    memcpy_dma(MLP_INPUTS, padded_input, 3 * 418 * 418);
+
+    AccelParams ap = getYoloAccelParams(418, 418, 3, 3, 3, 416, 416, 0x00a15bd2, yolo_qparams_store[0].Z_i_next, 1);
+    ap.relu = true;
+    ap.fixed_leaky_relu = true;
+    ap.zp_macced = nullptr;
+
+    Xil_Out32(MLP_CTRLB, 0);
+    auto &conv0 = static_cast<YoloConvLayer &>(model.getLayer(0));
+    runAccLayer(ap, (int8_t *)conv0.getWeightData().raw(), (int16_t *)conv0.getBiasData().raw(), 16, 0);
+
+    LayerData hw_out(conv0.getOutputParams());
+    hw_out.allocData();
+    memcpy_dma(hw_out.raw(), MLP_OUTPUTS, hw_out.getParams().byte_size());
+
+    // Compare
+    int errs = 0;
+    for (size_t i = 0; i < sw_out.getParams().flat_count(); i++)
+    {
+        if (sw_out.get<i8>(i) != hw_out.get<i8>(i))
+        {
+            if (errs < 5)
+                printf("Index %zu Mismatch: SW=%d, HW=%d\n", i, sw_out.get<i8>(i), hw_out.get<i8>(i));
+            errs++;
+        }
+    }
+    printf("Result: %s (%d mismatches)\n", (errs == 0 ? "SUCCESS" : "FAIL"), errs);
+}
 
 } // namespace ML
 

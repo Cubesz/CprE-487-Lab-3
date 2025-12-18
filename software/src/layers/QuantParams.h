@@ -18,6 +18,13 @@ const int player3outputscaler = (1.0f / (34.65046495f / (38.9806973f * 234.51324
 const int player4outputscaler = (1.0f / (22.17446924f / (34.65046495f * 236.64046f)));
 const int player5outputscaler = (1.0f / (14.83324517f / (22.17446924f * 248.70012f)));
 const int player6outputscaler = (1.0f / (8.22409603f / (14.83324517f * 227.76791f)));
+// const int player0outputscaler = 0x00363129 & 0xFFFFC000;
+// const int player1outputscaler = 0x00609664 & 0xFFFFC000;
+// const int player2outputscaler = 0x01ceb190 & 0xFFFFC000;
+// const int player3outputscaler = 0x00f86962 & 0xFFFFC000;
+// const int player4outputscaler = 0x00b13aa9 & 0xFFFFC000;
+// const int player5outputscaler = 0x00b04601 & 0xFFFFC000;
+// const int player6outputscaler = 0x009f8767 & 0xFFFFC000;
 
 typedef struct
 {
@@ -27,12 +34,185 @@ typedef struct
     const int32_t *zp_macced;
     int Z_i_next;
     bool quantedOutput;
-    int32_t output_multiplier; // Fixed-point multiplier (from Si*Sw/So)
-    int output_shift;          // Bit shift for the multiplier
-    int32_t Z_i;               // Input Zero Point (needed if not using zp_macced)
 } QParams;
 
 const QParams modelQParams_8q[] = {{player0outputscaler, 226, 419, Zp_macced_player0, -3, true}, {player1outputscaler, 78, 261, Zp_macced_player1, -2, true}, {0, 0, 0, 0, 0, true}, {player2outputscaler, 30, 183, Zp_macced_player2, -1, true}, {player3outputscaler, 39, 235, Zp_macced_player3, -2, true}, {0, 0, 0, 0, 0, true}, {player4outputscaler, 35, 237, Zp_macced_player4, -3, true}, {player5outputscaler, 22, 249, Zp_macced_player5, -2, true}, {0, 0, 0, 0, 0, true}, {0, 0, 0, 0, 0, true}, {player6outputscaler, 15, 228, Zp_macced_player6, -5, true}, {0, 8.22409603, 95.91284, Zp_macced_player7, 0, false}, {0, 0, 0, 0, 0, false}};
+
+typedef struct
+{
+    bool relu;
+    bool fixed_leaky_relu = false; // relu and this both need to be enabled for this. Fixed leaky constant of 0.125.
+    bool maxpool;
+    int input_size;
+    int filter_w;
+    int filter_h;
+    int filter_c;
+    int single_filter_size;
+    int output_w;                    // width pre pooling if pooling
+    int output_h;                    // height pre pooling if pooling
+    int output_elements_per_channel; // output elements post pooling if pooling
+    int inp_diff_fw;
+    int inp_diff_fh;
+    int inp_diff_fc;
+    int inp_diff_ow;
+    int q_scale_fx_pnt; // Q0.32 format. Hardware is actually Q0.18 though and also the top 5 or so bits are assumed to be 0.
+    int q_zero;
+    const int32_t *zp_macced;
+    int sparse_scale = 1;
+} AccelParams;
+
+const AccelParams aplayer0 = {
+    .relu = true,
+    .maxpool = false,
+    .input_size = 3 * 64 * 64,
+    .filter_w = 5,
+    .filter_h = 5,
+    .filter_c = 3,
+    .single_filter_size = 5 * 5 * 3,
+    .output_w = 60,
+    .output_h = 60,
+    .output_elements_per_channel = 60 * 60,
+    .inp_diff_fw = 60,
+    .inp_diff_fh = 3836,
+    .inp_diff_fc = -8451,
+    .inp_diff_ow = -8447,
+    .q_scale_fx_pnt = 0x00363129, // 0.0008269047213 in Q0.32.
+    .q_zero = modelQParams_8q[0].Z_i_next,
+    .zp_macced = Zp_macced_player0};
+
+const AccelParams aplayer1 = {
+    .relu = true,
+    .maxpool = true,
+    .input_size = 115200,
+    .filter_w = 5,
+    .filter_h = 5,
+    .filter_c = 32,
+    .single_filter_size = 5 * 5 * 32,
+    .output_w = 56,
+    .output_h = 56,
+    .output_elements_per_channel = 28 * 28,
+    // .output_elements_per_channel = 56*56,
+    .inp_diff_fw = 56,
+    .inp_diff_fh = 3356,
+    .inp_diff_fc = -111843,
+    .inp_diff_ow = -111839,
+    .q_scale_fx_pnt = 0x00609664, // 0.001473807791 in Q0.32.
+    .q_zero = modelQParams_8q[1].Z_i_next,
+    .zp_macced = Zp_macced_player1};
+
+const AccelParams aplayer2 = {
+    .relu = true,
+    .maxpool = false,
+    .input_size = 28 * 28 * 32,
+    .filter_w = 3,
+    .filter_h = 3,
+    .filter_c = 32,
+    .single_filter_size = 3 * 3 * 32,
+    .output_w = 26,
+    .output_h = 26,
+    .output_elements_per_channel = 26 * 26,
+    .inp_diff_fw = 26,
+    .inp_diff_fh = 726,
+    .inp_diff_fc = -24361,
+    .inp_diff_ow = -24359,
+    .q_scale_fx_pnt = 0x01ceb190, // 0.0070601440966129303 in Q0.32.
+    .q_zero = modelQParams_8q[3].Z_i_next,
+    .zp_macced = Zp_macced_player2};
+
+const AccelParams aplayer3 = {
+    .relu = true,
+    .maxpool = true,
+    .input_size = 26 * 26 * 64,
+    .filter_w = 3,
+    .filter_h = 3,
+    .filter_c = 64,
+    .single_filter_size = 3 * 3 * 64,
+    .output_w = 24,
+    .output_h = 24,
+    .output_elements_per_channel = 12 * 12,
+    .inp_diff_fw = 24,
+    .inp_diff_fh = 622,
+    .inp_diff_fc = -42641,
+    .inp_diff_ow = -42639,
+    .q_scale_fx_pnt = 0x00f86962, // 0.00379046099260449409 in Q0.32.
+    .q_zero = modelQParams_8q[4].Z_i_next,
+    .zp_macced = Zp_macced_player3};
+
+const AccelParams aplayer4 = {
+    .relu = true,
+    .maxpool = false,
+    .input_size = 12 * 12 * 64,
+    .filter_w = 3,
+    .filter_h = 3,
+    .filter_c = 64,
+    .single_filter_size = 3 * 3 * 64,
+    .output_w = 10,
+    .output_h = 10,
+    .output_elements_per_channel = 10 * 10,
+    .inp_diff_fw = 10,
+    .inp_diff_fh = 118,
+    .inp_diff_fc = -9097,
+    .inp_diff_ow = -9095,
+    .q_scale_fx_pnt = 0x00b13aa9, // 0.00270430208183825016 in Q0.32.
+    .q_zero = modelQParams_8q[6].Z_i_next,
+    .zp_macced = Zp_macced_player4};
+
+const AccelParams aplayer5 = {
+    .relu = true,
+    .maxpool = true,
+    .input_size = 10 * 10 * 64,
+    .filter_w = 3,
+    .filter_h = 3,
+    .filter_c = 64,
+    .single_filter_size = 3 * 3 * 64,
+    .output_w = 8,
+    .output_h = 8,
+    .output_elements_per_channel = 4 * 4,
+    .inp_diff_fw = 8,
+    .inp_diff_fh = 78,
+    .inp_diff_fc = -6321,
+    .inp_diff_ow = -6319,
+    .q_scale_fx_pnt = 0x00b04601, // 0.002689719432964921 in Q0.32.
+    .q_zero = modelQParams_8q[7].Z_i_next,
+    .zp_macced = Zp_macced_player5};
+
+const AccelParams aplayer6 = {
+    .relu = true,
+    .maxpool = false,
+    .input_size = 2048,
+    .filter_w = 4,
+    .filter_h = 4,
+    .filter_c = 128,
+    .single_filter_size = 2048,
+    .output_w = 1,
+    .output_h = 1,
+    .output_elements_per_channel = 1,
+    .inp_diff_fw = 1,
+    .inp_diff_fh = 1,
+    .inp_diff_fc = 0,
+    .inp_diff_ow = 0,
+    .q_scale_fx_pnt = 0x009f8767, // 0.00243421806953847408 in Q0.32.
+    .q_zero = modelQParams_8q[10].Z_i_next,
+    .zp_macced = Zp_macced_player6};
+
+const AccelParams aplayer7 = {
+    .relu = false,
+    .maxpool = false,
+    .input_size = 256,
+    .filter_w = 1,
+    .filter_h = 1,
+    .filter_c = 256,
+    .single_filter_size = 256,
+    .output_w = 1,
+    .output_h = 1,
+    .output_elements_per_channel = 1,
+    .inp_diff_fw = 1,
+    .inp_diff_fh = 1,
+    .inp_diff_fc = 0,
+    .inp_diff_ow = 0,
+    .q_scale_fx_pnt = 0x00531563 << 3, // 0.001267754254 * 8 in Q0.32.
+    .q_zero = modelQParams_8q[11].Z_i_next,
+    .zp_macced = Zp_macced_player7};
 
 const int32_t Zp_macced_player0_4b[] = {22, 6, 47, -11, 95, 229, 60, 385, 8, 77, -4, 10, 36, -9, -1, 15, 79, 6, 442, -12, 207, 129, 5, 126, 239, -6, 6, 253, 20, 127, -10, -58};
 const int32_t Zp_macced_player1_4b[] = {21, 39, -7, 18, 29, 18, 25, 16, 55, 51, 36, 49, 20, 33, 29, 8, 15, -4, 42, 39, 24, 19, 27, 47, 19, 19, 85, 15, 34, 9, 29, 20};
@@ -52,3 +232,37 @@ const int player5outputscaler_4b = (1.0f / (0.81758044f / (1.22221484f * 13.7078
 const int player6outputscaler_4b = (1.0f / (0.45329663f / (0.81758044f * 12.554137f)));
 
 const QParams modelQParams_4q[] = {{player0outputscaler_4b, 12, 23, Zp_macced_player0_4b, 0, true}, {player1outputscaler_4b, 4, 14, Zp_macced_player1_4b, 0, true}, {0, 0, 0, 0, 0, true}, {player2outputscaler_4b, 2, 10, Zp_macced_player2_4b, 0, true}, {player3outputscaler_4b, 2, 13, Zp_macced_player3_4b, 0, true}, {0, 0, 0, 0, 0, true}, {player4outputscaler_4b, 2, 13, Zp_macced_player4_4b, 0, true}, {player5outputscaler_4b, 1, 14, Zp_macced_player5_4b, 0, true}, {0, 0, 0, 0, 0, true}, {0, 0, 0, 0, 0, true}, {player6outputscaler_4b, 1, 13, Zp_macced_player6_4b, 0, true}, {0, 0.45329663, 5.2865343, Zp_macced_player7_4b, 0, false}, {0, 0, 0, 0, 0, false}};
+
+namespace ML
+{
+
+    AccelParams getYoloAccelParams(int Win, int Hin, int Cin, int Fw, int Fh, int Wout, int Hout, uint32_t q_scale, int q_zero, int stride)
+    {
+        AccelParams ap;
+        // YOLO intermediate layers use Leaky ReLU (0.125)
+        // Both relu and fixed_leaky_relu must be true
+        ap.relu = true;
+        ap.fixed_leaky_relu = true;
+
+        ap.maxpool = false;
+        ap.input_size = Cin * Hin * Win;
+        ap.filter_w = Fw;
+        ap.filter_h = Fh;
+        ap.filter_c = Cin;
+        ap.single_filter_size = Fw * Fh * Cin;
+        ap.output_w = Wout;
+        ap.output_h = Hout;
+        ap.output_elements_per_channel = Wout * Hout;
+
+        ap.inp_diff_fw = Win - (Fw - 1);
+        ap.inp_diff_fh = (Win * Hin) - ((Fh - 1) * Win) - (Fw - 1);
+        ap.inp_diff_fc = -((int)(Cin - 1) * Win * Hin) - ((int)(Fh - 1) * Win) - ((int)Fw - 2);
+        ap.inp_diff_ow = -((int)(Cin - 1) * Win * Hin) - ((int)(Fh - 2) * Win) - ((int)Win - 1);
+
+        ap.q_scale_fx_pnt = q_scale;
+        ap.q_zero = q_zero;
+        ap.zp_macced = nullptr;
+        return ap;
+    }
+
+}
