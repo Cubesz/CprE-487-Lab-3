@@ -34,8 +34,8 @@ module sv_output_storage #(
         (* mark_debug = "true" *) input [C_TID_WIDTH-1 : 0] S_AXIS_TID,
         (* mark_debug = "true" *) input S_AXIS_TVALID,
         
-        (* mark_debug = "true" *) output reg [32-1 : 0] BRAM_addr,
-        (* mark_debug = "true" *) output reg [BRAM_DATA_WIDTH-1 : 0] BRAM_din,
+        output reg [32-1 : 0] BRAM_addr,
+        output reg [BRAM_DATA_WIDTH-1 : 0] BRAM_din,
         input [BRAM_DATA_WIDTH-1 : 0] BRAM_dout,
         output reg BRAM_en,
         output reg [(BRAM_DATA_WIDTH/8)-1 : 0] BRAM_we,
@@ -64,13 +64,13 @@ module sv_output_storage #(
 
     
    
-    (* mark_debug = "true" *) reg [DIM_WIDTH-1 : 0] column_progress;
-    (* mark_debug = "true" *) reg [DIM_WIDTH-1 : 0] row_progress;
+    reg [DIM_WIDTH-1 : 0] column_progress;
+    reg [DIM_WIDTH-1 : 0] row_progress;
     
     (* mark_debug = "true" *) reg [ADDR_WIDTH-1 : 0] output_idx;
     
     
-    (* mark_debug = "true" *) reg [ADDR_WIDTH-1 : 0] offsetted_progress; // should be ahead index
+    reg [ADDR_WIDTH-1 : 0] offsetted_progress; // should be ahead index
     
     
     reg [ADDR_WIDTH-1 : 0] saved_base_row_idx;

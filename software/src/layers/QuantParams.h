@@ -14,15 +14,20 @@ const int32_t Zp_macced_player7[] = { 3188, 3539, 2987, 3497, 3122, 3223, 3501, 
 
 
 
-// const int player0outputscaler = (1.0f/(78.2820355f / (225.77330403f * 419.30887f)));
-// const int player1outputscaler = (1.0f/(30.10063831f / (78.2820355f * 260.8992f)));
-const int player0outputscaler = 0x00363129 & 0xFFFFC000;
-const int player1outputscaler = 0x00609664 & 0xFFFFC000;
+const int player0outputscaler = (1.0f/(78.2820355f / (225.77330403f * 419.30887f)));
+const int player1outputscaler = (1.0f/(30.10063831f / (78.2820355f * 260.8992f)));
 const int player2outputscaler = (1.0f/(38.9806973f / (30.10063831f * 183.42577f)));
 const int player3outputscaler = (1.0f/(34.65046495f / (38.9806973f * 234.51324f)));
 const int player4outputscaler = (1.0f/(22.17446924f / (34.65046495f * 236.64046f)));
 const int player5outputscaler = (1.0f/(14.83324517f / (22.17446924f * 248.70012f)));
 const int player6outputscaler = (1.0f/(8.22409603f / (14.83324517f * 227.76791f)));
+// const int player0outputscaler = 0x00363129 & 0xFFFFC000;
+// const int player1outputscaler = 0x00609664 & 0xFFFFC000;
+// const int player2outputscaler = 0x01ceb190 & 0xFFFFC000;
+// const int player3outputscaler = 0x00f86962 & 0xFFFFC000;
+// const int player4outputscaler = 0x00b13aa9 & 0xFFFFC000;
+// const int player5outputscaler = 0x00b04601 & 0xFFFFC000;
+// const int player6outputscaler = 0x009f8767 & 0xFFFFC000;
 
 
 typedef struct {
@@ -55,6 +60,8 @@ typedef struct {
     int q_scale_fx_pnt; // Q0.32 format. Hardware is actually Q0.18 though and also the top 5 or so bits are assumed to be 0.
     int q_zero;
     const int32_t* zp_macced;
+    bool return_accelerator_data = false;
+    int sparse_scale = 1; // this up scales q scale fx pnt and then down scales at end but expect as float. Changing this from 1 will result in float returns if applicable. Otherwise inter returns if applicable.
 } AccelParams;
 
 const AccelParams aplayer0 = {
@@ -98,7 +105,7 @@ const AccelParams aplayer1 = {
     .zp_macced = Zp_macced_player1
 };
 
-const AccelParams aplayer2 = { // not complete yet
+const AccelParams aplayer2 = {
     .relu = true,
     .maxpool = false,
     .input_size = 28*28*32,
@@ -109,14 +116,113 @@ const AccelParams aplayer2 = { // not complete yet
     .output_w = 26,
     .output_h = 26,
     .output_elements_per_channel = 26*26,
-    // .output_elements_per_channel = 56*56,
-    .inp_diff_fw = 56,
-    .inp_diff_fh = 3356,
-    .inp_diff_fc = -111843,
-    .inp_diff_ow = -111839,
-    .q_scale_fx_pnt = 0x00609664, // 0.001473807791 in Q0.32.
+    .inp_diff_fw = 26,
+    .inp_diff_fh = 726,
+    .inp_diff_fc = -24361,
+    .inp_diff_ow = -24359,
+    .q_scale_fx_pnt = 0x01ceb190, // 0.0070601440966129303 in Q0.32.
     .q_zero = modelQParams_8q[3].Z_i_next,
     .zp_macced = Zp_macced_player2
+};
+
+const AccelParams aplayer3 = {
+    .relu = true,
+    .maxpool = true,
+    .input_size = 26*26*64,
+    .filter_w = 3,
+    .filter_h = 3,
+    .filter_c = 64,
+    .single_filter_size = 3 * 3 * 64,
+    .output_w = 24,
+    .output_h = 24,
+    .output_elements_per_channel = 12*12,
+    .inp_diff_fw = 24,
+    .inp_diff_fh = 622,
+    .inp_diff_fc = -42641,
+    .inp_diff_ow = -42639,
+    .q_scale_fx_pnt = 0x00f86962, // 0.00379046099260449409 in Q0.32.
+    .q_zero = modelQParams_8q[4].Z_i_next,
+    .zp_macced = Zp_macced_player3
+};
+
+const AccelParams aplayer4 = {
+    .relu = true,
+    .maxpool = false,
+    .input_size = 12*12*64,
+    .filter_w = 3,
+    .filter_h = 3,
+    .filter_c = 64,
+    .single_filter_size = 3 * 3 * 64,
+    .output_w = 10,
+    .output_h = 10,
+    .output_elements_per_channel = 10*10,
+    .inp_diff_fw = 10,
+    .inp_diff_fh = 118,
+    .inp_diff_fc = -9097,
+    .inp_diff_ow = -9095,
+    .q_scale_fx_pnt = 0x00b13aa9, // 0.00270430208183825016 in Q0.32.
+    .q_zero = modelQParams_8q[6].Z_i_next,
+    .zp_macced = Zp_macced_player4
+};
+
+const AccelParams aplayer5 = {
+    .relu = true,
+    .maxpool = true,
+    .input_size = 10*10*64,
+    .filter_w = 3,
+    .filter_h = 3,
+    .filter_c = 64,
+    .single_filter_size = 3 * 3 * 64,
+    .output_w = 8,
+    .output_h = 8,
+    .output_elements_per_channel = 4*4,
+    .inp_diff_fw = 8,
+    .inp_diff_fh = 78,
+    .inp_diff_fc = -6321,
+    .inp_diff_ow = -6319,
+    .q_scale_fx_pnt = 0x00b04601, // 0.002689719432964921 in Q0.32.
+    .q_zero = modelQParams_8q[7].Z_i_next,
+    .zp_macced = Zp_macced_player5
+};
+
+const AccelParams aplayer6 = {
+    .relu = true,
+    .maxpool = false,
+    .input_size = 2048,
+    .filter_w = 4,
+    .filter_h = 4,
+    .filter_c = 128,
+    .single_filter_size = 2048,
+    .output_w = 1,
+    .output_h = 1,
+    .output_elements_per_channel = 1,
+    .inp_diff_fw = 1,
+    .inp_diff_fh = 1,
+    .inp_diff_fc = 0,
+    .inp_diff_ow = 0,
+    .q_scale_fx_pnt = 0x009f8767, // 0.00243421806953847408 in Q0.32.
+    .q_zero = modelQParams_8q[10].Z_i_next,
+    .zp_macced = Zp_macced_player6
+};
+
+const AccelParams aplayer7 = {
+    .relu = false,
+    .maxpool = false,
+    .input_size = 256,
+    .filter_w = 1,
+    .filter_h = 1,
+    .filter_c = 256,
+    .single_filter_size = 256,
+    .output_w = 1,
+    .output_h = 1,
+    .output_elements_per_channel = 1,
+    .inp_diff_fw = 1,
+    .inp_diff_fh = 1,
+    .inp_diff_fc = 0,
+    .inp_diff_ow = 0,
+    .q_scale_fx_pnt = 0x00531563 << 3, // 0.001267754254 * 8 in Q0.32.
+    .q_zero = modelQParams_8q[11].Z_i_next,
+    .zp_macced = Zp_macced_player7
 };
 
 

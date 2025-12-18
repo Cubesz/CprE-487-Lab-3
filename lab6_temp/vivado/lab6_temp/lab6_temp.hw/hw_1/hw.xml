@@ -15,15 +15,18 @@
   </ObjectList>
   <ObjectList object_type="hw_ila" gui_info="">
     <Object name="u_ila_0" gui_info="">
-      <Properties Property="CONTROL.DATA_DEPTH" value="2"/>
+      <Properties Property="CONTROL.DATA_DEPTH" value="4096"/>
       <Properties Property="CONTROL.TRIGGER_CONDITION" value="AND"/>
       <Properties Property="CONTROL.TRIGGER_POSITION" value="1"/>
-      <Properties Property="CONTROL.WINDOW_COUNT" value="1024"/>
+      <Properties Property="CONTROL.WINDOW_COUNT" value="1"/>
       <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
     </Object>
   </ObjectList>
   <ObjectList object_type="hw_probe" gui_info="">
-    <Object name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_output_storage/out_store/conv_idle" gui_info="Trigger Setup=0"/>
+    <Object name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_output_storage/out_store/S_AXIS_TID[1:0]" gui_info=""/>
+    <Object name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_output_storage/out_store/conv_idle" gui_info=""/>
+    <Object name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_output_storage/out_store/output_idx[16:0]" gui_info="Trigger Setup=0"/>
+    <Object name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_output_storage/out_store/row_progress[11:0]" gui_info=""/>
   </ObjectList>
   <probeset name="hw project" active="false">
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
@@ -32,11 +35,136 @@
         <Option Id="COMPARE_VALUE.0" value="eq32&apos;hXXXX_XXXX"/>
         <Option Id="DISPLAY_AS_ENUM" value="1"/>
         <Option Id="DISPLAY_HINT" value=""/>
-        <Option Id="DISPLAY_RADIX" value="HEX"/>
+        <Option Id="DISPLAY_RADIX" value="SIGNED"/>
         <Option Id="DISPLAY_VISIBILITY" value=""/>
         <Option Id="HW_ILA" value="hw_ila_1"/>
         <Option Id="LINK_TO_WAVEFORM" value="1"/>
         <Option Id="MAP" value="probe4[31:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq32&apos;hXXXX_XXXX"/>
+        <Option Id="WAVEFORM_STYLE" value="Digital"/>
+      </probeOptions>
+      <nets>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[31]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[30]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[29]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[28]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[27]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[26]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[25]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[24]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[23]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[22]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[21]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[20]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[19]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[18]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[17]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[16]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[15]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[14]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[13]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[12]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[11]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[10]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[9]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[8]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[7]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[6]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[5]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[4]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[3]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[2]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[1]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TDATA[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq2&apos;hX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq2&apos;hX"/>
+        <Option Id="DISPLAY_AS_ENUM" value="1"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_RADIX" value="HEX"/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="LINK_TO_WAVEFORM" value="1"/>
+        <Option Id="MAP" value="probe5[1:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq2&apos;hX"/>
+        <Option Id="WAVEFORM_STYLE" value="Digital"/>
+      </probeOptions>
+      <nets>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TID[1]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/S_AXIS_TID[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq31&apos;hXXXX_XXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq31&apos;hXXXX_XXXX"/>
+        <Option Id="DISPLAY_AS_ENUM" value="1"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_RADIX" value="SIGNED"/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="LINK_TO_WAVEFORM" value="1"/>
+        <Option Id="MAP" value="probe6[30:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq31&apos;hXXXX_XXXX"/>
+        <Option Id="WAVEFORM_STYLE" value="Digital"/>
+      </probeOptions>
+      <nets>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[30]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[29]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[28]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[27]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[26]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[25]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[24]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[23]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[22]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[21]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[20]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[19]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[18]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[17]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[16]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[15]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[14]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[13]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[12]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[11]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[10]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[9]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[8]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[7]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[6]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[5]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[4]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[3]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[2]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[1]"/>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_dequantization/dequant/post_zp_adjusted[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq32&apos;hXXXX_XXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq32&apos;hXXXX_XXXX"/>
+        <Option Id="DISPLAY_AS_ENUM" value="1"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_RADIX" value="UNSIGNED"/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="LINK_TO_WAVEFORM" value="1"/>
+        <Option Id="MAP" value="probe0[31:0]"/>
         <Option Id="NAME.CUSTOM" value=""/>
         <Option Id="NAME.SELECT" value="Long"/>
         <Option Id="SOURCE" value="netlist"/>
@@ -136,11 +264,11 @@
         <Option Id="COMPARE_VALUE.0" value="eq8&apos;hXX"/>
         <Option Id="DISPLAY_AS_ENUM" value="1"/>
         <Option Id="DISPLAY_HINT" value=""/>
-        <Option Id="DISPLAY_RADIX" value="HEX"/>
+        <Option Id="DISPLAY_RADIX" value="SIGNED"/>
         <Option Id="DISPLAY_VISIBILITY" value=""/>
         <Option Id="HW_ILA" value="hw_ila_1"/>
         <Option Id="LINK_TO_WAVEFORM" value="1"/>
-        <Option Id="MAP" value="probe7[7:0]"/>
+        <Option Id="MAP" value="probe2[7:0]"/>
         <Option Id="NAME.CUSTOM" value=""/>
         <Option Id="NAME.SELECT" value="Long"/>
         <Option Id="SOURCE" value="netlist"/>
@@ -168,7 +296,7 @@
         <Option Id="DISPLAY_VISIBILITY" value=""/>
         <Option Id="HW_ILA" value="hw_ila_1"/>
         <Option Id="LINK_TO_WAVEFORM" value="1"/>
-        <Option Id="MAP" value="probe2[1:0]"/>
+        <Option Id="MAP" value="probe1[1:0]"/>
         <Option Id="NAME.CUSTOM" value=""/>
         <Option Id="NAME.SELECT" value="Long"/>
         <Option Id="SOURCE" value="netlist"/>
@@ -198,6 +326,48 @@
         <Option Id="WAVEFORM_STYLE" value="Digital"/>
       </probeOptions>
       <nets>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_output_storage/out_store/S_AXIS_TLAST"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq1&apos;bX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="DISPLAY_AS_ENUM" value="1"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_RADIX" value="HEX"/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="LINK_TO_WAVEFORM" value="1"/>
+        <Option Id="MAP" value="probe10[0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq1&apos;bX"/>
+        <Option Id="WAVEFORM_STYLE" value="Digital"/>
+      </probeOptions>
+      <nets>
+        <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_output_storage/out_store/S_AXIS_TREADY"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq1&apos;bX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="DISPLAY_AS_ENUM" value="1"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_RADIX" value="HEX"/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="LINK_TO_WAVEFORM" value="1"/>
+        <Option Id="MAP" value="probe11[0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq1&apos;bX"/>
+        <Option Id="WAVEFORM_STYLE" value="Digital"/>
+      </probeOptions>
+      <nets>
         <net name="conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_output_storage/out_store/S_AXIS_TVALID"/>
       </nets>
     </probe>
@@ -207,7 +377,7 @@
         <Option Id="COMPARE_VALUE.0" value="eq12&apos;hXXX"/>
         <Option Id="DISPLAY_AS_ENUM" value="1"/>
         <Option Id="DISPLAY_HINT" value=""/>
-        <Option Id="DISPLAY_RADIX" value="HEX"/>
+        <Option Id="DISPLAY_RADIX" value="UNSIGNED"/>
         <Option Id="DISPLAY_VISIBILITY" value=""/>
         <Option Id="HW_ILA" value="hw_ila_1"/>
         <Option Id="LINK_TO_WAVEFORM" value="1"/>
@@ -236,7 +406,7 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="CAPTURE_COMPARE_VALUE" value="eq1&apos;bX"/>
-        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bF"/>
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
         <Option Id="DISPLAY_AS_ENUM" value="1"/>
         <Option Id="DISPLAY_HINT" value=""/>
         <Option Id="DISPLAY_RADIX" value="HEX"/>
@@ -247,7 +417,7 @@
         <Option Id="NAME.CUSTOM" value=""/>
         <Option Id="NAME.SELECT" value="Long"/>
         <Option Id="SOURCE" value="netlist"/>
-        <Option Id="TRIGGER_COMPARE_VALUE" value="eq1&apos;bF"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq1&apos;bX"/>
         <Option Id="WAVEFORM_STYLE" value="Digital"/>
       </probeOptions>
       <nets>
@@ -260,7 +430,7 @@
         <Option Id="COMPARE_VALUE.0" value="eq17&apos;hX_XXXX"/>
         <Option Id="DISPLAY_AS_ENUM" value="1"/>
         <Option Id="DISPLAY_HINT" value=""/>
-        <Option Id="DISPLAY_RADIX" value="HEX"/>
+        <Option Id="DISPLAY_RADIX" value="UNSIGNED"/>
         <Option Id="DISPLAY_VISIBILITY" value=""/>
         <Option Id="HW_ILA" value="hw_ila_1"/>
         <Option Id="LINK_TO_WAVEFORM" value="1"/>
@@ -294,18 +464,18 @@
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="CAPTURE_COMPARE_VALUE" value="eq17&apos;hX_XXXX"/>
-        <Option Id="COMPARE_VALUE.0" value="eq17&apos;hX_XXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq17&apos;u54"/>
         <Option Id="DISPLAY_AS_ENUM" value="1"/>
         <Option Id="DISPLAY_HINT" value=""/>
-        <Option Id="DISPLAY_RADIX" value="HEX"/>
+        <Option Id="DISPLAY_RADIX" value="UNSIGNED"/>
         <Option Id="DISPLAY_VISIBILITY" value=""/>
         <Option Id="HW_ILA" value="hw_ila_1"/>
         <Option Id="LINK_TO_WAVEFORM" value="1"/>
-        <Option Id="MAP" value="probe1[16:0]"/>
+        <Option Id="MAP" value="probe3[16:0]"/>
         <Option Id="NAME.CUSTOM" value=""/>
         <Option Id="NAME.SELECT" value="Long"/>
         <Option Id="SOURCE" value="netlist"/>
-        <Option Id="TRIGGER_COMPARE_VALUE" value="eq17&apos;hX_XXXX"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq17&apos;u54"/>
         <Option Id="WAVEFORM_STYLE" value="Digital"/>
       </probeOptions>
       <nets>
@@ -338,7 +508,7 @@
         <Option Id="DISPLAY_VISIBILITY" value=""/>
         <Option Id="HW_ILA" value="hw_ila_1"/>
         <Option Id="LINK_TO_WAVEFORM" value="1"/>
-        <Option Id="MAP" value="probe0[11:0]"/>
+        <Option Id="MAP" value="probe7[11:0]"/>
         <Option Id="NAME.CUSTOM" value=""/>
         <Option Id="NAME.SELECT" value="Long"/>
         <Option Id="SOURCE" value="netlist"/>

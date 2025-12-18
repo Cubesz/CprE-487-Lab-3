@@ -129,6 +129,7 @@ namespace ML
 
             if (qparam.quantedOutput) {
                 i32 outputPixel = accumulate / qparam.outputscaler;
+                // i32 outputPixel = (accumulate * qparam.outputscaler) >> 32;
                 const i8 finalOutputPixel = (outputPixel > 0 || !useRelu) ? (int8_t) (outputPixel + qparam.Z_i_next) : (int8_t) qparam.Z_i_next;
                 outputData.get<i8>(outputPixelIdx) = finalOutputPixel;
             }

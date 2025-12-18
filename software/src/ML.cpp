@@ -1545,8 +1545,8 @@ namespace ML
             Xil_Out32(MLP_CTRLA, 0); // start
             // as it goes, load upcoming filters
 
-            if (i < (nOutputChannels - 4))
-            {
+            // if (i < (nOutputChannels - 4))
+            // {
                 memcpy_dma(MLP_FILTER0, filterDataPtr, ap.single_filter_size);
                 filterDataPtr += ap.single_filter_size;
                 memcpy_dma(MLP_FILTER1, filterDataPtr, ap.single_filter_size);
@@ -1555,7 +1555,7 @@ namespace ML
                 filterDataPtr += ap.single_filter_size;
                 memcpy_dma(MLP_FILTER3, filterDataPtr, ap.single_filter_size);
                 filterDataPtr += ap.single_filter_size;
-            }
+            // }
 
             while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE)); // wait for it to finish
             ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
@@ -1566,6 +1566,19 @@ namespace ML
 
         #endif
         return 0;
+    }
+
+    Model buildLab6Model() {
+        Model model;
+
+        model.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {3, 64, 64}},                                              // Input Data
+            LayerParams{sizeof(i8), {32, 60, 60}},                                             // Output Data
+            LayerParams{sizeof(i8), {32, 3, 5, 5}, "data/quant/param_layer_0/weights_8q.bin"}, // Weights
+            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_8q.bin"}           // Bias
+        );
+
+        return model;
     }
 
     void lab6Stuff()
@@ -1591,6 +1604,8 @@ namespace ML
         Xil_Out32(MLP_CTRLB, 0);
         memcpy_dma(MLP_INPUTS, ly0id.raw(), aplayer0.input_size);
 
+        Timer tmr("inf");
+        tmr.start();
         runAccLayer(aplayer0, (int8_t*) ly0wd.raw(), (int16_t*) ly0bd.raw(), 32, 0);
 
         ly0bd.freeData(); // maybe do later
@@ -1599,8 +1614,8 @@ namespace ML
         printf("Comparing Hardware Output vs Software Reference...\n");
 
         // Get Hardware Output
-        std::vector<int8_t> hw_out_l1(32 * 60 * 60);
-        memcpy_dma(hw_out_l1.data(), MLP_OUTPUTS, 32 * 60 * 60);
+        // std::vector<int8_t> hw_out_l1(32 * 60 * 60);
+        // memcpy_dma(hw_out_l1.data(), MLP_OUTPUTS, 32 * 60 * 60);
 
         // std::cout << "[";
         // int cnt = 0;
@@ -1621,73 +1636,73 @@ namespace ML
         // std::cout << "]" << std::endl;
 
         // Run Software Layer 1
-        Model model_l1;
-        std::cout << "Adding Layer 1: Convolutional" << std::endl;
+        // Model model_l1;
+        // std::cout << "Adding Layer 1: Convolutional" << std::endl;
 
-        model_l1.addLayer<ConvolutionalLayer>(
-            LayerParams{sizeof(i8), {64, 64, 3}},
-            LayerParams{sizeof(i8), {60, 60, 32}},
-            LayerParams{sizeof(i8), {5, 5, 3, 32}, "data/quant/param_layer_0/weights_8q.bin"},
-            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_8q.bin"});
-        model_l1.allocLayers();
+        // model_l1.addLayer<ConvolutionalLayer>(
+        //     LayerParams{sizeof(i8), {64, 64, 3}},
+        //     LayerParams{sizeof(i8), {60, 60, 32}},
+        //     LayerParams{sizeof(i8), {5, 5, 3, 32}, "data/quant/param_layer_0/weights_8q.bin"},
+        //     LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_8q.bin"});
+        // model_l1.allocLayers();
 
-        LayerData inp_sw = LayerData{LayerParams{sizeof(i8), {64, 64, 3}}, "data/quant/given_image0_8q.bin"};
-        inp_sw.loadData();
-        const LayerData &l1_out_sw = model_l1.inferenceLayer(inp_sw, 0, Layer::InfType::QUANTIZED, modelQParams_8q[0]);
+        // LayerData inp_sw = LayerData{LayerParams{sizeof(i8), {64, 64, 3}}, "data/quant/given_image0_8q.bin"};
+        // inp_sw.loadData();
+        // const LayerData &l1_out_sw = model_l1.inferenceLayer(inp_sw, 0, Layer::InfType::QUANTIZED, modelQParams_8q[0]);
 
-        // Compare each pixel
-        int mismatches = 0;
-        int diff_of_one = 0;
-        int print_limit = 10;
+        // // Compare each pixel
+        // int mismatches = 0;
+        // int diff_of_one = 0;
+        // int print_limit = 10;
 
-        for (int ch = 0; ch < 32; ch++)
-        {
-            for (int r = 0; r < 60; r++)
-            {
-                for (int c = 0; c < 60; c++)
-                {
-                    // HW Output is [Ch][Row][Col]
-                    int hw_val = (int)hw_out_l1[(ch * 60 * 60) + (r * 60) + c];
+        // for (int ch = 0; ch < 32; ch++)
+        // {
+        //     for (int r = 0; r < 60; r++)
+        //     {
+        //         for (int c = 0; c < 60; c++)
+        //         {
+        //             // HW Output is [Ch][Row][Col]
+        //             int hw_val = (int)hw_out_l1[(ch * 60 * 60) + (r * 60) + c];
 
-                    // SW Output is [Row][Col][Ch]
-                    int sw_val = (int)l1_out_sw.get<i8>((r * 60 * 32) + (c * 32) + ch);
+        //             // SW Output is [Row][Col][Ch]
+        //             int sw_val = (int)l1_out_sw.get<i8>((r * 60 * 32) + (c * 32) + ch);
 
-                    int diff = abs(hw_val - sw_val);
+        //             int diff = abs(hw_val - sw_val);
 
-                    if (diff > 0)
-                    {
-                        if (diff == 1)
-                        {
-                            diff_of_one++;
-                        }
-                        else
-                        {
-                            if (mismatches < print_limit)
-                            {
-                                printf("FAIL: Ch%d R%d C%d -> HW:%d SW:%d (Diff: %d)\n", ch, r, c, hw_val, sw_val, diff);
-                            }
-                            mismatches++;
-                        }
-                    }
-                }
-            }
-        }
+        //             if (diff > 0)
+        //             {
+        //                 if (diff == 1)
+        //                 {
+        //                     diff_of_one++;
+        //                 }
+        //                 else
+        //                 {
+        //                     if (mismatches < print_limit)
+        //                     {
+        //                         printf("FAIL: Ch%d R%d C%d -> HW:%d SW:%d (Diff: %d)\n", ch, r, c, hw_val, sw_val, diff);
+        //                     }
+        //                     mismatches++;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        printf("\n--- RESULTS ---\n");
-        printf("Total Pixels: %d\n", 32 * 60 * 60);
-        printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
+        // printf("\n--- RESULTS ---\n");
+        // printf("Total Pixels: %d\n", 32 * 60 * 60);
+        // printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
 
-        if (mismatches == 0)
-        {
-            printf(">> SUCCESS: Layer 1 matches perfectly (within +/- 1 tolerance).\n");
-        }
-        else
-        {
-            printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
-        }
+        // if (mismatches == 0)
+        // {
+        //     printf(">> SUCCESS: Layer 1 matches perfectly (within +/- 1 tolerance).\n");
+        // }
+        // else
+        // {
+        //     printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
+        // }
 
 
-        inp_sw.freeData();
+        // inp_sw.freeData();
         // model_l1.freeLayers();
 
         // std::cout << "stop" << std::endl;
@@ -1703,7 +1718,7 @@ namespace ML
         ly1wd.loadData();
         ly1bd.loadData();
 
-        printf("Running Layer 2 (with max pooling) (60x60x32-> 28x28x32)...\n");
+        // printf("Running Layer 2 (with max pooling) (60x60x32-> 28x28x32)...\n");
 
         // layer initialization
         ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
@@ -1712,97 +1727,100 @@ namespace ML
         ly1bd.freeData(); // maybe do later
         ly1wd.freeData();
 
-        printf("Comparing Hardware Output vs Software Reference...\n");
+        // printf("Comparing Hardware Output vs Software Reference...\n");
 
         // Get Hardware Output
-        std::vector<int8_t> hw_out_l2(32 * 28 * 28);
-        memcpy_dma(hw_out_l2.data(), MLP_OUTPUTS, 32 * 28 * 28);
+        // std::vector<int8_t> hw_out_l2(32 * 28 * 28);
+        // memcpy_dma(hw_out_l2.data(), MLP_OUTPUTS, 32 * 28 * 28);
 
         // Run Software Layer 2
-        Model model_l2;
+        // Model model_l2;
 
-        model_l2.addLayer<ConvolutionalLayer>(
-            LayerParams{sizeof(i8), {60, 60, 32}},
-            LayerParams{sizeof(i8), {56, 56, 32}},
-            LayerParams{sizeof(i8), {5, 5, 32, 32}, "data/quant/param_layer_1/weights_8q.bin"},
-            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_1/biases_8q.bin"});
-        model_l2.addLayer<MaxPoolingLayer>(
-            LayerParams{sizeof(i8), {56, 56, 32}}, // Input
-            LayerParams{sizeof(i8), {28, 28, 32}}  // Output
-        );
+        // model_l2.addLayer<ConvolutionalLayer>(
+        //     LayerParams{sizeof(i8), {60, 60, 32}},
+        //     LayerParams{sizeof(i8), {56, 56, 32}},
+        //     LayerParams{sizeof(i8), {5, 5, 32, 32}, "data/quant/param_layer_1/weights_8q.bin"},
+        //     LayerParams{sizeof(i16), {32}, "data/quant/param_layer_1/biases_8q.bin"});
+        // model_l2.addLayer<MaxPoolingLayer>(
+        //     LayerParams{sizeof(i8), {56, 56, 32}}, // Input
+        //     LayerParams{sizeof(i8), {28, 28, 32}}  // Output
+        // );
         
-        model_l2.allocLayers();
+        // model_l2.allocLayers();
 
 
         // const LayerData &l2_out_sw_out = model_l2.inference(inp_sw_again, Layer::InfType::QUANTIZED, modelQParams_8q);
         // const LayerData &l2_out_sw_out = model_l2.inferenceLayer(l1_out_sw, 0, Layer::InfType::QUANTIZED, modelQParams_8q[1]);
-        const LayerData &l2_out_sw_out = model_l2.inference(l1_out_sw, Layer::InfType::QUANTIZED, (modelQParams_8q+1));
+        // const LayerData &l2_out_sw_out = model_l2.inference(l1_out_sw, Layer::InfType::QUANTIZED, (modelQParams_8q+1));
 
         // Compare each pixel
-        mismatches = 0;
-        diff_of_one = 0;
-        print_limit = 10;
-        bool channel_errs[32] = {0};
+        // mismatches = 0;
+        // diff_of_one = 0;
+        // print_limit = 10;
+        // bool channel_errs[64] = {0};
 
-        for (int ch = 0; ch < 32; ch++)
-        {
-            for (int r = 0; r < 28; r++)
-            {
-                for (int c = 0; c < 28; c++)
-                {
-                    // HW Output is [Ch][Row][Col]
-                    int hw_val = (int)hw_out_l2[(ch * 28 * 28) + (r * 28) + c];
+        // for (int ch = 0; ch < 32; ch++)
+        // {
+        //     for (int r = 0; r < 28; r++)
+        //     {
+        //         for (int c = 0; c < 28; c++)
+        //         {
+        //             // HW Output is [Ch][Row][Col]
+        //             int hw_val = (int)hw_out_l2[(ch * 28 * 28) + (r * 28) + c];
 
-                    // SW Output is [Row][Col][Ch]
-                    int sw_val = (int)l2_out_sw_out.get<i8>((r * 28 * 32) + (c * 32) + ch);
+        //             // SW Output is [Row][Col][Ch]
+        //             int sw_val = (int)l2_out_sw_out.get<i8>((r * 28 * 32) + (c * 32) + ch);
 
-                    int diff = abs(hw_val - sw_val);
+        //             int diff = abs(hw_val - sw_val);
 
-                    if (diff > 0)
-                    {
-                        channel_errs[ch] = true;
-                        if (diff == 1)
-                        {
-                            diff_of_one++;
-                        }
-                        else
-                        {
-                            if (mismatches < print_limit)
-                            {
-                                printf("FAIL: Ch%d R%d C%d -> HW:%d SW:%d (Diff: %d)\n", ch, r, c, hw_val, sw_val, diff);
-                            }
-                            mismatches++;
-                        }
-                    }
-                }
-            }
-        }
+        //             if (diff > 0)
+        //             {
+        //                 channel_errs[ch] = true;
+        //                 if (diff == 1)
+        //                 {
+        //                     diff_of_one++;
+        //                 }
+        //                 else
+        //                 {
+        //                     if (mismatches < print_limit)
+        //                     {
+        //                         printf("FAIL: Ch%d R%d C%d -> HW:%d SW:%d (Diff: %d)\n", ch, r, c, hw_val, sw_val, diff);
+        //                     }
+        //                     mismatches++;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        for (int i = 0; i < 32; i++) {
-            if (channel_errs[i])
-                std::cout << "Error in channel: " << i << std::endl;
-        }
+        // for (int i = 0; i < 32; i++) {
+        //     if (channel_errs[i])
+        //         std::cout << "Error in channel: " << i << std::endl;
+        // }
+        // channel_errs[64] = {0};
 
-        printf("\n--- RESULTS ---\n");
-        printf("Total Pixels: %d\n", 32 * 56 * 56);
-        printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
+        // printf("\n--- RESULTS ---\n");
+        // printf("Total Pixels: %d\n", 32 * 56 * 56);
+        // printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
 
-        if (mismatches == 0)
-        {
-            printf(">> SUCCESS: Layer 1 matches perfectly (within +/- 1 tolerance).\n");
-        }
-        else
-        {
-            printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
-        }
+        // if (mismatches == 0)
+        // {
+        //     printf(">> SUCCESS: Layer 1 matches perfectly (within +/- 1 tolerance).\n");
+        // }
+        // else
+        // {
+        //     printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
+        // }
 
 
-        LayerData ly2wd = LayerData{LayerParams{sizeof(i8), {32, 32, 5, 5}}, "data/quant_t_new/layer2_weights_8q_t_new.bin"};
-        LayerData ly2bd = LayerData{LayerParams{sizeof(i16), {32}}, "data/quant/param_layer_2/biases_8q.bin"};
+        // model_l1.freeLayers();
+
+        LayerData ly2wd = LayerData{LayerParams{sizeof(i8), {64, 32, 3, 3}}, "data/quant_t_new/layer2_weights_8q_t_new.bin"};
+        LayerData ly2bd = LayerData{LayerParams{sizeof(i16), {64}}, "data/quant/param_layer_2/biases_8q.bin"};
         ly2wd.loadData();
         ly2bd.loadData();
 
-        printf("Running layer 3 (28x28x32 -> 26x26x64)...\n");
+        // printf("Running layer 3 (28x28x32 -> 26x26x64)...\n");
         ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
         runAccLayer(aplayer2, (int8_t*) ly2wd.raw(), (int16_t*) ly2bd.raw(), 64, ctrlb_flags);
 
@@ -1810,84 +1828,496 @@ namespace ML
         ly2bd.freeData();
 
 
-        printf("Comparing Hardware Output vs Software Reference...\n");
+        // printf("Comparing Hardware Output vs Software Reference...\n");
 
         // Get Hardware Output
-        std::vector<int8_t> hw_out_l3(64 * 26 * 26);
-        memcpy_dma(hw_out_l3.data(), MLP_OUTPUTS, 64 * 26 * 26);
+        // std::vector<int8_t> hw_out_l3(64 * 26 * 26);
+        // memcpy_dma(hw_out_l3.data(), MLP_OUTPUTS, 64 * 26 * 26);
 
         // Run Software Layer 2
-        Model model_l3;
+        // Model moodel;
 
-        model_l3.addLayer<ConvolutionalLayer>(
-            LayerParams{sizeof(i8), {28, 28, 32}},
-            LayerParams{sizeof(i8), {26, 26, 64}},
-            LayerParams{sizeof(i8), {3, 3, 32, 64}, "data/quant/param_layer_2/weights_8q.bin"},
-            LayerParams{sizeof(i16), {64}, "data/quant/param_layer_2/biases_8q.bin"});
-        
-        model_l3.allocLayers();
+        // moodel.addLayer<ConvolutionalLayer>(
+        //     LayerParams{sizeof(i8), {64, 64, 3}},                                              // Input Data
+        //     LayerParams{sizeof(i8), {60, 60, 32}},                                             // Output Data
+        //     LayerParams{sizeof(i8), {5, 5, 3, 32}, "data/quant/param_layer_0/weights_8q.bin"}, // Weights
+        //     LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_8q.bin"}           // Bias
+        // );
 
+        // moodel.addLayer<ConvolutionalLayer>(
+        //     LayerParams{sizeof(i8), {60, 60, 32}},                                              // Input Data
+        //     LayerParams{sizeof(i8), {56, 56, 32}},                                              // Output Data
+        //     LayerParams{sizeof(i8), {5, 5, 32, 32}, "data/quant/param_layer_1/weights_8q.bin"}, // Weights
+        //     LayerParams{sizeof(i16), {32}, "data/quant/param_layer_1/biases_8q.bin"}            // Bias
+        // );
+
+        // moodel.addLayer<MaxPoolingLayer>(
+        //     LayerParams{sizeof(i8), {56, 56, 32}}, // Input
+        //     LayerParams{sizeof(i8), {28, 28, 32}}  // Output
+        // );
+
+        // moodel.addLayer<ConvolutionalLayer>(
+        //     LayerParams{sizeof(i8), {28, 28, 32}},                                              // Input Data
+        //     LayerParams{sizeof(i8), {26, 26, 64}},                                              // Output Data
+        //     LayerParams{sizeof(i8), {3, 3, 32, 64}, "data/quant/param_layer_2/weights_8q.bin"}, // Weights
+        //     LayerParams{sizeof(i16), {64}, "data/quant/param_layer_2/biases_8q.bin"}            // Bias
+        // );
+        // moodel.allocLayers();
+
+        // const LayerData &l3_out_sw_out = moodel.inference(inp_sw, Layer::InfType::QUANTIZED, modelQParams_8q);
 
         // const LayerData &l2_out_sw_out = model_l2.inference(inp_sw_again, Layer::InfType::QUANTIZED, modelQParams_8q);
-        const LayerData &l3_out_sw_out = model_l3.inferenceLayer(l2_out_sw_out, 0, Layer::InfType::QUANTIZED, modelQParams_8q[3]);
+        // const LayerData &l3_out_sw_out = model_l3.inferenceLayer(l2_out_sw_out, 0, Layer::InfType::QUANTIZED, modelQParams_8q[3]);
+
+
 
         // Compare each pixel
-        mismatches = 0;
-        diff_of_one = 0;
-        print_limit = 10;
+        // mismatches = 0;
+        // diff_of_one = 0;
+        // print_limit = 10;
 
-        for (int ch = 0; ch < 64; ch++)
-        {
-            for (int r = 0; r < 26; r++)
-            {
-                for (int c = 0; c < 26; c++)
-                {
-                    // HW Output is [Ch][Row][Col]
-                    int hw_val = (int)hw_out_l3[(ch * 26 * 26) + (r * 26) + c];
+        // for (int ch = 0; ch < 64; ch++)
+        // {
+        //     for (int r = 0; r < 26; r++)
+        //     {
+        //         for (int c = 0; c < 26; c++)
+        //         {
+        //             // HW Output is [Ch][Row][Col]
+        //             int hw_val = (int)hw_out_l3[(ch * 26 * 26) + (r * 26) + c];
 
-                    // SW Output is [Row][Col][Ch]
-                    int sw_val = (int)l3_out_sw_out.get<i8>((r * 26 * 64) + (c * 64) + ch);
+        //             // SW Output is [Row][Col][Ch]
+        //             int sw_val = (int)l3_out_sw_out.get<i8>((r * 26 * 64) + (c * 64) + ch);
 
-                    int diff = abs(hw_val - sw_val);
+        //             int diff = abs(hw_val - sw_val);
 
-                    if (diff > 0)
-                    {
-                        channel_errs[ch] = true;
-                        if (diff == 1)
-                        {
-                            diff_of_one++;
-                        }
-                        else
-                        {
-                            if (mismatches < print_limit)
-                            {
-                                printf("FAIL: Ch%d R%d C%d -> HW:%d SW:%d (Diff: %d)\n", ch, r, c, hw_val, sw_val, diff);
-                            }
-                            mismatches++;
-                        }
-                    }
-                }
-            }
+        //             if (diff > 0)
+        //             {
+        //                 channel_errs[ch] = true;
+        //                 if (diff == 1)
+        //                 {
+        //                     diff_of_one++;
+        //                 }
+        //                 else
+        //                 {
+        //                     if (mismatches < print_limit)
+        //                     {
+        //                         printf("FAIL: Ch%d R%d C%d -> HW:%d SW:%d (Diff: %d)\n", ch, r, c, hw_val, sw_val, diff);
+        //                     }
+        //                     mismatches++;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        // for (int i = 0; i < 64; i++) {
+        //     if (channel_errs[i])
+        //         std::cout << "Error in channel: " << i << std::endl;
+        // }
+
+        // printf("\n--- RESULTS ---\n");
+        // printf("Total Pixels: %d\n", 64 * 26 * 26);
+        // printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
+
+        // if (mismatches == 0)
+        // {
+        //     printf(">> SUCCESS: Layer 1 matches perfectly (within +/- 1 tolerance).\n");
+        // }
+        // else
+        // {
+        //     printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
+        // }
+
+        LayerData ly3wd = LayerData{LayerParams{sizeof(i8), {64, 64, 3, 3}}, "data/quant_t_new/layer3_weights_8q_t_new.bin"};
+        LayerData ly3bd = LayerData{LayerParams{sizeof(i16), {64}}, "data/quant/param_layer_3/biases_8q.bin"};
+        ly3wd.loadData();
+        ly3bd.loadData();
+
+        // printf("Running layer 4 (with max pooling) (26x26x64 -> 12x12x64)...\n");
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer3, (int8_t*) ly3wd.raw(), (int16_t*) ly3bd.raw(), 64, ctrlb_flags);
+
+        ly3wd.freeData();
+        ly3bd.freeData();
+
+
+        // printf("Comparing Hardware Output vs Software Reference...\n");
+
+        // Get Hardware Output
+        // std::vector<int8_t> hw_out_l4(64 * 12 * 12);
+        // memcpy_dma(hw_out_l4.data(), MLP_OUTPUTS, 64 * 12 * 12);
+
+        // Model amodel;
+
+        // amodel.addLayer<ConvolutionalLayer>(
+        //     LayerParams{sizeof(i8), {26, 26, 64}},                                              // Input Data
+        //     LayerParams{sizeof(i8), {24, 24, 64}},                                              // Output Data
+        //     LayerParams{sizeof(i8), {3, 3, 64, 64}, "data/quant/param_layer_3/weights_8q.bin"}, // Weights
+        //     LayerParams{sizeof(i16), {64}, "data/quant/param_layer_3/biases_8q.bin"}            // Bias
+        // );
+
+        // amodel.addLayer<MaxPoolingLayer>(
+        //     LayerParams{sizeof(i8), {24, 24, 64}}, // Input
+        //     LayerParams{sizeof(i8), {12, 12, 64}}  // Output
+        // );
+        // amodel.allocLayers();
+
+        // const LayerData &l4_out_sw_out = amodel.inference(l3_out_sw_out, Layer::InfType::QUANTIZED, modelQParams_8q + 4);
+
+        // const LayerData &l2_out_sw_out = model_l2.inference(inp_sw_again, Layer::InfType::QUANTIZED, modelQParams_8q);
+        // const LayerData &l3_out_sw_out = model_l3.inferenceLayer(l2_out_sw_out, 0, Layer::InfType::QUANTIZED, modelQParams_8q[3]);
+
+
+
+        // Compare each pixel
+        // mismatches = 0;
+        // diff_of_one = 0;
+        // print_limit = 10;
+
+        // for (int ch = 0; ch < 64; ch++)
+        // {
+        //     for (int r = 0; r < 12; r++)
+        //     {
+        //         for (int c = 0; c < 12; c++)
+        //         {
+        //             // HW Output is [Ch][Row][Col]
+        //             int hw_val = (int)hw_out_l4[(ch * 12 * 12) + (r * 12) + c];
+
+        //             // SW Output is [Row][Col][Ch]
+        //             int sw_val = (int)l4_out_sw_out.get<i8>((r * 12 * 64) + (c * 64) + ch);
+
+        //             int diff = abs(hw_val - sw_val);
+
+        //             if (diff > 0)
+        //             {
+        //                 channel_errs[ch] = true;
+        //                 if (diff == 1)
+        //                 {
+        //                     diff_of_one++;
+        //                 }
+        //                 else
+        //                 {
+        //                     if (mismatches < print_limit)
+        //                     {
+        //                         printf("FAIL: Ch%d R%d C%d -> HW:%d SW:%d (Diff: %d)\n", ch, r, c, hw_val, sw_val, diff);
+        //                     }
+        //                     mismatches++;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        // printf("\n--- RESULTS ---\n");
+        // printf("Total Pixels: %d\n", 64 * 12 * 12);
+        // printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
+
+        // if (mismatches == 0)
+        // {
+        //     printf(">> SUCCESS: Layer 1 matches perfectly (within +/- 1 tolerance).\n");
+        // }
+        // else
+        // {
+        //     printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
+        // }
+
+
+        // printf("Running layer 5 (12x12x64 -> 10x10x64)...\n");
+        LayerData ly4wd = LayerData{LayerParams{sizeof(i8), {64, 64, 3, 3}}, "data/quant_t_new/layer4_weights_8q_t_new.bin"};
+        LayerData ly4bd = LayerData{LayerParams{sizeof(i16), {64}}, "data/quant/param_layer_4/biases_8q.bin"};
+        ly4wd.loadData();
+        ly4bd.loadData();
+
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer4, (int8_t*) ly4wd.raw(), (int16_t*) ly4bd.raw(), 64, ctrlb_flags);
+
+        ly4wd.freeData();
+        ly4bd.freeData();
+
+        // printf("Running layer 6 (10x10x64 -> 4x4x128)...\n");
+
+        LayerData ly5wd = LayerData{LayerParams{sizeof(i8), {128, 64, 3, 3}}, "data/quant_t_new/layer5_weights_8q_t_new.bin"};
+        LayerData ly5bd = LayerData{LayerParams{sizeof(i16), {128}}, "data/quant/param_layer_5/biases_8q.bin"};
+        ly5wd.loadData();
+        ly5bd.loadData();
+
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer5, (int8_t*) ly5wd.raw(), (int16_t*) ly5bd.raw(), 128, ctrlb_flags);
+
+        std::vector<int8_t> hw_out_l6(128 * 4 * 4);
+        memcpy_dma(hw_out_l6.data(), MLP_OUTPUTS, 128 * 4 * 4);
+
+        ly5wd.freeData();
+        ly5bd.freeData();
+
+        // Model anotherM;
+        // anotherM.addLayer<ConvolutionalLayer>(
+        //     LayerParams{sizeof(i8), {12, 12, 64}},                                              // Input Data
+        //     LayerParams{sizeof(i8), {10, 10, 64}},                                              // Output Data
+        //     LayerParams{sizeof(i8), {3, 3, 64, 64}, "data/quant/param_layer_4/weights_8q.bin"}, // Weights
+        //     LayerParams{sizeof(i16), {64}, "data/quant/param_layer_4/biases_8q.bin"}            // Bias
+        // );
+
+        // anotherM.addLayer<ConvolutionalLayer>(
+        //     LayerParams{sizeof(i8), {10, 10, 64}},                                               // Input Data
+        //     LayerParams{sizeof(i8), {8, 8, 128}},                                                // Output Data
+        //     LayerParams{sizeof(i8), {3, 3, 64, 128}, "data/quant/param_layer_5/weights_8q.bin"}, // Weights
+        //     LayerParams{sizeof(i16), {128}, "data/quant/param_layer_5/biases_8q.bin"}            // Bias
+        // );
+
+        // anotherM.addLayer<MaxPoolingLayer>(
+        //     LayerParams{sizeof(i8), {8, 8, 128}}, // Input
+        //     LayerParams{sizeof(i8), {4, 4, 128}}  // Output
+        // );
+
+        // anotherM.allocLayers();
+
+        // const LayerData &l6_out_sw_out = anotherM.inference(l4_out_sw_out, Layer::InfType::QUANTIZED, modelQParams_8q + 6);
+
+
+        // Compare each pixel
+        // mismatches = 0;
+        // diff_of_one = 0;
+        // print_limit = 10;
+
+        // for (int ch = 0; ch < 128; ch++)
+        // {
+        //     for (int r = 0; r < 4; r++)
+        //     {
+        //         for (int c = 0; c < 4; c++)
+        //         {
+        //             // HW Output is [Ch][Row][Col]
+        //             int hw_val = (int)hw_out_l6[(ch * 4 * 4) + (r * 4) + c];
+
+        //             // SW Output is [Row][Col][Ch]
+        //             int sw_val = (int)l6_out_sw_out.get<i8>((r * 4 * 128) + (c * 128) + ch);
+
+        //             int diff = abs(hw_val - sw_val);
+
+        //             if (diff > 0)
+        //             {
+        //                 channel_errs[ch] = true;
+        //                 if (diff == 1)
+        //                 {
+        //                     diff_of_one++;
+        //                 }
+        //                 else
+        //                 {
+        //                     if (mismatches < print_limit)
+        //                     {
+        //                         printf("FAIL: Ch%d R%d C%d -> HW:%d SW:%d (Diff: %d)\n", ch, r, c, hw_val, sw_val, diff);
+        //                     }
+        //                     mismatches++;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        // printf("\n--- RESULTS ---\n");
+        // printf("Total Pixels: %d\n", 128 * 4 * 4);
+        // printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
+
+        // if (mismatches == 0)
+        // {
+        //     printf(">> SUCCESS: Layer 1 matches perfectly (within +/- 1 tolerance).\n");
+        // }
+        // else
+        // {
+        //     printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
+        // }
+
+
+        // printf("Running layer 7 (Dense) (4x4x128 -> 1x1x256)...\n");
+
+        LayerData ly6wd = LayerData{LayerParams{sizeof(i8), {256, 128, 4, 4}}, "data/quant_t_new/layer6_dense_weights_8q_t_new.bin"};
+        LayerData ly6bd = LayerData{LayerParams{sizeof(i16), {256}}, "data/quant/param_layer_6/biases_8q.bin"};
+        ly6wd.loadData();
+        ly6bd.loadData();
+
+        // LayerData weighttest = LayerData{LayerParams{sizeof(i8), {4, 4, 128, 256}}, "data/quant/param_layer_6/weights_8q.bin"};
+        // weighttest.loadData();
+
+
+        // for (int filt = 0; filt < 256; filt++) {
+        //     for (int chan = 0; chan < 128; chan++) {
+        //         for (int row = 0; row < 4; row++) {
+        //             for (int col = 0; col < 4; col++) {
+        //                 int w0 = int(weighttest.get<i8>(row * 4 * 128 * 256 + col * 128 * 256 + chan * 256 + filt));
+        //                 int w1 = int(ly6wd.get<i8>(filt * 128 * 4 * 4 + chan * 4 * 4 + row * 4 + col));
+        //                 if (w0 != w1)
+        //                     std::cout << "mismatch" << std::endl;
+        //             }
+        //         }
+        //     }
+        // }
+
+        // weighttest.freeData();
+
+
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer6, (int8_t*) ly6wd.raw(), (int16_t*) ly6bd.raw(), 256, ctrlb_flags);
+
+        std::vector<int8_t> hw_out_l7(256);
+        memcpy_dma(hw_out_l7.data(), MLP_OUTPUTS, 256);
+
+        ly6wd.freeData();
+        ly6bd.freeData();
+
+        // Model d1Model;
+        // d1Model.addLayer<FlattenLayer>(
+        //     LayerParams{sizeof(i8), {4, 4, 128}}, // Input
+        //     LayerParams{sizeof(i8), {2048}}       // Output
+        // );
+        // d1Model.addLayer<DenseLayer>(
+        //     LayerParams{sizeof(i8), {2048}},                                                 // Input
+        //     LayerParams{sizeof(i8), {256}},                                                  // Output
+        //     LayerParams{sizeof(i8), {2048, 256}, "data/quant/param_layer_6/weights_8q.bin"}, // Weights
+        //     LayerParams{sizeof(i16), {256}, "data/quant/param_layer_6/biases_8q.bin"},       // Biases,
+        //     true);
+
+        // d1Model.allocLayers();
+
+        // const LayerData &l7_out_sw_out = d1Model.inference(l6_out_sw_out, Layer::InfType::QUANTIZED, modelQParams_8q + 9);
+
+
+
+        // Compare each pixel
+        // mismatches = 0;
+        // diff_of_one = 0;
+        // print_limit = 10;
+
+        // for (int ch = 0; ch < 256; ch++)
+        // {
+        //     for (int r = 0; r < 1; r++)
+        //     {
+        //         for (int c = 0; c < 1; c++)
+        //         {
+        //             // HW Output is [Ch][Row][Col]
+        //             int hw_val = (int)hw_out_l7[(ch * 1 * 1) + (r * 1) + c];
+
+        //             // SW Output is [Row][Col][Ch]
+        //             int sw_val = (int)l7_out_sw_out.get<i8>((r * 1 * 256) + (c * 256) + ch);
+
+        //             int diff = abs(hw_val - sw_val);
+
+        //             if (diff > 0)
+        //             {
+        //                 channel_errs[ch] = true;
+        //                 if (diff == 1)
+        //                 {
+        //                     diff_of_one++;
+        //                 }
+        //                 else
+        //                 {
+        //                     if (mismatches < print_limit)
+        //                     {
+        //                         printf("FAIL: Ch%d R%d C%d -> HW:%d SW:%d (Diff: %d)\n", ch, r, c, hw_val, sw_val, diff);
+        //                     }
+        //                     mismatches++;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        // printf("\n--- RESULTS ---\n");
+        // printf("Total Pixels: %d\n", 256);
+        // printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
+
+        // if (mismatches == 0)
+        // {
+        //     printf(">> SUCCESS: Layer 1 matches perfectly (within +/- 1 tolerance).\n");
+        // }
+        // else
+        // {
+        //     printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
+        // }
+
+        // printf("Running layer 8 (Dense) (1x1x256 -> 1x1x200)...\n");
+
+        LayerData ly7wd = LayerData{LayerParams{sizeof(i8), {200, 256, 1, 1}}, "data/quant_t_new/layer7_dense_weights_8q_t_new.bin"};
+        LayerData ly7bd = LayerData{LayerParams{sizeof(i16), {200}}, "data/quant/param_layer_7/biases_8q.bin"};
+        ly7wd.loadData();
+        ly7bd.loadData();
+
+
+
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer7, (int8_t*) ly7wd.raw(), (int16_t*) ly7bd.raw(), 200, ctrlb_flags);
+
+        std::vector<int8_t> hw_out_l8(200);
+        memcpy_dma(hw_out_l8.data(), MLP_OUTPUTS, 200);
+
+        ly7wd.freeData();
+        ly7bd.freeData();
+
+        LayerData denseOut = LayerData{LayerParams{sizeof(fp32), {200}}};
+        denseOut.allocData();
+        for (int i = 0; i < 200; i++) {
+            denseOut.get<fp32>(i) = float(hw_out_l8[i])/8.0;
         }
 
 
-        printf("\n--- RESULTS ---\n");
-        printf("Total Pixels: %d\n", 32 * 56 * 56);
-        printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
+        // Model d2Model;
+        // d2Model.addLayer<DenseLayer>(
+        //     LayerParams{sizeof(i8), {256}},                                                 // Input
+        //     LayerParams{sizeof(fp32), {200}},                                               // Output
+        //     LayerParams{sizeof(i8), {256, 200}, "data/quant/param_layer_7/weights_8q.bin"}, // Weights
+        //     LayerParams{sizeof(i16), {200}, "data/quant/param_layer_7/biases_8q.bin"},      // Biases
+        //     false                                                                           // Enable Relu
+        // );
 
-        if (mismatches == 0)
-        {
-            printf(">> SUCCESS: Layer 1 matches perfectly (within +/- 1 tolerance).\n");
+        // d2Model.allocLayers();
+
+        // const LayerData &l8_out_sw_out = d2Model.inference(l7_out_sw_out, Layer::InfType::QUANTIZED, modelQParams_8q + 11);
+
+        // for (int i = 0; i < 200; i++) {
+        //     if (std::abs(denseOut.get<fp32>(i) - l8_out_sw_out.get<fp32>(i)) > 1 ) {
+        //         std::cout << "mismatch" << std::endl;
+        //     } else {
+        //         std::cout << "HW: " << denseOut.get<fp32>(i) << " SW: " << l8_out_sw_out.get<fp32>(i) << std::endl;
+        //     }
+        // }
+
+        Model softmaxModel;
+        softmaxModel.addLayer<SoftmaxLayer>(
+            LayerParams{sizeof(fp32), {200}}, // Input
+            LayerParams{sizeof(fp32), {200}}  // Output
+        );
+        softmaxModel.allocLayers();
+        const LayerData& hw_inf = softmaxModel.inferenceLayer(denseOut, 0, Layer::InfType::QUANTIZED);
+        tmr.stop();
+        std::cout << tmr.milliseconds << std::endl;
+
+        // Model softmaxModel2;
+        // softmaxModel2.addLayer<SoftmaxLayer>(
+        //     LayerParams{sizeof(fp32), {200}}, // Input
+        //     LayerParams{sizeof(fp32), {200}}  // Output
+        // );
+        // softmaxModel2.allocLayers();
+        // const LayerData& sw_inf = softmaxModel2.inferenceLayer(l8_out_sw_out, 0, Layer::InfType::QUANTIZED);
+
+
+        // float max = 0;
+        // for (int i = 0; i < 200; i++) {
+        //     float o1 = hw_inf.get<fp32>(i);
+        //     float o2 = sw_inf.get<fp32>(i);
+        //     float diff = std::abs(o1 - o2);
+        //     if (diff > max)
+        //         max = diff;
+        //     std::cout << "HW: " << hw_inf.get<fp32>(i) << " SW: " << sw_inf.get<fp32>(i) << std::endl;
+        // }
+        // std::cout << max << std::endl;
+
+
+        for (int i = 0; i < 200; i++) {
+            std::cout << hw_inf.get<fp32>(i) << std::endl;
         }
-        else
-        {
-            printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
-        }
 
 
-
-        model_l2.freeLayers();
-        model_l3.freeLayers();
+        // model_l2.freeLayers();
+        // moodel.freeLayers();
 
 #endif
     }

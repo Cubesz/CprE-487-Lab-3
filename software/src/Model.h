@@ -17,6 +17,7 @@ class Model {
     // Functions
     const LayerData& inference(const LayerData& inData, const Layer::InfType infType = Layer::InfType::NAIVE, const QParams* qparams = nullptr) const;
     const LayerData& inferenceLayer(const LayerData& inData, const int layerNum, const Layer::InfType infType = Layer::InfType::NAIVE, const QParams qparam = {0}) const;
+    const LayerData& inferenceAccelerator(const LayerData& inData, const AccelParams* aparams) const;
 
     // Internal memory management
     // Allocate the internal output buffers for each layer in the model

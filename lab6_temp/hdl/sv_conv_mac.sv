@@ -32,8 +32,8 @@ module sv_conv_mac #(parameter C_DATA_WIDTH = 8, parameter C_OUTPUT_DATA_WIDTH =
         
         input [C_OUTPUT_DATA_WIDTH-1 : 0] bias,
         
-        output MO_AXIS_TVALID,
-        output [C_OUTPUT_DATA_WIDTH-1 : 0] MO_AXIS_TDATA,
+        (* mark_debug = "true" *) output MO_AXIS_TVALID,
+        (* mark_debug = "true" *) output [C_OUTPUT_DATA_WIDTH-1 : 0] MO_AXIS_TDATA,
         output MO_AXIS_TLAST,
         input MO_AXIS_TREADY
     );

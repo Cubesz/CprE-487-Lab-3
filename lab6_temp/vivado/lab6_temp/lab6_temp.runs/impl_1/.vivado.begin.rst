@@ -1,10 +1,5 @@
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="zfsalti" Host="linuxvdi-f25-05.ece.iastate.edu" Pid="86113" HostCore="4" HostMemory="16110232">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="zfsalti" Host="linuxvdi-f25-05.ece.iastate.edu" Pid="91567" HostCore="4" HostMemory="16110232">
+    <Process Command="vivado" Owner="zfsalti" Host="linuxvdi-f25-05.ece.iastate.edu" Pid="155900" HostCore="4" HostMemory="16110232">
     </Process>
 </ProcessHandle>
