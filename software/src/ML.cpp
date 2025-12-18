@@ -1511,7 +1511,7 @@ namespace ML
         Xil_Out32(MLP_CTRLB, 0);
         memcpy_dma(MLP_INPUTS, ly0id.raw(), aplayer0.input_size);
 
-        uint8_t *filterDataPtr = (uint8_t *)ly0wd.raw();
+        int8_t *filterDataPtr = (int8_t *)ly0wd.raw();
 
         memcpy_dma(MLP_FILTER0, filterDataPtr, aplayer0.single_filter_size);
         filterDataPtr += aplayer0.single_filter_size;
@@ -1669,6 +1669,9 @@ namespace ML
         }
 
 
+        inp_sw.freeData();
+        // model_l1.freeLayers();
+
 
         // Layer 2
         LayerData ly1wd = LayerData{LayerParams{sizeof(i8), {32, 32, 5, 5}}, "data/quant_t_new/layer1_weights_8q_t_new.bin"};
@@ -1680,23 +1683,29 @@ namespace ML
 
         // layer initialization
         ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        // ctrlb_flags = 0;
         ctrlb_flags = aplayer1.relu ? ctrlb_flags | MLP_CTRLB_RELU : ctrlb_flags & ~MLP_CTRLB_RELU;
         ctrlb_flags = aplayer1.maxpool ? ctrlb_flags | MLP_CTRLB_MAX_POOLING : ctrlb_flags & ~MLP_CTRLB_MAX_POOLING;
         Xil_Out32(MLP_CTRLB, ctrlb_flags);
 
-        filterDataPtr = (uint8_t *)ly1wd.raw();
+        filterDataPtr = (int8_t *)ly1wd.raw();
 
+        // memcpy_dma(MLP_INPUTS, hw_out_l1.data(), 32*60*60);
         memcpy_dma(MLP_FILTER0, filterDataPtr, aplayer1.single_filter_size);
         filterDataPtr += aplayer1.single_filter_size;
+
         memcpy_dma(MLP_FILTER1, filterDataPtr, aplayer1.single_filter_size);
         filterDataPtr += aplayer1.single_filter_size;
+
         memcpy_dma(MLP_FILTER2, filterDataPtr, aplayer1.single_filter_size);
         filterDataPtr += aplayer1.single_filter_size;
+
         memcpy_dma(MLP_FILTER3, filterDataPtr, aplayer1.single_filter_size);
         filterDataPtr += aplayer1.single_filter_size;
 
-        ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
+
         // Register Config
+        ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
         Xil_Out32(MLP_CTRLB, ctrlb_flags);
         Xil_Out32(MLP_FILTER_W, aplayer1.filter_w);
         Xil_Out32(MLP_FILTER_H, aplayer1.filter_h);
@@ -1747,7 +1756,7 @@ namespace ML
             Xil_Out32(MLP_CTRLB, ctrlb_flags);
             // break;
         }
-        // ly1bd.freeData(); // maybe do later
+        ly1bd.freeData(); // maybe do later
         ly1wd.freeData();
 
         printf("Comparing Hardware Output vs Software Reference...\n");
@@ -1761,11 +1770,6 @@ namespace ML
         std::cout << "Adding Layer 1: Convolutional" << std::endl;
 
         model_l2.addLayer<ConvolutionalLayer>(
-            LayerParams{sizeof(i8), {64, 64, 3}},
-            LayerParams{sizeof(i8), {60, 60, 32}},
-            LayerParams{sizeof(i8), {5, 5, 3, 32}, "data/quant/param_layer_0/weights_8q.bin"},
-            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_8q.bin"});
-        model_l2.addLayer<ConvolutionalLayer>(
             LayerParams{sizeof(i8), {60, 60, 32}},
             LayerParams{sizeof(i8), {56, 56, 32}},
             LayerParams{sizeof(i8), {5, 5, 32, 32}, "data/quant/param_layer_1/weights_8q.bin"},
@@ -1777,31 +1781,31 @@ namespace ML
         
         model_l2.allocLayers();
 
-        LayerData w8 = LayerData{LayerParams{sizeof(i8), {5, 5, 32, 32}}, "data/quant/param_layer_1/weights_8q.bin"};
-        w8.loadData();
-        for (int filt = 0; filt < 32; filt++) {
-            for (int chan = 0; chan < 32; chan++) {
-                for (int row = 0; row < 5; row++) {
-                    for (int col = 0; col < 5; col++) {
-                        int tWeight = ly1wd.get<i8>(filt * 32 * 5 * 5 + chan * 5 * 5 + col* 5 + row);
-                        int weight = w8.get<i8>(col* 5 * 32 * 32 + row * 32 * 32 + chan * 32 + filt);
-                        if (tWeight != weight) {
-                            std::cout << "Not matching: " << filt << std::endl;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+        // LayerData w8 = LayerData{LayerParams{sizeof(i8), {5, 5, 32, 32}}, "data/quant/param_layer_1/weights_8q.bin"};
+        // w8.loadData();
+        // for (int filt = 0; filt < 32; filt++) {
+        //     for (int chan = 0; chan < 32; chan++) {
+        //         for (int row = 0; row < 5; row++) {
+        //             for (int col = 0; col < 5; col++) {
+        //                 int tWeight = ly1wd.get<i8>(filt * 32 * 5 * 5 + chan * 5 * 5 + row* 5 + col);
+        //                 int weight = w8.get<i8>(row* 5 * 32 * 32 + col * 32 * 32 + chan * 32 + filt);
+        //                 if (int(tWeight) != int(weight)) {
+        //                     std::cout << "Not matching: " << filt << std::endl;
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        LayerData inp_sw_again = LayerData{LayerParams{sizeof(i8), {64, 64, 3}}, "data/quant/given_image0_8q.bin"};
-        inp_sw_again.loadData();
-        const LayerData &l2_out_sw_out = model_l2.inference(inp_sw_again, Layer::InfType::QUANTIZED, modelQParams_8q);
+        // const LayerData &l2_out_sw_out = model_l2.inference(inp_sw_again, Layer::InfType::QUANTIZED, modelQParams_8q);
+        const LayerData &l2_out_sw_out = model_l2.inferenceLayer(l1_out_sw, 0, Layer::InfType::QUANTIZED, modelQParams_8q[1]);
 
         // Compare each pixel
         mismatches = 0;
         diff_of_one = 0;
         print_limit = 10;
+        bool channel_errs[32] = {0};
 
         for (int ch = 0; ch < 32; ch++)
         {
@@ -1819,6 +1823,7 @@ namespace ML
 
                     if (diff > 0)
                     {
+                        channel_errs[ch] = true;
                         if (diff == 1)
                         {
                             diff_of_one++;
@@ -1836,6 +1841,11 @@ namespace ML
             }
         }
 
+        for (int i = 0; i < 32; i++) {
+            if (channel_errs[i])
+                std::cout << "Error in channel: " << i << std::endl;
+        }
+
         printf("\n--- RESULTS ---\n");
         printf("Total Pixels: %d\n", 32 * 56 * 56);
         printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
@@ -1848,6 +1858,8 @@ namespace ML
         {
             printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
         }
+
+        model_l2.freeLayers();
 
 #endif
     }
