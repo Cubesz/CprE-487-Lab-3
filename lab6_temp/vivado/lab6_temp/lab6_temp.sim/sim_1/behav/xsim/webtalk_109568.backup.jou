@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Thu Dec 18 01:32:24 2025
+# Process ID: 109568
+# Current directory: /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.sim/sim_1/behav/xsim
+# Command line: wbtcv -mode batch -source /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.sim/sim_1/behav/xsim/xsim.dir/swi_test_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.sim/sim_1/behav/xsim/webtalk.jou
+#-----------------------------------------------------------
+source /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.sim/sim_1/behav/xsim/xsim.dir/swi_test_behav/webtalk/xsim_webtalk.tcl -notrace

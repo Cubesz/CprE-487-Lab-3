@@ -1,0 +1,98 @@
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: /remote/Xilinx/2020.1/Vivado/2020.1/bin/unwrapped/lnx64.o/xelab -wto aefee35899174020aabecb305fb1bf76 --incr --debug typical --relax --mt 8 -L xbip_utils_v3_0_10 -L c_reg_fd_v12_0_6 -L xbip_dsp48_wrapper_v3_0_4 -L xbip_pipe_v3_0_6 -L xbip_dsp48_addsub_v3_0_6 -L xbip_addsub_v3_0_6 -L c_addsub_v12_0_14 -L xil_defaultlib -L xbip_bram18k_v3_0_6 -L mult_gen_v12_0_16 -L xbip_dsp48_macro_v3_0_17 -L xilinx_vip -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot swi_test_behav xil_defaultlib.swi_test xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4100] "/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv" Line 23. Module sv_dequantization(C_DATA_WIDTH=32,C_TID_WIDTH=2,C_OUT_WIDTH=8) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_output_storage.sv" Line 23. Module sv_output_storage(DATA_WIDTH=8,BRAM_DATA_WIDTH=32,ADDR_WIDTH=7,BRAM_ADDR_WIDTH=5,DIM_WIDTH=12,C_TID_WIDTH=2) has a timescale but at least one module in design doesn't have timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package ieee.math_real
+Compiling package ieee.std_logic_arith
+Compiling package ieee.std_logic_unsigned
+Compiling package xbip_utils_v3_0_10.xbip_utils_v3_0_10_pkg
+Compiling package xbip_dsp48_macro_v3_0_17.xbip_dsp48_macro_v3_0_17_viv_com...
+Compiling package xbip_dsp48_macro_v3_0_17.xbip_dsp48_macro_v3_0_17_pkg
+Compiling package unisim.vcomponents
+Compiling package ieee.std_logic_signed
+Compiling package ieee.vital_timing
+Compiling package ieee.vital_primitives
+Compiling package unisim.vpkg
+Compiling package mult_gen_v12_0_16.mult_gen_v12_0_16_viv_comp
+Compiling package mult_gen_v12_0_16.mult_gen_v12_0_16_pkg
+Compiling package c_addsub_v12_0_14.c_addsub_v12_0_14_viv_comp
+Compiling package xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv_comp
+Compiling package xbip_addsub_v3_0_6.xbip_addsub_v3_0_6_viv_comp
+Compiling package c_addsub_v12_0_14.c_addsub_v12_0_14_pkg
+Compiling package c_addsub_v12_0_14.c_addsub_v12_0_14_pkg_legacy
+Compiling package c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv_comp
+Compiling package vl.vl_types
+Compiling module xil_defaultlib.glbl
+Compiling architecture behavioral of entity xil_defaultlib.index_gen [\index_gen(dim_width=12,input_ad...]
+Compiling architecture behavioral of entity xil_defaultlib.axis_register_slice [\axis_register_slice(c_data_widt...]
+Compiling architecture behavioral of entity xil_defaultlib.bram_slice_fetcher [\bram_slice_fetcher(addr_width=7...]
+Compiling architecture behavioral of entity xil_defaultlib.axis_register_slice [\axis_register_slice(c_data_widt...]
+Compiling architecture behavioral of entity xil_defaultlib.mac_stream_provider [\mac_stream_provider(input_addr_...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(adreg=0,dreg=0,inmodere...]
+Compiling architecture synth of entity xbip_dsp48_wrapper_v3_0_4.xbip_dsp48e1_wrapper_v3_0 [\xbip_dsp48e1_wrapper_v3_0(areg=...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture synth of entity xbip_dsp48_macro_v3_0_17.xbip_dsp48_macro_synth [\xbip_dsp48_macro_synth(c_xdevic...]
+Compiling architecture synth of entity xbip_dsp48_macro_v3_0_17.xbip_dsp48_macro_v3_0_17_viv [\xbip_dsp48_macro_v3_0_17_viv(c_...]
+Compiling architecture xilinx of entity xbip_dsp48_macro_v3_0_17.xbip_dsp48_macro_v3_0_17 [\xbip_dsp48_macro_v3_0_17(c_xdev...]
+Compiling architecture dsp48_custom_mult_add_piped_arch of entity xil_defaultlib.dsp48_custom_mult_add_piped [dsp48_custom_mult_add_piped_defa...]
+Compiling module xil_defaultlib.sv_conv_mac(C_DATA_WIDTH=8,C_OUT...
+Compiling architecture behavioral of entity xil_defaultlib.conv_mac [\conv_mac(c_data_width=8)\]
+Compiling architecture behavioral of entity xil_defaultlib.axis_register_slice [axis_register_slice_default]
+Compiling architecture behavioral of entity xil_defaultlib.axis_4_to_1_round_robin_combiner [axis_4_to_1_round_robin_combiner...]
+Compiling architecture behavioral of entity xil_defaultlib.axis_buffered_4_to_1_round_robin_combiner [axis_buffered_4_to_1_round_robin...]
+Compiling architecture lut6_2_v of entity unisim.LUT6_2 [\LUT6_2(init="000011111111000011...]
+Compiling architecture lut6_2_v of entity unisim.LUT6_2 [\LUT6_2(init="111010111011111010...]
+Compiling architecture lut6_2_v of entity unisim.LUT6_2 [\LUT6_2(init="111111111111000000...]
+Compiling architecture muxcy_v of entity unisim.MUXCY [muxcy_default]
+Compiling architecture xorcy_v of entity unisim.XORCY [xorcy_default]
+Compiling architecture fdre_v of entity unisim.FDRE [fdre_default]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.three_input_adder [\three_input_adder(c_a_width=45,...]
+Compiling architecture lut6_2_v of entity unisim.LUT6_2 [\LUT6_2(init="111100000000111100...]
+Compiling architecture lut6_2_v of entity unisim.LUT6_2 [\LUT6_2(init="001111001100001111...]
+Compiling architecture lut6_2_v of entity unisim.LUT6_2 [\LUT6_2(init="000011111111111111...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.three_input_adder [\three_input_adder(c_a_width=45,...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.multmxn_lut6 [\multmxn_lut6(c_xdevicefamily="z...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.mult_gen_v12_0_16_viv [\mult_gen_v12_0_16_viv(c_verbosi...]
+Compiling architecture xilinx of entity mult_gen_v12_0_16.mult_gen_v12_0_16 [\mult_gen_v12_0_16(c_optimize_go...]
+Compiling architecture mult_q32d0_q0d18_arch of entity xil_defaultlib.mult_q32d0_q0d18 [mult_q32d0_q0d18_default]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_sync_pri...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=10...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture structural of entity c_reg_fd_v12_0_6.c_reg_fd_v12_0_6_viv [\c_reg_fd_v12_0_6_viv(c_width=11...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture rtl of entity c_addsub_v12_0_14.c_addsub_v12_0_14_lut6_legacy [\c_addsub_v12_0_14_lut6_legacy(c...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_fabric_legacy [\c_addsub_v12_0_14_fabric_legacy...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_legacy [\c_addsub_v12_0_14_legacy(c_fami...]
+Compiling architecture synth of entity c_addsub_v12_0_14.c_addsub_v12_0_14_viv [\c_addsub_v12_0_14_viv(c_xdevice...]
+Compiling architecture xilinx of entity c_addsub_v12_0_14.c_addsub_v12_0_14 [\c_addsub_v12_0_14(c_xdevicefami...]
+Compiling architecture zp_adder_arch of entity xil_defaultlib.zp_adder [zp_adder_default]
+Compiling module xil_defaultlib.sv_dequantization(C_DATA_WIDTH=3...
+Compiling architecture behavioral of entity xil_defaultlib.dequantization [\dequantization(c_tid_width=2)\]
+Compiling module xil_defaultlib.sv_output_storage(DATA_WIDTH=8,B...
+Compiling architecture behavioral of entity xil_defaultlib.output_storage [\output_storage(data_width=8,add...]
+Compiling architecture behavioral of entity xil_defaultlib.conv_accelerator [\conv_accelerator(input_addr_wid...]
+Compiling architecture behavioral of entity xil_defaultlib.swi_test
+Built simulation snapshot swi_test_behav

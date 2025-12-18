@@ -1,0 +1,4 @@
+vhdl xil_defaultlib  \
+"../../../../../../hdl/mult_q32d0_q0d18/sim/mult_q32d0_q0d18.vhd" \
+
+nosort

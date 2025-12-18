@@ -1,0 +1,11 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  --include "../../../../lab6_temp.srcs/sources_1/bd/conv_accelerator_bd/ipshared/ec67/hdl" --include "../../../../lab6_temp.srcs/sources_1/bd/conv_accelerator_bd/ipshared/6b56/hdl" --include "/remote/Xilinx/2020.1/Vivado/2020.1/data/xilinx_vip/include" \
+"../../../../../../hdl/sv_conv_mac.sv" \
+"../../../../../../hdl/sv_dequantization.sv" \
+"../../../../../../hdl/sv_output_storage.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

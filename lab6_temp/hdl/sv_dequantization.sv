@@ -48,7 +48,7 @@ module sv_dequantization #(parameter C_DATA_WIDTH = 32, parameter C_TID_WIDTH = 
     
     wire stall;
     
-    wire signed [26:0] scaled;
+    wire signed [31:0] scaled;
     // 4 pipeline stages
     // assuming [2^-1, 2^-5] bits are all 0.
     // scaled is bits [28 : 18] of actual product.
@@ -59,19 +59,13 @@ module sv_dequantization #(parameter C_DATA_WIDTH = 32, parameter C_TID_WIDTH = 
         .B(q_scale[26 : 14]),
         .P(scaled)
     );
-    reg wat;
-    always @* begin
-        if (scaled == -13992936) begin
-            if (scaled[10])
-                wat = 1;
-        end
-    end
+
     
-    wire signed [26:0] post_cond_relued;
+    wire signed [31:0] post_cond_relued;
     assign post_cond_relued = relu ? (scaled[$size(scaled) - 1] ? 0 : scaled) : scaled;
     
     // 1 pipeline stage
-    wire signed [26:0] post_zp_adjusted;
+    wire signed [31:0] post_zp_adjusted;
     zp_adder zerop_adder (
         .CLK(clk),
         .CE(~stall),
@@ -83,9 +77,9 @@ module sv_dequantization #(parameter C_DATA_WIDTH = 32, parameter C_TID_WIDTH = 
     reg signed [7:0] post_saturate;
     
     always @* begin
-        if (|post_zp_adjusted[26:7] == 0 || &post_zp_adjusted[26:7] == 1)
+        if (|post_zp_adjusted[31:7] == 0 || &post_zp_adjusted[31:7] == 1)
             post_saturate = post_zp_adjusted[7:0];
-        else if (post_zp_adjusted[26] == 0 && |post_zp_adjusted[26:7] != 0)
+        else if (post_zp_adjusted[31] == 0 && |post_zp_adjusted[31:7] != 0)
             post_saturate = 127;
         else
             post_saturate = -128;

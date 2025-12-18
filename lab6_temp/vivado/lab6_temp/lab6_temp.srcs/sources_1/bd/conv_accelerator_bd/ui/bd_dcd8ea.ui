@@ -1,0 +1,33 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.0",
+   "Default View_TopLeft":"-552,-435",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:9.0 TLS
+#  -string -flagsOSRD
+preplace port BRAM_INPUTS -pg 1 -lvl 0 -x -20 -y 80 -defaultsOSRD
+preplace port BRAM_OUTPUTS -pg 1 -lvl 0 -x -20 -y 240 -defaultsOSRD
+preplace port BRAM_PORT0 -pg 1 -lvl 0 -x -20 -y 60 -defaultsOSRD
+preplace port BRAM_PORT1 -pg 1 -lvl 0 -x -20 -y 220 -defaultsOSRD
+preplace port invert_banks -pg 1 -lvl 0 -x -20 -y 160 -defaultsOSRD
+preplace port sel -pg 1 -lvl 0 -x -20 -y 100 -defaultsOSRD
+preplace inst blk_mem_gen_0 -pg 1 -lvl 3 -x 770 -y 50 -defaultsOSRD
+preplace inst blk_mem_gen_1 -pg 1 -lvl 3 -x 770 -y 150 -defaultsOSRD
+preplace inst bram_mux_0 -pg 1 -lvl 1 -x 160 -y 80 -defaultsOSRD
+preplace inst bram_mux_1 -pg 1 -lvl 1 -x 160 -y 240 -defaultsOSRD
+preplace inst bram_switch_1 -pg 1 -lvl 2 -x 490 -y 140 -defaultsOSRD
+preplace netloc Net 1 0 1 0 100n
+preplace netloc invert_banks_0_2 1 0 2 NJ 160 NJ
+preplace netloc Conn2 1 0 1 NJ 60
+preplace netloc BRAM_INPUTS_1 1 0 1 NJ 80
+preplace netloc bram_mux_1_BRAM_PORT 1 1 1 300 140n
+preplace netloc bram_switch_1_BLK_MEM_PORT1 1 2 1 NJ 150
+preplace netloc BRAM_OUTPUTS_1 1 0 1 NJ 240
+preplace netloc bram_mux_0_BRAM_PORT 1 1 1 300 80n
+preplace netloc Conn3 1 0 1 NJ 220
+preplace netloc bram_switch_1_BLK_MEM_PORT0 1 2 1 640J 50n
+levelinfo -pg 1 -20 160 490 770 890
+pagesize -pg 1 -db -bbox -sgen -160 -10 890 320
+"
+}
+0

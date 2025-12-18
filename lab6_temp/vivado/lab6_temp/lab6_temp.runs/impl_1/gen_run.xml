@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7z020clg484-1" LaunchTime="1766040960">
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="BITSTR-SYSDEF" Name="conv_accelerator_bd_wrapper.sysdef"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="conv_accelerator_bd_wrapper.ltx"/>
+  <File Type="BG-BGN" Name="conv_accelerator_bd_wrapper.bgn"/>
+  <File Type="NPI_FILE" Name="conv_accelerator_bd_wrapper.npi"/>
+  <File Type="BG-DRC" Name="conv_accelerator_bd_wrapper.drc"/>
+  <File Type="RNPI_FILE" Name="conv_accelerator_bd_wrapper.rnpi"/>
+  <File Type="CFI_FILE" Name="conv_accelerator_bd_wrapper.cfi"/>
+  <File Type="RCFI_FILE" Name="conv_accelerator_bd_wrapper.rcfi"/>
+  <File Type="PDI-FILE" Name="conv_accelerator_bd_wrapper.pdi"/>
+  <File Type="BITSTR-MMI" Name="conv_accelerator_bd_wrapper.mmi"/>
+  <File Type="BITSTR-BMM" Name="conv_accelerator_bd_wrapper_bd.bmm"/>
+  <File Type="BITSTR-NKY" Name="conv_accelerator_bd_wrapper.nky"/>
+  <File Type="BITSTR-RBT" Name="conv_accelerator_bd_wrapper.rbt"/>
+  <File Type="BITSTR-MSK" Name="conv_accelerator_bd_wrapper.msk"/>
+  <File Type="RBD_FILE" Name="conv_accelerator_bd_wrapper.rbd"/>
+  <File Type="BG-BIN" Name="conv_accelerator_bd_wrapper.bin"/>
+  <File Type="BG-BIT" Name="conv_accelerator_bd_wrapper.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="conv_accelerator_bd_wrapper_bus_skew_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="conv_accelerator_bd_wrapper_bus_skew_postroute_physopted.pb"/>
+  <File Type="RDI-RDI" Name="conv_accelerator_bd_wrapper.vdi"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="conv_accelerator_bd_wrapper_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="conv_accelerator_bd_wrapper_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="conv_accelerator_bd_wrapper_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="conv_accelerator_bd_wrapper_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="conv_accelerator_bd_wrapper_postroute_physopt.dcp"/>
+  <File Type="ROUTE-BUS-SKEW" Name="conv_accelerator_bd_wrapper_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="conv_accelerator_bd_wrapper_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-SIMILARITY" Name="conv_accelerator_bd_wrapper_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-TIMING-RPX" Name="conv_accelerator_bd_wrapper_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-TIMING-PB" Name="conv_accelerator_bd_wrapper_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="conv_accelerator_bd_wrapper_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="conv_accelerator_bd_wrapper_route_status.pb"/>
+  <File Type="ROUTE-STATUS" Name="conv_accelerator_bd_wrapper_route_status.rpt"/>
+  <File Type="ROUTE-PWR-RPX" Name="conv_accelerator_bd_wrapper_power_routed.rpx"/>
+  <File Type="ROUTE-PWR-SUM" Name="conv_accelerator_bd_wrapper_power_summary_routed.pb"/>
+  <File Type="ROUTE-PWR" Name="conv_accelerator_bd_wrapper_power_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="conv_accelerator_bd_wrapper_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="conv_accelerator_bd_wrapper_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="conv_accelerator_bd_wrapper_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-RPX" Name="conv_accelerator_bd_wrapper_drc_routed.rpx"/>
+  <File Type="ROUTE-DRC-PB" Name="conv_accelerator_bd_wrapper_drc_routed.pb"/>
+  <File Type="ROUTE-DRC" Name="conv_accelerator_bd_wrapper_drc_routed.rpt"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="conv_accelerator_bd_wrapper_routed_bb.dcp"/>
+  <File Type="ROUTE-DCP" Name="conv_accelerator_bd_wrapper_routed.dcp"/>
+  <File Type="ROUTE-ERROR-DCP" Name="conv_accelerator_bd_wrapper_routed_error.dcp"/>
+  <File Type="PHYSOPT-TIMING" Name="conv_accelerator_bd_wrapper_timing_summary_physopted.rpt"/>
+  <File Type="PHYSOPT-DRC" Name="conv_accelerator_bd_wrapper_drc_physopted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="conv_accelerator_bd_wrapper_physopt.dcp"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="conv_accelerator_bd_wrapper_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="conv_accelerator_bd_wrapper_postplace_pwropt.dcp"/>
+  <File Type="PLACE-TIMING" Name="conv_accelerator_bd_wrapper_timing_summary_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="conv_accelerator_bd_wrapper_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="conv_accelerator_bd_wrapper_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-CTRL" Name="conv_accelerator_bd_wrapper_control_sets_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="conv_accelerator_bd_wrapper_utilization_placed.pb"/>
+  <File Type="PLACE-UTIL" Name="conv_accelerator_bd_wrapper_utilization_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="conv_accelerator_bd_wrapper_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-IO" Name="conv_accelerator_bd_wrapper_io_placed.rpt"/>
+  <File Type="PLACE-DCP" Name="conv_accelerator_bd_wrapper_placed.dcp"/>
+  <File Type="PWROPT-TIMING" Name="conv_accelerator_bd_wrapper_timing_summary_pwropted.rpt"/>
+  <File Type="PWROPT-DRC" Name="conv_accelerator_bd_wrapper_drc_pwropted.rpt"/>
+  <File Type="PWROPT-DCP" Name="conv_accelerator_bd_wrapper_pwropt.dcp"/>
+  <File Type="OPT-TIMING" Name="conv_accelerator_bd_wrapper_timing_summary_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="conv_accelerator_bd_wrapper.hwdef"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="conv_accelerator_bd_wrapper_methodology_drc_opted.rpt"/>
+  <File Type="OPT-DRC" Name="conv_accelerator_bd_wrapper_drc_opted.rpt"/>
+  <File Type="OPT-DCP" Name="conv_accelerator_bd_wrapper_opt.dcp"/>
+  <File Type="INIT-TIMING" Name="conv_accelerator_bd_wrapper_timing_summary_init.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="conv_accelerator_bd_wrapper_bus_skew_routed.rpx"/>
+  <File Type="REPORTS-TCL" Name="conv_accelerator_bd_wrapper_reports.tcl"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="conv_accelerator_bd_wrapper_bus_skew_routed.pb"/>
+  <File Type="PA-TCL" Name="conv_accelerator_bd_wrapper.tcl"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="conv_accelerator_bd_wrapper_bus_skew_postroute_physopted.rpt"/>
+  <File Type="PA-DCP" Name="conv_accelerator_bd_wrapper.dcp"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PPRDIR/../../hdl/bram_connect.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/bram_switch.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/bram_mux.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/bram_read_delay.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/zp_adder/zp_adder.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/mult_q32d0_q0d18/mult_q32d0_q0d18.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/dsp48_custom_mult_add_piped/dsp48_custom_mult_add_piped.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/sv_conv_mac.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/sv_dequantization.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/sv_output_storage.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/axis_utils.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/bram_slice_fetcher.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/index_gen.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/mac_stream_provider.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/conv_mac.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/dequantization.vhd">
+      <FileInfo SFType="VHDL2008">
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/output_storage.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/conv_accelerator.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/conv_config.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../hdl/conv_accelerator_wrapper.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/bd/conv_accelerator_bd/conv_accelerator_bd.bd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/bd/conv_accelerator_bd/hdl/conv_accelerator_bd_wrapper.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="conv_accelerator_bd_wrapper"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PPRDIR/../../hdl/zedboard.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="TargetConstrsFile" Val="$PPRDIR/../../hdl/zedboard.xdc"/>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020">
+      <Desc>Default settings for Implementation.</Desc>
+    </StratHandle>
+    <Step Id="init_design"/>
+    <Step Id="opt_design">
+      <Option Id="MoreOptsStr"><![CDATA[-resynth_remap -merge_equivalent_drivers]]></Option>
+    </Step>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design" EnableStepBool="1">
+      <Option Id="Directive">1</Option>
+    </Step>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+</GenRun>

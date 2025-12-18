@@ -28,14 +28,14 @@ module sv_output_storage #(
         parameter DIM_WIDTH = 8,
         parameter C_TID_WIDTH = 1
     ) (
-        output S_AXIS_TREADY,
-        input [DATA_WIDTH-1 : 0] S_AXIS_TDATA,
-        input S_AXIS_TLAST,
-        input [C_TID_WIDTH-1 : 0] S_AXIS_TID,
-        input S_AXIS_TVALID,
+        (* mark_debug = "true" *) output S_AXIS_TREADY,
+        (* mark_debug = "true" *) input [DATA_WIDTH-1 : 0] S_AXIS_TDATA,
+        (* mark_debug = "true" *) input S_AXIS_TLAST,
+        (* mark_debug = "true" *) input [C_TID_WIDTH-1 : 0] S_AXIS_TID,
+        (* mark_debug = "true" *) input S_AXIS_TVALID,
         
-        output reg [32-1 : 0] BRAM_addr,
-        output reg [BRAM_DATA_WIDTH-1 : 0] BRAM_din,
+        (* mark_debug = "true" *) output reg [32-1 : 0] BRAM_addr,
+        (* mark_debug = "true" *) output reg [BRAM_DATA_WIDTH-1 : 0] BRAM_din,
         input [BRAM_DATA_WIDTH-1 : 0] BRAM_dout,
         output reg BRAM_en,
         output reg [(BRAM_DATA_WIDTH/8)-1 : 0] BRAM_we,
@@ -64,13 +64,13 @@ module sv_output_storage #(
 
     
    
-    reg [DIM_WIDTH-1 : 0] column_progress;
-    reg [DIM_WIDTH-1 : 0] row_progress;
+    (* mark_debug = "true" *) reg [DIM_WIDTH-1 : 0] column_progress;
+    (* mark_debug = "true" *) reg [DIM_WIDTH-1 : 0] row_progress;
     
-    reg [ADDR_WIDTH-1 : 0] output_idx;
+    (* mark_debug = "true" *) reg [ADDR_WIDTH-1 : 0] output_idx;
     
     
-    reg [ADDR_WIDTH-1 : 0] offsetted_progress; // should be ahead index
+    (* mark_debug = "true" *) reg [ADDR_WIDTH-1 : 0] offsetted_progress; // should be ahead index
     
     
     reg [ADDR_WIDTH-1 : 0] saved_base_row_idx;
@@ -171,6 +171,8 @@ module sv_output_storage #(
             BRAM_din = 0;
             if (S_AXIS_TVALID)
                 BRAM_en = 1;
+            else
+                BRAM_en = 0;
         end
         else if (state == WRITE) begin
             ready = 0;

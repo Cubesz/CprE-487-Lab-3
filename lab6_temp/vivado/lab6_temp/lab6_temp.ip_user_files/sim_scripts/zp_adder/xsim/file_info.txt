@@ -1,0 +1,2 @@
+zp_adder.vhd,vhdl,xil_defaultlib,../../../../../../hdl/zp_adder/sim/zp_adder.vhd,
+glbl.v,Verilog,xil_defaultlib,glbl.v

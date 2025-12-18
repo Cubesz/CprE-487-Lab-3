@@ -1,0 +1,104 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.625",
+   "Default View_TopLeft":"362,-374",
+   "ExpandedHierarchyInLayout":"",
+   "comment_0":"This is the collection of all memory modules
+Each BRAM unit contains an AXI interface for 
+debugging and DMA access and a raw BRAM
+interface for hardware access to feed the MAC
+units. Each BRAM unit is double-buffered, one
+buffer is connected to the AXI bus and the other
+is connected to the BRAM interface. Use invert_banks
+to switch buffers.
+
+Filter buffers are sized to 1kB, enough to hold the 800
+bytes required to store a single filter channel. 
+
+Input buffers are sized to 131kB, enough to store the entire
+input for a single convolution. 
+
+Output buffers are sized to 16kB, enough to store 4 channels
+of output data at a time.
+
+If you want to compute more at once, increase the number of
+filter elements and increase the size of the output buffers. But
+beware timing and place and route restrictions.
+
+These are also locked to physical resources in the Implemented
+Design using pblocks, you may have to change that if these are
+modified.",
+   "commentid":"comment_0|",
+   "fillcolor_comment_0":"",
+   "font_comment_0":"19",
+   "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:9.0 TLS
+#  -string -flagsOSRD
+preplace port BRAM_PORT_FILTER_0 -pg 1 -lvl 0 -x -30 -y 70 -defaultsOSRD
+preplace port BRAM_PORT_FILTER_1 -pg 1 -lvl 0 -x -30 -y 450 -defaultsOSRD
+preplace port BRAM_PORT_FILTER_2 -pg 1 -lvl 0 -x -30 -y 720 -defaultsOSRD
+preplace port BRAM_PORT_FILTER_3 -pg 1 -lvl 0 -x -30 -y 990 -defaultsOSRD
+preplace port BRAM_PORT_INPUT_0 -pg 1 -lvl 0 -x -30 -y 190 -defaultsOSRD
+preplace port BRAM_PORT_OUTPUT_0 -pg 1 -lvl 0 -x -30 -y 170 -defaultsOSRD
+preplace port S_AXI_BRAM -pg 1 -lvl 0 -x -30 -y 1050 -defaultsOSRD
+preplace port aclk_0 -pg 1 -lvl 0 -x -30 -y 1070 -defaultsOSRD
+preplace port aresetn_0 -pg 1 -lvl 0 -x -30 -y 1090 -defaultsOSRD
+preplace port invert_activations -pg 1 -lvl 0 -x -30 -y 410 -defaultsOSRD
+preplace port invert_filters -pg 1 -lvl 0 -x -30 -y 1150 -defaultsOSRD
+preplace port sel -pg 1 -lvl 0 -x -30 -y 430 -defaultsOSRD
+preplace inst axi_bram_ctrl -pg 1 -lvl 1 -x 160 -y 1070 -defaultsOSRD
+preplace inst bram_connect_0 -pg 1 -lvl 4 -x 1010 -y 600 -defaultsOSRD
+preplace inst bram_connect_1 -pg 1 -lvl 4 -x 1010 -y 810 -defaultsOSRD
+preplace inst bram_connect_2 -pg 1 -lvl 3 -x 720 -y 520 -defaultsOSRD
+preplace inst bram_connect_3 -pg 1 -lvl 3 -x 720 -y 800 -defaultsOSRD
+preplace inst bram_connect_4 -pg 1 -lvl 2 -x 440 -y 790 -defaultsOSRD
+preplace inst bram_filter_0 -pg 1 -lvl 6 -x 2510 -y 80 -defaultsOSRD
+preplace inst bram_filter_1 -pg 1 -lvl 6 -x 2510 -y 470 -defaultsOSRD
+preplace inst bram_filter_2 -pg 1 -lvl 6 -x 2510 -y 740 -defaultsOSRD
+preplace inst bram_filter_3 -pg 1 -lvl 6 -x 2510 -y 1010 -defaultsOSRD
+preplace inst bram_input_0 -pg 1 -lvl 5 -x 1390 -y 180 -defaultsOSRD
+preplace inst bram_read_delay_0 -pg 1 -lvl 5 -x 1390 -y 510 -defaultsOSRD
+preplace inst bram_read_delay_1 -pg 1 -lvl 5 -x 1390 -y 610 -defaultsOSRD
+preplace inst bram_read_delay_2 -pg 1 -lvl 5 -x 1390 -y 800 -defaultsOSRD
+preplace inst bram_read_delay_3 -pg 1 -lvl 5 -x 1390 -y 900 -defaultsOSRD
+preplace inst bram_read_delay_4 -pg 1 -lvl 4 -x 1010 -y 350 -defaultsOSRD
+preplace inst bram_read_delay_5 -pg 1 -lvl 4 -x 1010 -y 250 -defaultsOSRD
+preplace netloc aclk_0_1 1 0 1 NJ 1070
+preplace netloc aresetn_0_1 1 0 1 NJ 1090
+preplace netloc invert_banks_1 1 0 6 20J 990 NJ 990 NJ 990 NJ 990 NJ 990 1530
+preplace netloc invert_banks_2 1 0 5 10J 180 NJ 180 NJ 180 NJ 180 1150J
+preplace netloc sel_1 1 0 5 20J 190 NJ 190 NJ 190 NJ 190 1130J
+preplace netloc BRAM_PORT_OUTPUT_0_1 1 0 5 0J 150 NJ 150 NJ 150 NJ 150 1160J
+preplace netloc bram_connect_0_M_BRAM0 1 4 1 1150J 510n
+preplace netloc bram_read_delay_3_S_BRAM 1 5 1 1550 900n
+preplace netloc BRAM_PORT_FILTER_3_1 1 0 6 0J 980 NJ 980 NJ 980 NJ 980 NJ 980 1540J
+preplace netloc bram_connect_4_M_BRAM0 1 2 1 560 520n
+preplace netloc BRAM_PORT_FILTER_0_1 1 0 6 -10J 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ
+preplace netloc BRAM_PORT_FILTER_2_1 1 0 6 NJ 720 NJ 720 NJ 720 NJ 720 NJ 720 NJ
+preplace netloc bram_connect_1_M_BRAM0 1 4 1 NJ 800
+preplace netloc bram_connect_1_M_BRAM1 1 4 1 1140J 820n
+preplace netloc bram_connect_3_M_BRAM0 1 3 1 840 600n
+preplace netloc BRAM_PORT_FILTER_1_1 1 0 6 0J 440 NJ 440 NJ 440 NJ 440 NJ 440 1550J
+preplace netloc BRAM_PORT_INPUT_0_1 1 0 5 -10J 130 NJ 130 NJ 130 NJ 130 1140J
+preplace netloc axi_bram_ctrl_BRAM_PORTA 1 1 1 290 790n
+preplace netloc axi_register_slice_2_M_AXI 1 0 1 NJ 1050
+preplace netloc bram_connect_0_M_BRAM1 1 4 1 NJ 610
+preplace netloc bram_connect_4_M_BRAM1 1 2 1 N 800
+preplace netloc bram_connect_2_M_BRAM1 1 3 1 850 350n
+preplace netloc bram_read_delay_5_S_BRAM 1 4 1 1140J 170n
+preplace netloc bram_connect_2_M_BRAM0 1 3 1 840 250n
+preplace netloc bram_read_delay_2_S_BRAM 1 5 1 1550 740n
+preplace netloc bram_read_delay_0_S_BRAM 1 5 1 1510 80n
+preplace netloc bram_connect_3_M_BRAM1 1 3 1 N 810
+preplace netloc bram_read_delay_4_S_BRAM 1 4 1 1160J 190n
+preplace netloc bram_read_delay_1_S_BRAM 1 5 1 1520 470n
+preplace cgraphic comment_0 place right 52 596 textcolor 4 linecolor 3 linewidth 2
+levelinfo -pg 1 -30 160 440 720 1010 1390 2510 2610
+pagesize -pg 1 -db -bbox -sgen -210 0 2610 1210
+",
+   "linecolor_comment_0":"",
+   "textcolor_comment_0":""
+}
+0
+{
+   "/comment_0":"comment_0"
+}

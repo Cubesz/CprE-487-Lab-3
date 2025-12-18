@@ -1,0 +1,21 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../../hdl/zp_adder/sim/zp_adder.vhd" \
+"../../../../../../hdl/mult_q32d0_q0d18/sim/mult_q32d0_q0d18.vhd" \
+"../../../../../../hdl/dsp48_custom_mult_add_piped/sim/dsp48_custom_mult_add_piped.vhd" \
+"../../../../../../hdl/axis_utils.vhd" \
+"../../../../../../hdl/bram_slice_fetcher.vhd" \
+"../../../../../../hdl/index_gen.vhd" \
+"../../../../../../hdl/mac_stream_provider.vhd" \
+"../../../../../../hdl/conv_mac.vhd" \
+
+vhdl2008 xil_defaultlib  \
+"../../../../../../hdl/dequantization.vhd" \
+
+vhdl xil_defaultlib  \
+"../../../../../../hdl/output_storage.vhd" \
+"../../../../../../hdl/conv_accelerator.vhd" \
+"../../../../../../tb/new_conv_accelerator_tb.vhd" \
+
+# Do not sort compile order
+nosort

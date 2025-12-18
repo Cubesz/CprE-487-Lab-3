@@ -1,0 +1,7 @@
+Running: xsim.dir/swi_test_behav/xsimk -simmode gui -wdb swi_test_behav.wdb -simrunnum 0 -socket 44229
+Design successfully loaded
+Design Loading Memory Usage: 41844 KB (Peak: 41844 KB)
+Design Loading CPU Usage: 50 ms
+Simulation completed
+Simulation Memory Usage: 132228 KB (Peak: 181112 KB)
+Simulation CPU Usage: 170 ms

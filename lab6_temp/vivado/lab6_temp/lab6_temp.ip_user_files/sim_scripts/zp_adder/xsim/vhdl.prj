@@ -1,0 +1,4 @@
+vhdl xil_defaultlib  \
+"../../../../../../hdl/zp_adder/sim/zp_adder.vhd" \
+
+nosort
