@@ -279,7 +279,7 @@ void ConvolutionalLayer::computeQuantized(const LayerData& dataIn, QParams qpara
 
                 #else
 
-                i32 outputPixel = biasData.get<i16>(outputChannel) - qparam.zp_macced[outputChannel];
+                i64 outputPixel = biasData.get<i16>(outputChannel) - qparam.zp_macced[outputChannel];
                 // i32 outputPixel = biasData.get<i16>(outputChannel);
 
                 for (size_t filterChannel = 0; filterChannel < nFilterChannels; filterChannel++) {
@@ -308,7 +308,8 @@ void ConvolutionalLayer::computeQuantized(const LayerData& dataIn, QParams qpara
                 
                 size_t outputPixelIdx = outputColumn * (nOutputRows * nOutputChannels) + outputRow * (nOutputChannels) + outputChannel;
                 if (qparam.quantedOutput) {
-                    outputPixel = outputPixel / qparam.outputscaler;
+                    // outputPixel = outputPixel / qparam.outputscaler;
+                    outputPixel = (outputPixel * qparam.outputscaler) >> 32;
                     const i8 finalOutputPixel = (outputPixel > 0) ? (int8_t) (outputPixel + qparam.Z_i_next) : (int8_t) qparam.Z_i_next;
                     outputData.get<i8>(outputPixelIdx) = finalOutputPixel;
                 } else {

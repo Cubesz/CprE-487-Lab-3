@@ -1508,72 +1508,71 @@ namespace ML
         printf("Running Layer 1 (64x64x3 -> 60x60x32)...\n");
 
         // layer initialization
-        Xil_Out32(MLP_CTRLB, MLP_CTRLB_SWAP_FILTERS);
-        memcpy_dma(MLP_INPUTS, ly0id.raw(), 3 * 64 * 64);
+        Xil_Out32(MLP_CTRLB, 0);
+        memcpy_dma(MLP_INPUTS, ly0id.raw(), aplayer0.input_size);
 
-        int singleFilterSize_L1 = 3 * 5 * 5;
-        uint8_t *filterDataPtr_L1 = (uint8_t *)ly0wd.raw();
+        uint8_t *filterDataPtr = (uint8_t *)ly0wd.raw();
 
-        memcpy_dma(MLP_FILTER0, filterDataPtr_L1, singleFilterSize_L1);
-        filterDataPtr_L1 += singleFilterSize_L1;
-        memcpy_dma(MLP_FILTER1, filterDataPtr_L1, singleFilterSize_L1);
-        filterDataPtr_L1 += singleFilterSize_L1;
-        memcpy_dma(MLP_FILTER2, filterDataPtr_L1, singleFilterSize_L1);
-        filterDataPtr_L1 += singleFilterSize_L1;
-        memcpy_dma(MLP_FILTER3, filterDataPtr_L1, singleFilterSize_L1);
-        filterDataPtr_L1 += singleFilterSize_L1;
+        memcpy_dma(MLP_FILTER0, filterDataPtr, aplayer0.single_filter_size);
+        filterDataPtr += aplayer0.single_filter_size;
+        memcpy_dma(MLP_FILTER1, filterDataPtr, aplayer0.single_filter_size);
+        filterDataPtr += aplayer0.single_filter_size;
+        memcpy_dma(MLP_FILTER2, filterDataPtr, aplayer0.single_filter_size);
+        filterDataPtr += aplayer0.single_filter_size;
+        memcpy_dma(MLP_FILTER3, filterDataPtr, aplayer0.single_filter_size);
+        filterDataPtr += aplayer0.single_filter_size;
 
+        uint32_t ctrlb_flags = MLP_CTRLB_SWAP_FILTERS | (aplayer0.relu ? MLP_CTRLB_RELU : 0) | (aplayer0.maxpool ? MLP_CTRLB_MAX_POOLING : 0);
         // Register Config
-        Xil_Out32(MLP_CTRLB, MLP_CTRLB_RELU);
-        Xil_Out32(MLP_FILTER_W, 5);
-        Xil_Out32(MLP_FILTER_H, 5);
-        Xil_Out32(MLP_FILTER_C, 3);
-        Xil_Out32(MLP_OUTPUT_W, 60);
-        Xil_Out32(MLP_OUTPUT_H, 60);
-        Xil_Out32(MLP_INPUT_END_DIFF_FW, 60);
-        Xil_Out32(MLP_INPUT_END_DIFF_FH, 3836);
-        Xil_Out32(MLP_INPUT_END_DIFF_FC, -8451);
-        Xil_Out32(MLP_INPUT_END_DIFF_OW, -8447);
-        Xil_Out32(MLP_OUTPUT_ELEMENTS_PER_CHANNEL, 60 * 60);
+        Xil_Out32(MLP_CTRLB, ctrlb_flags);
+        Xil_Out32(MLP_FILTER_W, aplayer0.filter_w);
+        Xil_Out32(MLP_FILTER_H, aplayer0.filter_h);
+        Xil_Out32(MLP_FILTER_C, aplayer0.filter_c);
+        Xil_Out32(MLP_OUTPUT_W, aplayer0.output_w);
+        Xil_Out32(MLP_OUTPUT_H, aplayer0.output_h);
+        Xil_Out32(MLP_INPUT_END_DIFF_FW, aplayer0.inp_diff_fw);
+        Xil_Out32(MLP_INPUT_END_DIFF_FH, aplayer0.inp_diff_fh);
+        Xil_Out32(MLP_INPUT_END_DIFF_FC, aplayer0.inp_diff_fc);
+        Xil_Out32(MLP_INPUT_END_DIFF_OW, aplayer0.inp_diff_ow);
+        Xil_Out32(MLP_OUTPUT_ELEMENTS_PER_CHANNEL, aplayer0.output_elements_per_channel);
 
         // Scale
-        uint32_t l1_scale = (uint32_t)(4294967296.0 / (double)modelQParams_8q[0].outputscaler);
-        Xil_Out32(MLP_Q_SCALE, l1_scale);
-        Xil_Out32(MLP_Q_ZERO, modelQParams_8q[0].Z_i_next);
+        // uint32_t l1_scale = (uint32_t)(4294967296.0 / (double)modelQParams_8q[0].outputscaler);
+        Xil_Out32(MLP_Q_SCALE, aplayer0.q_scale_fx_pnt);
+        Xil_Out32(MLP_Q_ZERO, aplayer0.q_zero);
 
         // Process 32 Output Channels in batches of 4
-        uint32_t ctrlb_flags_L1 = MLP_CTRLB_RELU;
         int outputOffset = 0;
 
         for (int i = 0; i < 32; i += 4)
         {
             Xil_Out32(MLP_OUTPUT_INITIAL_OFFSET, outputOffset);
-            outputOffset += 4 * 60 * 60;
+            outputOffset += 4 * aplayer0.output_elements_per_channel;
 
-            Xil_Out32(MLP_MAC0_BIAS, int(ly0bd.get<i16>(i)) - Zp_macced_player0[i]);
-            Xil_Out32(MLP_MAC1_BIAS, int(ly0bd.get<i16>(i + 1)) - Zp_macced_player0[i + 1]);
-            Xil_Out32(MLP_MAC2_BIAS, int(ly0bd.get<i16>(i + 2)) - Zp_macced_player0[i + 2]);
-            Xil_Out32(MLP_MAC3_BIAS, int(ly0bd.get<i16>(i + 3)) - Zp_macced_player0[i + 3]);
+            Xil_Out32(MLP_MAC0_BIAS, int(ly0bd.get<i16>(i)) - aplayer0.zp_macced[i]);
+            Xil_Out32(MLP_MAC1_BIAS, int(ly0bd.get<i16>(i + 1)) - aplayer0.zp_macced[i + 1]);
+            Xil_Out32(MLP_MAC2_BIAS, int(ly0bd.get<i16>(i + 2)) - aplayer0.zp_macced[i + 2]);
+            Xil_Out32(MLP_MAC3_BIAS, int(ly0bd.get<i16>(i + 3)) - aplayer0.zp_macced[i + 3]);
 
             Xil_Out32(MLP_CTRLA, 0); // start
             // as it goes, load upcoming filters
 
             if (i < 28)
             {
-                memcpy_dma(MLP_FILTER0, filterDataPtr_L1, singleFilterSize_L1);
-                filterDataPtr_L1 += singleFilterSize_L1;
-                memcpy_dma(MLP_FILTER1, filterDataPtr_L1, singleFilterSize_L1);
-                filterDataPtr_L1 += singleFilterSize_L1;
-                memcpy_dma(MLP_FILTER2, filterDataPtr_L1, singleFilterSize_L1);
-                filterDataPtr_L1 += singleFilterSize_L1;
-                memcpy_dma(MLP_FILTER3, filterDataPtr_L1, singleFilterSize_L1);
-                filterDataPtr_L1 += singleFilterSize_L1;
+                memcpy_dma(MLP_FILTER0, filterDataPtr, aplayer0.single_filter_size);
+                filterDataPtr += aplayer0.single_filter_size;
+                memcpy_dma(MLP_FILTER1, filterDataPtr, aplayer0.single_filter_size);
+                filterDataPtr += aplayer0.single_filter_size;
+                memcpy_dma(MLP_FILTER2, filterDataPtr, aplayer0.single_filter_size);
+                filterDataPtr += aplayer0.single_filter_size;
+                memcpy_dma(MLP_FILTER3, filterDataPtr, aplayer0.single_filter_size);
+                filterDataPtr += aplayer0.single_filter_size;
             }
 
             while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE))
                 ; // wait for it to finish
-            ctrlb_flags_L1 ^= MLP_CTRLB_SWAP_FILTERS;
-            Xil_Out32(MLP_CTRLB, ctrlb_flags_L1);
+            ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
+            Xil_Out32(MLP_CTRLB, ctrlb_flags);
             // break;
         }
         ly0bd.freeData(); // maybe do later
@@ -1584,6 +1583,24 @@ namespace ML
         // Get Hardware Output
         std::vector<int8_t> hw_out_l1(32 * 60 * 60);
         memcpy_dma(hw_out_l1.data(), MLP_OUTPUTS, 32 * 60 * 60);
+
+        // std::cout << "[";
+        // int cnt = 0;
+        // for (int i = 0; i < 32; i++) {
+        //     std::cout << "[";
+        //     for (int j = 0; j < 60; j++) {
+        //         std::cout << "[";
+        //         for (int k = 0; k < 60; k++) {
+        //             if (k != 0)
+        //                 std::cout << ",";
+
+        //             std::cout << static_cast<int>(hw_out_l1[cnt++]);
+        //         }
+        //         std::cout << "]";
+        //     }
+        //     std::cout << "]";
+        // }
+        // std::cout << "]" << std::endl;
 
         // Run Software Layer 1
         Model model_l1;
@@ -1640,6 +1657,187 @@ namespace ML
 
         printf("\n--- RESULTS ---\n");
         printf("Total Pixels: %d\n", 32 * 60 * 60);
+        printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
+
+        if (mismatches == 0)
+        {
+            printf(">> SUCCESS: Layer 1 matches perfectly (within +/- 1 tolerance).\n");
+        }
+        else
+        {
+            printf(">> FAILURE: %d mismatches found > 1.\n", mismatches);
+        }
+
+
+
+        // Layer 2
+        LayerData ly1wd = LayerData{LayerParams{sizeof(i8), {32, 32, 5, 5}}, "data/quant_t_new/layer1_weights_8q_t_new.bin"};
+        LayerData ly1bd = LayerData{LayerParams{sizeof(i16), {32}}, "data/quant/param_layer_1/biases_8q.bin"};
+        ly1wd.loadData();
+        ly1bd.loadData();
+
+        printf("Running Layer 2 (with max pooling) (60x60x32-> 28x28x32)...\n");
+
+        // layer initialization
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        ctrlb_flags = aplayer1.relu ? ctrlb_flags | MLP_CTRLB_RELU : ctrlb_flags & ~MLP_CTRLB_RELU;
+        ctrlb_flags = aplayer1.maxpool ? ctrlb_flags | MLP_CTRLB_MAX_POOLING : ctrlb_flags & ~MLP_CTRLB_MAX_POOLING;
+        Xil_Out32(MLP_CTRLB, ctrlb_flags);
+
+        filterDataPtr = (uint8_t *)ly1wd.raw();
+
+        memcpy_dma(MLP_FILTER0, filterDataPtr, aplayer1.single_filter_size);
+        filterDataPtr += aplayer1.single_filter_size;
+        memcpy_dma(MLP_FILTER1, filterDataPtr, aplayer1.single_filter_size);
+        filterDataPtr += aplayer1.single_filter_size;
+        memcpy_dma(MLP_FILTER2, filterDataPtr, aplayer1.single_filter_size);
+        filterDataPtr += aplayer1.single_filter_size;
+        memcpy_dma(MLP_FILTER3, filterDataPtr, aplayer1.single_filter_size);
+        filterDataPtr += aplayer1.single_filter_size;
+
+        ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
+        // Register Config
+        Xil_Out32(MLP_CTRLB, ctrlb_flags);
+        Xil_Out32(MLP_FILTER_W, aplayer1.filter_w);
+        Xil_Out32(MLP_FILTER_H, aplayer1.filter_h);
+        Xil_Out32(MLP_FILTER_C, aplayer1.filter_c);
+        Xil_Out32(MLP_OUTPUT_W, aplayer1.output_w);
+        Xil_Out32(MLP_OUTPUT_H, aplayer1.output_h);
+        Xil_Out32(MLP_INPUT_END_DIFF_FW, aplayer1.inp_diff_fw);
+        Xil_Out32(MLP_INPUT_END_DIFF_FH, aplayer1.inp_diff_fh);
+        Xil_Out32(MLP_INPUT_END_DIFF_FC, aplayer1.inp_diff_fc);
+        Xil_Out32(MLP_INPUT_END_DIFF_OW, aplayer1.inp_diff_ow);
+        Xil_Out32(MLP_OUTPUT_ELEMENTS_PER_CHANNEL, aplayer1.output_elements_per_channel);
+
+        // Scale
+        Xil_Out32(MLP_Q_SCALE, aplayer1.q_scale_fx_pnt);
+        Xil_Out32(MLP_Q_ZERO, aplayer1.q_zero);
+
+        // Process 32 Output Channels in batches of 4
+        outputOffset = 0;
+
+        for (int i = 0; i < 32; i += 4)
+        {
+            Xil_Out32(MLP_OUTPUT_INITIAL_OFFSET, outputOffset);
+            outputOffset += 4 * aplayer1.output_elements_per_channel;
+
+            Xil_Out32(MLP_MAC0_BIAS, int(ly1bd.get<i16>(i)) - aplayer1.zp_macced[i]);
+            Xil_Out32(MLP_MAC1_BIAS, int(ly1bd.get<i16>(i + 1)) - aplayer1.zp_macced[i + 1]);
+            Xil_Out32(MLP_MAC2_BIAS, int(ly1bd.get<i16>(i + 2)) - aplayer1.zp_macced[i + 2]);
+            Xil_Out32(MLP_MAC3_BIAS, int(ly1bd.get<i16>(i + 3)) - aplayer1.zp_macced[i + 3]);
+
+            Xil_Out32(MLP_CTRLA, 0); // start
+            // as it goes, load upcoming filters
+
+            if (i < 28)
+            {
+                memcpy_dma(MLP_FILTER0, filterDataPtr, aplayer1.single_filter_size);
+                filterDataPtr += aplayer1.single_filter_size;
+                memcpy_dma(MLP_FILTER1, filterDataPtr, aplayer1.single_filter_size);
+                filterDataPtr += aplayer1.single_filter_size;
+                memcpy_dma(MLP_FILTER2, filterDataPtr, aplayer1.single_filter_size);
+                filterDataPtr += aplayer1.single_filter_size;
+                memcpy_dma(MLP_FILTER3, filterDataPtr, aplayer1.single_filter_size);
+                filterDataPtr += aplayer1.single_filter_size;
+            }
+
+            while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE))
+                ; // wait for it to finish
+            ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
+            Xil_Out32(MLP_CTRLB, ctrlb_flags);
+            // break;
+        }
+        // ly1bd.freeData(); // maybe do later
+        ly1wd.freeData();
+
+        printf("Comparing Hardware Output vs Software Reference...\n");
+
+        // Get Hardware Output
+        std::vector<int8_t> hw_out_l2(32 * 56 * 56);
+        memcpy_dma(hw_out_l2.data(), MLP_OUTPUTS, 32 * 56 * 56);
+
+        // Run Software Layer 2
+        Model model_l2;
+        std::cout << "Adding Layer 1: Convolutional" << std::endl;
+
+        model_l2.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {64, 64, 3}},
+            LayerParams{sizeof(i8), {60, 60, 32}},
+            LayerParams{sizeof(i8), {5, 5, 3, 32}, "data/quant/param_layer_0/weights_8q.bin"},
+            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_8q.bin"});
+        model_l2.addLayer<ConvolutionalLayer>(
+            LayerParams{sizeof(i8), {60, 60, 32}},
+            LayerParams{sizeof(i8), {56, 56, 32}},
+            LayerParams{sizeof(i8), {5, 5, 32, 32}, "data/quant/param_layer_1/weights_8q.bin"},
+            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_1/biases_8q.bin"});
+        // model_l2.addLayer<MaxPoolingLayer>(
+        //     LayerParams{sizeof(i8), {56, 56, 32}}, // Input
+        //     LayerParams{sizeof(i8), {28, 28, 32}}  // Output
+        // );
+        
+        model_l2.allocLayers();
+
+        LayerData w8 = LayerData{LayerParams{sizeof(i8), {5, 5, 32, 32}}, "data/quant/param_layer_1/weights_8q.bin"};
+        w8.loadData();
+        for (int filt = 0; filt < 32; filt++) {
+            for (int chan = 0; chan < 32; chan++) {
+                for (int row = 0; row < 5; row++) {
+                    for (int col = 0; col < 5; col++) {
+                        int tWeight = ly1wd.get<i8>(filt * 32 * 5 * 5 + chan * 5 * 5 + col* 5 + row);
+                        int weight = w8.get<i8>(col* 5 * 32 * 32 + row * 32 * 32 + chan * 32 + filt);
+                        if (tWeight != weight) {
+                            std::cout << "Not matching: " << filt << std::endl;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        LayerData inp_sw_again = LayerData{LayerParams{sizeof(i8), {64, 64, 3}}, "data/quant/given_image0_8q.bin"};
+        inp_sw_again.loadData();
+        const LayerData &l2_out_sw_out = model_l2.inference(inp_sw_again, Layer::InfType::QUANTIZED, modelQParams_8q);
+
+        // Compare each pixel
+        mismatches = 0;
+        diff_of_one = 0;
+        print_limit = 10;
+
+        for (int ch = 0; ch < 32; ch++)
+        {
+            for (int r = 0; r < 56; r++)
+            {
+                for (int c = 0; c < 56; c++)
+                {
+                    // HW Output is [Ch][Row][Col]
+                    int hw_val = (int)hw_out_l2[(ch * 56 * 56) + (r * 56) + c];
+
+                    // SW Output is [Row][Col][Ch]
+                    int sw_val = (int)l2_out_sw_out.get<i8>((r * 56 * 32) + (c * 32) + ch);
+
+                    int diff = abs(hw_val - sw_val);
+
+                    if (diff > 0)
+                    {
+                        if (diff == 1)
+                        {
+                            diff_of_one++;
+                        }
+                        else
+                        {
+                            if (mismatches < print_limit)
+                            {
+                                printf("FAIL: Ch%d R%d C%d -> HW:%d SW:%d (Diff: %d)\n", ch, r, c, hw_val, sw_val, diff);
+                            }
+                            mismatches++;
+                        }
+                    }
+                }
+            }
+        }
+
+        printf("\n--- RESULTS ---\n");
+        printf("Total Pixels: %d\n", 32 * 56 * 56);
         printf("Differences of exactly 1 (Ignored): %d\n", diff_of_one);
 
         if (mismatches == 0)

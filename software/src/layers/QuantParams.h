@@ -14,32 +14,16 @@ const int32_t Zp_macced_player7[] = { 3188, 3539, 2987, 3497, 3122, 3223, 3501, 
 
 
 
-const int player0outputscaler = (1.0f/(78.2820355f / (225.77330403f * 419.30887f)));
-const int player1outputscaler = (1.0f/(30.10063831f / (78.2820355f * 260.8992f)));
+// const int player0outputscaler = (1.0f/(78.2820355f / (225.77330403f * 419.30887f)));
+// const int player1outputscaler = (1.0f/(30.10063831f / (78.2820355f * 260.8992f)));
+const int player0outputscaler = 0x00363129 & 0xFFFFC000;
+const int player1outputscaler = 0x00609664 & 0xFFFFC000;
 const int player2outputscaler = (1.0f/(38.9806973f / (30.10063831f * 183.42577f)));
 const int player3outputscaler = (1.0f/(34.65046495f / (38.9806973f * 234.51324f)));
 const int player4outputscaler = (1.0f/(22.17446924f / (34.65046495f * 236.64046f)));
 const int player5outputscaler = (1.0f/(14.83324517f / (22.17446924f * 248.70012f)));
 const int player6outputscaler = (1.0f/(8.22409603f / (14.83324517f * 227.76791f)));
 
-typedef struct {
-    bool inputs_loaded;
-    bool do_set_outputs;
-    bool relu;
-    bool maxpool;
-    int filter_w;
-    int filter_h;
-    int filter_c;
-    int output_w; // width pre pooling if pooling
-    int output_h; // height pre pooling if pooling
-    int output_elments_per_channel; // output elements post pooling if pooling
-    int inp_diff_fw;
-    int inp_diff_fh;
-    int inp_diff_fc;
-    int inp_diff_ow;
-    int q_scale_fx_pnt;
-    int q_zero;
-} AccelParams;
 
 typedef struct {
     int outputscaler;
@@ -50,7 +34,71 @@ typedef struct {
     bool quantedOutput;
 } QParams;
 
+
 const QParams modelQParams_8q[] = {{player0outputscaler, 226, 419, Zp_macced_player0, -3, true}, {player1outputscaler, 78, 261, Zp_macced_player1, -2, true}, {0, 0, 0, 0, 0, true}, {player2outputscaler, 30, 183, Zp_macced_player2, -1, true}, {player3outputscaler, 39, 235, Zp_macced_player3, -2, true}, {0, 0, 0, 0, 0, true}, {player4outputscaler, 35, 237, Zp_macced_player4, -3, true}, {player5outputscaler, 22, 249, Zp_macced_player5, -2, true}, {0, 0, 0, 0, 0, true}, {0, 0, 0, 0, 0, true}, {player6outputscaler, 15, 228, Zp_macced_player6, -5, true}, {0, 8.22409603, 95.91284, Zp_macced_player7, 0, false}, {0, 0, 0, 0, 0, false}};
+
+typedef struct {
+    bool relu;
+    bool maxpool;
+    int input_size;
+    int filter_w;
+    int filter_h;
+    int filter_c;
+    int single_filter_size;
+    int output_w; // width pre pooling if pooling
+    int output_h; // height pre pooling if pooling
+    int output_elements_per_channel; // output elements post pooling if pooling
+    int inp_diff_fw;
+    int inp_diff_fh;
+    int inp_diff_fc;
+    int inp_diff_ow;
+    int q_scale_fx_pnt; // Q0.32 format. Hardware is actually Q0.18 though and also the top 5 or so bits are assumed to be 0.
+    int q_zero;
+    const int32_t* zp_macced;
+} AccelParams;
+
+const AccelParams aplayer0 = {
+    .relu = true,
+    .maxpool = false,
+    .input_size = 3 * 64 * 64,
+    .filter_w = 5,
+    .filter_h = 5,
+    .filter_c = 3,
+    .single_filter_size = 5 * 5 *3,
+    .output_w = 60,
+    .output_h = 60,
+    .output_elements_per_channel = 60*60,
+    .inp_diff_fw = 60,
+    .inp_diff_fh = 3836,
+    .inp_diff_fc = -8451,
+    .inp_diff_ow = -8447,
+    .q_scale_fx_pnt = 0x00363129, // 0.0008269047213 in Q0.32.
+    .q_zero = modelQParams_8q[0].Z_i_next,
+    .zp_macced = Zp_macced_player0
+};
+
+const AccelParams aplayer1 = {
+    .relu = true,
+    // .maxpool = true,
+    .maxpool = false,
+    .input_size = 115200,
+    .filter_w = 5,
+    .filter_h = 5,
+    .filter_c = 32,
+    .single_filter_size = 5 * 5 * 32,
+    .output_w = 56,
+    .output_h = 56,
+    // .output_elements_per_channel = 784,
+    .output_elements_per_channel = 56*56,
+    .inp_diff_fw = 56,
+    .inp_diff_fh = 3356,
+    .inp_diff_fc = -111843,
+    .inp_diff_ow = -111838,
+    .q_scale_fx_pnt = 0x00609664, // 0.001473807791 in Q0.32.
+    .q_zero = modelQParams_8q[1].Z_i_next,
+    .zp_macced = Zp_macced_player1
+};
+
 
 const int32_t Zp_macced_player0_4b[] = {22, 6, 47, -11, 95, 229, 60, 385, 8, 77, -4, 10, 36, -9, -1, 15, 79, 6, 442, -12, 207, 129, 5, 126, 239, -6, 6, 253, 20, 127, -10, -58 };
 const int32_t Zp_macced_player1_4b[] = {21, 39, -7, 18, 29, 18, 25, 16, 55, 51, 36, 49, 20, 33, 29, 8, 15, -4, 42, 39, 24, 19, 27, 47, 19, 19, 85, 15, 34, 9, 29, 20};
