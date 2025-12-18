@@ -1875,6 +1875,7 @@ namespace ML
 
         q.output_multiplier = (int32_t)q_fixed;
         q.output_shift = 31 - shift;
+        printf("Multiplier: 0x%08x, Shift: %d\n", q.output_multiplier, q.output_shift);
     }
 
     float getScale(const YoloLoader &loader, const std::string &name)
@@ -2000,7 +2001,7 @@ namespace ML
         const auto &dims = feature_map.getParams().dims;
         int grid_w = dims[0];
         int grid_h = dims[1];
-        int channels = dims[2];
+        // int channels = dims[2];
 
         for (int a = 0; a < 3; a++)
         {
@@ -2011,10 +2012,13 @@ namespace ML
             {
                 for (int x = 0; x < grid_w; x++)
                 {
-
+                    // Data is now CHW.
+                    // Index = (channel * H * W) + (y * W) + x
                     auto get_val = [&](int ch_offset)
                     {
-                        return data[(y * grid_w + x) * channels + box_ch_start + ch_offset];
+                        int c = box_ch_start + ch_offset;
+                        // Index: [Channel * Height * Width] + [Row * Width] + Column
+                        return data[(c * grid_h * grid_w) + (y * grid_w) + x];
                     };
 
                     float obj_logit = get_val(4);
@@ -2145,9 +2149,18 @@ namespace ML
                 resized_img.resize(416 * 416 * 3, 0);
             }
 
+            // Transpose initial HWC image to CHW
+            LayerData chw_img(img.getParams());
+            chw_img.allocData();
+            transpose_HWC_to_CHW((i8 *)img.raw(), (i8 *)chw_img.raw(), 416, 416, 3);
+
+            // Reset the layer counter for the Conv layers
+            resetYoloLayerId();
+
             // Inference
             std::cout << "Running Inference..." << std::endl;
-            model.inference(img, Layer::InfType::QUANTIZED, yolo_qparams_store.data());
+
+            model.inference(chw_img, Layer::InfType::QUANTIZED, yolo_qparams_store.data());
 
             // Decode
             std::cout << "Decoding detections..." << std::endl;

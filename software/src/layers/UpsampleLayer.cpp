@@ -11,30 +11,25 @@ namespace ML
         size_t inW = getInputParams().dims[0];
         size_t inH = getInputParams().dims[1];
         size_t C = getInputParams().dims[2];
+        size_t outW = inW * stride;
+        size_t outH = inH * stride;
 
-        size_t outW = getOutputParams().dims[0]; // Should be inW * stride
-
-        for (size_t y = 0; y < inH; ++y)
+        for (size_t c = 0; c < C; ++c)
         {
-            for (size_t x = 0; x < inW; ++x)
+            for (size_t y = 0; y < inH; ++y)
             {
-
-                // Pointer to the start of the pixel channels in Input
-                const i8 *pixel_src = in_ptr + (y * inW + x) * C;
-
-                // Map to output blocks
-                for (int dy = 0; dy < stride; ++dy)
+                for (size_t x = 0; x < inW; ++x)
                 {
-                    for (int dx = 0; dx < stride; ++dx)
+                    i8 val = in_ptr[(c * inH * inW) + (y * inW) + x];
+
+                    for (int dy = 0; dy < stride; ++dy)
                     {
-
-                        size_t out_y = y * stride + dy;
-                        size_t out_x = x * stride + dx;
-
-                        i8 *pixel_dst = out_ptr + (out_y * outW + out_x) * C;
-
-                        // Copy all channels
-                        std::memcpy(pixel_dst, pixel_src, C);
+                        for (int dx = 0; dx < stride; ++dx)
+                        {
+                            size_t out_y = y * stride + dy;
+                            size_t out_x = x * stride + dx;
+                            out_ptr[(c * outH * outW) + (out_y * outW) + out_x] = val;
+                        }
                     }
                 }
             }

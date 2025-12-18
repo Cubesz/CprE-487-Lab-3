@@ -15,6 +15,22 @@
 namespace ML
 {
 
+    void transpose_HWC_to_CHW(i8 *src, i8 *dst, int H, int W, int C)
+    {
+        for (int c = 0; c < C; ++c)
+        {
+            for (int h = 0; h < H; ++h)
+            {
+                for (int w = 0; w < W; ++w)
+                {
+                    // HWC index: h*W*C + w*C + c
+                    // CHW index: c*H*W + h*W + w
+                    dst[c * H * W + h * W + w] = src[h * (W * C) + w * C + c];
+                }
+            }
+        }
+    }
+
     // Bilinear Resize to 416x416 for YOLO
     inline std::vector<uint8_t> resize_bilinear(const uint8_t *src, int w, int h, int target_w, int target_h)
     {

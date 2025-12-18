@@ -3,6 +3,11 @@
 
 namespace ML
 {
+    void resetYoloLayerId();
+}
+
+namespace ML
+{
 
     class YoloConvLayer : public ConvolutionalLayer
     {
