@@ -60,8 +60,7 @@ typedef struct {
     int q_scale_fx_pnt; // Q0.32 format. Hardware is actually Q0.18 though and also the top 5 or so bits are assumed to be 0.
     int q_zero;
     const int32_t* zp_macced;
-    bool return_accelerator_data = false;
-    int sparse_scale = 1; // this up scales q scale fx pnt and then down scales at end but expect as float. Changing this from 1 will result in float returns if applicable. Otherwise inter returns if applicable.
+    int sparse_scale = 1;
 } AccelParams;
 
 const AccelParams aplayer0 = {

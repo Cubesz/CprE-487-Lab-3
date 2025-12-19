@@ -1369,12 +1369,6 @@
                   "bram_switch_1/BRAM_PORT1"
                 ]
               },
-              "Conn1": {
-                "interface_ports": [
-                  "BRAM_PORT0",
-                  "bram_switch_1/BRAM_PORT0"
-                ]
-              },
               "bram_switch_0_BLK_MEM_PORTA1": {
                 "interface_ports": [
                   "blk_mem_gen_1/BRAM_PORTA",
@@ -1385,6 +1379,12 @@
                 "interface_ports": [
                   "blk_mem_gen_0/BRAM_PORTA",
                   "bram_switch_1/BLK_MEM_PORT0"
+                ]
+              },
+              "Conn1": {
+                "interface_ports": [
+                  "BRAM_PORT0",
+                  "bram_switch_1/BRAM_PORT0"
                 ]
               }
             },
@@ -1710,18 +1710,6 @@
               }
             },
             "interface_nets": {
-              "bram_switch_0_BLK_MEM_PORTA1": {
-                "interface_ports": [
-                  "blk_mem_gen_1/BRAM_PORTA",
-                  "bram_switch_1/BLK_MEM_PORT1"
-                ]
-              },
-              "BRAM_PORT_1": {
-                "interface_ports": [
-                  "BRAM_PORT",
-                  "bram_switch_1/BRAM_PORT1"
-                ]
-              },
               "bram_switch_0_BLK_MEM_PORTA0": {
                 "interface_ports": [
                   "blk_mem_gen_0/BRAM_PORTA",
@@ -1732,6 +1720,18 @@
                 "interface_ports": [
                   "BRAM_PORT0",
                   "bram_switch_1/BRAM_PORT0"
+                ]
+              },
+              "bram_switch_0_BLK_MEM_PORTA1": {
+                "interface_ports": [
+                  "blk_mem_gen_1/BRAM_PORTA",
+                  "bram_switch_1/BLK_MEM_PORT1"
+                ]
+              },
+              "BRAM_PORT_1": {
+                "interface_ports": [
+                  "BRAM_PORT",
+                  "bram_switch_1/BRAM_PORT1"
                 ]
               }
             },
@@ -2057,12 +2057,6 @@
               }
             },
             "interface_nets": {
-              "Conn1": {
-                "interface_ports": [
-                  "BRAM_PORT0",
-                  "bram_switch_1/BRAM_PORT0"
-                ]
-              },
               "bram_switch_0_BLK_MEM_PORTA0": {
                 "interface_ports": [
                   "blk_mem_gen_0/BRAM_PORTA",
@@ -2073,6 +2067,12 @@
                 "interface_ports": [
                   "blk_mem_gen_1/BRAM_PORTA",
                   "bram_switch_1/BLK_MEM_PORT1"
+                ]
+              },
+              "Conn1": {
+                "interface_ports": [
+                  "BRAM_PORT0",
+                  "bram_switch_1/BRAM_PORT0"
                 ]
               },
               "BRAM_PORT_1": {
@@ -2404,16 +2404,10 @@
               }
             },
             "interface_nets": {
-              "bram_switch_0_BLK_MEM_PORTA0": {
+              "bram_switch_0_BLK_MEM_PORTA1": {
                 "interface_ports": [
-                  "blk_mem_gen_0/BRAM_PORTA",
-                  "bram_switch_1/BLK_MEM_PORT0"
-                ]
-              },
-              "Conn1": {
-                "interface_ports": [
-                  "BRAM_PORT0",
-                  "bram_switch_1/BRAM_PORT0"
+                  "blk_mem_gen_1/BRAM_PORTA",
+                  "bram_switch_1/BLK_MEM_PORT1"
                 ]
               },
               "BRAM_PORT_1": {
@@ -2422,10 +2416,16 @@
                   "bram_switch_1/BRAM_PORT1"
                 ]
               },
-              "bram_switch_0_BLK_MEM_PORTA1": {
+              "Conn1": {
                 "interface_ports": [
-                  "blk_mem_gen_1/BRAM_PORTA",
-                  "bram_switch_1/BLK_MEM_PORT1"
+                  "BRAM_PORT0",
+                  "bram_switch_1/BRAM_PORT0"
+                ]
+              },
+              "bram_switch_0_BLK_MEM_PORTA0": {
+                "interface_ports": [
+                  "blk_mem_gen_0/BRAM_PORTA",
+                  "bram_switch_1/BLK_MEM_PORT0"
                 ]
               }
             },
@@ -3062,40 +3062,10 @@
               }
             },
             "interface_nets": {
-              "bram_switch_1_BLK_MEM_PORT1": {
+              "Conn3": {
                 "interface_ports": [
-                  "blk_mem_gen_1/BRAM_PORTA",
-                  "bram_switch_1/BLK_MEM_PORT1"
-                ]
-              },
-              "BRAM_OUTPUTS_1": {
-                "interface_ports": [
-                  "BRAM_OUTPUTS",
-                  "bram_mux_1/BRAM_PORT1"
-                ]
-              },
-              "bram_mux_1_BRAM_PORT": {
-                "interface_ports": [
-                  "bram_mux_1/BRAM_PORT",
-                  "bram_switch_1/BRAM_PORT1"
-                ]
-              },
-              "bram_switch_1_BLK_MEM_PORT0": {
-                "interface_ports": [
-                  "blk_mem_gen_0/BRAM_PORTA",
-                  "bram_switch_1/BLK_MEM_PORT0"
-                ]
-              },
-              "Conn2": {
-                "interface_ports": [
-                  "BRAM_PORT0",
-                  "bram_mux_0/BRAM_PORT0"
-                ]
-              },
-              "BRAM_INPUTS_1": {
-                "interface_ports": [
-                  "BRAM_INPUTS",
-                  "bram_mux_0/BRAM_PORT1"
+                  "BRAM_PORT1",
+                  "bram_mux_1/BRAM_PORT0"
                 ]
               },
               "bram_mux_0_BRAM_PORT": {
@@ -3104,10 +3074,40 @@
                   "bram_switch_1/BRAM_PORT0"
                 ]
               },
-              "Conn3": {
+              "BRAM_INPUTS_1": {
                 "interface_ports": [
-                  "BRAM_PORT1",
-                  "bram_mux_1/BRAM_PORT0"
+                  "BRAM_INPUTS",
+                  "bram_mux_0/BRAM_PORT1"
+                ]
+              },
+              "Conn2": {
+                "interface_ports": [
+                  "BRAM_PORT0",
+                  "bram_mux_0/BRAM_PORT0"
+                ]
+              },
+              "bram_switch_1_BLK_MEM_PORT0": {
+                "interface_ports": [
+                  "blk_mem_gen_0/BRAM_PORTA",
+                  "bram_switch_1/BLK_MEM_PORT0"
+                ]
+              },
+              "bram_mux_1_BRAM_PORT": {
+                "interface_ports": [
+                  "bram_mux_1/BRAM_PORT",
+                  "bram_switch_1/BRAM_PORT1"
+                ]
+              },
+              "BRAM_OUTPUTS_1": {
+                "interface_ports": [
+                  "BRAM_OUTPUTS",
+                  "bram_mux_1/BRAM_PORT1"
+                ]
+              },
+              "bram_switch_1_BLK_MEM_PORT1": {
+                "interface_ports": [
+                  "blk_mem_gen_1/BRAM_PORTA",
+                  "bram_switch_1/BLK_MEM_PORT1"
                 ]
               }
             },
@@ -3699,16 +3699,10 @@
           }
         },
         "interface_nets": {
-          "BRAM_PORT_FILTER_3_1": {
+          "bram_connect_3_M_BRAM0": {
             "interface_ports": [
-              "BRAM_PORT_FILTER_3",
-              "bram_filter_3/BRAM_PORT"
-            ]
-          },
-          "bram_connect_0_M_BRAM1": {
-            "interface_ports": [
-              "bram_connect_0/M_BRAM1",
-              "bram_read_delay_1/M_BRAM"
+              "bram_connect_0/S_BRAM",
+              "bram_connect_3/M_BRAM0"
             ]
           },
           "BRAM_PORT_OUTPUT_0_1": {
@@ -3717,76 +3711,16 @@
               "bram_input_0/BRAM_INPUTS"
             ]
           },
-          "bram_connect_3_M_BRAM0": {
+          "bram_connect_0_M_BRAM1": {
             "interface_ports": [
-              "bram_connect_0/S_BRAM",
-              "bram_connect_3/M_BRAM0"
+              "bram_connect_0/M_BRAM1",
+              "bram_read_delay_1/M_BRAM"
             ]
           },
-          "bram_connect_1_M_BRAM1": {
+          "BRAM_PORT_FILTER_3_1": {
             "interface_ports": [
-              "bram_connect_1/M_BRAM1",
-              "bram_read_delay_3/M_BRAM"
-            ]
-          },
-          "bram_read_delay_5_S_BRAM": {
-            "interface_ports": [
-              "bram_input_0/BRAM_PORT0",
-              "bram_read_delay_5/S_BRAM"
-            ]
-          },
-          "bram_connect_4_M_BRAM1": {
-            "interface_ports": [
-              "bram_connect_3/S_BRAM",
-              "bram_connect_4/M_BRAM1"
-            ]
-          },
-          "bram_connect_0_M_BRAM0": {
-            "interface_ports": [
-              "bram_connect_0/M_BRAM0",
-              "bram_read_delay_0/M_BRAM"
-            ]
-          },
-          "bram_read_delay_1_S_BRAM": {
-            "interface_ports": [
-              "bram_filter_1/BRAM_PORT0",
-              "bram_read_delay_1/S_BRAM"
-            ]
-          },
-          "BRAM_PORT_FILTER_0_1": {
-            "interface_ports": [
-              "BRAM_PORT_FILTER_0",
-              "bram_filter_0/BRAM_PORT"
-            ]
-          },
-          "BRAM_PORT_INPUT_0_1": {
-            "interface_ports": [
-              "BRAM_PORT_OUTPUT_0",
-              "bram_input_0/BRAM_OUTPUTS"
-            ]
-          },
-          "bram_read_delay_4_S_BRAM": {
-            "interface_ports": [
-              "bram_input_0/BRAM_PORT1",
-              "bram_read_delay_4/S_BRAM"
-            ]
-          },
-          "bram_read_delay_0_S_BRAM": {
-            "interface_ports": [
-              "bram_filter_0/BRAM_PORT0",
-              "bram_read_delay_0/S_BRAM"
-            ]
-          },
-          "bram_read_delay_3_S_BRAM": {
-            "interface_ports": [
-              "bram_filter_3/BRAM_PORT0",
-              "bram_read_delay_3/S_BRAM"
-            ]
-          },
-          "BRAM_PORT_FILTER_2_1": {
-            "interface_ports": [
-              "BRAM_PORT_FILTER_2",
-              "bram_filter_2/BRAM_PORT"
+              "BRAM_PORT_FILTER_3",
+              "bram_filter_3/BRAM_PORT"
             ]
           },
           "bram_connect_1_M_BRAM0": {
@@ -3801,28 +3735,70 @@
               "bram_connect_4/M_BRAM0"
             ]
           },
-          "BRAM_PORT_FILTER_1_1": {
+          "bram_read_delay_3_S_BRAM": {
             "interface_ports": [
-              "BRAM_PORT_FILTER_1",
-              "bram_filter_1/BRAM_PORT"
+              "bram_filter_3/BRAM_PORT0",
+              "bram_read_delay_3/S_BRAM"
             ]
           },
-          "axi_bram_ctrl_BRAM_PORTA": {
+          "bram_read_delay_0_S_BRAM": {
             "interface_ports": [
-              "axi_bram_ctrl/BRAM_PORTA",
-              "bram_connect_4/S_BRAM"
+              "bram_filter_0/BRAM_PORT0",
+              "bram_read_delay_0/S_BRAM"
             ]
           },
-          "bram_read_delay_2_S_BRAM": {
+          "bram_read_delay_4_S_BRAM": {
             "interface_ports": [
-              "bram_filter_2/BRAM_PORT0",
-              "bram_read_delay_2/S_BRAM"
+              "bram_input_0/BRAM_PORT1",
+              "bram_read_delay_4/S_BRAM"
             ]
           },
-          "bram_connect_3_M_BRAM1": {
+          "BRAM_PORT_INPUT_0_1": {
             "interface_ports": [
-              "bram_connect_1/S_BRAM",
-              "bram_connect_3/M_BRAM1"
+              "BRAM_PORT_OUTPUT_0",
+              "bram_input_0/BRAM_OUTPUTS"
+            ]
+          },
+          "BRAM_PORT_FILTER_0_1": {
+            "interface_ports": [
+              "BRAM_PORT_FILTER_0",
+              "bram_filter_0/BRAM_PORT"
+            ]
+          },
+          "bram_connect_4_M_BRAM1": {
+            "interface_ports": [
+              "bram_connect_3/S_BRAM",
+              "bram_connect_4/M_BRAM1"
+            ]
+          },
+          "bram_read_delay_5_S_BRAM": {
+            "interface_ports": [
+              "bram_input_0/BRAM_PORT0",
+              "bram_read_delay_5/S_BRAM"
+            ]
+          },
+          "bram_connect_1_M_BRAM1": {
+            "interface_ports": [
+              "bram_connect_1/M_BRAM1",
+              "bram_read_delay_3/M_BRAM"
+            ]
+          },
+          "BRAM_PORT_FILTER_2_1": {
+            "interface_ports": [
+              "BRAM_PORT_FILTER_2",
+              "bram_filter_2/BRAM_PORT"
+            ]
+          },
+          "bram_read_delay_1_S_BRAM": {
+            "interface_ports": [
+              "bram_filter_1/BRAM_PORT0",
+              "bram_read_delay_1/S_BRAM"
+            ]
+          },
+          "bram_connect_0_M_BRAM0": {
+            "interface_ports": [
+              "bram_connect_0/M_BRAM0",
+              "bram_read_delay_0/M_BRAM"
             ]
           },
           "axi_register_slice_2_M_AXI": {
@@ -3831,16 +3807,40 @@
               "axi_bram_ctrl/S_AXI"
             ]
           },
-          "bram_connect_2_M_BRAM0": {
+          "bram_connect_3_M_BRAM1": {
             "interface_ports": [
-              "bram_connect_2/M_BRAM0",
-              "bram_read_delay_5/M_BRAM"
+              "bram_connect_1/S_BRAM",
+              "bram_connect_3/M_BRAM1"
+            ]
+          },
+          "bram_read_delay_2_S_BRAM": {
+            "interface_ports": [
+              "bram_filter_2/BRAM_PORT0",
+              "bram_read_delay_2/S_BRAM"
+            ]
+          },
+          "axi_bram_ctrl_BRAM_PORTA": {
+            "interface_ports": [
+              "axi_bram_ctrl/BRAM_PORTA",
+              "bram_connect_4/S_BRAM"
+            ]
+          },
+          "BRAM_PORT_FILTER_1_1": {
+            "interface_ports": [
+              "BRAM_PORT_FILTER_1",
+              "bram_filter_1/BRAM_PORT"
             ]
           },
           "bram_connect_2_M_BRAM1": {
             "interface_ports": [
               "bram_connect_2/M_BRAM1",
               "bram_read_delay_4/M_BRAM"
+            ]
+          },
+          "bram_connect_2_M_BRAM0": {
+            "interface_ports": [
+              "bram_connect_2/M_BRAM0",
+              "bram_read_delay_5/M_BRAM"
             ]
           }
         },
@@ -3906,7 +3906,7 @@
             "value": "10.000000"
           },
           "PCW_ACT_FPGA0_PERIPHERAL_FREQMHZ": {
-            "value": "50.000000"
+            "value": "83.333336"
           },
           "PCW_ACT_FPGA1_PERIPHERAL_FREQMHZ": {
             "value": "10.000000"
@@ -3996,7 +3996,7 @@
             "value": "0"
           },
           "PCW_CLK0_FREQ": {
-            "value": "50000000"
+            "value": "83333336"
           },
           "PCW_CLK1_FREQ": {
             "value": "10000000"
@@ -4293,7 +4293,7 @@
             "value": "TRUE"
           },
           "PCW_FPGA0_PERIPHERAL_FREQMHZ": {
-            "value": "50"
+            "value": "85"
           },
           "PCW_FPGA1_PERIPHERAL_FREQMHZ": {
             "value": "150.000000"
@@ -5804,7 +5804,7 @@
                 "value_src": "constant"
               },
               "FREQ_HZ": {
-                "value": "50000000",
+                "value": "83333336",
                 "value_src": "user_prop"
               },
               "ID_WIDTH": {
@@ -6012,7 +6012,7 @@
                 "value_src": "default_prop"
               },
               "FREQ_HZ": {
-                "value": "50000000",
+                "value": "83333336",
                 "value_src": "user_prop"
               }
             }
@@ -6040,70 +6040,10 @@
       }
     },
     "interface_nets": {
-      "axi_crossbar_0_M00_AXI": {
+      "axi_crossbar_0_M01_AXI": {
         "interface_ports": [
-          "axi_crossbar_0/M00_AXI",
-          "conv_accelerator_wra_0/S_AXI_LITE"
-        ]
-      },
-      "axi_protocol_convert_0_M_AXI": {
-        "interface_ports": [
-          "axi_crossbar_0/S00_AXI",
-          "axi_protocol_convert_0/M_AXI"
-        ]
-      },
-      "conv_accelerator_wra_0_BRAM_FILTER3": {
-        "interface_ports": [
-          "bram/BRAM_PORT_FILTER_3",
-          "conv_accelerator_wra_0/BRAM_FILTER3"
-        ]
-      },
-      "BRAM_PORT_OUTPUT_0_1": {
-        "interface_ports": [
-          "bram/BRAM_PORT_OUTPUT_0",
-          "conv_accelerator_wra_0/BRAM_OUTPUT"
-        ]
-      },
-      "axi_protocol_convert_3_M_AXI": {
-        "interface_ports": [
-          "axi_protocol_convert_3/M_AXI",
-          "processing_system7_0/S_AXI_HP0"
-        ]
-      },
-      "axi_crossbar_1_M01_AXI": {
-        "interface_ports": [
-          "axi_crossbar_1/M01_AXI",
-          "bram/S_AXI_BRAM"
-        ]
-      },
-      "conv_accelerator_wra_0_BRAM_FILTER2": {
-        "interface_ports": [
-          "bram/BRAM_PORT_FILTER_2",
-          "conv_accelerator_wra_0/BRAM_FILTER2"
-        ]
-      },
-      "conv_accelerator_wra_0_BRAM_FILTER1": {
-        "interface_ports": [
-          "bram/BRAM_PORT_FILTER_1",
-          "conv_accelerator_wra_0/BRAM_FILTER1"
-        ]
-      },
-      "processing_system7_0_M_AXI_GP0": {
-        "interface_ports": [
-          "axi_protocol_convert_0/S_AXI",
-          "processing_system7_0/M_AXI_GP0"
-        ]
-      },
-      "conv_accelerator_wra_0_BRAM_FILTER0": {
-        "interface_ports": [
-          "bram/BRAM_PORT_FILTER_0",
-          "conv_accelerator_wra_0/BRAM_FILTER0"
-        ]
-      },
-      "axi_cdma_0_M_AXI": {
-        "interface_ports": [
-          "axi_cdma_0/M_AXI",
-          "axi_crossbar_1/S00_AXI"
+          "axi_cdma_0/S_AXI_LITE",
+          "axi_crossbar_0/M01_AXI"
         ]
       },
       "conv_accelerator_wra_0_BRAM_INPUT": {
@@ -6112,16 +6052,28 @@
           "conv_accelerator_wra_0/BRAM_INPUT"
         ]
       },
-      "processing_system7_0_FIXED_IO": {
+      "axi_cdma_0_M_AXI": {
         "interface_ports": [
-          "FIXED_IO",
-          "processing_system7_0/FIXED_IO"
+          "axi_cdma_0/M_AXI",
+          "axi_crossbar_1/S00_AXI"
         ]
       },
-      "processing_system7_0_DDR": {
+      "axi_crossbar_1_M01_AXI": {
         "interface_ports": [
-          "DDR",
-          "processing_system7_0/DDR"
+          "axi_crossbar_1/M01_AXI",
+          "bram/S_AXI_BRAM"
+        ]
+      },
+      "axi_protocol_convert_3_M_AXI": {
+        "interface_ports": [
+          "axi_protocol_convert_3/M_AXI",
+          "processing_system7_0/S_AXI_HP0"
+        ]
+      },
+      "BRAM_PORT_OUTPUT_0_1": {
+        "interface_ports": [
+          "bram/BRAM_PORT_OUTPUT_0",
+          "conv_accelerator_wra_0/BRAM_OUTPUT"
         ]
       },
       "axi_crossbar_1_M00_AXI": {
@@ -6130,10 +6082,58 @@
           "axi_protocol_convert_3/S_AXI"
         ]
       },
-      "axi_crossbar_0_M01_AXI": {
+      "processing_system7_0_DDR": {
         "interface_ports": [
-          "axi_cdma_0/S_AXI_LITE",
-          "axi_crossbar_0/M01_AXI"
+          "DDR",
+          "processing_system7_0/DDR"
+        ]
+      },
+      "processing_system7_0_FIXED_IO": {
+        "interface_ports": [
+          "FIXED_IO",
+          "processing_system7_0/FIXED_IO"
+        ]
+      },
+      "conv_accelerator_wra_0_BRAM_FILTER0": {
+        "interface_ports": [
+          "bram/BRAM_PORT_FILTER_0",
+          "conv_accelerator_wra_0/BRAM_FILTER0"
+        ]
+      },
+      "processing_system7_0_M_AXI_GP0": {
+        "interface_ports": [
+          "axi_protocol_convert_0/S_AXI",
+          "processing_system7_0/M_AXI_GP0"
+        ]
+      },
+      "conv_accelerator_wra_0_BRAM_FILTER1": {
+        "interface_ports": [
+          "bram/BRAM_PORT_FILTER_1",
+          "conv_accelerator_wra_0/BRAM_FILTER1"
+        ]
+      },
+      "conv_accelerator_wra_0_BRAM_FILTER3": {
+        "interface_ports": [
+          "bram/BRAM_PORT_FILTER_3",
+          "conv_accelerator_wra_0/BRAM_FILTER3"
+        ]
+      },
+      "conv_accelerator_wra_0_BRAM_FILTER2": {
+        "interface_ports": [
+          "bram/BRAM_PORT_FILTER_2",
+          "conv_accelerator_wra_0/BRAM_FILTER2"
+        ]
+      },
+      "axi_protocol_convert_0_M_AXI": {
+        "interface_ports": [
+          "axi_crossbar_0/S00_AXI",
+          "axi_protocol_convert_0/M_AXI"
+        ]
+      },
+      "axi_crossbar_0_M00_AXI": {
+        "interface_ports": [
+          "axi_crossbar_0/M00_AXI",
+          "conv_accelerator_wra_0/S_AXI_LITE"
         ]
       }
     },

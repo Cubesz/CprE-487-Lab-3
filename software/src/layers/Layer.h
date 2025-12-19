@@ -157,7 +157,6 @@ class Layer {
     virtual void computeSIMD(const LayerData& dataIn) const = 0;
     virtual void computeQuantized(const LayerData& dataIn, QParams qparam) const = 0;
     virtual void computeAccelerated(const LayerData& dataIn) const {};
-    virtual void computeFastAccelerated(const LayerData& dataIn, AccelParams aparam) const {};
 
    private:
     LayerParams inParams;
@@ -186,7 +185,7 @@ inline void LayerData::loadData(Path filePath) {
     std::ifstream file(params.filePath, std::ios::binary);  // Open our file
     if (file.is_open()) {
 #endif
-        std::cout << "Opened binary file " << params.filePath << std::endl;
+        // std::cout << "Opened binary file " << params.filePath << std::endl;
     } else {
         throw std::runtime_error("Failed to open binary file: " + params.filePath);
     }

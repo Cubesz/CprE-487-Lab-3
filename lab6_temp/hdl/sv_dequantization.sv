@@ -22,9 +22,9 @@
 
 module sv_dequantization #(parameter C_DATA_WIDTH = 32, parameter C_TID_WIDTH = 1, parameter C_OUT_WIDTH = 8) (
         output S_AXIS_TREADY,
-        (* mark_debug = "true" *) input [C_DATA_WIDTH-1 : 0] S_AXIS_TDATA,
+        input [C_DATA_WIDTH-1 : 0] S_AXIS_TDATA,
         input S_AXIS_TLAST,
-        (* mark_debug = "true" *) input [C_TID_WIDTH-1 : 0] S_AXIS_TID,
+        input [C_TID_WIDTH-1 : 0] S_AXIS_TID,
         input S_AXIS_TVALID,
         
         input relu,
@@ -32,9 +32,9 @@ module sv_dequantization #(parameter C_DATA_WIDTH = 32, parameter C_TID_WIDTH = 
         input [C_OUT_WIDTH-1 : 0] q_zero,
         
         input M_AXIS_TREADY,
-        (* mark_debug = "true" *) output [C_OUT_WIDTH-1 : 0] M_AXIS_TDATA,
+        output [C_OUT_WIDTH-1 : 0] M_AXIS_TDATA,
         output M_AXIS_TLAST,
-        (* mark_debug = "true" *) output [C_TID_WIDTH-1 : 0] M_AXIS_TID,
+        output [C_TID_WIDTH-1 : 0] M_AXIS_TID,
         output M_AXIS_TVALID,
         
         input clk,

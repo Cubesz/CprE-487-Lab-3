@@ -1545,8 +1545,8 @@ namespace ML
             Xil_Out32(MLP_CTRLA, 0); // start
             // as it goes, load upcoming filters
 
-            // if (i < (nOutputChannels - 4))
-            // {
+            if (i < (nOutputChannels - 4))
+            {
                 memcpy_dma(MLP_FILTER0, filterDataPtr, ap.single_filter_size);
                 filterDataPtr += ap.single_filter_size;
                 memcpy_dma(MLP_FILTER1, filterDataPtr, ap.single_filter_size);
@@ -1555,7 +1555,7 @@ namespace ML
                 filterDataPtr += ap.single_filter_size;
                 memcpy_dma(MLP_FILTER3, filterDataPtr, ap.single_filter_size);
                 filterDataPtr += ap.single_filter_size;
-            // }
+            }
 
             while (!(Xil_In32(MLP_CTRLA) & MLP_CTRLA_CONV_IDLE)); // wait for it to finish
             ctrlb_flags ^= MLP_CTRLB_SWAP_FILTERS;
@@ -1568,17 +1568,171 @@ namespace ML
         return 0;
     }
 
-    Model buildLab6Model() {
-        Model model;
+    void lab6Inference(const LayerData& input, fp32* inference_result = 0) {
+        static int first = 0;
 
-        model.addLayer<ConvolutionalLayer>(
-            LayerParams{sizeof(i8), {3, 64, 64}},                                              // Input Data
-            LayerParams{sizeof(i8), {32, 60, 60}},                                             // Output Data
-            LayerParams{sizeof(i8), {32, 3, 5, 5}, "data/quant/param_layer_0/weights_8q.bin"}, // Weights
-            LayerParams{sizeof(i16), {32}, "data/quant/param_layer_0/biases_8q.bin"}           // Bias
+        // Convolution layer 1
+        static LayerData layer1W = LayerData{LayerParams{sizeof(i8), {32, 3, 5, 5}}, "data/quant_t_new/layer0_weights_8q_t_new.bin"};
+        static LayerData layer1B = LayerData{LayerParams{sizeof(i16), {32}}, "data/quant/param_layer_0/biases_8q.bin"};
+        if (first == 0) {
+            layer1W.loadData();
+            layer1B.loadData();
+        }
+
+        // Convolution layer 2 with max pooling
+        static LayerData layer2W = LayerData{LayerParams{sizeof(i8), {32, 32, 5, 5}}, "data/quant_t_new/layer1_weights_8q_t_new.bin"};
+        static LayerData layer2B = LayerData{LayerParams{sizeof(i16), {32}}, "data/quant/param_layer_1/biases_8q.bin"};
+        if (first == 0) {
+        layer2W.loadData();
+        layer2B.loadData();
+        }
+
+        // Convolution layer 3
+        static LayerData layer3W = LayerData{LayerParams{sizeof(i8), {64, 32, 3, 3}}, "data/quant_t_new/layer2_weights_8q_t_new.bin"};
+        static LayerData layer3B = LayerData{LayerParams{sizeof(i16), {64}}, "data/quant/param_layer_2/biases_8q.bin"};
+        if (first == 0) {
+        layer3W.loadData();
+        layer3B.loadData();
+        }
+
+        // Convolution layer 4 with max pooling
+        static LayerData layer4W = LayerData{LayerParams{sizeof(i8), {64, 64, 3, 3}}, "data/quant_t_new/layer3_weights_8q_t_new.bin"};
+        static LayerData layer4B = LayerData{LayerParams{sizeof(i16), {64}}, "data/quant/param_layer_3/biases_8q.bin"};
+        if (first == 0) {
+        layer4W.loadData();
+        layer4B.loadData();
+        }
+
+        // Convolution layer 5
+        static LayerData layer5W = LayerData{LayerParams{sizeof(i8), {64, 64, 3, 3}}, "data/quant_t_new/layer4_weights_8q_t_new.bin"};
+        static LayerData layer5B = LayerData{LayerParams{sizeof(i16), {64}}, "data/quant/param_layer_4/biases_8q.bin"};
+        if (first == 0) {
+        layer5W.loadData();
+        layer5B.loadData();
+        }
+
+        // Convolution layer 6 with max pooling
+        static LayerData layer6W = LayerData{LayerParams{sizeof(i8), {128, 64, 3, 3}}, "data/quant_t_new/layer5_weights_8q_t_new.bin"};
+        static LayerData layer6B = LayerData{LayerParams{sizeof(i16), {128}}, "data/quant/param_layer_5/biases_8q.bin"};
+        if (first == 0) {
+        layer6W.loadData();
+        layer6B.loadData();
+        }
+
+        // Convolution/Dense layer 7
+        static LayerData layer7W = LayerData{LayerParams{sizeof(i8), {256, 128, 4, 4}}, "data/quant_t_new/layer6_dense_weights_8q_t_new.bin"};
+        static LayerData layer7B = LayerData{LayerParams{sizeof(i16), {256}}, "data/quant/param_layer_6/biases_8q.bin"};
+        if (first == 0) {
+        layer7W.loadData();
+        layer7B.loadData();
+        }
+
+        // Convolution/Dense layer 8
+        static LayerData layer8W = LayerData{LayerParams{sizeof(i8), {200, 256, 1, 1}}, "data/quant_t_new/layer7_dense_weights_8q_t_new.bin"};
+        static LayerData layer8B = LayerData{LayerParams{sizeof(i16), {200}}, "data/quant/param_layer_7/biases_8q.bin"};
+        if (first == 0) {
+        layer8W.loadData();
+        layer8B.loadData();
+        }
+
+        i8 lastDenseOut[200];
+        LayerData lastDenseUnscaled = LayerData{LayerParams{sizeof(fp32), {200}}};
+        lastDenseUnscaled.allocData();
+
+        Model softmaxModel;
+        softmaxModel.addLayer<SoftmaxLayer>(
+            LayerParams{sizeof(fp32), {200}}, // Input
+            LayerParams{sizeof(fp32), {200}}  // Output
         );
+        softmaxModel.allocLayers();
 
-        return model;
+        Timer tmr("Timer");
+        // tmr.start();
+
+        // Convolution layer 1
+        uint32_t ctrlb_flags = 0;
+        Xil_Out32(MLP_CTRLB, 0);
+        memcpy_dma(MLP_INPUTS, input.raw(), aplayer0.input_size);
+
+        runAccLayer(aplayer0, (int8_t*) layer1W.raw(), (int16_t*) layer1B.raw(), 32, ctrlb_flags);
+
+        // Convolution layer 2 with max pooling
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer1, (int8_t*) layer2W.raw(), (int16_t*) layer2B.raw(), 32, ctrlb_flags);
+
+        
+        // Convolution layer 3
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer2, (int8_t*) layer3W.raw(), (int16_t*) layer3B.raw(), 64, ctrlb_flags);
+
+        // Convolution layer 4 with max pooling
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer3, (int8_t*) layer4W.raw(), (int16_t*) layer4B.raw(), 64, ctrlb_flags);
+
+        // Convolution layer 5
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer4, (int8_t*) layer5W.raw(), (int16_t*) layer5B.raw(), 64, ctrlb_flags);
+
+        // Convolution layer 6 with max pooling
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer5, (int8_t*) layer6W.raw(), (int16_t*) layer6B.raw(), 128, ctrlb_flags);
+
+        // Convolution/Dense layer 7
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer6, (int8_t*) layer7W.raw(), (int16_t*) layer7B.raw(), 256, ctrlb_flags);
+
+        // Convolution/Dense layer 8
+        ctrlb_flags ^= MLP_CTRLB_SWAP_ACTIVATIONS;
+        runAccLayer(aplayer7, (int8_t*) layer8W.raw(), (int16_t*) layer8B.raw(), 200, ctrlb_flags);
+
+
+        memcpy_dma(lastDenseOut, MLP_OUTPUTS, 200);
+        for (int i = 0; i < 200; i++) {
+            lastDenseUnscaled.get<fp32>(i) = float(lastDenseOut[i]) / 8.0f;
+        }
+
+        const LayerData& inference = softmaxModel.inferenceLayer(lastDenseUnscaled, 0, Layer::InfType::QUANTIZED);
+
+        // tmr.stop();
+
+        if (inference_result != 0) {
+            memcpy(inference_result, inference.raw(), sizeof(fp32) * 200);
+        }
+        
+        // for (int i = 0; i < 200; i++) {
+        //     std::cout << inference.get<fp32>(i) << std::endl;
+        // }
+
+
+
+        softmaxModel.freeLayers();
+
+        lastDenseUnscaled.freeData();
+
+        // layer8W.freeData();
+        // layer8B.freeData();
+
+        // layer7W.freeData();
+        // layer7B.freeData();
+
+        // layer6W.freeData();
+        // layer6B.freeData();
+
+        // layer5W.freeData();
+        // layer5B.freeData();
+
+        // layer4W.freeData();
+        // layer4B.freeData();
+
+        // layer3W.freeData();
+        // layer3B.freeData();
+
+        // layer2W.freeData();
+        // layer2B.freeData();
+
+        // layer1W.freeData();
+        // layer1B.freeData();
+        first = 1;
     }
 
     void lab6Stuff()
@@ -1596,6 +1750,38 @@ namespace ML
         ly0id.loadData(); // first layer only
         ly0wd.loadData();
         ly0bd.loadData();
+
+        lab6Inference(ly0id);
+
+        int corrects = 0;
+        for (int imgIdx = 0; imgIdx < 1000; imgIdx++) {
+            LayerData inputImage = LayerData{LayerParams{sizeof(i8), {3, 64, 64}}, "data/quant_t_new/images_1000_8b_t_new/" + std::to_string(imgIdx) + "_t_new.bin"};
+            inputImage.loadData();
+            fp32 inference[200];
+            lab6Inference(inputImage, inference);
+
+            int correctClass = images_8q_classes[imgIdx];
+            
+            int maxIdx = 0;
+            fp32 maxNum = 0;
+            for (int i = 0; i < 200; i++) {
+                if (inference[i] > maxNum) {
+                    maxNum = inference[i];
+                    maxIdx = i;
+                }
+            }
+
+            if (correctClass == maxIdx) {
+                std::cout << "correct" << std::endl;
+                corrects++;
+            }
+
+            inputImage.freeData();
+        }
+
+        std::cout << "Top 1 accuracy: " << corrects << "/1000: " << float(corrects) / 1000.0f << std::endl;
+
+        return;
 
         printf("Running Layer 1 (64x64x3 -> 60x60x32)...\n");
 

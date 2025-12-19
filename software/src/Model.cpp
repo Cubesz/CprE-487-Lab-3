@@ -26,9 +26,6 @@ const LayerData& Model::inference(const LayerData& inData, const Layer::InfType 
     return layers.back()->getOutputData();
 }
 
-const LayerData& Model::inferenceAccelerator(const LayerData& inData, const AccelParams* aparams) const {
-    
-}
 
 // Run inference on a single layer of the model using the inData and outputting the outData
 // infType can be used to determine the inference function to call

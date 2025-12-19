@@ -142,9 +142,6 @@ namespace ML
 
     }
 
-    void DenseLayer::computeFastAccelerated(const LayerData &dataIn, AccelParams aparam) const {
-
-    }
 
 
     void DenseLayer::computeAccelerated(const LayerData &dataIn) const

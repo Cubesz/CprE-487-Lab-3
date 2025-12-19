@@ -28,11 +28,11 @@ module sv_output_storage #(
         parameter DIM_WIDTH = 8,
         parameter C_TID_WIDTH = 1
     ) (
-        (* mark_debug = "true" *) output S_AXIS_TREADY,
-        (* mark_debug = "true" *) input [DATA_WIDTH-1 : 0] S_AXIS_TDATA,
-        (* mark_debug = "true" *) input S_AXIS_TLAST,
-        (* mark_debug = "true" *) input [C_TID_WIDTH-1 : 0] S_AXIS_TID,
-        (* mark_debug = "true" *) input S_AXIS_TVALID,
+        output S_AXIS_TREADY,
+        input [DATA_WIDTH-1 : 0] S_AXIS_TDATA,
+        input S_AXIS_TLAST,
+        input [C_TID_WIDTH-1 : 0] S_AXIS_TID,
+        input S_AXIS_TVALID,
         
         output reg [32-1 : 0] BRAM_addr,
         output reg [BRAM_DATA_WIDTH-1 : 0] BRAM_din,
@@ -67,7 +67,7 @@ module sv_output_storage #(
     reg [DIM_WIDTH-1 : 0] column_progress;
     reg [DIM_WIDTH-1 : 0] row_progress;
     
-    (* mark_debug = "true" *) reg [ADDR_WIDTH-1 : 0] output_idx;
+    reg [ADDR_WIDTH-1 : 0] output_idx;
     
     
     reg [ADDR_WIDTH-1 : 0] offsetted_progress; // should be ahead index
@@ -145,18 +145,29 @@ module sv_output_storage #(
     assign BRAM_rst = rst;
     
     
-    typedef enum {
+    typedef enum logic {
         READ,
         WRITE
     } outstorage_state_t;
     
+    typedef struct packed {
+        logic [DATA_WIDTH-1:0] out_data;
+        logic [BRAM_DATA_WIDTH-1:0] bram_read;
+        logic [ADDR_WIDTH-1:0] out_idx;
+        logic [C_TID_WIDTH-1:0] tid;
+        logic [DIM_WIDTH-1:0] row_progress;
+        logic [DIM_WIDTH-1:0] col_progress;
+    } pline_t;
+    
     outstorage_state_t state;
-    reg [DATA_WIDTH-1 : 0] p_output_data;
+    
+    pline_t pline;
+    /*reg [DATA_WIDTH-1 : 0] p_output_data;
     reg [BRAM_DATA_WIDTH-1 : 0] p_bram_read;
     reg [ADDR_WIDTH-1 : 0] p_output_idx;
     reg [DIM_WIDTH-1 : 0] p_col_progress;
     reg [DIM_WIDTH-1 : 0] p_row_progress;    
-    reg [C_TID_WIDTH-1 : 0] p_tid;
+    reg [C_TID_WIDTH-1 : 0] p_tid;*/
     
     
     always @* begin
@@ -177,40 +188,40 @@ module sv_output_storage #(
         else if (state == WRITE) begin
             ready = 0;
             if (max_pooling)
-                BRAM_addr = $unsigned({p_output_idx[ADDR_WIDTH-1 : 3], 2'b00}); // divided by 2 and 32 bit align
+                BRAM_addr = $unsigned({pline.out_idx[ADDR_WIDTH-1 : 3], 2'b00}); // divided by 2 and 32 bit align
             else
-                BRAM_addr = $unsigned({p_output_idx[ADDR_WIDTH-1 : 2], 2'b00}); //32 bit align and 0 pad
+                BRAM_addr = $unsigned({pline.out_idx[ADDR_WIDTH-1 : 2], 2'b00}); //32 bit align and 0 pad
             BRAM_en = 1;
             BRAM_we = 4'b1111;
             
             if (max_pooling) begin
                 // odd row and odd column -> top left of 2x2 pool block -> First element
-                if (p_col_progress[0] && p_row_progress[0]) begin
-                    case (p_output_idx[2:1])
-                        2'b00: BRAM_din = {BRAM_dout[31:8], p_output_data[7:0]};
-                        2'b01: BRAM_din = {BRAM_dout[31:16], p_output_data[7:0], BRAM_dout[7:0]};
-                        2'b10: BRAM_din = {BRAM_dout[31:24], p_output_data[7:0], BRAM_dout[15:0]};
-                        2'b11: BRAM_din = {p_output_data[7:0], BRAM_dout[23:0]};
+                if (pline.col_progress[0] && pline.row_progress[0]) begin
+                    case (pline.out_idx[2:1])
+                        2'b00: BRAM_din = {BRAM_dout[31:8], pline.out_data[7:0]};
+                        2'b01: BRAM_din = {BRAM_dout[31:16], pline.out_data[7:0], BRAM_dout[7:0]};
+                        2'b10: BRAM_din = {BRAM_dout[31:24], pline.out_data[7:0], BRAM_dout[15:0]};
+                        2'b11: BRAM_din = {pline.out_data[7:0], BRAM_dout[23:0]};
                         default: BRAM_din = 0;
                     endcase
                 end
                 else begin
                     // load if bigger
-                    case (p_output_idx[2:1])
-                        2'b00: BRAM_din = {BRAM_dout[31:8], ($signed(p_output_data[7:0]) > $signed(BRAM_dout[7:0])) ? p_output_data[7:0] : BRAM_dout[7:0]};
-                        2'b01: BRAM_din = {BRAM_dout[31:16], ($signed(p_output_data[7:0]) > $signed(BRAM_dout[15:8])) ? p_output_data[7:0] : BRAM_dout[15:8], BRAM_dout[7:0]};
-                        2'b10: BRAM_din = {BRAM_dout[31:24], ($signed(p_output_data[7:0]) > $signed(BRAM_dout[23:16])) ? p_output_data[7:0] : BRAM_dout[23:16], BRAM_dout[15:0]};
-                        2'b11: BRAM_din = {($signed(p_output_data[7:0]) > $signed(BRAM_dout[31:24])) ? p_output_data[7:0] : BRAM_dout[31:24], BRAM_dout[23:0]};
+                    case (pline.out_idx[2:1])
+                        2'b00: BRAM_din = {BRAM_dout[31:8], ($signed(pline.out_data[7:0]) > $signed(BRAM_dout[7:0])) ? pline.out_data[7:0] : BRAM_dout[7:0]};
+                        2'b01: BRAM_din = {BRAM_dout[31:16], ($signed(pline.out_data[7:0]) > $signed(BRAM_dout[15:8])) ? pline.out_data[7:0] : BRAM_dout[15:8], BRAM_dout[7:0]};
+                        2'b10: BRAM_din = {BRAM_dout[31:24], ($signed(pline.out_data[7:0]) > $signed(BRAM_dout[23:16])) ? pline.out_data[7:0] : BRAM_dout[23:16], BRAM_dout[15:0]};
+                        2'b11: BRAM_din = {($signed(pline.out_data[7:0]) > $signed(BRAM_dout[31:24])) ? pline.out_data[7:0] : BRAM_dout[31:24], BRAM_dout[23:0]};
                         default: BRAM_din = 0;
                     endcase
                 end
             end
             else begin
-                case (p_output_idx[1:0])
-                    2'b00: BRAM_din = {BRAM_dout[31:8], p_output_data[7:0]};
-                    2'b01: BRAM_din = {BRAM_dout[31:16], p_output_data[7:0], BRAM_dout[7:0]};
-                    2'b10: BRAM_din = {BRAM_dout[31:24], p_output_data[7:0], BRAM_dout[15:0]};
-                    2'b11: BRAM_din = {p_output_data[7:0], BRAM_dout[23:0]};
+                case (pline.out_idx[1:0])
+                    2'b00: BRAM_din = {BRAM_dout[31:8], pline.out_data[7:0]};
+                    2'b01: BRAM_din = {BRAM_dout[31:16], pline.out_data[7:0], BRAM_dout[7:0]};
+                    2'b10: BRAM_din = {BRAM_dout[31:24], pline.out_data[7:0], BRAM_dout[15:0]};
+                    2'b11: BRAM_din = {pline.out_data[7:0], BRAM_dout[23:0]};
                     default: BRAM_din = 0;
                 endcase
             end
@@ -231,6 +242,8 @@ module sv_output_storage #(
         
     end
     
+
+    
     always @(posedge clk) begin
         if (rst || conv_idle) begin
             state <= READ;
@@ -242,19 +255,19 @@ module sv_output_storage #(
                 
                     if (S_AXIS_TVALID && !conv_complete) begin
                         state <= WRITE;
-                        p_output_data <= S_AXIS_TDATA;
-                        p_bram_read <= BRAM_dout;
-                        p_output_idx <= output_idx;
-                        p_tid <= S_AXIS_TID;
-                        p_col_progress <= column_progress;
-                        p_row_progress <= row_progress;
+                        pline.out_data <= S_AXIS_TDATA;
+                        pline.bram_read <= BRAM_dout;
+                        pline.out_idx <= output_idx;
+                        pline.tid <= S_AXIS_TID;
+                        pline.col_progress <= column_progress;
+                        pline.row_progress <= row_progress;
                     end
                 
                 end
                 WRITE: begin
                     state <= READ;
                     
-                    if (p_tid == 3 && p_row_progress == output_h && p_col_progress == output_w)
+                    if (pline.tid == 3 && pline.row_progress == output_h && pline.col_progress == output_w)
                         conv_complete <= 1;
                     
                 end

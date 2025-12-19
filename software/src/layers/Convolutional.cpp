@@ -326,25 +326,6 @@ void ConvolutionalLayer::computeQuantized(const LayerData& dataIn, QParams qpara
 
 }
 
-void ConvolutionalLayer::computeFastAccelerated(const LayerData& dataIn, AccelParams aparam) const {
-
-    // const LayerData& filterData = getWeightData();
-    // LayerData& outputData = getOutputData();
-    // const LayerData& biasData = getBiasData();
-
-    // int nFilters = outputData.getParams().dims[2];
-
-
-    // for (int filter = 0; filter < nFilters; filter += 4) {
-
-    // }
-
-    // Xil_Out32(MLP_CTRLB, 0);
-    // memcpy_dma(MLP_INPUTS, dataIn.raw(), dataIn.getParams().byte_size());
-    // memcpy_dma(MLP_FILTER0, filterData.raw() + )
-
-}
-
 
 // Compute the convolution using custom MAC
 void ConvolutionalLayer::computeAccelerated(const LayerData& dataIn) const {
