@@ -1496,6 +1496,7 @@ namespace ML
 
         uint32_t ctrlb_flags = preflags; // maintain given activations orientation
         ctrlb_flags = ap.relu ? ctrlb_flags | MLP_CTRLB_RELU : ctrlb_flags & ~MLP_CTRLB_RELU;
+        ctrlb_flags = ap.fixed_leaky_relu ? ctrlb_flags | MLP_CTRLB_LEAKY_RELU : ctrlb_flags & ~MLP_CTRLB_LEAKY_RELU;
         ctrlb_flags = ap.maxpool ? ctrlb_flags | MLP_CTRLB_MAX_POOLING : ctrlb_flags & ~MLP_CTRLB_MAX_POOLING;
         Xil_Out32(MLP_CTRLB, ctrlb_flags);
 

@@ -44,6 +44,7 @@ const QParams modelQParams_8q[] = {{player0outputscaler, 226, 419, Zp_macced_pla
 
 typedef struct {
     bool relu;
+    bool fixed_leaky_relu = false; // relu and this both need to be enabled for this. Fixed leaky constant of 0.125.
     bool maxpool;
     int input_size;
     int filter_w;

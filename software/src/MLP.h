@@ -26,6 +26,7 @@ using namespace ML;
 #define MLP_CTRLB_SWAP_ACTIVATIONS      (1 << 1)
 #define MLP_CTRLB_MAX_POOLING           (1 << 2)
 #define MLP_CTRLB_RELU                  (1 << 3)
+#define MLP_CTRLB_LEAKY_RELU            (1 << 4)
 // #define MLP_RESERVED                   (MLP_CONV_BASEADDR + 0x08)
 #define MLP_FILTER_W                    (MLP_CONV_BASEADDR + 0x0C)
 #define MLP_FILTER_H                    (MLP_CONV_BASEADDR + 0x10)
