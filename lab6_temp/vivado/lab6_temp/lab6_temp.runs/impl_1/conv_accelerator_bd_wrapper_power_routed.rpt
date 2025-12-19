@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.1 (lin64) Build 2902540 Wed May 27 19:54:35 MDT 2020
-| Date             : Thu Dec 18 16:12:40 2025
+| Date             : Thu Dec 18 19:29:32 2025
 | Host             : linuxvdi-f25-28.ece.iastate.edu running 64-bit unknown
 | Command          : report_power -file conv_accelerator_bd_wrapper_power_routed.rpt -pb conv_accelerator_bd_wrapper_power_summary_routed.pb -rpx conv_accelerator_bd_wrapper_power_routed.rpx
 | Design           : conv_accelerator_bd_wrapper
@@ -53,15 +53,15 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.016 |        3 |       --- |             --- |
-| Slice Logic              |     0.010 |    11106 |       --- |             --- |
-|   LUT as Logic           |     0.008 |     4028 |     53200 |            7.57 |
-|   Register               |    <0.001 |     4518 |    106400 |            4.25 |
+| Slice Logic              |     0.009 |    11107 |       --- |             --- |
+|   LUT as Logic           |     0.008 |     4044 |     53200 |            7.60 |
 |   CARRY4                 |    <0.001 |      201 |     13300 |            1.51 |
+|   Register               |    <0.001 |     4519 |    106400 |            4.25 |
 |   LUT as Distributed RAM |    <0.001 |      230 |     17400 |            1.32 |
-|   F7/F8 Muxes            |    <0.001 |       79 |     53200 |            0.15 |
+|   F7/F8 Muxes            |    <0.001 |       74 |     53200 |            0.14 |
 |   LUT as Shift Register  |    <0.001 |      174 |     17400 |            1.00 |
 |   Others                 |     0.000 |      321 |       --- |             --- |
-| Signals                  |     0.015 |     9189 |       --- |             --- |
+| Signals                  |     0.015 |     9199 |       --- |             --- |
 | Block RAM                |     0.007 |       68 |       140 |           48.57 |
 | DSPs                     |     0.003 |        4 |       220 |            1.82 |
 | PS7                      |     1.530 |        1 |       --- |             --- |

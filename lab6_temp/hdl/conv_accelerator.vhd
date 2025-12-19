@@ -27,6 +27,7 @@ entity conv_accelerator is
         -- Configuration values from conv_config unit
         max_pooling : in std_logic;
         relu : in std_logic;
+        leaky_relu : in std_logic;
         filter_w : in std_logic_vector(DIM_WIDTH-1 downto 0);
         filter_h : in std_logic_vector(DIM_WIDTH-1 downto 0);
         filter_c : in std_logic_vector(DIM_WIDTH-1 downto 0);
@@ -524,6 +525,7 @@ begin
             S_AXIS_TVALID => s_out_combiner_m_axis_tvalid,
 
             relu => relu,
+            leaky_relu => leaky_relu,
             q_scale => q_scale,
             q_zero => q_zero,
 

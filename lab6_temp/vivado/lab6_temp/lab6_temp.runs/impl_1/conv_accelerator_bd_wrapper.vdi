@@ -2,21 +2,21 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Thu Dec 18 16:09:07 2025
-# Process ID: 29899
+# Start of session at: Thu Dec 18 19:26:13 2025
+# Process ID: 63946
 # Current directory: /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1
 # Command line: vivado -log conv_accelerator_bd_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source conv_accelerator_bd_wrapper.tcl -notrace
 # Log file: /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1/conv_accelerator_bd_wrapper.vdi
 # Journal file: /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1/vivado.jou
 #-----------------------------------------------------------
 source conv_accelerator_bd_wrapper.tcl -notrace
-add_files: Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 2379.281 ; gain = 40.043 ; free physical = 1460 ; free virtual = 13088
+add_files: Time (s): cpu = 00:00:20 ; elapsed = 00:00:22 . Memory (MB): peak = 2380.812 ; gain = 40.043 ; free physical = 2239 ; free virtual = 14496
 Command: link_design -top conv_accelerator_bd_wrapper -part xc7z020clg484-1
 Design is defaulting to srcset: sources_1
 Design is defaulting to constrset: constrs_1
 INFO: [Device 21-403] Loading part xc7z020clg484-1
-Netlist sorting complete. Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.08 . Memory (MB): peak = 2379.281 ; gain = 0.000 ; free physical = 1158 ; free virtual = 12785
-INFO: [Netlist 29-17] Analyzing 644 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:00.09 . Memory (MB): peak = 2380.812 ; gain = 0.000 ; free physical = 1993 ; free virtual = 14251
+INFO: [Netlist 29-17] Analyzing 639 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-479] Netlist was created with Vivado 2020.1
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -166,7 +166,7 @@ Finished Sourcing Tcl File [/remote/Xilinx/2020.1/Vivado/2020.1/data/ip/xpm/xpm_
 Sourcing Tcl File [/remote/Xilinx/2020.1/Vivado/2020.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_async_rst.tcl] for cell 'conv_accelerator_bd_i/axi_protocol_convert_3/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gnsckt_wrst.rst_wr_reg2_inst'
 Finished Sourcing Tcl File [/remote/Xilinx/2020.1/Vivado/2020.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_async_rst.tcl] for cell 'conv_accelerator_bd_i/axi_protocol_convert_3/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gnsckt_wrst.rst_wr_reg2_inst'
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2403.293 ; gain = 0.000 ; free physical = 926 ; free virtual = 12554
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2404.824 ; gain = 0.000 ; free physical = 1780 ; free virtual = 14039
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 288 instances were transformed.
   LUT6_2 => LUT6_2 (LUT5, LUT6): 225 instances
@@ -177,7 +177,7 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 
 8 Infos, 105 Warnings, 18 Critical Warnings and 0 Errors encountered.
 link_design completed successfully
-link_design: Time (s): cpu = 00:00:44 ; elapsed = 00:00:52 . Memory (MB): peak = 2403.293 ; gain = 24.012 ; free physical = 926 ; free virtual = 12554
+link_design: Time (s): cpu = 00:00:44 ; elapsed = 00:00:53 . Memory (MB): peak = 2404.824 ; gain = 24.012 ; free physical = 1780 ; free virtual = 14039
 Command: opt_design -resynth_remap -merge_equivalent_drivers
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
@@ -188,30 +188,30 @@ INFO: [DRC 23-27] Running DRC with 4 threads
 INFO: [Project 1-461] DRC finished with 0 Errors
 INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 2424.016 ; gain = 20.723 ; free physical = 934 ; free virtual = 12563
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 2425.547 ; gain = 20.723 ; free physical = 1761 ; free virtual = 14021
 
 Starting Logic Optimization Task
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Phase 1 Merging equivalent drivers
-Phase 1 Merging equivalent drivers | Checksum: 1653ee470
+Phase 1 Merging equivalent drivers | Checksum: 1f182522e
 
-Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2971.656 ; gain = 441.641 ; free physical = 394 ; free virtual = 12022
-INFO: [Opt 31-389] Phase Merging equivalent drivers created 0 cells and removed 545 cells
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2971.188 ; gain = 440.641 ; free physical = 1140 ; free virtual = 13414
+INFO: [Opt 31-389] Phase Merging equivalent drivers created 0 cells and removed 543 cells
 INFO: [Opt 31-1021] In phase Merging equivalent drivers, 61 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
 
 Phase 2 Remap
 INFO: [Timing 38-35] Done setting XDC timing constraints.
-INFO: [Opt 31-572] Total number of LUTs replicated during resynth remap are 23316
-Phase 2 Remap | Checksum: 19eafc3be
+INFO: [Opt 31-572] Total number of LUTs replicated during resynth remap are 23162
+Phase 2 Remap | Checksum: 273fe48c7
 
-Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 3248.730 ; gain = 718.715 ; free physical = 177 ; free virtual = 11707
-INFO: [Opt 31-389] Phase Remap created 508 cells and removed 472 cells
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 3248.262 ; gain = 717.715 ; free physical = 861 ; free virtual = 13135
+INFO: [Opt 31-389] Phase Remap created 512 cells and removed 476 cells
 
 Phase 3 Post Processing Netlist
-Phase 3 Post Processing Netlist | Checksum: 1291436da
+Phase 3 Post Processing Netlist | Checksum: 227bb703d
 
-Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 3248.730 ; gain = 718.715 ; free physical = 184 ; free virtual = 11714
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 3248.262 ; gain = 717.715 ; free physical = 866 ; free virtual = 13140
 INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 132 cells
 INFO: [Opt 31-1021] In phase Post Processing Netlist, 33 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
 Opt_design Change Summary
@@ -221,31 +221,31 @@ Opt_design Change Summary
 ------------------------------------------------------------------------------------------------------------------------
 |  Phase                       |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
 ------------------------------------------------------------------------------------------------------------------------
-|  Merging equivalent drivers  |               0  |             545  |                                             61  |
-|  Remap                       |             508  |             472  |                                              0  |
+|  Merging equivalent drivers  |               0  |             543  |                                             61  |
+|  Remap                       |             512  |             476  |                                              0  |
 |  Post Processing Netlist     |               0  |             132  |                                             33  |
 ------------------------------------------------------------------------------------------------------------------------
 
 
-Ending Logic Optimization Task | Checksum: 23de5a0e3
+Ending Logic Optimization Task | Checksum: 1cbfaa80e
 
-Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 3248.730 ; gain = 718.715 ; free physical = 184 ; free virtual = 11714
+Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 3248.262 ; gain = 717.715 ; free physical = 866 ; free virtual = 13140
 
 Starting Netlist Obfuscation Task
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3248.730 ; gain = 0.000 ; free physical = 185 ; free virtual = 11714
-Ending Netlist Obfuscation Task | Checksum: 23de5a0e3
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3248.262 ; gain = 0.000 ; free physical = 866 ; free virtual = 13140
+Ending Netlist Obfuscation Task | Checksum: 1cbfaa80e
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3248.730 ; gain = 0.000 ; free physical = 185 ; free virtual = 11714
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3248.262 ; gain = 0.000 ; free physical = 866 ; free virtual = 13140
 INFO: [Common 17-83] Releasing license: Implementation
 21 Infos, 105 Warnings, 18 Critical Warnings and 0 Errors encountered.
 opt_design completed successfully
-opt_design: Time (s): cpu = 00:00:24 ; elapsed = 00:00:24 . Memory (MB): peak = 3248.730 ; gain = 845.438 ; free physical = 185 ; free virtual = 11714
+opt_design: Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 3248.262 ; gain = 843.438 ; free physical = 866 ; free virtual = 13140
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:00.10 ; elapsed = 00:00:00.05 . Memory (MB): peak = 3291.719 ; gain = 2.969 ; free physical = 199 ; free virtual = 11733
+Write XDEF Complete: Time (s): cpu = 00:00:00.11 ; elapsed = 00:00:00.05 . Memory (MB): peak = 3288.281 ; gain = 0.000 ; free physical = 865 ; free virtual = 13143
 INFO: [Common 17-1381] The checkpoint '/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1/conv_accelerator_bd_wrapper_opt.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_drc -file conv_accelerator_bd_wrapper_drc_opted.rpt -pb conv_accelerator_bd_wrapper_drc_opted.pb -rpx conv_accelerator_bd_wrapper_drc_opted.rpx
 Command: report_drc -file conv_accelerator_bd_wrapper_drc_opted.rpt -pb conv_accelerator_bd_wrapper_drc_opted.pb -rpx conv_accelerator_bd_wrapper_drc_opted.rpx
@@ -270,45 +270,45 @@ INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 
 Phase 1 Placer Initialization
 
 Phase 1.1 Placer Initialization Netlist Sorting
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 196 ; free virtual = 11730
-Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 14f3353f6
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 918 ; free virtual = 13197
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: fadafab0
 
-Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 196 ; free virtual = 11730
+Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 918 ; free virtual = 13197
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 251 ; free virtual = 11785
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 980 ; free virtual = 13259
 
 Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
 INFO: [Timing 38-35] Done setting XDC timing constraints.
-Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: dc5c32dc
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: fa770881
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.89 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 255 ; free virtual = 11790
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.90 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 977 ; free virtual = 13257
 
 Phase 1.3 Build Placer Netlist Model
-Phase 1.3 Build Placer Netlist Model | Checksum: 4a42c232
+Phase 1.3 Build Placer Netlist Model | Checksum: b6a8b36f
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 258 ; free virtual = 11793
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 967 ; free virtual = 13247
 
 Phase 1.4 Constrain Clocks/Macros
-Phase 1.4 Constrain Clocks/Macros | Checksum: 4a42c232
+Phase 1.4 Constrain Clocks/Macros | Checksum: b6a8b36f
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 258 ; free virtual = 11793
-Phase 1 Placer Initialization | Checksum: 4a42c232
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 967 ; free virtual = 13247
+Phase 1 Placer Initialization | Checksum: b6a8b36f
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 258 ; free virtual = 11794
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 967 ; free virtual = 13247
 
 Phase 2 Global Placement
 
 Phase 2.1 Floorplanning
-Phase 2.1 Floorplanning | Checksum: 4bffa957
+Phase 2.1 Floorplanning | Checksum: 12668b94b
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:02 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 256 ; free virtual = 11792
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:02 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 966 ; free virtual = 13246
 
 Phase 2.2 Global Placement Core
 
 Phase 2.2.1 Physical Synthesis In Placer
-INFO: [Physopt 32-1035] Found 56 LUTNM shape to break, 654 LUT instances to create LUTNM shape
-INFO: [Physopt 32-1044] Break lutnm for timing: one critical 56, two critical 0, total 56, new lutff created 0
-INFO: [Physopt 32-775] End 1 Pass. Optimized 362 nets or cells. Created 56 new cells, deleted 306 existing cells and moved 0 existing cell
+INFO: [Physopt 32-1035] Found 55 LUTNM shape to break, 658 LUT instances to create LUTNM shape
+INFO: [Physopt 32-1044] Break lutnm for timing: one critical 54, two critical 1, total 55, new lutff created 0
+INFO: [Physopt 32-775] End 1 Pass. Optimized 351 nets or cells. Created 55 new cells, deleted 296 existing cells and moved 0 existing cell
 INFO: [Physopt 32-65] No nets found for high-fanout optimization.
 INFO: [Physopt 32-232] Optimized 0 net. Created 0 new instance.
 INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
@@ -316,83 +316,87 @@ INFO: [Physopt 32-76] Pass 1. Identified 1 candidate net for fanout optimization
 INFO: [Physopt 32-81] Processed net conv_accelerator_bd_i/rst_ps7_0_200M/U0/peripheral_aresetn[0]. Replicated 9 times.
 INFO: [Physopt 32-232] Optimized 1 net. Created 9 new instances.
 INFO: [Physopt 32-775] End 1 Pass. Optimized 1 net or cell. Created 9 new cells, deleted 0 existing cell and moved 0 existing cell
-Netlist sorting complete. Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.05 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 245 ; free virtual = 11783
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[1] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[1]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[5] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[5]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[7] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[7]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[13] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[13]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[7] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[7]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[11] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[11]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[9] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[9]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[15] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[15]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[5] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[5]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[3] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[3]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[9] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[9]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[12] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_6 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[25] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[25]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[13] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[13]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[15] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[15]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[0] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_20 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[11] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[11]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[2] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_21 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[3] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[3]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[1] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[1]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[31] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[31]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[4] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_22 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[10] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_9 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[12] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_26 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[8] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_2 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[21] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[21]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[14] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_27 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[19] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[19]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[6] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_23 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[23] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[23]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[10] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_25 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[29] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[29]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[25] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[25]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[27] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[27]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[27] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[27]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[21] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[21]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[8] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_24 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[29] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[29]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[23] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[23]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[31] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[31]_INST_0 could not be replicated
+Netlist sorting complete. Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.05 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 943 ; free virtual = 13226
 INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[17] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[17]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[24] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_18 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[14] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_1 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[19] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[19]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[28] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_12 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[0] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[22] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_16 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[20] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_15 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[4] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_3 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[20] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_17 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[22] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_10 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[21] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[21]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[21] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[21]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[27] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[27]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[31] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[31]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[23] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[23]_INST_0 could not be replicated
 INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[17] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[17]_INST_0 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[18] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_29 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[2] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_5 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[6] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_4 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[18] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_14 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__3_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__3 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[27] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[27]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[31] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[31]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[19] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[19]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[20] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_26 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[18] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_18 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[23] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[23]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[25] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[25]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[29] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[29]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[29] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[29]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[19] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[19]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[5] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[5]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[25] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[25]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[30] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_21 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[16] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_6 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[7] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[7]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[1] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[1]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[3] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[3]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[20] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_14 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[16] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_17 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[26] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_20 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[5] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[5]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[7] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[7]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[11] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[11]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[3] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[3]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[15] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[15]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[22] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_8 could not be replicated
 INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[30] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_31 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[24] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_30 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[16] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_28 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[28] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_8 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[26] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_13 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[16] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_11 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[30] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_19 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[26] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_7 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__0_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[22] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_27 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[28] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_30 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[18] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_7 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[13] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[13]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[15] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[15]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[13] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[13]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[24] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_28 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[24] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_19 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[11] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[11]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[9] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[9]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[26] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_29 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[28] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_9 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[1] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[1]_INST_0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[4] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_24 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[6] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_25 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[12] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_2 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[4] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_13 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[9] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT1_din[9]_INST_0 could not be replicated
 INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__1_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__1 could not be replicated
 INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[0] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_22 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[14] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_4 could not be replicated
 INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__2_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__2 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__5_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__5 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__4_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__4 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__3_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__3 could not be replicated
 INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__5_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__5 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__5_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__5 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[12] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_16 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[8] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_3 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[14] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_10 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[2] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_12 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[10] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_1 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[2] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_23 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[0] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__3_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__3 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[8] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_11 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/inst_blk_mem_gen/gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen/valid.cstr/ram_ena could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__6 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__3_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__3 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__4_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__4 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__4_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__4 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__0_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__0 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/inst_blk_mem_gen/gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen/valid.cstr/ram_ena could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__6 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[6] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_5 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT1_din[10] could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/i_0_LOPT_REMAP_15 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1 could not be replicated
+INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__2_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__2 could not be replicated
 INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__0_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__0 could not be replicated
 INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__1_n_0 could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__1 could not be replicated
-INFO: [Physopt 32-117] Net conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/inst_blk_mem_gen/gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen/valid.cstr/ram_ena could not be optimized because driver conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_1/U0/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_i_1__6 could not be replicated
 INFO: [Physopt 32-68] No nets found for critical-cell optimization.
 INFO: [Physopt 32-232] Optimized 0 net. Created 0 new instance.
 INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
@@ -408,7 +412,7 @@ INFO: [Physopt 32-846] No candidate cells for URAM register optimization found i
 INFO: [Physopt 32-775] End 2 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
 INFO: [Physopt 32-949] No candidate nets found for HD net replication
 INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 245 ; free virtual = 11783
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 944 ; free virtual = 13227
 
 Summary of Physical Synthesis Optimizations
 ============================================
@@ -417,7 +421,7 @@ Summary of Physical Synthesis Optimizations
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 |  Optimization                                     |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
-|  LUT Combining                                    |           56  |            306  |                   362  |           0  |           1  |  00:00:00  |
+|  LUT Combining                                    |           55  |            296  |                   351  |           0  |           1  |  00:00:00  |
 |  Very High Fanout                                 |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
 |  Fanout                                           |            9  |              0  |                     1  |           0  |           1  |  00:00:00  |
 |  Critical Cell                                    |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
@@ -427,69 +431,69 @@ Summary of Physical Synthesis Optimizations
 |  BRAM Register                                    |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
 |  URAM Register                                    |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
 |  Dynamic/Static Region Interface Net Replication  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
-|  Total                                            |           65  |            306  |                   363  |           0  |          10  |  00:00:01  |
+|  Total                                            |           64  |            296  |                   352  |           0  |          10  |  00:00:01  |
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Phase 2.2.1 Physical Synthesis In Placer | Checksum: 176130aff
+Phase 2.2.1 Physical Synthesis In Placer | Checksum: 10bf8e2ce
 
-Time (s): cpu = 00:00:12 ; elapsed = 00:00:07 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 245 ; free virtual = 11784
-Phase 2.2 Global Placement Core | Checksum: 1a01081fb
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:07 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 946 ; free virtual = 13229
+Phase 2.2 Global Placement Core | Checksum: 19bf04926
 
-Time (s): cpu = 00:00:13 ; elapsed = 00:00:08 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 245 ; free virtual = 11784
-Phase 2 Global Placement | Checksum: 1a01081fb
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:08 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 944 ; free virtual = 13227
+Phase 2 Global Placement | Checksum: 19bf04926
 
-Time (s): cpu = 00:00:13 ; elapsed = 00:00:08 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 246 ; free virtual = 11785
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:08 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 945 ; free virtual = 13228
 
 Phase 3 Detail Placement
 
 Phase 3.1 Commit Multi Column Macros
-Phase 3.1 Commit Multi Column Macros | Checksum: 1fcbd6575
+Phase 3.1 Commit Multi Column Macros | Checksum: 18b0d4b35
 
-Time (s): cpu = 00:00:14 ; elapsed = 00:00:08 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 246 ; free virtual = 11785
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:08 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 948 ; free virtual = 13232
 
 Phase 3.2 Commit Most Macros & LUTRAMs
-Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 184df252a
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 25259ad09
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:09 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 248 ; free virtual = 11787
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:09 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 948 ; free virtual = 13232
 
 Phase 3.3 Area Swap Optimization
-Phase 3.3 Area Swap Optimization | Checksum: 1e5bfe18c
+Phase 3.3 Area Swap Optimization | Checksum: 1ae94e666
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:09 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 248 ; free virtual = 11787
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:09 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 948 ; free virtual = 13232
 
 Phase 3.4 Pipeline Register Optimization
-Phase 3.4 Pipeline Register Optimization | Checksum: 18b7fb7db
+Phase 3.4 Pipeline Register Optimization | Checksum: 1f2862944
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:09 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 248 ; free virtual = 11787
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:09 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 948 ; free virtual = 13232
 
 Phase 3.5 Fast Optimization
-Phase 3.5 Fast Optimization | Checksum: 236385f91
+Phase 3.5 Fast Optimization | Checksum: 1d5209fac
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:09 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 249 ; free virtual = 11789
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:10 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 956 ; free virtual = 13240
 
 Phase 3.6 Small Shape Detail Placement
-Phase 3.6 Small Shape Detail Placement | Checksum: 13e128b07
+Phase 3.6 Small Shape Detail Placement | Checksum: 125ef5d6c
 
-Time (s): cpu = 00:00:18 ; elapsed = 00:00:11 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 252 ; free virtual = 11792
+Time (s): cpu = 00:00:18 ; elapsed = 00:00:12 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 961 ; free virtual = 13245
 
 Phase 3.7 Re-assign LUT pins
-Phase 3.7 Re-assign LUT pins | Checksum: 11e808ae8
+Phase 3.7 Re-assign LUT pins | Checksum: bec56fe3
 
-Time (s): cpu = 00:00:19 ; elapsed = 00:00:12 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 252 ; free virtual = 11792
+Time (s): cpu = 00:00:19 ; elapsed = 00:00:12 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 959 ; free virtual = 13243
 
 Phase 3.8 Pipeline Register Optimization
-Phase 3.8 Pipeline Register Optimization | Checksum: 15f6b1b75
+Phase 3.8 Pipeline Register Optimization | Checksum: 189e2937d
 
-Time (s): cpu = 00:00:19 ; elapsed = 00:00:12 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 252 ; free virtual = 11792
+Time (s): cpu = 00:00:19 ; elapsed = 00:00:12 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 959 ; free virtual = 13243
 
 Phase 3.9 Fast Optimization
-Phase 3.9 Fast Optimization | Checksum: 1d5881892
+Phase 3.9 Fast Optimization | Checksum: 14a5a0ed5
 
-Time (s): cpu = 00:00:21 ; elapsed = 00:00:13 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 255 ; free virtual = 11794
-Phase 3 Detail Placement | Checksum: 1d5881892
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:14 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 958 ; free virtual = 13241
+Phase 3 Detail Placement | Checksum: 14a5a0ed5
 
-Time (s): cpu = 00:00:21 ; elapsed = 00:00:13 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 255 ; free virtual = 11794
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:14 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 958 ; free virtual = 13241
 
 Phase 4 Post Placement Optimization and Clean-Up
 
@@ -497,7 +501,7 @@ Phase 4.1 Post Commit Optimization
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Phase 4.1.1 Post Placement Optimization
-Post Placement Optimization Initialization | Checksum: 17d838630
+Post Placement Optimization Initialization | Checksum: 19881e4fc
 
 Phase 4.1.1.1 BUFG Insertion
 
@@ -505,76 +509,76 @@ Starting Physical Synthesis Task
 
 Phase 1 Physical Synthesis Initialization
 INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 4 CPUs
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.846 | TNS=-13.392 |
-Phase 1 Physical Synthesis Initialization | Checksum: 1340e9392
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.346 | TNS=-2.309 |
+Phase 1 Physical Synthesis Initialization | Checksum: 193854017
 
-Time (s): cpu = 00:00:00.44 ; elapsed = 00:00:00.20 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 253 ; free virtual = 11793
+Time (s): cpu = 00:00:00.45 ; elapsed = 00:00:00.20 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 979 ; free virtual = 13263
 INFO: [Place 46-56] BUFG insertion identified 0 candidate nets. Inserted BUFG: 0, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 0, Skipped due to Timing Degradation: 0, Skipped due to Illegal Netlist: 0.
-Ending Physical Synthesis Task | Checksum: 1f5a7fd2f
+Ending Physical Synthesis Task | Checksum: 183ab13a3
 
-Time (s): cpu = 00:00:00.46 ; elapsed = 00:00:00.21 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 253 ; free virtual = 11793
-Phase 4.1.1.1 BUFG Insertion | Checksum: 17d838630
+Time (s): cpu = 00:00:00.47 ; elapsed = 00:00:00.22 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 979 ; free virtual = 13263
+Phase 4.1.1.1 BUFG Insertion | Checksum: 19881e4fc
 
-Time (s): cpu = 00:00:24 ; elapsed = 00:00:15 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 253 ; free virtual = 11793
-INFO: [Place 30-746] Post Placement Timing Summary WNS=0.440. For the most accurate timing information please run report_timing.
-Phase 4.1.1 Post Placement Optimization | Checksum: 1ca009ddd
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:15 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 979 ; free virtual = 13263
+INFO: [Place 30-746] Post Placement Timing Summary WNS=0.530. For the most accurate timing information please run report_timing.
+Phase 4.1.1 Post Placement Optimization | Checksum: 1c2d759c7
 
-Time (s): cpu = 00:00:33 ; elapsed = 00:00:23 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 274 ; free virtual = 11813
-Phase 4.1 Post Commit Optimization | Checksum: 1ca009ddd
+Time (s): cpu = 00:00:30 ; elapsed = 00:00:21 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 982 ; free virtual = 13266
+Phase 4.1 Post Commit Optimization | Checksum: 1c2d759c7
 
-Time (s): cpu = 00:00:33 ; elapsed = 00:00:23 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 274 ; free virtual = 11813
+Time (s): cpu = 00:00:30 ; elapsed = 00:00:21 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 982 ; free virtual = 13266
 
 Phase 4.2 Post Placement Cleanup
-Phase 4.2 Post Placement Cleanup | Checksum: 1ca009ddd
+Phase 4.2 Post Placement Cleanup | Checksum: 1c2d759c7
 
-Time (s): cpu = 00:00:33 ; elapsed = 00:00:23 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 274 ; free virtual = 11813
+Time (s): cpu = 00:00:31 ; elapsed = 00:00:21 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 982 ; free virtual = 13266
 
 Phase 4.3 Placer Reporting
-Phase 4.3 Placer Reporting | Checksum: 1ca009ddd
+Phase 4.3 Placer Reporting | Checksum: 1c2d759c7
 
-Time (s): cpu = 00:00:33 ; elapsed = 00:00:23 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 274 ; free virtual = 11813
+Time (s): cpu = 00:00:31 ; elapsed = 00:00:22 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 982 ; free virtual = 13266
 
 Phase 4.4 Final Placement Cleanup
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 274 ; free virtual = 11813
-Phase 4.4 Final Placement Cleanup | Checksum: 2094415a5
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 982 ; free virtual = 13266
+Phase 4.4 Final Placement Cleanup | Checksum: 1fa23048b
 
-Time (s): cpu = 00:00:33 ; elapsed = 00:00:23 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 274 ; free virtual = 11813
-Phase 4 Post Placement Optimization and Clean-Up | Checksum: 2094415a5
+Time (s): cpu = 00:00:31 ; elapsed = 00:00:22 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 982 ; free virtual = 13266
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 1fa23048b
 
-Time (s): cpu = 00:00:33 ; elapsed = 00:00:23 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 274 ; free virtual = 11813
-Ending Placer Task | Checksum: 120e9ef16
+Time (s): cpu = 00:00:31 ; elapsed = 00:00:22 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 982 ; free virtual = 13266
+Ending Placer Task | Checksum: 198db1b3e
 
-Time (s): cpu = 00:00:33 ; elapsed = 00:00:23 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 274 ; free virtual = 11813
+Time (s): cpu = 00:00:31 ; elapsed = 00:00:22 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 982 ; free virtual = 13266
 INFO: [Common 17-83] Releasing license: Implementation
-144 Infos, 105 Warnings, 18 Critical Warnings and 0 Errors encountered.
+148 Infos, 105 Warnings, 18 Critical Warnings and 0 Errors encountered.
 place_design completed successfully
-place_design: Time (s): cpu = 00:00:35 ; elapsed = 00:00:24 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 279 ; free virtual = 11818
+place_design: Time (s): cpu = 00:00:33 ; elapsed = 00:00:23 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 992 ; free virtual = 13276
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.48 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 260 ; free virtual = 11817
+Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.50 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 960 ; free virtual = 13260
 INFO: [Common 17-1381] The checkpoint '/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1/conv_accelerator_bd_wrapper_placed.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_io -file conv_accelerator_bd_wrapper_io_placed.rpt
-report_io: Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.07 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 273 ; free virtual = 11818
+report_io: Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.06 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 967 ; free virtual = 13256
 INFO: [runtcl-4] Executing : report_utilization -file conv_accelerator_bd_wrapper_utilization_placed.rpt -pb conv_accelerator_bd_wrapper_utilization_placed.pb
 INFO: [runtcl-4] Executing : report_control_sets -verbose -file conv_accelerator_bd_wrapper_control_sets_placed.rpt
-report_control_sets: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 273 ; free virtual = 11817
+report_control_sets: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 967 ; free virtual = 13256
 Command: phys_opt_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Vivado_Tcl 4-383] Design worst setup slack (WNS) is greater than or equal to 0.000 ns. Skipping all physical synthesis optimizations.
 INFO: [Vivado_Tcl 4-232] No setup violation found. The netlist was not modified.
 INFO: [Common 17-83] Releasing license: Implementation
-153 Infos, 105 Warnings, 18 Critical Warnings and 0 Errors encountered.
+157 Infos, 105 Warnings, 18 Critical Warnings and 0 Errors encountered.
 phys_opt_design completed successfully
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.46 . Memory (MB): peak = 3356.586 ; gain = 0.000 ; free physical = 251 ; free virtual = 11812
+Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.49 . Memory (MB): peak = 3354.148 ; gain = 0.000 ; free physical = 923 ; free virtual = 13228
 INFO: [Common 17-1381] The checkpoint '/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1/conv_accelerator_bd_wrapper_physopt.dcp' has been generated.
 Command: route_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
@@ -587,41 +591,41 @@ INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more in
 
 Starting Routing Task
 INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 4 CPUs
-Checksum: PlaceDB: 4f17e6e1 ConstDB: 0 ShapeSum: d1d20835 RouteDB: 0
+Checksum: PlaceDB: e252835e ConstDB: 0 ShapeSum: b68897e0 RouteDB: 0
 
 Phase 1 Build RT Design
-Phase 1 Build RT Design | Checksum: 1a5130764
+Phase 1 Build RT Design | Checksum: ad4a31ca
 
-Time (s): cpu = 00:00:12 ; elapsed = 00:00:09 . Memory (MB): peak = 3370.047 ; gain = 13.461 ; free physical = 150 ; free virtual = 11700
-Post Restoration Checksum: NetGraph: ec1a5b2b NumContArr: b8f8ac39 Constraints: 0 Timing: 0
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:09 . Memory (MB): peak = 3368.578 ; gain = 14.430 ; free physical = 832 ; free virtual = 13126
+Post Restoration Checksum: NetGraph: 5a06b25 NumContArr: a7a9c6a5 Constraints: 0 Timing: 0
 
 Phase 2 Router Initialization
 
 Phase 2.1 Create Timer
-Phase 2.1 Create Timer | Checksum: 1a5130764
+Phase 2.1 Create Timer | Checksum: ad4a31ca
 
-Time (s): cpu = 00:00:12 ; elapsed = 00:00:09 . Memory (MB): peak = 3370.047 ; gain = 13.461 ; free physical = 246 ; free virtual = 11697
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:09 . Memory (MB): peak = 3368.578 ; gain = 14.430 ; free physical = 834 ; free virtual = 13128
 
 Phase 2.2 Fix Topology Constraints
-Phase 2.2 Fix Topology Constraints | Checksum: 1a5130764
+Phase 2.2 Fix Topology Constraints | Checksum: ad4a31ca
 
-Time (s): cpu = 00:00:12 ; elapsed = 00:00:10 . Memory (MB): peak = 3378.043 ; gain = 21.457 ; free physical = 233 ; free virtual = 11684
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:09 . Memory (MB): peak = 3376.574 ; gain = 22.426 ; free physical = 817 ; free virtual = 13112
 
 Phase 2.3 Pre Route Cleanup
-Phase 2.3 Pre Route Cleanup | Checksum: 1a5130764
+Phase 2.3 Pre Route Cleanup | Checksum: ad4a31ca
 
-Time (s): cpu = 00:00:12 ; elapsed = 00:00:10 . Memory (MB): peak = 3378.043 ; gain = 21.457 ; free physical = 233 ; free virtual = 11684
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:09 . Memory (MB): peak = 3376.574 ; gain = 22.426 ; free physical = 817 ; free virtual = 13112
  Number of Nodes with overlaps = 0
 
 Phase 2.4 Update Timing
-Phase 2.4 Update Timing | Checksum: 1ea23aadc
+Phase 2.4 Update Timing | Checksum: 229da499f
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:11 . Memory (MB): peak = 3413.098 ; gain = 56.512 ; free physical = 202 ; free virtual = 11654
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.464  | TNS=0.000  | WHS=-0.194 | THS=-101.295|
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:11 . Memory (MB): peak = 3410.629 ; gain = 56.480 ; free physical = 778 ; free virtual = 13073
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.587  | TNS=0.000  | WHS=-0.193 | THS=-96.343|
 
-Phase 2 Router Initialization | Checksum: 16dc9efba
+Phase 2 Router Initialization | Checksum: 249743edc
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:12 . Memory (MB): peak = 3413.098 ; gain = 56.512 ; free physical = 204 ; free virtual = 11656
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:12 . Memory (MB): peak = 3410.629 ; gain = 56.480 ; free physical = 777 ; free virtual = 13072
 
 Router Utilization Summary
   Global Vertical Routing Utilization    = 0 %
@@ -629,97 +633,94 @@ Router Utilization Summary
   Routable Net Status*
   *Does not include unroutable nets such as driverless and loadless.
   Run report_route_status for detailed report.
-  Number of Failed Nets               = 9319
+  Number of Failed Nets               = 9329
     (Failed Nets is the sum of unrouted and partially routed nets)
-  Number of Unrouted Nets             = 9319
+  Number of Unrouted Nets             = 9329
   Number of Partially Routed Nets     = 0
   Number of Node Overlaps             = 0
 
 
 Phase 3 Initial Routing
-Phase 3 Initial Routing | Checksum: 1c2cc7389
+Phase 3 Initial Routing | Checksum: 1b1ecfc87
 
-Time (s): cpu = 00:00:25 ; elapsed = 00:00:15 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 252 ; free virtual = 11605
+Time (s): cpu = 00:00:25 ; elapsed = 00:00:16 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 704 ; free virtual = 13000
 
 Phase 4 Rip-up And Reroute
 
 Phase 4.1 Global Iteration 0
- Number of Nodes with overlaps = 1127
- Number of Nodes with overlaps = 284
- Number of Nodes with overlaps = 126
- Number of Nodes with overlaps = 41
- Number of Nodes with overlaps = 24
- Number of Nodes with overlaps = 9
- Number of Nodes with overlaps = 7
- Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 1158
+ Number of Nodes with overlaps = 262
+ Number of Nodes with overlaps = 110
+ Number of Nodes with overlaps = 48
+ Number of Nodes with overlaps = 17
+ Number of Nodes with overlaps = 10
+ Number of Nodes with overlaps = 6
+ Number of Nodes with overlaps = 1
  Number of Nodes with overlaps = 0
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.210 | TNS=-1.527 | WHS=N/A    | THS=N/A    |
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.124  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 4.1 Global Iteration 0 | Checksum: 2c05b9153
+Phase 4.1 Global Iteration 0 | Checksum: 1366d702a
 
-Time (s): cpu = 00:01:05 ; elapsed = 00:00:40 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 407 ; free virtual = 11759
+Time (s): cpu = 00:00:58 ; elapsed = 00:00:36 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 788 ; free virtual = 13084
 
 Phase 4.2 Global Iteration 1
- Number of Nodes with overlaps = 212
- Number of Nodes with overlaps = 60
- Number of Nodes with overlaps = 39
- Number of Nodes with overlaps = 27
- Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 8
+ Number of Nodes with overlaps = 3
  Number of Nodes with overlaps = 0
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.204 | TNS=-0.602 | WHS=N/A    | THS=N/A    |
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.191  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 4.2 Global Iteration 1 | Checksum: 212269642
+Phase 4.2 Global Iteration 1 | Checksum: 1a4958fd0
 
-Time (s): cpu = 00:01:28 ; elapsed = 00:00:56 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
-Phase 4 Rip-up And Reroute | Checksum: 212269642
+Time (s): cpu = 00:01:02 ; elapsed = 00:00:40 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 771 ; free virtual = 13066
+Phase 4 Rip-up And Reroute | Checksum: 1a4958fd0
 
-Time (s): cpu = 00:01:28 ; elapsed = 00:00:56 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
+Time (s): cpu = 00:01:02 ; elapsed = 00:00:40 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 771 ; free virtual = 13066
 
 Phase 5 Delay and Skew Optimization
 
 Phase 5.1 Delay CleanUp
 
 Phase 5.1.1 Update Timing
-Phase 5.1.1 Update Timing | Checksum: 221e915de
+Phase 5.1.1 Update Timing | Checksum: 2118b51c8
 
-Time (s): cpu = 00:01:29 ; elapsed = 00:00:56 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.089 | TNS=-0.089 | WHS=N/A    | THS=N/A    |
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:41 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 771 ; free virtual = 13066
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.260  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
- Number of Nodes with overlaps = 0
-Phase 5.1 Delay CleanUp | Checksum: 15b5bbc0a
+Phase 5.1 Delay CleanUp | Checksum: 2118b51c8
 
-Time (s): cpu = 00:01:29 ; elapsed = 00:00:56 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:41 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 771 ; free virtual = 13066
 
 Phase 5.2 Clock Skew Optimization
-Phase 5.2 Clock Skew Optimization | Checksum: 15b5bbc0a
+Phase 5.2 Clock Skew Optimization | Checksum: 2118b51c8
 
-Time (s): cpu = 00:01:29 ; elapsed = 00:00:56 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
-Phase 5 Delay and Skew Optimization | Checksum: 15b5bbc0a
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:41 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 771 ; free virtual = 13066
+Phase 5 Delay and Skew Optimization | Checksum: 2118b51c8
 
-Time (s): cpu = 00:01:29 ; elapsed = 00:00:56 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:41 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 771 ; free virtual = 13066
 
 Phase 6 Post Hold Fix
 
 Phase 6.1 Hold Fix Iter
 
 Phase 6.1.1 Update Timing
-Phase 6.1.1 Update Timing | Checksum: 1a8c88b65
+Phase 6.1.1 Update Timing | Checksum: 162979c7e
 
-Time (s): cpu = 00:01:30 ; elapsed = 00:00:57 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.074 | TNS=-0.074 | WHS=0.034  | THS=0.000  |
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:41 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 771 ; free virtual = 13066
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.260  | TNS=0.000  | WHS=0.037  | THS=0.000  |
 
-Phase 6.1 Hold Fix Iter | Checksum: cf91878f
+Phase 6.1 Hold Fix Iter | Checksum: 17b44892b
 
-Time (s): cpu = 00:01:30 ; elapsed = 00:00:57 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
-Phase 6 Post Hold Fix | Checksum: cf91878f
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:41 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 770 ; free virtual = 13066
+Phase 6 Post Hold Fix | Checksum: 17b44892b
 
-Time (s): cpu = 00:01:30 ; elapsed = 00:00:57 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:41 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 770 ; free virtual = 13066
 
 Phase 7 Route finalize
 
 Router Utilization Summary
-  Global Vertical Routing Utilization    = 2.89987 %
-  Global Horizontal Routing Utilization  = 3.72279 %
+  Global Vertical Routing Utilization    = 3.03992 %
+  Global Horizontal Routing Utilization  = 3.72397 %
   Routable Net Status*
   *Does not include unroutable nets such as driverless and loadless.
   Run report_route_status for detailed report.
@@ -729,65 +730,38 @@ Router Utilization Summary
   Number of Partially Routed Nets     = 0
   Number of Node Overlaps             = 0
 
-Congestion Report
-North Dir 1x1 Area, Max Cong = 52.2523%, No Congested Regions.
-South Dir 1x1 Area, Max Cong = 52.2523%, No Congested Regions.
-East Dir 1x1 Area, Max Cong = 55.8824%, No Congested Regions.
-West Dir 1x1 Area, Max Cong = 61.7647%, No Congested Regions.
+Phase 7 Route finalize | Checksum: 19de9df9d
 
-------------------------------
-Reporting congestion hotspots
-------------------------------
-Direction: North
-----------------
-Congested clusters found at Level 0
-Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
-Direction: South
-----------------
-Congested clusters found at Level 0
-Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
-Direction: East
-----------------
-Congested clusters found at Level 0
-Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
-Direction: West
-----------------
-Congested clusters found at Level 0
-Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
-
-Phase 7 Route finalize | Checksum: f634c876
-
-Time (s): cpu = 00:01:30 ; elapsed = 00:00:57 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:41 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 770 ; free virtual = 13066
 
 Phase 8 Verifying routed nets
 
  Verification completed successfully
-Phase 8 Verifying routed nets | Checksum: f634c876
+Phase 8 Verifying routed nets | Checksum: 19de9df9d
 
-Time (s): cpu = 00:01:30 ; elapsed = 00:00:57 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:41 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 770 ; free virtual = 13066
 
 Phase 9 Depositing Routes
-Phase 9 Depositing Routes | Checksum: 154746c5e
+Phase 9 Depositing Routes | Checksum: da33dd35
 
-Time (s): cpu = 00:01:30 ; elapsed = 00:00:57 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:42 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 770 ; free virtual = 13065
 
 Phase 10 Post Router Timing
-INFO: [Route 35-57] Estimated Timing Summary | WNS=-0.074 | TNS=-0.074 | WHS=0.034  | THS=0.000  |
+INFO: [Route 35-57] Estimated Timing Summary | WNS=0.260  | TNS=0.000  | WHS=0.037  | THS=0.000  |
 
-WARNING: [Route 35-328] Router estimated timing not met.
-Resolution: For a complete and accurate timing signoff, report_timing_summary must be run after route_design. Alternatively, route_design can be run with the -timing_summary option to enable a complete timing signoff at the end of route_design.
-Phase 10 Post Router Timing | Checksum: 154746c5e
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 10 Post Router Timing | Checksum: da33dd35
 
-Time (s): cpu = 00:01:31 ; elapsed = 00:00:57 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 421 ; free virtual = 11773
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:42 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 770 ; free virtual = 13066
 INFO: [Route 35-16] Router Completed Successfully
 
-Time (s): cpu = 00:01:31 ; elapsed = 00:00:57 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 446 ; free virtual = 11798
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:42 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 794 ; free virtual = 13090
 
 Routing Is Done.
 INFO: [Common 17-83] Releasing license: Implementation
-168 Infos, 106 Warnings, 18 Critical Warnings and 0 Errors encountered.
+173 Infos, 105 Warnings, 18 Critical Warnings and 0 Errors encountered.
 route_design completed successfully
-route_design: Time (s): cpu = 00:01:33 ; elapsed = 00:00:58 . Memory (MB): peak = 3485.102 ; gain = 128.516 ; free physical = 446 ; free virtual = 11798
+route_design: Time (s): cpu = 00:01:06 ; elapsed = 00:00:43 . Memory (MB): peak = 3478.633 ; gain = 124.484 ; free physical = 794 ; free virtual = 13090
 INFO: [Common 17-600] The following parameters have non-default value.
 general.maxThreads
 INFO: [Timing 38-480] Writing timing data to binary archive.
@@ -795,7 +769,7 @@ Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.54 . Memory (MB): peak = 3493.105 ; gain = 0.000 ; free physical = 446 ; free virtual = 11818
+Write XDEF Complete: Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.58 . Memory (MB): peak = 3486.637 ; gain = 0.000 ; free physical = 770 ; free virtual = 13086
 INFO: [Common 17-1381] The checkpoint '/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1/conv_accelerator_bd_wrapper_routed.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_drc -file conv_accelerator_bd_wrapper_drc_routed.rpt -pb conv_accelerator_bd_wrapper_drc_routed.pb -rpx conv_accelerator_bd_wrapper_drc_routed.rpx
 Command: report_drc -file conv_accelerator_bd_wrapper_drc_routed.rpt -pb conv_accelerator_bd_wrapper_drc_routed.pb -rpx conv_accelerator_bd_wrapper_drc_routed.rpx
@@ -817,7 +791,7 @@ Running Vector-less Activity Propagation...
 Finished Running Vector-less Activity Propagation
 WARNING: [Power 33-332] Found switching activity that implies high-fanout reset nets being asserted for excessive periods of time which may result in inaccurate power analysis.
 Resolution: To review and fix problems, please run Power Constraints Advisor in the GUI from Tools > Power Constraints Advisor or run report_power with the -advisory option to generate a text report.
-181 Infos, 107 Warnings, 18 Critical Warnings and 0 Errors encountered.
+186 Infos, 106 Warnings, 18 Critical Warnings and 0 Errors encountered.
 report_power completed successfully
 INFO: [runtcl-4] Executing : report_route_status -file conv_accelerator_bd_wrapper_route_status.rpt -pb conv_accelerator_bd_wrapper_route_status.pb
 INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file conv_accelerator_bd_wrapper_timing_summary_routed.rpt -pb conv_accelerator_bd_wrapper_timing_summary_routed.pb -rpx conv_accelerator_bd_wrapper_timing_summary_routed.rpx
@@ -834,70 +808,10 @@ Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Vivado_Tcl 4-241] Physical synthesis in post route mode ( 100.0% nets are fully routed)
 INFO: [Vivado_Tcl 4-137] Directive used for phys_opt_design is: AggressiveExplore
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3517.121 ; gain = 0.000 ; free physical = 422 ; free virtual = 11787
-
-Starting Physical Synthesis Task
-
-Phase 1 Physical Synthesis Initialization
-INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 4 CPUs
-INFO: [Physopt 32-668] Current Timing Summary | WNS=-0.075 | TNS=-0.075 | WHS=0.034 | THS=0.000 |
-Phase 1 Physical Synthesis Initialization | Checksum: 15c25dad1
-
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 3517.121 ; gain = 0.000 ; free physical = 413 ; free virtual = 11777
-
-Phase 2 Critical Path Optimization
-INFO: [Physopt 32-668] Current Timing Summary | WNS=-0.075 | TNS=-0.075 | WHS=0.034 | THS=0.000 |
-INFO: [Physopt 32-953] Path group WNS did not improve. Path group: clk_fpga_0. Processed net: conv_accelerator_bd_i/bram/bram_input_0/blk_mem_gen_0/U0/inst_blk_mem_gen/gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen/valid.cstr/ramloop[22].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_n_35.
-INFO: [Physopt 32-953] Path group WNS did not improve. Path group: clk_fpga_0. Processed net: conv_accelerator_bd_i/processing_system7_0/inst/FCLK_CLK_unbuffered[0].
-INFO: [Physopt 32-710] Processed net conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/BLK_MEM_PORT0_din[17]. Critical path length was reduced through logic transformation on cell conv_accelerator_bd_i/bram/bram_input_0/bram_switch_1/U0/BLK_MEM_PORT0_din[17]_INST_0_comp.
-INFO: [Physopt 32-735] Processed net conv_accelerator_bd_i/bram/bram_input_0/bram_mux_1/BRAM_PORT_din[17]. Optimization improves timing on the net.
-INFO: [Physopt 32-668] Current Timing Summary | WNS=0.027 | TNS=0.000 | WHS=0.034 | THS=0.000 |
-INFO: [Physopt 32-668] Current Timing Summary | WNS=0.027 | TNS=0.000 | WHS=0.034 | THS=0.000 |
-Phase 2 Critical Path Optimization | Checksum: 15c25dad1
-
-Time (s): cpu = 00:00:05 ; elapsed = 00:00:03 . Memory (MB): peak = 3517.121 ; gain = 0.000 ; free physical = 388 ; free virtual = 11753
-
-Phase 3 Hold Fix Optimization
-INFO: [Physopt 32-668] Current Timing Summary | WNS=0.027 | TNS=0.000 | WHS=0.034 | THS=0.000 |
-INFO: [Physopt 32-45] Identified 1 candidate net for hold slack optimization.
-INFO: [Physopt 32-234] Optimized 1 net. Inserted 0 new ZHOLD_DELAYs. Calibrated 0 existing ZHOLD_DELAYs. Inserted 1 buffer.
-
-INFO: [Physopt 32-668] Current Timing Summary | WNS=0.027 | TNS=0.000 | WHS=0.034 | THS=0.000 |
-Phase 3 Hold Fix Optimization | Checksum: 15c25dad1
-
-Time (s): cpu = 00:00:05 ; elapsed = 00:00:03 . Memory (MB): peak = 3517.121 ; gain = 0.000 ; free physical = 372 ; free virtual = 11737
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3517.121 ; gain = 0.000 ; free physical = 372 ; free virtual = 11737
-INFO: [Physopt 32-669] Post Physical Optimization Timing Summary | WNS=0.027 | TNS=0.000 | WHS=0.034 | THS=0.000 |
-
-Summary of Physical Synthesis Optimizations
-============================================
-
-
--------------------------------------------------------------------------------------------------------------------------------------------------------------
-|  Optimization   |  WNS Gain (ns)  |  TNS Gain (ns)  |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
--------------------------------------------------------------------------------------------------------------------------------------------------------------
-|  Critical Path  |          0.103  |          0.075  |            0  |              0  |                     1  |           0  |           1  |  00:00:01  |
--------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-Summary of Hold Fix Optimizations
-=================================
-
-
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-|  Optimization               |  WHS Gain (ns)  |  THS Gain (ns)  |  Added LUTs  |  Added FFs  |  Optimized Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-|  LUT1 and ZHOLD Insertion   |          0.000  |          0.000  |           1  |          0  |               1  |           0  |           1  |  00:00:01  |
-|  Total                      |          0.000  |          0.000  |           1  |          0  |               1  |           0  |           1  |  00:00:01  |
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3517.121 ; gain = 0.000 ; free physical = 372 ; free virtual = 11737
-Ending Physical Synthesis Task | Checksum: 19b61e296
-
-Time (s): cpu = 00:00:05 ; elapsed = 00:00:03 . Memory (MB): peak = 3517.121 ; gain = 0.000 ; free physical = 372 ; free virtual = 11737
+INFO: [Vivado_Tcl 4-383] Design worst setup slack (WNS) is greater than or equal to 0.000 ns. Skipping all physical synthesis optimizations.
+INFO: [Vivado_Tcl 4-232] No setup violation found. The netlist was not modified.
 INFO: [Common 17-83] Releasing license: Implementation
-209 Infos, 107 Warnings, 18 Critical Warnings and 0 Errors encountered.
+202 Infos, 106 Warnings, 18 Critical Warnings and 0 Errors encountered.
 phys_opt_design completed successfully
 INFO: [Common 17-600] The following parameters have non-default value.
 general.maxThreads
@@ -906,7 +820,7 @@ Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.56 . Memory (MB): peak = 3517.121 ; gain = 0.000 ; free physical = 432 ; free virtual = 11817
+Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.56 . Memory (MB): peak = 3526.668 ; gain = 0.000 ; free physical = 749 ; free virtual = 13077
 INFO: [Common 17-1381] The checkpoint '/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1/conv_accelerator_bd_wrapper_postroute_physopt.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -warn_on_violation -file conv_accelerator_bd_wrapper_timing_summary_postroute_physopted.rpt -pb conv_accelerator_bd_wrapper_timing_summary_postroute_physopted.pb -rpx conv_accelerator_bd_wrapper_timing_summary_postroute_physopted.rpx
 INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
@@ -914,61 +828,11 @@ INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum o
 INFO: [runtcl-4] Executing : report_bus_skew -warn_on_violation -file conv_accelerator_bd_wrapper_bus_skew_postroute_physopted.rpt -pb conv_accelerator_bd_wrapper_bus_skew_postroute_physopted.pb -rpx conv_accelerator_bd_wrapper_bus_skew_postroute_physopted.rpx
 INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
 INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 4 CPUs
-INFO: [Common 17-206] Exiting Vivado at Thu Dec 18 16:12:48 2025...
-#-----------------------------------------------------------
-# Vivado v2020.1 (64-bit)
-# SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
-# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Thu Dec 18 16:13:34 2025
-# Process ID: 34500
-# Current directory: /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1
-# Command line: vivado -log conv_accelerator_bd_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source conv_accelerator_bd_wrapper.tcl -notrace
-# Log file: /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1/conv_accelerator_bd_wrapper.vdi
-# Journal file: /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1/vivado.jou
-#-----------------------------------------------------------
-source conv_accelerator_bd_wrapper.tcl -notrace
-Command: open_checkpoint conv_accelerator_bd_wrapper_postroute_physopt.dcp
-
-Starting open_checkpoint Task
-
-Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.08 . Memory (MB): peak = 2340.746 ; gain = 0.000 ; free physical = 1710 ; free virtual = 13081
-INFO: [Device 21-403] Loading part xc7z020clg484-1
-Netlist sorting complete. Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:00.09 . Memory (MB): peak = 2340.828 ; gain = 0.000 ; free physical = 1247 ; free virtual = 12618
-INFO: [Netlist 29-17] Analyzing 644 Unisim elements for replacement
-INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
-INFO: [Project 1-479] Netlist was created with Vivado 2020.1
-INFO: [Project 1-570] Preparing netlist for logic optimization
-INFO: [Timing 38-478] Restoring timing data from binary archive.
-INFO: [Timing 38-479] Binary timing data restore complete.
-INFO: [Project 1-856] Restoring constraints from binary archive.
-INFO: [Constraints 18-5170] The checkpoint was created with non-default parameter values which do not match the current Vivado settings.  Mismatching parameters are:
-  general.maxThreads
-INFO: [Project 1-853] Binary constraint restore complete.
-Reading XDEF placement.
-Reading placer database...
-Reading XDEF routing.
-Read XDEF File: Time (s): cpu = 00:00:00.60 ; elapsed = 00:00:00.65 . Memory (MB): peak = 2764.676 ; gain = 6.938 ; free physical = 649 ; free virtual = 12020
-Restored from archive | CPU: 0.650000 secs | Memory: 12.646294 MB |
-Finished XDEF File Restore: Time (s): cpu = 00:00:00.60 ; elapsed = 00:00:00.65 . Memory (MB): peak = 2764.676 ; gain = 6.938 ; free physical = 649 ; free virtual = 12020
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2764.676 ; gain = 0.000 ; free physical = 649 ; free virtual = 12020
-INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 290 instances were transformed.
-  LUT6_2 => LUT6_2 (LUT5, LUT6): 225 instances
-  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 2 instances
-  RAM32X1D => RAM32X1D (RAMD32(x2)): 1 instance 
-  RAM64M => RAM64M (RAMD64E(x4)): 50 instances
-  RAM64X1D => RAM64X1D (RAMD64E(x2)): 10 instances
-  SRLC32E => SRL16E: 2 instances
-
-INFO: [Project 1-604] Checkpoint was created with Vivado v2020.1 (64-bit) build 2902540
-open_checkpoint: Time (s): cpu = 00:00:13 ; elapsed = 00:00:21 . Memory (MB): peak = 2764.676 ; gain = 423.930 ; free physical = 649 ; free virtual = 12020
 Command: write_bitstream -force conv_accelerator_bd_wrapper.bit
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
 Running DRC as a precondition to command write_bitstream
-INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1704] No user IP repositories specified
-INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/remote/Xilinx/2020.1/Vivado/2020.1/data/ip'.
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
 INFO: [DRC 23-27] Running DRC with 4 threads
 WARNING: [DRC RTSTAT-10] No routable loads: 95 net(s) have no routable loads. The problem bus(es) and/or net(s) are conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT0_addr[0], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT0_addr[11], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT0_addr[12], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT0_addr[13], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT0_addr[14], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT0_addr[15], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT0_addr[16], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT0_addr[17], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT0_addr[18], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT1_addr[11], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT1_addr[12], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT1_addr[13], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT1_addr[14], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT1_addr[15], conv_accelerator_bd_i/bram/bram_filter_0/bram_switch_1/BLK_MEM_PORT1_addr[16]... and (the first 15 of 55 listed).
 INFO: [DRC AVAL-4] enum_USE_DPORT_FALSE_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: conv_accelerator_bd_i/conv_accelerator_wra_0/U0/g_conv_accel/g_mac0/mac/mult_add/U0/i_synth/i_synth_option.i_synth_model/opt_7series.i_uniwrap/i_primitive: DSP48E1 is not using the D port (USE_DPORT = FALSE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
@@ -988,7 +852,7 @@ Writing bitstream ./conv_accelerator_bd_wrapper.bit...
 INFO: [Vivado 12-1842] Bitgen Completed Successfully.
 INFO: [Project 1-120] WebTalk data collection is mandatory when using a WebPACK part without a full Vivado license. To see the specific WebTalk data collected for your design, open the usage_statistics_webtalk.html or usage_statistics_webtalk.xml file in the implementation directory.
 INFO: [Common 17-83] Releasing license: Implementation
-27 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+224 Infos, 107 Warnings, 18 Critical Warnings and 0 Errors encountered.
 write_bitstream completed successfully
-write_bitstream: Time (s): cpu = 00:00:17 ; elapsed = 00:00:25 . Memory (MB): peak = 3237.000 ; gain = 472.324 ; free physical = 577 ; free virtual = 11863
-INFO: [Common 17-206] Exiting Vivado at Thu Dec 18 16:14:29 2025...
+write_bitstream: Time (s): cpu = 00:00:17 ; elapsed = 00:00:23 . Memory (MB): peak = 3779.660 ; gain = 252.992 ; free physical = 645 ; free virtual = 12970
+INFO: [Common 17-206] Exiting Vivado at Thu Dec 18 19:29:58 2025...

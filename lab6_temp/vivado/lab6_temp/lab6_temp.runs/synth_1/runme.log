@@ -61,7 +61,7 @@ INFO: [IP_Flow 19-4728] Bus Interface 'S_AXI_LITE_ACLK': Added interface paramet
 INFO: [IP_Flow 19-4728] Bus Interface 'S_AXI_LITE_ACLK': Added interface parameter 'ASSOCIATED_RESET' with value 'S_AXI_LITE_ARESETN'.
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
-add_files: Time (s): cpu = 00:00:21 ; elapsed = 00:00:24 . Memory (MB): peak = 2371.277 ; gain = 32.039 ; free physical = 1125 ; free virtual = 13046
+add_files: Time (s): cpu = 00:00:21 ; elapsed = 00:00:31 . Memory (MB): peak = 2372.809 ; gain = 32.039 ; free physical = 2545 ; free virtual = 14604
 Command: synth_design -top conv_accelerator_bd_wrapper -part xc7z020clg484-1 -flatten_hierarchy full -directive PerformanceOptimized
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
@@ -69,9 +69,9 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020
 INFO: [Device 21-403] Loading part xc7z020clg484-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 29353
+INFO: [Synth 8-7075] Helper process launched with PID 63418
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:12 . Memory (MB): peak = 2430.973 ; gain = 59.660 ; free physical = 812 ; free virtual = 12434
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:13 . Memory (MB): peak = 2430.473 ; gain = 57.629 ; free physical = 1776 ; free virtual = 13947
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'conv_accelerator_bd_wrapper' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.srcs/sources_1/bd/conv_accelerator_bd/hdl/conv_accelerator_bd_wrapper.vhd:40]
 INFO: [Synth 8-3491] module 'conv_accelerator_bd' declared at '/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.srcs/sources_1/bd/conv_accelerator_bd/synth/conv_accelerator_bd.vhd:2078' bound to instance 'conv_accelerator_bd_i' of component 'conv_accelerator_bd' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.srcs/sources_1/bd/conv_accelerator_bd/hdl/conv_accelerator_bd_wrapper.vhd:67]
@@ -3510,7 +3510,7 @@ INFO: [Synth 8-638] synthesizing module 'conv_accelerator_wrapper' [/home/zfsalt
 	Parameter BRAM_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter MAC_DATA_WIDTH bound to: 8 - type: integer 
 	Parameter MAC_OUTPUT_DATA_WIDTH bound to: 32 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'conv_config' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/conv_config.vhd:77]
+INFO: [Synth 8-638] synthesizing module 'conv_config' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/conv_config.vhd:78]
 	Parameter C_AXI_ADDR_WIDTH bound to: 8 - type: integer 
 	Parameter C_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter DIM_WIDTH bound to: 12 - type: integer 
@@ -3519,8 +3519,8 @@ INFO: [Synth 8-638] synthesizing module 'conv_config' [/home/zfsalti/487/lab3/Cp
 	Parameter OUTPUT_ADDR_WIDTH bound to: 17 - type: integer 
 	Parameter MAC_OUTPUT_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter MAC_DATA_WIDTH bound to: 8 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'conv_config' (158#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/conv_config.vhd:77]
-INFO: [Synth 8-638] synthesizing module 'conv_accelerator' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/conv_accelerator.vhd:156]
+INFO: [Synth 8-256] done synthesizing module 'conv_config' (158#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/conv_config.vhd:78]
+INFO: [Synth 8-638] synthesizing module 'conv_accelerator' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/conv_accelerator.vhd:157]
 	Parameter DIM_WIDTH bound to: 12 - type: integer 
 	Parameter INPUT_ADDR_WIDTH bound to: 17 - type: integer 
 	Parameter FILTER_ADDR_WIDTH bound to: 11 - type: integer 
@@ -3641,14 +3641,14 @@ INFO: [Synth 8-638] synthesizing module 'axis_4_to_1_round_robin_combiner' [/hom
 	Parameter C_DATA_WIDTH bound to: 32 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'axis_4_to_1_round_robin_combiner' (171#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/axis_utils.vhd:118]
 INFO: [Synth 8-256] done synthesizing module 'axis_buffered_4_to_1_round_robin_combiner' (172#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/axis_utils.vhd:206]
-INFO: [Synth 8-638] synthesizing module 'dequantization' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/dequantization.vhd:41]
+INFO: [Synth 8-638] synthesizing module 'dequantization' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/dequantization.vhd:42]
 	Parameter C_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_TID_WIDTH bound to: 2 - type: integer 
 	Parameter C_OUT_WIDTH bound to: 8 - type: integer 
 	Parameter C_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_TID_WIDTH bound to: 2 - type: integer 
 	Parameter C_OUT_WIDTH bound to: 8 - type: integer 
-INFO: [Synth 8-3491] module 'sv_dequantization' declared at '/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:23' bound to instance 'dequant' of component 'sv_dequantization' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/dequantization.vhd:76]
+INFO: [Synth 8-3491] module 'sv_dequantization' declared at '/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:23' bound to instance 'dequant' of component 'sv_dequantization' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/dequantization.vhd:78]
 INFO: [Synth 8-6157] synthesizing module 'sv_dequantization' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:23]
 	Parameter C_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_TID_WIDTH bound to: 2 - type: integer 
@@ -3707,9 +3707,6 @@ INFO: [Synth 8-638] synthesizing module 'zp_adder' [/home/zfsalti/487/lab3/CprE-
 	Parameter C_HAS_SINIT bound to: 0 - type: integer 
 INFO: [Synth 8-3491] module 'c_addsub_v12_0_14' declared at '/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/zp_adder/hdl/c_addsub_v12_0_vh_rfs.vhd:7026' bound to instance 'U0' of component 'c_addsub_v12_0_14' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/zp_adder/synth/zp_adder.vhd:136]
 INFO: [Synth 8-256] done synthesizing module 'zp_adder' (184#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/zp_adder/synth/zp_adder.vhd:69]
-WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:102]
-WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:102]
-WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:102]
 WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:103]
 WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:103]
 WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:103]
@@ -3728,8 +3725,11 @@ WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and n
 WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:108]
 WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:108]
 WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:108]
+WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:109]
+WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:109]
+WARNING: [Synth 8-6090] variable 'p_pipelines' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:109]
 INFO: [Synth 8-6155] done synthesizing module 'sv_dequantization' (185#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_dequantization.sv:23]
-INFO: [Synth 8-256] done synthesizing module 'dequantization' (186#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/dequantization.vhd:41]
+INFO: [Synth 8-256] done synthesizing module 'dequantization' (186#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/dequantization.vhd:42]
 INFO: [Synth 8-638] synthesizing module 'output_storage' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/output_storage.vhd:49]
 	Parameter DATA_WIDTH bound to: 8 - type: integer 
 	Parameter BRAM_DATA_WIDTH bound to: 32 - type: integer 
@@ -3757,7 +3757,7 @@ INFO: [Synth 8-226] default block is never used [/home/zfsalti/487/lab3/CprE-487
 INFO: [Synth 8-226] default block is never used [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_output_storage.sv:253]
 INFO: [Synth 8-6155] done synthesizing module 'sv_output_storage' (187#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/sv_output_storage.sv:23]
 INFO: [Synth 8-256] done synthesizing module 'output_storage' (188#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/output_storage.vhd:49]
-INFO: [Synth 8-256] done synthesizing module 'conv_accelerator' (189#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/conv_accelerator.vhd:156]
+INFO: [Synth 8-256] done synthesizing module 'conv_accelerator' (189#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/conv_accelerator.vhd:157]
 INFO: [Synth 8-256] done synthesizing module 'conv_accelerator_wrapper' (190#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/hdl/conv_accelerator_wrapper.vhd:107]
 INFO: [Synth 8-256] done synthesizing module 'conv_accelerator_bd_conv_accelerator_wra_0_0' (191#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.srcs/sources_1/bd/conv_accelerator_bd/ip/conv_accelerator_bd_conv_accelerator_wra_0_0/synth/conv_accelerator_bd_conv_accelerator_wra_0_0.vhd:127]
 INFO: [Synth 8-3491] module 'conv_accelerator_bd_processing_system7_0_0' declared at '/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.srcs/sources_1/bd/conv_accelerator_bd/ip/conv_accelerator_bd_processing_system7_0_0/synth/conv_accelerator_bd_processing_system7_0_0.v:60' bound to instance 'processing_system7_0' of component 'conv_accelerator_bd_processing_system7_0_0' [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.srcs/sources_1/bd/conv_accelerator_bd/synth/conv_accelerator_bd.vhd:3452]
@@ -3922,18 +3922,18 @@ INFO: [Synth 8-256] done synthesizing module 'conv_accelerator_bd_rst_ps7_0_200M
 INFO: [Synth 8-256] done synthesizing module 'conv_accelerator_bd' (204#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.srcs/sources_1/bd/conv_accelerator_bd/synth/conv_accelerator_bd.vhd:2108]
 INFO: [Synth 8-256] done synthesizing module 'conv_accelerator_bd_wrapper' (205#1) [/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.srcs/sources_1/bd/conv_accelerator_bd/hdl/conv_accelerator_bd_wrapper.vhd:40]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:32 ; elapsed = 00:00:49 . Memory (MB): peak = 2811.395 ; gain = 440.082 ; free physical = 694 ; free virtual = 12321
+Finished RTL Elaboration : Time (s): cpu = 00:00:32 ; elapsed = 00:00:51 . Memory (MB): peak = 2811.582 ; gain = 438.738 ; free physical = 1679 ; free virtual = 13847
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:33 ; elapsed = 00:00:50 . Memory (MB): peak = 2814.363 ; gain = 443.051 ; free physical = 692 ; free virtual = 12319
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:34 ; elapsed = 00:00:53 . Memory (MB): peak = 2817.520 ; gain = 444.676 ; free physical = 1737 ; free virtual = 13905
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:33 ; elapsed = 00:00:50 . Memory (MB): peak = 2814.363 ; gain = 443.051 ; free physical = 692 ; free virtual = 12319
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:34 ; elapsed = 00:00:53 . Memory (MB): peak = 2817.520 ; gain = 444.676 ; free physical = 1737 ; free virtual = 13905
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.32 ; elapsed = 00:00:00.33 . Memory (MB): peak = 2818.363 ; gain = 0.000 ; free physical = 675 ; free virtual = 12301
+Netlist sorting complete. Time (s): cpu = 00:00:00.32 ; elapsed = 00:00:00.33 . Memory (MB): peak = 2823.457 ; gain = 0.000 ; free physical = 1712 ; free virtual = 13880
 INFO: [Netlist 29-17] Analyzing 905 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -3972,7 +3972,7 @@ Sourcing Tcl File [/remote/Xilinx/2020.1/Vivado/2020.1/data/ip/xpm/xpm_cdc/tcl/x
 Finished Sourcing Tcl File [/remote/Xilinx/2020.1/Vivado/2020.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_async_rst.tcl] for cell 'conv_accelerator_bd_i/axi_protocol_convert_3/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gnsckt_wrst.rst_wr_reg2_inst'
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2836.176 ; gain = 0.000 ; free physical = 547 ; free virtual = 12174
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2835.332 ; gain = 0.000 ; free physical = 1561 ; free virtual = 13745
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 248 instances were transformed.
   FDR => FDRE: 13 instances
@@ -3980,16 +3980,16 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   MUXCY_L => MUXCY: 4 instances
   SRL16 => SRL16E: 1 instance 
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.20 ; elapsed = 00:00:00.20 . Memory (MB): peak = 2836.176 ; gain = 0.000 ; free physical = 549 ; free virtual = 12175
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.21 ; elapsed = 00:00:00.21 . Memory (MB): peak = 2835.332 ; gain = 0.000 ; free physical = 1556 ; free virtual = 13744
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:43 ; elapsed = 00:01:02 . Memory (MB): peak = 2836.176 ; gain = 464.863 ; free physical = 681 ; free virtual = 12308
+Finished Constraint Validation : Time (s): cpu = 00:00:44 ; elapsed = 00:01:06 . Memory (MB): peak = 2835.332 ; gain = 462.488 ; free physical = 1624 ; free virtual = 13826
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:43 ; elapsed = 00:01:02 . Memory (MB): peak = 2836.176 ; gain = 464.863 ; free physical = 681 ; free virtual = 12308
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:44 ; elapsed = 00:01:06 . Memory (MB): peak = 2835.332 ; gain = 462.488 ; free physical = 1624 ; free virtual = 13826
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -4045,7 +4045,7 @@ Applied set_property DONT_TOUCH = true for conv_accelerator_bd_i/axi_protocol_co
 Applied set_property DONT_TOUCH = true for conv_accelerator_bd_i/axi_protocol_convert_3/inst/\gen_axi4_axi3.axi3_conv_inst /\USE_WRITE.write_addr_inst /\USE_B_CHANNEL.cmd_b_queue /inst/fifo_gen_inst/inst_fifo_gen/\gconvfifo.rf /\grf.rf /rstblk/\ngwrdrst.grst.g7serrst.gnsckt_wrst.rst_wr_reg2_inst . (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for conv_accelerator_bd_i/axi_protocol_convert_3/inst/\gen_axi4_axi3.axi3_conv_inst /\USE_READ.USE_SPLIT_R.read_addr_inst /\USE_R_CHANNEL.cmd_queue /inst/fifo_gen_inst/inst_fifo_gen/\gconvfifo.rf /\grf.rf /rstblk/\ngwrdrst.grst.g7serrst.gnsckt_wrst.rst_wr_reg2_inst . (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:43 ; elapsed = 00:01:03 . Memory (MB): peak = 2836.176 ; gain = 464.863 ; free physical = 681 ; free virtual = 12308
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:44 ; elapsed = 00:01:06 . Memory (MB): peak = 2835.332 ; gain = 462.488 ; free physical = 1624 ; free virtual = 13827
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'sig_sm_state_reg' in module 'axi_cdma_simple_cntlr'
 INFO: [Synth 8-802] inferred FSM for state register 'sig_pcc_sm_state_reg' in module 'axi_datamover_pcc'
@@ -4157,7 +4157,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'GEN_WDATA_SM_NO_ECC_SNG_RE
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'GEN_NO_RD_CMD_OPT.rlast_sm_cs_reg' using encoding 'sequential' in module 'rd_chnl'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:48 ; elapsed = 00:01:09 . Memory (MB): peak = 2836.176 ; gain = 464.863 ; free physical = 680 ; free virtual = 12311
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:49 ; elapsed = 00:01:13 . Memory (MB): peak = 2843.340 ; gain = 470.496 ; free physical = 1536 ; free virtual = 13748
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -4178,25 +4178,25 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:02 ; elapsed = 00:01:25 . Memory (MB): peak = 2860.191 ; gain = 488.879 ; free physical = 664 ; free virtual = 12319
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:04 ; elapsed = 00:01:30 . Memory (MB): peak = 2867.355 ; gain = 494.512 ; free physical = 1425 ; free virtual = 13693
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:08 ; elapsed = 00:01:31 . Memory (MB): peak = 2860.191 ; gain = 488.879 ; free physical = 394 ; free virtual = 12049
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:10 ; elapsed = 00:01:36 . Memory (MB): peak = 2867.355 ; gain = 494.512 ; free physical = 1129 ; free virtual = 13420
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:12 ; elapsed = 00:01:35 . Memory (MB): peak = 2903.910 ; gain = 532.598 ; free physical = 349 ; free virtual = 12004
+Finished Timing Optimization : Time (s): cpu = 00:01:13 ; elapsed = 00:01:40 . Memory (MB): peak = 2903.129 ; gain = 530.285 ; free physical = 1084 ; free virtual = 13371
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:16 ; elapsed = 00:01:40 . Memory (MB): peak = 2919.926 ; gain = 548.613 ; free physical = 339 ; free virtual = 11994
+Finished Technology Mapping : Time (s): cpu = 00:01:18 ; elapsed = 00:01:45 . Memory (MB): peak = 2919.145 ; gain = 546.301 ; free physical = 1071 ; free virtual = 13359
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -4214,19 +4214,19 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:19 ; elapsed = 00:01:43 . Memory (MB): peak = 2919.926 ; gain = 548.613 ; free physical = 342 ; free virtual = 11997
+Finished IO Insertion : Time (s): cpu = 00:01:21 ; elapsed = 00:01:48 . Memory (MB): peak = 2919.145 ; gain = 546.301 ; free physical = 1077 ; free virtual = 13366
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:19 ; elapsed = 00:01:43 . Memory (MB): peak = 2919.926 ; gain = 548.613 ; free physical = 342 ; free virtual = 11997
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:21 ; elapsed = 00:01:48 . Memory (MB): peak = 2919.145 ; gain = 546.301 ; free physical = 1077 ; free virtual = 13366
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:20 ; elapsed = 00:01:44 . Memory (MB): peak = 2919.926 ; gain = 548.613 ; free physical = 342 ; free virtual = 11997
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:21 ; elapsed = 00:01:49 . Memory (MB): peak = 2919.145 ; gain = 546.301 ; free physical = 1077 ; free virtual = 13366
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -4247,13 +4247,13 @@ Report Cell Usage:
 |3     |CARRY4   |   126|
 |4     |DSP48E1  |     4|
 |5     |LUT1     |   205|
-|6     |LUT2     |   538|
-|7     |LUT3     |  2114|
-|8     |LUT4     |   647|
-|9     |LUT5     |   580|
-|10    |LUT6     |  1602|
+|6     |LUT2     |   536|
+|7     |LUT3     |  2086|
+|8     |LUT4     |   648|
+|9     |LUT5     |   608|
+|10    |LUT6     |  1606|
 |12    |MUXCY    |   272|
-|13    |MUXF7    |    78|
+|13    |MUXF7    |    73|
 |14    |MUXF8    |     1|
 |15    |PS7      |     1|
 |16    |RAM32M   |     2|
@@ -4269,22 +4269,22 @@ Report Cell Usage:
 |26    |FDCE     |    69|
 |27    |FDPE     |    33|
 |28    |FDR      |     8|
-|29    |FDRE     |  4535|
+|29    |FDRE     |  4536|
 |30    |FDSE     |    73|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:20 ; elapsed = 00:01:44 . Memory (MB): peak = 2919.926 ; gain = 548.613 ; free physical = 342 ; free virtual = 11997
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:21 ; elapsed = 00:01:49 . Memory (MB): peak = 2919.145 ; gain = 546.301 ; free physical = 1077 ; free virtual = 13366
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:13 ; elapsed = 00:01:37 . Memory (MB): peak = 2919.926 ; gain = 526.801 ; free physical = 390 ; free virtual = 12046
-Synthesis Optimization Complete : Time (s): cpu = 00:01:20 ; elapsed = 00:01:44 . Memory (MB): peak = 2919.934 ; gain = 548.613 ; free physical = 390 ; free virtual = 12046
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:15 ; elapsed = 00:01:42 . Memory (MB): peak = 2919.145 ; gain = 528.488 ; free physical = 1146 ; free virtual = 13435
+Synthesis Optimization Complete : Time (s): cpu = 00:01:22 ; elapsed = 00:01:49 . Memory (MB): peak = 2919.152 ; gain = 546.301 ; free physical = 1147 ; free virtual = 13436
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.13 ; elapsed = 00:00:00.13 . Memory (MB): peak = 2922.895 ; gain = 0.000 ; free physical = 474 ; free virtual = 12129
-INFO: [Netlist 29-17] Analyzing 1111 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00.15 ; elapsed = 00:00:00.15 . Memory (MB): peak = 2922.113 ; gain = 0.000 ; free physical = 1227 ; free virtual = 13518
+INFO: [Netlist 29-17] Analyzing 1106 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2925.863 ; gain = 0.000 ; free physical = 417 ; free virtual = 12072
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2925.082 ; gain = 0.000 ; free physical = 1172 ; free virtual = 13464
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 372 instances were transformed.
   (MUXCY,XORCY) => CARRY4: 75 instances
@@ -4299,7 +4299,7 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 INFO: [Common 17-83] Releasing license: Synthesis
 681 Infos, 56 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:29 ; elapsed = 00:01:55 . Memory (MB): peak = 2925.863 ; gain = 554.586 ; free physical = 619 ; free virtual = 12274
+synth_design: Time (s): cpu = 00:01:31 ; elapsed = 00:01:58 . Memory (MB): peak = 2925.082 ; gain = 552.273 ; free physical = 1392 ; free virtual = 13684
 INFO: [Common 17-1381] The checkpoint '/home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/synth_1/conv_accelerator_bd_wrapper.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file conv_accelerator_bd_wrapper_utilization_synth.rpt -pb conv_accelerator_bd_wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Dec 18 16:08:21 2025...
+INFO: [Common 17-206] Exiting Vivado at Thu Dec 18 19:26:02 2025...

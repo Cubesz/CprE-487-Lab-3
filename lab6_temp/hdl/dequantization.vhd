@@ -21,7 +21,8 @@ entity dequantization is
         S_AXIS_TLAST  : in  std_logic;
         S_AXIS_TID    : in  std_logic_vector(C_TID_WIDTH-1 downto 0);
         S_AXIS_TVALID : in  std_logic;
-
+        
+        leaky_relu : in std_logic;
         relu : in std_logic;
         q_scale : in std_logic_vector(C_DATA_WIDTH-1 downto 0);
         q_zero : in std_logic_vector(C_OUT_WIDTH-1 downto 0);
@@ -54,6 +55,7 @@ component sv_dequantization is
         S_AXIS_TID : in std_logic_vector(C_TID_WIDTH-1 downto 0);
         S_AXIS_TVALID : in std_logic;
         
+        leaky_relu : in std_logic;
         relu : in std_logic;
         q_scale : in std_logic_vector(C_DATA_WIDTH-1 downto 0);
         q_zero : in std_logic_vector(C_OUT_WIDTH-1 downto 0);
@@ -86,6 +88,7 @@ begin
             S_AXIS_TID => S_AXIS_TID,
             S_AXIS_TVALID => S_AXIS_TVALID,
             
+            leaky_relu => leaky_relu,
             relu => relu,
             q_scale => q_scale,
             q_zero => q_zero,

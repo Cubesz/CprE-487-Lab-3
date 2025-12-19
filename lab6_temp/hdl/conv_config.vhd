@@ -68,6 +68,7 @@ entity conv_config is
         mac3_bias : out std_logic_vector(MAC_OUTPUT_DATA_WIDTH-1 downto 0);
         q_scale : out std_logic_vector(MAC_OUTPUT_DATA_WIDTH-1 downto 0);
         q_zero : out std_logic_vector(MAC_DATA_WIDTH-1 downto 0);
+        leaky_relu : out std_logic;
         
         conv_complete : in std_logic;
         conv_idle : out std_logic
@@ -111,6 +112,7 @@ architecture Behavioral of conv_config is
     signal s_mac3_bias : std_logic_vector(MAC_OUTPUT_DATA_WIDTH-1 downto 0);
     signal s_q_scale : std_logic_vector(MAC_OUTPUT_DATA_WIDTH-1 downto 0);
     signal s_q_zero : std_logic_vector(MAC_DATA_WIDTH-1 downto 0);
+    signal s_leaky_relu : std_logic;
 
 begin
 
@@ -191,6 +193,7 @@ begin
                     when "000000" =>
                         s_conv_idle <= S_AXI_LITE_WDATA(0);
                     when "000001" =>
+                        s_leaky_relu <= S_AXI_LITE_WDATA(4);
                         s_relu <= S_AXI_LITE_WDATA(3);
                         s_max_pooling <= S_AXI_LITE_WDATA(2);
                         s_swap_activations <= S_AXI_LITE_WDATA(1);
@@ -252,6 +255,7 @@ begin
                     when "000000" =>
                         axil_read_data(0) <= s_conv_idle;
                     when "000001" =>
+                        axil_read_data(4) <= s_leaky_relu;
                         axil_read_data(3) <= s_relu;
                         axil_read_data(2) <= s_max_pooling;
                         axil_read_data(1) <= s_swap_activations;
@@ -301,7 +305,8 @@ begin
     end process;
 
     -- Custom Peripheral Logic
-
+    
+    leaky_relu <= s_leaky_relu;
     relu <= s_relu;
     max_pooling <= s_max_pooling;
     accelerator_controls_activation_bram <= not s_conv_idle;

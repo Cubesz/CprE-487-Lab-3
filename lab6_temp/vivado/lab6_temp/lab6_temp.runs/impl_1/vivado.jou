@@ -2,8 +2,8 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Thu Dec 18 16:13:34 2025
-# Process ID: 34500
+# Start of session at: Thu Dec 18 19:26:13 2025
+# Process ID: 63946
 # Current directory: /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1
 # Command line: vivado -log conv_accelerator_bd_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source conv_accelerator_bd_wrapper.tcl -notrace
 # Log file: /home/zfsalti/487/lab3/CprE-487-Lab-3/lab6_temp/vivado/lab6_temp/lab6_temp.runs/impl_1/conv_accelerator_bd_wrapper.vdi

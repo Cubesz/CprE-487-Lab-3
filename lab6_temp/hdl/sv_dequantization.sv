@@ -27,6 +27,7 @@ module sv_dequantization #(parameter C_DATA_WIDTH = 32, parameter C_TID_WIDTH = 
         input [C_TID_WIDTH-1 : 0] S_AXIS_TID,
         input S_AXIS_TVALID,
         
+        input leaky_relu,
         input relu,
         input [C_DATA_WIDTH-1 : 0] q_scale,
         input [C_OUT_WIDTH-1 : 0] q_zero,
@@ -62,7 +63,7 @@ module sv_dequantization #(parameter C_DATA_WIDTH = 32, parameter C_TID_WIDTH = 
 
     
     wire signed [31:0] post_cond_relued;
-    assign post_cond_relued = relu ? (scaled[$size(scaled) - 1] ? 0 : scaled) : scaled;
+    assign post_cond_relued = relu ? (scaled[$size(scaled) - 1] ? (leaky_relu ? {3'b111, scaled[$size(scaled) - 1 : 3]} : 0) : scaled) : scaled; // fixed leaky relu constant of 0.125
     
     // 1 pipeline stage
     wire signed [31:0] post_zp_adjusted;

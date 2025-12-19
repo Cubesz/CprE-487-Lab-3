@@ -170,6 +170,7 @@ architecture Behavioral of conv_accelerator_wrapper is
 
     signal s_max_pooling : std_logic;
     signal s_relu : std_logic;
+    signal s_leaky_relu : std_logic;
     signal s_filter_w : std_logic_vector(DIM_WIDTH-1 downto 0);
     signal s_filter_h : std_logic_vector(DIM_WIDTH-1 downto 0);
     signal s_filter_c : std_logic_vector(DIM_WIDTH-1 downto 0);
@@ -233,6 +234,7 @@ begin
             accelerator_controls_activation_bram => accelerator_controls_activation_bram,
             swap_activations => swap_activations,
             swap_filters => swap_filters,
+            leaky_relu => s_leaky_relu,
             relu => s_relu,
             max_pooling => s_max_pooling,
             filter_w => s_filter_w,
@@ -271,6 +273,7 @@ begin
         )
         port map(
             -- Configuration values from conv_config unit
+            leaky_relu => s_leaky_relu,
             relu => s_relu,
             max_pooling => s_max_pooling,
             filter_w => s_filter_w,

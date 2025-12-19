@@ -1363,12 +1363,6 @@
               }
             },
             "interface_nets": {
-              "BRAM_PORT_1": {
-                "interface_ports": [
-                  "BRAM_PORT",
-                  "bram_switch_1/BRAM_PORT1"
-                ]
-              },
               "bram_switch_0_BLK_MEM_PORTA1": {
                 "interface_ports": [
                   "blk_mem_gen_1/BRAM_PORTA",
@@ -1385,6 +1379,12 @@
                 "interface_ports": [
                   "BRAM_PORT0",
                   "bram_switch_1/BRAM_PORT0"
+                ]
+              },
+              "BRAM_PORT_1": {
+                "interface_ports": [
+                  "BRAM_PORT",
+                  "bram_switch_1/BRAM_PORT1"
                 ]
               }
             },
@@ -1710,12 +1710,6 @@
               }
             },
             "interface_nets": {
-              "bram_switch_0_BLK_MEM_PORTA0": {
-                "interface_ports": [
-                  "blk_mem_gen_0/BRAM_PORTA",
-                  "bram_switch_1/BLK_MEM_PORT0"
-                ]
-              },
               "Conn1": {
                 "interface_ports": [
                   "BRAM_PORT0",
@@ -1732,6 +1726,12 @@
                 "interface_ports": [
                   "BRAM_PORT",
                   "bram_switch_1/BRAM_PORT1"
+                ]
+              },
+              "bram_switch_0_BLK_MEM_PORTA0": {
+                "interface_ports": [
+                  "blk_mem_gen_0/BRAM_PORTA",
+                  "bram_switch_1/BLK_MEM_PORT0"
                 ]
               }
             },
@@ -3062,12 +3062,6 @@
               }
             },
             "interface_nets": {
-              "Conn3": {
-                "interface_ports": [
-                  "BRAM_PORT1",
-                  "bram_mux_1/BRAM_PORT0"
-                ]
-              },
               "bram_mux_0_BRAM_PORT": {
                 "interface_ports": [
                   "bram_mux_0/BRAM_PORT",
@@ -3108,6 +3102,12 @@
                 "interface_ports": [
                   "blk_mem_gen_1/BRAM_PORTA",
                   "bram_switch_1/BLK_MEM_PORT1"
+                ]
+              },
+              "Conn3": {
+                "interface_ports": [
+                  "BRAM_PORT1",
+                  "bram_mux_1/BRAM_PORT0"
                 ]
               }
             },
@@ -3699,6 +3699,12 @@
           }
         },
         "interface_nets": {
+          "bram_connect_0_M_BRAM0": {
+            "interface_ports": [
+              "bram_connect_0/M_BRAM0",
+              "bram_read_delay_0/M_BRAM"
+            ]
+          },
           "bram_connect_3_M_BRAM0": {
             "interface_ports": [
               "bram_connect_0/S_BRAM",
@@ -3793,12 +3799,6 @@
             "interface_ports": [
               "bram_filter_1/BRAM_PORT0",
               "bram_read_delay_1/S_BRAM"
-            ]
-          },
-          "bram_connect_0_M_BRAM0": {
-            "interface_ports": [
-              "bram_connect_0/M_BRAM0",
-              "bram_read_delay_0/M_BRAM"
             ]
           },
           "axi_register_slice_2_M_AXI": {
